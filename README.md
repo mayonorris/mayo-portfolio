@@ -1,6 +1,6 @@
 # Personal Portfolio — Mayo Takémsi Norris KADANGA
 
-🚀 A modern, dark-themed personal portfolio showcasing my work as a  
+A modern, dark-themed personal portfolio showcasing my work as a  
 **Statistician-Economist, Developer, and Data Product Builder**.
 
 This portfolio is designed to highlight:
@@ -11,7 +11,7 @@ This portfolio is designed to highlight:
 
 ---
 
-## 🧠 About Me
+## About Me
 
 I am a **Statistician-Economist & Developer** with experience in:
 - national accounts & forecasting,
@@ -21,9 +21,8 @@ I am a **Statistician-Economist & Developer** with experience in:
 
 I currently work as a **Research Officer at INSEED (Togo)** and I am actively building data-driven products, including fintech and budgeting applications.
 
---
 
-## ✨ Features
+## Features
 
 -  Modern dark UI (bold tech style)
 -  Metrics & trust cards
@@ -32,7 +31,6 @@ I currently work as a **Research Officer at INSEED (Togo)** and I am actively bu
 -  Fully responsive design
 -  Conversion-focused contact section
 
---
 
 ## Tech Stack
 
@@ -59,9 +57,29 @@ mayo-portfolio/
 └── README.md
 ```
 
+## Project Status
+
+### 🟡 In active development
+
+This portfolio is being built progressively:
+
+- UI/UX first
+
+- clean structure
+
+- incremental improvements
+
+- Expect regular updates.
+
+
+##  Live Demo
+
+👉 Coming soon
+(The site will be deployed using GitHub Pages / Netlify / Vercel.)
+
 ## License
 
 This project is open for learning and inspiration.
 Feel free to explore, but please do not copy the content directly.
 
-© 2025 — Mayo Takémsi Norris KADANGA
+© 2025 - Mayo Takémsi Norris KADANGA
