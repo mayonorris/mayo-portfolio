@@ -745,3 +745,27 @@ input:focus, textarea:focus {
     transform: translateY(0);
   }
 }
+
+/* =========================
+   Reveal Animations (subtle)
+========================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 420ms var(--ease), transform 420ms var(--ease);
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal--visible {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
