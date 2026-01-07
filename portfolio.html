@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio — Mayo Takémsi Norris KADANGA" />
+  <title>Mayo KADANGA | Portfolio</title>
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script defer src="js/main.js"></script>
+  <script defer src="js/animations.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress-bar" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="index.html" aria-label="Go to home">
+        <span class="brand__name">Mayo KADANGA</span>
+      </a>
+
+      <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span class="nav__toggle-line"></span>
+        <span class="nav__toggle-line"></span>
+        <span class="nav__toggle-line"></span>
+      </button>
+
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav__cta">
+        <a class="btn btn--ghost" href="assets/CV-Mayo_Takemsi_Norris_KADANGA.pdf" target="_blank" rel="noopener">Download CV</a>
+        <a class="btn btn--primary" href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="page" aria-label="Portfolio page">
+      <div class="container">
+        <div class="section-head reveal">
+          <h1 class="section-title">Portfolio</h1>
+          <p class="section-subtitle">
+            Selected projects and experiments — data products, analytics tooling, and web development.
+          </p>
+        </div>
+
+        <div class="reveal" style="display:grid; gap: var(--space-4);">
+          <div class="about__facts">
+            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">SME Budgeting & Financial Insights App</h2>
+            <p style="margin:0 0 var(--space-3); color: var(--text-2);">
+              A budgeting and reporting app for SMEs: track expenses, categorize, and generate simple insights.
+            </p>
+            <ul class="list">
+              <li><strong>Stack:</strong> JavaScript, APIs (backend later)</li>
+              <li><strong>Focus:</strong> UX + clear financial storytelling</li>
+            </ul>
+            <div style="margin-top: var(--space-3); display:flex; gap: var(--space-2); flex-wrap:wrap;">
+              <a class="btn btn--primary" href="#" target="_blank" rel="noopener">Live</a>
+              <a class="btn btn--ghost" href="#" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+
+          <div class="about__facts">
+            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">Seasonal Adjustment Toolkit</h2>
+            <p style="margin:0 0 var(--space-3); color: var(--text-2);">
+              Tools and experiments for deseasonalization workflows (X-13 / STL), diagnostics, and visualization.
+            </p>
+            <ul class="list">
+              <li><strong>Stack:</strong> R, time series packages</li>
+              <li><strong>Focus:</strong> reproducible workflows + interpretability</li>
+            </ul>
+            <div style="margin-top: var(--space-3); display:flex; gap: var(--space-2); flex-wrap:wrap;">
+              <a class="btn btn--ghost" href="#" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+
+          <div class="about__facts">
+            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">Power BI Dashboards (KPIs & Monitoring)</h2>
+            <p style="margin:0 0 var(--space-3); color: var(--text-2);">
+              KPI dashboards for monitoring indicators, trends, and reporting — designed for decision makers.
+            </p>
+            <ul class="list">
+              <li><strong>Stack:</strong> Power BI, Excel, SQL</li>
+              <li><strong>Focus:</strong> clarity, relevance, performance</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" aria-label="Footer">
+    <div class="container footer__content">
+      <p>© <span id="year">2025</span> Mayo Takémsi Norris KADANGA.</p>
+      <a href="#top">Back to top ↑</a>
+    </div>
+    <button class="to-top" type="button" aria-label="Back to top">↑</button>
+  </footer>
+</body>
+</html>

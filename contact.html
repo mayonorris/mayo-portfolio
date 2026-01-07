@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact — Mayo Takémsi Norris KADANGA" />
+  <title>Mayo KADANGA | Contact</title>
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script defer src="js/main.js"></script>
+  <script defer src="js/animations.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress-bar" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="index.html" aria-label="Go to home">
+        <span class="brand__name">Mayo KADANGA</span>
+      </a>
+
+      <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span class="nav__toggle-line"></span>
+        <span class="nav__toggle-line"></span>
+        <span class="nav__toggle-line"></span>
+      </button>
+
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav__cta">
+        <a class="btn btn--ghost" href="assets/CV-Mayo_Takemsi_Norris_KADANGA.pdf" target="_blank" rel="noopener">Download CV</a>
+        <a class="btn btn--primary" href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="page" aria-label="Contact page">
+      <div class="container">
+        <div class="section-head reveal">
+          <h1 class="section-title">Contact</h1>
+          <p class="section-subtitle">
+            Want to collaborate, hire me, or discuss a project? Send a message.
+          </p>
+        </div>
+
+        <div class="reveal" style="display:grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); align-items:start;">
+          <div class="about__facts">
+            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">Reach me</h2>
+            <ul class="list" style="padding-left: 1.1rem;">
+              <li><strong>Phone:</strong> <a href="tel:+22890948958">+228 90 94 89 58</a></li>
+              <li><strong>Email:</strong> <a href="mailto:kadanganorris@gmail.com">kadanganorris@gmail.com</a></li>
+              <li><strong>Email:</strong> <a href="mailto:mkadanga@inseed.tg">mkadanga@inseed.tg</a></li>
+              <li><strong>Location:</strong> Lomé, Togo</li>
+            </ul>
+
+            <div class="about__links" style="margin-top: var(--space-4);">
+              <a href="https://github.com/mayonorris" target="_blank" rel="noopener">GitHub</a>
+              <a href="https://www.linkedin.com/in/mayo-takemsi-kadanga" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+
+          <div class="about__facts">
+            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">Send a message</h2>
+
+            <form class="contact-form" action="#" method="post" style="display:grid; gap: var(--space-3);">
+              <label style="display:grid; gap: 0.4rem;">
+                <span style="font-weight:750; color: var(--text-2); font-size: var(--fs-1);">Name</span>
+                <input type="text" name="name" required
+                  style="width:100%; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.12);
+                  background: rgba(0,0,0,0.15); color: var(--text); padding: 0.8rem 0.9rem;" />
+              </label>
+
+              <label style="display:grid; gap: 0.4rem;">
+                <span style="font-weight:750; color: var(--text-2); font-size: var(--fs-1);">Email</span>
+                <input type="email" name="email" required
+                  style="width:100%; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.12);
+                  background: rgba(0,0,0,0.15); color: var(--text); padding: 0.8rem 0.9rem;" />
+              </label>
+
+              <label style="display:grid; gap: 0.4rem;">
+                <span style="font-weight:750; color: var(--text-2); font-size: var(--fs-1);">Message</span>
+                <textarea name="message" rows="6" required
+                  style="width:100%; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.12);
+                  background: rgba(0,0,0,0.15); color: var(--text); padding: 0.8rem 0.9rem;"></textarea>
+              </label>
+
+              <button class="btn btn--primary" type="submit">Send Message</button>
+              <p style="margin:0; color: var(--text-3); font-size: var(--fs-1);">
+                This form can be wired to a backend later (or Formspree).
+              </p>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" aria-label="Footer">
+    <div class="container footer__content">
+      <p>© <span id="year">2025</span> Mayo Takémsi Norris KADANGA.</p>
+      <a href="#top">Back to top ↑</a>
+    </div>
+    <button class="to-top" type="button" aria-label="Back to top">↑</button>
+  </footer>
+
+  <script>
+    // tiny UX: show a friendly alert instead of real sending (optional)
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.querySelector(".contact-form");
+      if (!form) return;
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        form.reset();
+        alert("Message prepared ✅ (connect a backend to send it).");
+      });
+    });
+  </script>
+</body>
+</html>
