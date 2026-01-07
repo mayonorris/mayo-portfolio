@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Skills — Mayo Takémsi Norris KADANGA" />
+  <title>Mayo KADANGA | Skills</title>
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script defer src="js/main.js"></script>
+  <script defer src="js/animations.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress-bar" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="index.html" aria-label="Go to home">
+        <span class="brand__name">Mayo KADANGA</span>
+      </a>
+
+      <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span class="nav__toggle-line"></span>
+        <span class="nav__toggle-line"></span>
+        <span class="nav__toggle-line"></span>
+      </button>
+
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav__cta">
+        <a class="btn btn--ghost" href="assets/CV-Mayo_Takemsi_Norris_KADANGA.pdf" target="_blank" rel="noopener">Download CV</a>
+        <a class="btn btn--primary" href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="page" aria-label="Skills page">
+      <div class="container">
+        <div class="section-head reveal">
+          <h1 class="section-title">Skills</h1>
+          <p class="section-subtitle">
+            Tools and capabilities I use to deliver reliable indicators, forecasting workflows, dashboards, and web products.
+          </p>
+        </div>
+
+        <div class="reveal" style="display:grid; gap: var(--space-4);">
+          <div class="about__facts">
+            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">Data & Econometrics</h2>
+            <ul class="list">
+              <li>Time series: seasonal adjustment, diagnostics, forecasting workflows</li>
+              <li>Applied econometrics: regression, inference, modelling for policy/decision support</li>
+              <li>Indicator production: scope, classifications, sampling/weights, validation and consistency checks</li>
+            </ul>
+          </div>
+
+          <div class="about__facts">
+            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">Programming</h2>
+            <ul class="list">
+              <li>R: data processing, reporting, time series, reproducible analysis</li>
+              <li>Python: automation, APIs, data pipelines</li>
+              <li>SQL: querying, analytics-ready schemas</li>
+              <li>JavaScript: front-end interactions and web apps</li>
+            </ul>
+          </div>
+
+          <div class="about__facts">
+            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">Visualization & Delivery</h2>
+            <ul class="list">
+              <li>Power BI: dashboards, KPIs, business storytelling</li>
+              <li>Excel/VBA: automation, modelling, templates</li>
+              <li>Git/GitHub: version control and collaboration</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" aria-label="Footer">
+    <div class="container footer__content">
+      <p>© <span id="year">2025</span> Mayo Takémsi Norris KADANGA.</p>
+      <a href="#top">Back to top ↑</a>
+    </div>
+    <button class="to-top" type="button" aria-label="Back to top">↑</button>
+  </footer>
+</body>
+</html>
