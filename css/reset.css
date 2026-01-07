@@ -1,17 +1,11 @@
 /* =========================
    Minimal CSS Reset
-   (modern, safe, readable)
 ========================= */
-
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
-}
+*::after { box-sizing: border-box; }
 
-html:focus-within {
-  scroll-behavior: smooth;
-}
+html:focus-within { scroll-behavior: smooth; }
 
 body {
   margin: 0;
@@ -32,28 +26,18 @@ svg {
 input,
 button,
 textarea,
-select {
-  font: inherit;
-}
+select { font: inherit; }
 
 button {
   cursor: pointer;
   background: none;
+  border: none;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
-  overflow-wrap: break-word;
-}
+p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
 
-ul, ol {
-  margin: 0;
-  padding: 0;
-}
+ul, ol { margin: 0; padding: 0; }
 
-textarea {
-  resize: vertical;
-}
+textarea { resize: vertical; }
 
-a {
-  text-decoration: none;
-}
+a { text-decoration: none; color: inherit; }

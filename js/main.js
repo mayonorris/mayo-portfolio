@@ -2,6 +2,14 @@
 // main.js (Upgraded)
 // =========================
 
+// Active nav link based on page (multi-page)
+const path = location.pathname.split("/").pop() || "index.html";
+document.querySelectorAll(".nav__links a").forEach((a) => {
+  const href = a.getAttribute("href");
+  if (href === path) a.classList.add("is-active");
+});
+
+
 document.addEventListener("DOMContentLoaded", () => {
   // ---------- Helpers ----------
   const $ = (sel, root = document) => root.querySelector(sel);

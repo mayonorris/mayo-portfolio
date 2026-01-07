@@ -1,31 +1,24 @@
 // =========================
-// animations.js
-// Subtle reveal-on-scroll animations
+// animations.js (generic reveal system)
+// Works for any element with class ".reveal"
 // =========================
 
 document.addEventListener("DOMContentLoaded", () => {
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (prefersReducedMotion) return;
 
-  // Elements to animate in
-  const targets = document.querySelectorAll(`
-    .hero__content, .hero__visual,
-    .trust-card,
-    .about__text, .about__facts,
-    .project-card,
-    .skills-group,
-    .timeline-item,
-    .contact__content, .contact__form
-  `);
+  const targets = document.querySelectorAll(".reveal");
+  if (!targets.length) return;
 
-  // Add initial state class
-  targets.forEach((el) => el.classList.add("reveal"));
+  // Prepare initial state (but keep pages safe: reveal alone doesn't hide)
+  targets.forEach((el) => el.classList.add("reveal--init"));
 
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("reveal--visible");
+          entry.target.classList.remove("reveal--init");
           io.unobserve(entry.target);
         }
       });
