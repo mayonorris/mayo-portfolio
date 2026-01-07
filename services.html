@@ -47,57 +47,163 @@
   </header>
 
   <main id="main">
-    <section class="page" aria-label="Services page">
+    <!-- Page Hero -->
+    <section class="page-hero" aria-label="Services introduction">
+      <div class="container page-hero__grid reveal">
+        <div class="page-hero__content">
+          <p class="page-hero__eyebrow">Consulting • Delivery • Training</p>
+          <h1 class="page-hero__title">Services</h1>
+          <p class="page-hero__subtitle">
+            I help institutions and SMEs turn data into decisions — with rigorous methodology and practical delivery:
+            indicators, forecasting workflows, dashboards, and internal tools.
+          </p>
+
+          <div class="page-hero__actions">
+            <a class="btn btn--primary" href="contact.html">Request a quote</a>
+            <a class="btn btn--ghost" href="portfolio.html">See examples</a>
+          </div>
+
+          <ul class="hero__badges" aria-label="Highlights">
+            <li class="badge">Quality checks & consistency monitoring</li>
+            <li class="badge">Clear KPIs & storytelling</li>
+            <li class="badge">Reproducible workflows</li>
+          </ul>
+        </div>
+
+        <div class="page-hero__panel" aria-label="Service focus panel">
+          <div class="panel-card">
+            <p class="panel-card__title">Best for</p>
+            <ul class="panel-card__list">
+              <li>Indicator production & reporting</li>
+              <li>Forecasting and time series analysis</li>
+              <li>Power BI dashboards & analytics</li>
+              <li>Training & capacity building</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services grid -->
+    <section class="services" aria-label="Service offerings">
       <div class="container">
         <div class="section-head reveal">
-          <h1 class="section-title">Services</h1>
+          <h2 class="section-title">What I can deliver</h2>
           <p class="section-subtitle">
-            Practical, delivery-focused services for institutions and SMEs — from data to decisions.
+            Services are structured as deliverables. You get results you can use — not just analysis.
           </p>
         </div>
 
-        <div class="reveal" style="display:grid; gap: var(--space-4);">
-          <div class="about__facts">
-            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">Indicators & Reporting</h2>
-            <ul class="list">
-              <li>Short-term indicator production support (process, checks, consistency)</li>
-              <li>Automated reporting workflows</li>
-              <li>Data validation and quality assurance</li>
+        <div class="services__grid reveal">
+          <article class="service-card">
+            <p class="service-card__icon" aria-hidden="true">📈</p>
+            <h3 class="service-card__title">Indicators & Reporting</h3>
+            <p class="service-card__text">
+              Support for short-term indicators and reporting pipelines with strong data quality controls.
+            </p>
+            <ul class="service-card__list">
+              <li>Indicator processing & validation checks</li>
+              <li>Outlier detection & consistency monitoring</li>
+              <li>Monthly/quarterly bulletins templates</li>
+              <li>Automation (R/Python/Excel)</li>
             </ul>
+          </article>
+
+          <article class="service-card">
+            <p class="service-card__icon" aria-hidden="true">⏱️</p>
+            <h3 class="service-card__title">Econometrics & Forecasting</h3>
+            <p class="service-card__text">
+              Applied modelling for decision support: forecasting, diagnostics, and interpretability.
+            </p>
+            <ul class="service-card__list">
+              <li>Time series analysis & seasonal adjustment</li>
+              <li>Forecasting workflows (ARIMA/STL-based)</li>
+              <li>Model diagnostics & reporting</li>
+              <li>Methodological notes (clear & documented)</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <p class="service-card__icon" aria-hidden="true">📊</p>
+            <h3 class="service-card__title">Dashboards & Analytics</h3>
+            <p class="service-card__text">
+              Decision-grade dashboards that highlight what matters — KPIs, trends, and story.
+            </p>
+            <ul class="service-card__list">
+              <li>Power BI dashboards (KPIs & monitoring)</li>
+              <li>Data models & refresh strategy</li>
+              <li>Visual storytelling & usability</li>
+              <li>Performance optimization</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <p class="service-card__icon" aria-hidden="true">🎓</p>
+            <h3 class="service-card__title">Training & Capacity Building</h3>
+            <p class="service-card__text">
+              Practical training sessions focused on real tasks and reproducible workflows.
+            </p>
+            <ul class="service-card__list">
+              <li>R / Python / SQL for analytics</li>
+              <li>Power BI (dashboards and KPIs)</li>
+              <li>Excel/VBA automation</li>
+              <li>Exercises + templates + follow-up</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process" aria-label="How we work">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title">How we work</h2>
+          <p class="section-subtitle">
+            A simple and effective process: clarity first, then delivery.
+          </p>
+        </div>
+
+        <div class="process__grid reveal">
+          <div class="process-step">
+            <p class="process-step__num">01</p>
+            <h3 class="process-step__title">Discovery</h3>
+            <p class="process-step__text">Understand your goals, data sources, constraints, and decision context.</p>
           </div>
 
-          <div class="about__facts">
-            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">Econometrics & Forecasting</h2>
-            <ul class="list">
-              <li>Forecasting pipelines and model diagnostics</li>
-              <li>Time series analysis and seasonal adjustment</li>
-              <li>Impact evaluation / modelling for decision support</li>
-            </ul>
+          <div class="process-step">
+            <p class="process-step__num">02</p>
+            <h3 class="process-step__title">Design</h3>
+            <p class="process-step__text">Define outputs: KPIs, methodology, model choices, and delivery format.</p>
           </div>
 
-          <div class="about__facts">
-            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">Dashboards & Data Products</h2>
-            <ul class="list">
-              <li>Power BI dashboards (KPIs, storytelling)</li>
-              <li>Web apps for data workflows and internal tools</li>
-              <li>Data pipelines and automation (Python/R)</li>
-            </ul>
+          <div class="process-step">
+            <p class="process-step__num">03</p>
+            <h3 class="process-step__title">Build</h3>
+            <p class="process-step__text">Implementation with validation checks, documentation, and reproducibility.</p>
           </div>
 
-          <div class="about__facts">
-            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">Training</h2>
-            <ul class="list">
-              <li>R / Python / SQL (practical analytics)</li>
-              <li>Power BI (dashboards, DAX basics)</li>
-              <li>Excel / VBA (automation and modelling)</li>
-            </ul>
-
-            <div style="margin-top: var(--space-4); display:flex; gap: var(--space-2); flex-wrap:wrap;">
-              <a class="btn btn--primary" href="contact.html">Request a quote</a>
-              <a class="btn btn--ghost" href="portfolio.html">See examples</a>
-            </div>
+          <div class="process-step">
+            <p class="process-step__num">04</p>
+            <h3 class="process-step__title">Deliver</h3>
+            <p class="process-step__text">Final handover: dashboard/report, code (if needed), and a walkthrough.</p>
           </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- CTA band -->
+    <section class="cta-band" aria-label="Call to action">
+      <div class="container cta-band__inner reveal">
+        <div>
+          <h2 class="cta-band__title">Let’s work together</h2>
+          <p class="cta-band__text">
+            Tell me what you’re trying to achieve and what data you have. I’ll suggest a clear plan and deliverables.
+          </p>
+        </div>
+        <div class="cta-band__actions">
+          <a class="btn btn--primary" href="contact.html">Request a quote</a>
+          <a class="btn btn--ghost" href="portfolio.html">View portfolio</a>
         </div>
       </div>
     </section>
