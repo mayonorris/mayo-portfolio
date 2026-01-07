@@ -3,32 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta
-    name="description"
-    content="Personal portfolio of Mayo Takémsi Norris KADANGA — Statistician-Economist, Data Analyst & Developer building data-driven products."
-  />
-  <title>Mayo Takémsi Norris KADANGA | Portfolio</title>
+  <meta name="description" content="Mayo Takémsi Norris KADANGA — Data Analyst, Statistician-Economist & Developer." />
+  <title>Mayo KADANGA | Home</title>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="css/variables.css" />
   <link rel="stylesheet" href="css/styles.css" />
 
-  <!-- JS -->
   <script defer src="js/main.js"></script>
   <script defer src="js/animations.js"></script>
 </head>
 
 <body>
-  <!-- Skip link for accessibility -->
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="progress-bar" aria-hidden="true"></div>
-  <!-- ======================
-       Header / Navigation
-  ======================= -->
+
   <header class="site-header" id="top">
     <nav class="nav container" aria-label="Primary">
-      <a class="brand" href="#top" aria-label="Go to top">
+      <a class="brand" href="index.html" aria-label="Go to home">
         <span class="brand__name">Mayo KADANGA</span>
       </a>
 
@@ -39,380 +31,67 @@
       </button>
 
       <ul class="nav__links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#certifications">Certifications</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="index.html" data-nav="home">Home</a></li>
+        <li><a href="about.html" data-nav="about">About</a></li>
+        <li><a href="skills.html" data-nav="skills">Skills</a></li>
+        <li><a href="services.html" data-nav="services">Services</a></li>
+        <li><a href="portfolio.html" data-nav="portfolio">Portfolio</a></li>
+        <li><a href="contact.html" data-nav="contact">Contact</a></li>
       </ul>
 
       <div class="nav__cta">
-        <a class="btn btn--ghost" href="assets/CV-Mayo_Takemsi_Norris_KADANGA.pdf" target="_blank" rel="noopener">
-          Download CV
-        </a>
-        <a class="btn btn--primary" href="#contact">Contact</a>
+        <a class="btn btn--ghost" href="assets/CV-Mayo_Takemsi_Norris_KADANGA.pdf" target="_blank" rel="noopener">Download CV</a>
+        <a class="btn btn--primary" href="contact.html">Contact</a>
       </div>
     </nav>
   </header>
 
   <main id="main">
-    <!-- ======================
-         Hero
-    ======================= -->
-    <section class="hero" aria-label="Introduction">
-      <div class="container hero__grid">
-        <div class="hero__content">
-          <p class="hero__eyebrow">Data Analyst • Economic Modelling • Economic Forecasting • Developer</p>
+    <section class="home-hero" aria-label="Home hero">
+      <div class="container home-hero__grid reveal">
+      
+        <aside class="home-hero__social" aria-label="Social links">
+          <a class="icon-btn" href="https://www.linkedin.com/in/mayo-takemsi-kadanga" target="_blank" rel="noopener" aria-label="LinkedIn">
+            in
+          </a>
+          <a class="icon-btn" href="https://github.com/mayonorris" target="_blank" rel="noopener" aria-label="GitHub">
+            gh
+          </a>
+          <a class="icon-btn" href="mailto:kadanganorris@gmail.com" aria-label="Email">
+            @
+          </a>
+        </aside>
 
-          <h1 class="hero__title">
-            I build data-driven products that turn complexity into clarity.
-          </h1>
-
-          <p class="hero__subtitle">
-            I work on short-term business indicators, national accounts & forecasting, applied econometrics,
-            dashboards, and modern web development.
+        <!-- center: text -->
+        <div class="home-hero__content">
+          <p class="home-hero__eyebrow">Data Analyst • Forecasting • Developer</p>
+          <h1 class="home-hero__title">Hi, I’m Mayo</h1>
+          <p class="home-hero__subtitle">
+            I build data-driven tools for decision-making: indicators, dashboards, econometrics, and modern web apps.
           </p>
 
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="#projects">See My Work</a>
-            <a class="btn btn--ghost" href="#contact">Contact Me</a>
+          <div class="home-hero__actions">
+            <a class="btn btn--primary" href="contact.html">Contact Me</a>
+            <a class="btn btn--ghost" href="portfolio.html">See Portfolio</a>
           </div>
 
-          <p class="hero__now">
-            <strong>Currently building:</strong> SME Budgeting & Financial Insights App
-          </p>
-
-          <ul class="hero__badges" aria-label="Quick highlights">
-            <li class="badge">World Bank PHASAO • INSEED (DSSE)</li>
-            <li class="badge">Supervised 15 regional field teams</li>
-            <li class="badge">R • Python • SQL • Power BI • Excel</li>
-          </ul>
-        </div>
-
-        <div class="hero__visual" aria-label="Profile visual">
-          <!-- Replace with your image later (recommended: <img> inside this div) -->
-          <div class="hero__avatar" role="img" aria-label="Portrait placeholder"></div>
-
-          <div class="hero__mini-card" aria-label="Quick card">
-            <p class="hero__mini-title">Open to collaboration</p>
-            <p class="hero__mini-text">Data products • training • analytics • forecasting</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================
-         Trust / Metrics Cards
-    ======================= -->
-    <section class="trust" aria-label="Highlights and proof">
-      <div class="container">
-        <h2 class="section-title">What I do</h2>
-
-        <div class="trust__grid">
-          <article class="trust-card">
-            <h3 class="trust-card__title">Short-Term Business Indicators</h3>
-            <p class="trust-card__text">Industrial Production (IPI), Producer Prices (IPPI), Services/Trade/Construction indicators.</p>
-          </article>
-
-          <article class="trust-card">
-            <h3 class="trust-card__title">National Accounts & Forecasting</h3>
-            <p class="trust-card__text">Quarterly accounts support, monitoring, and short-term forecasting workflows.</p>
-          </article>
-
-          <article class="trust-card">
-            <h3 class="trust-card__title">Applied Econometrics & Time Series</h3>
-            <p class="trust-card__text">Seasonal adjustment, ARIMA workflows, diagnostics, inference.</p>
-          </article>
-
-          <article class="trust-card">
-            <h3 class="trust-card__title">Dashboards & Training</h3>
-            <p class="trust-card__text">Power BI dashboards and training in R, Python, SQL, Excel/VBA.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================
-         About
-    ======================= -->
-    <section class="about" id="about" aria-label="About me">
-      <div class="container">
-        <h2 class="section-title">About</h2>
-
-        <div class="about__grid">
-          <div class="about__text">
-            <p>
-              I’m Mayo Takémsi Norris KADANGA, a Statistician-Economist and Developer based in Lomé, Togo.
-              I work on short-term indicators, national accounts & forecasting, and I build digital solutions
-              that help institutions and SMEs make better decisions.
-            </p>
-
-            <p>
-              I care about clean data workflows, rigorous methodology, and product thinking — from idea to deployment.
-            </p>
-          </div>
-
-          <div class="about__facts" aria-label="Quick facts">
-            <ul class="list">
-              <li><strong>Location:</strong> Lomé, Togo</li>
-              <li><strong>Focus:</strong> Indicators, Forecasting, Econometrics, Data Products</li>
-              <li><strong>Tools:</strong> R, Python, SQL, Power BI, JavaScript</li>
-            </ul>
-
-            <div class="about__links">
-              <a href="https://github.com/mayonorris" target="_blank" rel="noopener">GitHub</a>
-              <a href="https://www.linkedin.com/in/mayo-takemsi-kadanga" target="_blank" rel="noopener">LinkedIn</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================
-         Projects
-    ======================= -->
-    <section class="projects" id="projects" aria-label="Projects">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Projects</h2>
-          <p class="section-subtitle">A selection of things I’ve built (and I’m building).</p>
-        </div>
-
-        <div class="projects__grid">
-          <!-- Featured Project Card -->
-          <article class="project-card project-card--featured">
-            <div class="project-card__media" aria-label="Project screenshot placeholder"></div>
-            <div class="project-card__body">
-              <h3 class="project-card__title">SME Budgeting App</h3>
-              <p class="project-card__text">
-                Budget tracking and reporting for small businesses with clean UX and clear financial insights.
-              </p>
-              <ul class="tags" aria-label="Tech stack">
-                <li class="tag">JavaScript</li>
-                <li class="tag">APIs</li>
-                <li class="tag">Fintech</li>
-              </ul>
-              <div class="project-card__actions">
-                <a class="btn btn--primary" href="#" target="_blank" rel="noopener">Live</a>
-                <a class="btn btn--ghost" href="#" target="_blank" rel="noopener">GitHub</a>
-                <a class="btn btn--ghost" href="#" target="_blank" rel="noopener">Case Study</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Standard Project Card -->
-          <article class="project-card">
-            <div class="project-card__media" aria-label="Project screenshot placeholder"></div>
-            <div class="project-card__body">
-              <h3 class="project-card__title">Seasonal Adjustment Toolkit</h3>
-              <p class="project-card__text">
-                Tools and experiments for deseasonalization workflows (X-13 / STL) and diagnostics.
-              </p>
-              <ul class="tags" aria-label="Tech stack">
-                <li class="tag">R</li>
-                <li class="tag">Time Series</li>
-                <li class="tag">X-13</li>
-              </ul>
-              <div class="project-card__actions">
-                <a class="btn btn--ghost" href="#" target="_blank" rel="noopener">GitHub</a>
-                <a class="btn btn--ghost" href="#" target="_blank" rel="noopener">Case Study</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Add more project cards later -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================
-         Skills
-    ======================= -->
-    <section class="skills" id="skills" aria-label="Skills">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Skills</h2>
-          <p class="section-subtitle">What I use — and how I use it.</p>
-        </div>
-
-        <div class="skills__groups">
-          <article class="skills-group">
-            <h3 class="skills-group__title">Data & Econometrics</h3>
-            <ul class="chips" aria-label="Data skills">
-              <li class="chip" data-detail="Forecasting, seasonal adjustment, model diagnostics">Time Series</li>
-              <li class="chip" data-detail="ARIMA workflows, STL, X-13 style pipelines">Forecasting</li>
-              <li class="chip" data-detail="Inference, regression, applied modelling">Econometrics</li>
-              <li class="chip" data-detail="KPIs, storytelling, decision support">Analytics</li>
-            </ul>
-          </article>
-
-          <article class="skills-group">
-            <h3 class="skills-group__title">Engineering</h3>
-            <ul class="chips" aria-label="Engineering skills">
-              <li class="chip" data-detail="Data processing, automation, APIs">Python</li>
-              <li class="chip" data-detail="Data manipulation, modelling, reporting">R</li>
-              <li class="chip" data-detail="Queries, schemas, analytics">SQL</li>
-              <li class="chip" data-detail="UI, DOM, interactions">JavaScript</li>
-            </ul>
-          </article>
-
-          <article class="skills-group">
-            <h3 class="skills-group__title">Tools</h3>
-            <ul class="chips" aria-label="Tools">
-              <li class="chip" data-detail="Version control, collaboration">Git & GitHub</li>
-              <li class="chip" data-detail="Dashboards and reporting">Power BI</li>
-              <li class="chip" data-detail="Models, reporting, automation">Excel / VBA</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="chip-tooltip" role="status" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <!-- ======================
-         Experience
-    ======================= -->
-    <section class="experience" id="experience" aria-label="Experience">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Experience</h2>
-          <p class="section-subtitle">A quick timeline of roles and impact.</p>
-        </div>
-
-        <div class="timeline">
-          <article class="timeline-item">
-            <h3 class="timeline-item__title">Consultant — World Bank PHASAO Project (INSEED)</h3>
-            <p class="timeline-item__meta">DSSE • Nov 2024 – Present • Lomé, Togo</p>
-            <ul class="list">
-              <li>Develop and update short-term business indicators (IPI, IPPI, and indicators for services, trade, and construction), including scope, classifications, sampling, weights, processing, and bulletins.</li>
-              <li>Design methodological frameworks for the General Business Census (RGE-2), including data architecture and variable definitions.</li>
-              <li>Supervise 15 regional field teams, ensuring data quality, timelines, and compliance with statistical standards.</li>
-              <li>Organize data collection, validation, completeness checks, and continuous monitoring of progress indicators.</li>
-              <li>Conduct analytical reviews to detect inconsistencies and improve indicator accuracy.</li>
-            </ul>
-          </article>
-
-          <article class="timeline-item">
-            <h3 class="timeline-item__title">Research Officer — INSEED (Togo)</h3>
-            <p class="timeline-item__meta">National Accounts Division • Forecasting</p>
-            <ul class="list">
-              <li>Contributed to quarterly national accounts production and monitoring of key indicators.</li>
-              <li>Supported forecasting and data processing workflows for reporting and decision support.</li>
-            </ul>
-          </article>
-
-          <article class="timeline-item">
-            <h3 class="timeline-item__title">Statistician Intern — DGE (Benin)</h3>
-            <p class="timeline-item__meta">May 2023 – Aug 2023</p>
-            <ul class="list">
-              <li>Analyzed the impact of exchange rate volatility on international trade for WAEMU countries.</li>
-              <li>Contributed to a report evaluating the effectiveness of fiscal measures in the 2023 finance law.</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================
-         Education
-    ======================= -->
-    <section class="education" id="education" aria-label="Education">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Education</h2>
-          <p class="section-subtitle">Academic foundation in statistics, econometrics, and mathematics.</p>
-        </div>
-
-        <div class="timeline">
-          <article class="timeline-item">
-            <h3 class="timeline-item__title">Engineer in Statistics & Economics (ISE)</h3>
-            <p class="timeline-item__meta">ENEAM • 2023 • Cotonou, Benin</p>
-          </article>
-
-          <article class="timeline-item">
-            <h3 class="timeline-item__title">BSc in Fundamental Mathematics</h3>
-            <p class="timeline-item__meta">University of Lomé • 2015 – 2018 • Lomé, Togo</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================
-         Certifications
-    ======================= -->
-    <section class="certifications" id="certifications" aria-label="Certifications">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Certifications</h2>
-          <p class="section-subtitle">Selected training and certifications in data, AI, and analytics.</p>
-        </div>
-
-        <div class="trust__grid">
-          <article class="trust-card"><h3 class="trust-card__title">ALX — AI for Developers I & II</h3></article>
-          <article class="trust-card"><h3 class="trust-card__title">ALX — Professional Foundations</h3></article>
-          <article class="trust-card"><h3 class="trust-card__title">Udacity & ALX — Data Analyst</h3></article>
-          <article class="trust-card"><h3 class="trust-card__title">Simplilearn — Machine Learning</h3></article>
-          <article class="trust-card"><h3 class="trust-card__title">Simplilearn — Business Analytics with Excel</h3></article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================
-         Contact
-    ======================= -->
-    <section class="contact" id="contact" aria-label="Contact">
-      <div class="container contact__grid">
-        <div class="contact__content">
-          <h2 class="section-title">Contact</h2>
-          <p class="section-subtitle">
-            Want to collaborate, hire me, or discuss a project? Send a message.
-          </p>
-
-          <ul class="contact__list">
-            <li><strong>Phone:</strong> <a href="tel:+22890948958">+228 90 94 89 58</a></li>
-            <li><strong>Email:</strong> <a href="mailto:kadanganorris@gmail.com">kadanganorris@gmail.com</a></li>
-            <li><strong>Email:</strong> <a href="mailto:mkadanga@inseed.tg">mkadanga@inseed.tg</a></li>
-            <li><strong>Location:</strong> Lomé, Togo</li>
-          </ul>
-
-          <div class="contact__links">
-            <a href="https://github.com/mayonorris" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://www.linkedin.com/in/mayo-takemsi-kadanga" target="_blank" rel="noopener">LinkedIn</a>
+          <div class="scroll-hint" aria-hidden="true">
+            <span class="scroll-hint__dot"></span>
+            <span>Scroll down</span>
           </div>
         </div>
 
-        <form class="contact__form" action="#" method="post">
-          <label class="field">
-            <span>Name</span>
-            <input type="text" name="name" autocomplete="name" required />
-          </label>
-
-          <label class="field">
-            <span>Email</span>
-            <input type="email" name="email" autocomplete="email" required />
-          </label>
-
-          <label class="field">
-            <span>Message</span>
-            <textarea name="message" rows="6" required></textarea>
-          </label>
-
-          <button class="btn btn--primary" type="submit">Send Message</button>
-          <p class="form-note">This form can be wired to a backend later (or a service like Formspree).</p>
-        </form>
+        <!-- right: avatar placeholder -->
+        <div class="home-hero__visual" aria-label="Profile visual">
+          <div class="home-hero__avatar" role="img" aria-label="Portrait placeholder"></div>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- ======================
-       Footer
-  ======================= -->
   <footer class="site-footer" aria-label="Footer">
     <div class="container footer__content">
-      <p>© <span id="year">2025</span> Mayo Takémsi Norris KADANGA. All rights reserved.</p>
+      <p>© <span id="year">2025</span> Mayo Takémsi Norris KADANGA.</p>
       <a href="#top">Back to top ↑</a>
     </div>
     <button class="to-top" type="button" aria-label="Back to top">↑</button>

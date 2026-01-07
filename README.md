@@ -47,14 +47,20 @@ I currently work as a **Research Officer at INSEED (Togo)** and I am actively bu
 
 ```text
 mayo-portfolio/
-│
-├── index.html
-├── assets/
-├── css/
-├── js/
-├── data/
-├── screenshots/
-└── README.md
+/
+├─ index.html               (Home — simple)
+├─ about.html
+├─ skills.html
+├─ services.html
+├─ portfolio.html
+├─ contact.html
+├─ css/
+│  ├─ reset.css
+│  ├─ variables.css
+│  └─ styles.css
+└─ js/
+   ├─ main.js
+   └─ animations.js
 ```
 
 ## Project Status
