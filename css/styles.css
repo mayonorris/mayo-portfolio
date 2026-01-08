@@ -688,3 +688,204 @@ body{
 @media (max-width: 720px){
   .process__grid{ grid-template-columns: 1fr; }
 }
+
+
+/* =========================
+   Portfolio (Cards + Filters)
+========================= */
+
+.portfolio{
+  padding: var(--space-5) 0 var(--space-7);
+}
+
+.portfolio-controls{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.filters{
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.filter-btn{
+  padding: 0.6rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  color: var(--text-2);
+  font-weight: 750;
+  transition: transform var(--speed) var(--ease), border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
+}
+.filter-btn:hover{
+  transform: translateY(-1px);
+  border-color: rgba(167,139,250,0.28);
+  box-shadow: var(--shadow-soft);
+  color: var(--text);
+}
+.filter-btn.is-active{
+  color: var(--text);
+  border-color: rgba(249,115,22,0.30);
+  background:
+    radial-gradient(260px 120px at 20% 10%, rgba(124,58,237,0.18), transparent 60%),
+    rgba(255,255,255,0.05);
+}
+
+.portfolio-search{
+  display: grid;
+  gap: 0.6rem;
+  justify-items: end;
+  min-width: min(440px, 100%);
+}
+
+.search-input{
+  width: min(440px, 100%);
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.15);
+  color: var(--text);
+  padding: 0.85rem 1rem;
+}
+.search-input:focus{
+  outline: none;
+  box-shadow: var(--focus);
+  border-color: rgba(124,58,237,0.35);
+}
+
+.portfolio-count{
+  margin: 0;
+  color: var(--text-3);
+  font-size: var(--fs-1);
+}
+
+/* Grid */
+.portfolio-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+/* Card */
+.project{
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--speed) var(--ease), border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
+}
+
+.project:hover{
+  transform: translateY(-2px);
+  border-color: rgba(167,139,250,0.28);
+  box-shadow: var(--shadow);
+}
+
+.project__media{
+  min-height: 190px;
+  background:
+    radial-gradient(260px 260px at 25% 35%, rgba(124, 58, 237, 0.18), transparent 60%),
+    radial-gradient(260px 260px at 75% 75%, rgba(249, 115, 22, 0.14), transparent 60%),
+    rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.project__body{
+  padding: var(--space-4);
+}
+
+.project__top{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.project__title{
+  margin: 0;
+  font-size: var(--fs-4);
+  letter-spacing: -0.02em;
+}
+
+.project__pill{
+  font-size: 0.8rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(0,0,0,0.18);
+  color: var(--text-2);
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.project__desc{
+  margin: 0 0 var(--space-3);
+  color: var(--text-2);
+}
+
+/* Tags */
+.tag-row{
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-3);
+  padding: 0;
+}
+
+.tag-chip{
+  font-size: 0.82rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+  color: var(--text-2);
+  font-weight: 700;
+}
+
+.project__actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.portfolio-empty{
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  border: 1px dashed rgba(255,255,255,0.18);
+  color: var(--text-2);
+}
+
+/* Utility */
+.sr-only{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .portfolio-controls{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .portfolio-search{
+    justify-items: start;
+    min-width: auto;
+  }
+  .portfolio-grid{
+    grid-template-columns: 1fr;
+  }
+}

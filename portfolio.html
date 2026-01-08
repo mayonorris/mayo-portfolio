@@ -12,6 +12,7 @@
 
   <script defer src="js/main.js"></script>
   <script defer src="js/animations.js"></script>
+  <script defer src="js/portfolio.js"></script>
 </head>
 
 <body>
@@ -47,57 +48,170 @@
   </header>
 
   <main id="main">
-    <section class="page" aria-label="Portfolio page">
-      <div class="container">
-        <div class="section-head reveal">
-          <h1 class="section-title">Portfolio</h1>
-          <p class="section-subtitle">
-            Selected projects and experiments — data products, analytics tooling, and web development.
+    <!-- Page hero -->
+    <section class="page-hero" aria-label="Portfolio introduction">
+      <div class="container page-hero__grid reveal">
+        <div class="page-hero__content">
+          <p class="page-hero__eyebrow">Selected Work • Case-study mindset</p>
+          <h1 class="page-hero__title">Portfolio</h1>
+          <p class="page-hero__subtitle">
+            A curated set of projects: data workflows, forecasting tools, dashboards, and web development.
           </p>
         </div>
 
-        <div class="reveal" style="display:grid; gap: var(--space-4);">
-          <div class="about__facts">
-            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">SME Budgeting & Financial Insights App</h2>
-            <p style="margin:0 0 var(--space-3); color: var(--text-2);">
-              A budgeting and reporting app for SMEs: track expenses, categorize, and generate simple insights.
-            </p>
-            <ul class="list">
-              <li><strong>Stack:</strong> JavaScript, APIs (backend later)</li>
-              <li><strong>Focus:</strong> UX + clear financial storytelling</li>
-            </ul>
-            <div style="margin-top: var(--space-3); display:flex; gap: var(--space-2); flex-wrap:wrap;">
-              <a class="btn btn--primary" href="#" target="_blank" rel="noopener">Live</a>
-              <a class="btn btn--ghost" href="#" target="_blank" rel="noopener">GitHub</a>
-            </div>
-          </div>
-
-          <div class="about__facts">
-            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">Seasonal Adjustment Toolkit</h2>
-            <p style="margin:0 0 var(--space-3); color: var(--text-2);">
-              Tools and experiments for deseasonalization workflows (X-13 / STL), diagnostics, and visualization.
-            </p>
-            <ul class="list">
-              <li><strong>Stack:</strong> R, time series packages</li>
-              <li><strong>Focus:</strong> reproducible workflows + interpretability</li>
-            </ul>
-            <div style="margin-top: var(--space-3); display:flex; gap: var(--space-2); flex-wrap:wrap;">
-              <a class="btn btn--ghost" href="#" target="_blank" rel="noopener">GitHub</a>
-            </div>
-          </div>
-
-          <div class="about__facts">
-            <h2 style="margin:0 0 var(--space-3); font-size: var(--fs-4); letter-spacing:-0.02em;">Power BI Dashboards (KPIs & Monitoring)</h2>
-            <p style="margin:0 0 var(--space-3); color: var(--text-2);">
-              KPI dashboards for monitoring indicators, trends, and reporting — designed for decision makers.
-            </p>
-            <ul class="list">
-              <li><strong>Stack:</strong> Power BI, Excel, SQL</li>
-              <li><strong>Focus:</strong> clarity, relevance, performance</li>
+        <div class="page-hero__panel" aria-label="Portfolio summary">
+          <div class="panel-card">
+            <p class="panel-card__title">Focus areas</p>
+            <ul class="panel-card__list">
+              <li>Indicators & data quality</li>
+              <li>Time series & forecasting</li>
+              <li>Dashboards & KPIs</li>
+              <li>Web tools & automation</li>
             </ul>
           </div>
         </div>
+      </div>
+    </section>
 
+    <!-- Filters -->
+    <section class="portfolio" aria-label="Portfolio projects">
+      <div class="container">
+        <div class="portfolio-controls reveal">
+          <div class="filters" role="group" aria-label="Project filters">
+            <button class="filter-btn is-active" type="button" data-filter="all">All</button>
+            <button class="filter-btn" type="button" data-filter="data">Data</button>
+            <button class="filter-btn" type="button" data-filter="forecasting">Forecasting</button>
+            <button class="filter-btn" type="button" data-filter="dashboard">Dashboards</button>
+            <button class="filter-btn" type="button" data-filter="web">Web</button>
+          </div>
+
+          <div class="portfolio-search">
+            <label class="sr-only" for="portfolioSearch">Search projects</label>
+            <input
+              id="portfolioSearch"
+              class="search-input"
+              type="search"
+              placeholder="Search by title, tags, or keywords..."
+              autocomplete="off"
+            />
+            <p class="portfolio-count" aria-live="polite">
+              Showing <span id="portfolioCount">0</span> projects
+            </p>
+          </div>
+        </div>
+
+        <!-- Cards -->
+        <div class="portfolio-grid reveal" id="portfolioGrid">
+          <!-- Project 1 -->
+          <article class="project" data-category="web data" data-tags="fintech budgeting expense tracking reporting javascript api ui" data-title="SME Budgeting App">
+            <div class="project__media" aria-label="Project thumbnail"></div>
+            <div class="project__body">
+              <div class="project__top">
+                <h2 class="project__title">SME Budgeting App</h2>
+                <span class="project__pill">In progress</span>
+              </div>
+
+              <p class="project__desc">
+                Budget tracking and reporting for SMEs with clean UX and clear insights.
+              </p>
+
+              <ul class="tag-row" aria-label="Tags">
+                <li class="tag-chip">JavaScript</li>
+                <li class="tag-chip">Fintech</li>
+                <li class="tag-chip">APIs</li>
+                <li class="tag-chip">UI</li>
+              </ul>
+
+              <div class="project__actions">
+                <a class="btn btn--ghost" href="#" target="_blank" rel="noopener">GitHub</a>
+                <a class="btn btn--primary" href="#" target="_blank" rel="noopener">Live</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project" data-category="forecasting data" data-tags="time series seasonal adjustment x-13 stl diagnostics r econometrics" data-title="Seasonal Adjustment Toolkit">
+            <div class="project__media" aria-label="Project thumbnail"></div>
+            <div class="project__body">
+              <div class="project__top">
+                <h2 class="project__title">Seasonal Adjustment Toolkit</h2>
+                <span class="project__pill">R</span>
+              </div>
+
+              <p class="project__desc">
+                Tools and experiments for deseasonalization workflows (X-13 / STL), diagnostics, and reporting.
+              </p>
+
+              <ul class="tag-row" aria-label="Tags">
+                <li class="tag-chip">R</li>
+                <li class="tag-chip">Time Series</li>
+                <li class="tag-chip">X-13</li>
+                <li class="tag-chip">STL</li>
+              </ul>
+
+              <div class="project__actions">
+                <a class="btn btn--primary" href="#" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project" data-category="dashboard data" data-tags="power bi kpi monitoring visualization dax reporting" data-title="KPI Dashboards">
+            <div class="project__media" aria-label="Project thumbnail"></div>
+            <div class="project__body">
+              <div class="project__top">
+                <h2 class="project__title">KPI Dashboards</h2>
+                <span class="project__pill">Power BI</span>
+              </div>
+
+              <p class="project__desc">
+                Decision-grade dashboards for monitoring indicators, trends, and reporting — built for clarity.
+              </p>
+
+              <ul class="tag-row" aria-label="Tags">
+                <li class="tag-chip">Power BI</li>
+                <li class="tag-chip">KPIs</li>
+                <li class="tag-chip">Monitoring</li>
+                <li class="tag-chip">Reporting</li>
+              </ul>
+
+              <div class="project__actions">
+                <a class="btn btn--ghost" href="contact.html">Request demo</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project" data-category="data" data-tags="data quality validation outliers consistency checks pipeline r python" data-title="Data Quality Toolkit">
+            <div class="project__media" aria-label="Project thumbnail"></div>
+            <div class="project__body">
+              <div class="project__top">
+                <h2 class="project__title">Data Quality Toolkit</h2>
+                <span class="project__pill">Methods</span>
+              </div>
+
+              <p class="project__desc">
+                A set of consistency checks and validation routines to improve indicator reliability and reduce outliers.
+              </p>
+
+              <ul class="tag-row" aria-label="Tags">
+                <li class="tag-chip">Validation</li>
+                <li class="tag-chip">Outliers</li>
+                <li class="tag-chip">Pipelines</li>
+                <li class="tag-chip">Reproducible</li>
+              </ul>
+
+              <div class="project__actions">
+                <a class="btn btn--ghost" href="contact.html">Ask details</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="portfolio-empty" id="portfolioEmpty" hidden>
+          No projects match your filters. Try a different keyword or choose “All”.
+        </p>
       </div>
     </section>
   </main>
