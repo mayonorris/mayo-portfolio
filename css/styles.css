@@ -299,22 +299,36 @@ body{
 }
 
 /* Scroll hint */
+/* =========================
+   Scroll hint (Home only)
+========================= */
+
 .scroll-hint{
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: var(--text-3);
-  font-weight: 750;
+
+  color: rgba(255,255,255,0.55);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+
   user-select: none;
+  pointer-events: none;
 }
+
 .scroll-hint__dot{
   width: 18px;
   height: 28px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
   position: relative;
-  overflow: hidden;
 }
+
 .scroll-hint__dot::after{
   content: "";
   position: absolute;
@@ -324,13 +338,25 @@ body{
   height: 6px;
   transform: translateX(-50%);
   border-radius: 999px;
-  background: rgba(255,255,255,0.55);
-  animation: scrollDot 1.25s var(--ease) infinite;
+  background: rgba(255,255,255,0.65);
+  animation: scrollDot 1.25s cubic-bezier(0.2,0.8,0.2,1) infinite;
 }
+
+.scroll-hint__text{
+  opacity: 0.9;
+}
+
+/* Animation */
 @keyframes scrollDot{
-  0%{ transform: translateX(-50%) translateY(0); opacity: 0.25; }
+  0%{
+    transform: translateX(-50%) translateY(0);
+    opacity: 0.25;
+  }
   40%{ opacity: 1; }
-  100%{ transform: translateX(-50%) translateY(12px); opacity: 0.25; }
+  100%{
+    transform: translateX(-50%) translateY(12px);
+    opacity: 0.25;
+  }
 }
 
 /* =========================
