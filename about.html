@@ -32,7 +32,7 @@
 
       <ul class="nav__links">
         <li><a href="index.html" data-nav="home">Home</a></li>
-        <li><a href="about.html" data-nav="about">About</a></li>
+        <li><a href="about.html" data-nav="about" aria-current="page">About</a></li>
         <li><a href="skills.html" data-nav="skills">Skills</a></li>
         <li><a href="services.html" data-nav="services">Services</a></li>
         <li><a href="portfolio.html" data-nav="portfolio">Portfolio</a></li>
@@ -47,36 +47,143 @@
   </header>
 
   <main id="main">
-    <section class="page" aria-label="About page">
+    <section class="page about-page" aria-label="About page">
       <div class="container">
-        <div class="section-head reveal">
-          <h1 class="section-title">About</h1>
-          <p class="section-subtitle">
-            Statistician-Economist & Developer based in Lomé, Togo. I work on indicators, forecasting, and data products.
+        <!-- Page Header -->
+        <div class="page-header reveal">
+          <div class="page-header__badge">About Me</div>
+          <h1 class="page-header__title">Building Data Solutions That Drive Decisions</h1>
+          <p class="page-header__subtitle">
+            Statistician-Economist & Developer based in Lomé, Togo. I transform data into actionable insights through indicators, forecasting models, and modern web applications.
           </p>
         </div>
 
-        <div class="about__grid reveal">
-          <div class="about__text">
-            <p>
-              I support institutions and SMEs with strong methodology (econometrics, time series)
-              and practical delivery (dashboards, pipelines, web apps).
-            </p>
-            <p>
-              I value clean data workflows, reproducibility, and clear storytelling with KPIs.
-            </p>
+        <!-- Main Content Grid -->
+        <div class="about__content reveal">
+          <!-- Story Section -->
+          <div class="about__story">
+            <div class="about__story-card">
+              <h2 class="about__story-title">My Approach</h2>
+              <p>
+                I bridge the gap between rigorous statistical methodology and practical business solutions. Whether it's building econometric forecasting models, designing interactive dashboards, or developing data pipelines, I focus on delivering tools that organizations can actually use to make better decisions.
+              </p>
+              <p>
+                My work spans from traditional statistical analysis to modern web development, always with an emphasis on clean data workflows, reproducibility, and clear communication of insights through well-designed KPIs and visualizations.
+              </p>
+            </div>
+
+            <!-- Values Grid -->
+            <div class="about__values">
+              <div class="value-card">
+                <div class="value-card__icon">📊</div>
+                <h3 class="value-card__title">Data Integrity</h3>
+                <p class="value-card__text">Clean workflows and reproducible analysis</p>
+              </div>
+              <div class="value-card">
+                <div class="value-card__icon">🎯</div>
+                <h3 class="value-card__title">Actionable Insights</h3>
+                <p class="value-card__text">Clear storytelling with meaningful KPIs</p>
+              </div>
+              <div class="value-card">
+                <div class="value-card__icon">🚀</div>
+                <h3 class="value-card__title">Practical Delivery</h3>
+                <p class="value-card__text">Solutions that work in real environments</p>
+              </div>
+            </div>
           </div>
 
-          <div class="about__facts" aria-label="Quick facts">
-            <ul class="list">
-              <li><strong>Location:</strong> Lomé, Togo</li>
-              <li><strong>Focus:</strong> Forecasting, Indicators, Econometrics, Dashboards, Web Apps</li>
-              <li><strong>Tools:</strong> R, Python, SQL, Power BI, JavaScript</li>
-            </ul>
+          <!-- Sidebar Info -->
+          <aside class="about__sidebar">
+            <!-- Quick Facts Card -->
+            <div class="info-card">
+              <h3 class="info-card__title">Quick Facts</h3>
+              <ul class="info-list">
+                <li class="info-list__item">
+                  <span class="info-list__label">Location</span>
+                  <span class="info-list__value">Lomé, Togo</span>
+                </li>
+                <li class="info-list__item">
+                  <span class="info-list__label">Specialization</span>
+                  <span class="info-list__value">Forecasting & Econometrics</span>
+                </li>
+                <li class="info-list__item">
+                  <span class="info-list__label">Industries</span>
+                  <span class="info-list__value">Institutions & SMEs</span>
+                </li>
+              </ul>
+            </div>
 
-            <div class="about__links">
-              <a href="https://github.com/mayonorris" target="_blank" rel="noopener">GitHub</a>
-              <a href="https://www.linkedin.com/in/mayo-takemsi-kadanga" target="_blank" rel="noopener">LinkedIn</a>
+            <!-- Expertise Card -->
+            <div class="info-card">
+              <h3 class="info-card__title">Core Expertise</h3>
+              <div class="tag-cloud">
+                <span class="tag">Time Series Analysis</span>
+                <span class="tag">Econometrics</span>
+                <span class="tag">Dashboard Design</span>
+                <span class="tag">Data Pipelines</span>
+                <span class="tag">Web Apps</span>
+                <span class="tag">KPI Development</span>
+              </div>
+            </div>
+
+            <!-- Tools Card -->
+            <div class="info-card">
+              <h3 class="info-card__title">Tech Stack</h3>
+              <div class="tech-stack">
+                <div class="tech-item">
+                  <span class="tech-item__icon">R</span>
+                  <span class="tech-item__name">R</span>
+                </div>
+                <div class="tech-item">
+                  <span class="tech-item__icon">Py</span>
+                  <span class="tech-item__name">Python</span>
+                </div>
+                <div class="tech-item">
+                  <span class="tech-item__icon">SQL</span>
+                  <span class="tech-item__name">SQL</span>
+                </div>
+                <div class="tech-item">
+                  <span class="tech-item__icon">JS</span>
+                  <span class="tech-item__name">JavaScript</span>
+                </div>
+                <div class="tech-item">
+                  <span class="tech-item__icon">PBI</span>
+                  <span class="tech-item__name">Power BI</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Links Card -->
+            <div class="info-card info-card--highlight">
+              <h3 class="info-card__title">Let's Connect</h3>
+              <div class="social-links">
+                <a href="https://github.com/mayonorris" target="_blank" rel="noopener" class="social-link">
+                  <span class="social-link__icon">gh</span>
+                  <span class="social-link__text">GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/mayo-takemsi-kadanga" target="_blank" rel="noopener" class="social-link">
+                  <span class="social-link__icon">in</span>
+                  <span class="social-link__text">LinkedIn</span>
+                </a>
+                <a href="mailto:kadanganorris@gmail.com" class="social-link">
+                  <span class="social-link__icon">@</span>
+                  <span class="social-link__text">Email</span>
+                </a>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="about__cta reveal">
+          <div class="cta-card">
+            <h2 class="cta-card__title">Ready to Work Together?</h2>
+            <p class="cta-card__text">
+              I'm available for consulting, data analysis projects, and development work. Let's discuss how I can help your organization make better data-driven decisions.
+            </p>
+            <div class="cta-card__actions">
+              <a href="contact.html" class="btn btn--primary btn--large">Get In Touch</a>
+              <a href="portfolio.html" class="btn btn--ghost btn--large">View My Work</a>
             </div>
           </div>
         </div>
