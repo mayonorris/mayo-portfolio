@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Portfolio — Mayo Takémsi Norris KADANGA" />
+  <meta name="theme-color" content="#0b0f1a" />
   <title>Mayo KADANGA | Portfolio</title>
 
   <link rel="stylesheet" href="css/reset.css" />
@@ -36,7 +37,7 @@
         <li><a href="about.html">About</a></li>
         <li><a href="skills.html">Skills</a></li>
         <li><a href="services.html">Services</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="portfolio.html" aria-current="page">Portfolio</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
 
@@ -48,41 +49,35 @@
   </header>
 
   <main id="main">
-    <!-- Page hero -->
-    <section class="page-hero" aria-label="Portfolio introduction">
-      <div class="container page-hero__grid reveal">
-        <div class="page-hero__content">
-          <p class="page-hero__eyebrow">Selected Work • Case-study mindset</p>
-          <h1 class="page-hero__title">Portfolio</h1>
-          <p class="page-hero__subtitle">
-            A curated set of projects: data workflows, forecasting tools, dashboards, and web development.
+    <!-- Page Header -->
+    <section class="page" aria-label="Portfolio introduction">
+      <div class="container">
+        <div class="page-header reveal">
+          <div class="page-header__badge">Selected Work</div>
+          <h1 class="page-header__title">Portfolio</h1>
+          <p class="page-header__subtitle">
+            A curated collection of projects showcasing data workflows, forecasting tools, interactive dashboards, and modern web development.
           </p>
         </div>
 
-        <div class="page-hero__panel" aria-label="Portfolio summary">
-          <div class="panel-card">
-            <p class="panel-card__title">Focus areas</p>
-            <ul class="panel-card__list">
-              <li>Indicators & data quality</li>
-              <li>Time series & forecasting</li>
-              <li>Dashboards & KPIs</li>
-              <li>Web tools & automation</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Filters -->
-    <section class="portfolio" aria-label="Portfolio projects">
-      <div class="container">
+        <!-- Portfolio Controls -->
         <div class="portfolio-controls reveal">
           <div class="filters" role="group" aria-label="Project filters">
-            <button class="filter-btn is-active" type="button" data-filter="all">All</button>
-            <button class="filter-btn" type="button" data-filter="data">Data</button>
-            <button class="filter-btn" type="button" data-filter="forecasting">Forecasting</button>
-            <button class="filter-btn" type="button" data-filter="dashboard">Dashboards</button>
-            <button class="filter-btn" type="button" data-filter="web">Web</button>
+            <button class="filter-btn is-active" type="button" data-filter="all" aria-label="Show all projects">
+              All
+            </button>
+            <button class="filter-btn" type="button" data-filter="data" aria-label="Filter by data projects">
+              Data
+            </button>
+            <button class="filter-btn" type="button" data-filter="forecasting" aria-label="Filter by forecasting projects">
+              Forecasting
+            </button>
+            <button class="filter-btn" type="button" data-filter="dashboard" aria-label="Filter by dashboard projects">
+              Dashboards
+            </button>
+            <button class="filter-btn" type="button" data-filter="web" aria-label="Filter by web projects">
+              Web
+            </button>
           </div>
 
           <div class="portfolio-search">
@@ -91,46 +86,48 @@
               id="portfolioSearch"
               class="search-input"
               type="search"
-              placeholder="Search by title, tags, or keywords..."
+              placeholder="Search by title, tags, or keywords... (Ctrl+K)"
               autocomplete="off"
+              aria-describedby="portfolioCount"
             />
-            <p class="portfolio-count" aria-live="polite">
-              Showing <span id="portfolioCount">0</span> projects
+            <p class="portfolio-count" id="portfolioCount" aria-live="polite">
+              Showing <span>4</span> projects
             </p>
           </div>
         </div>
 
-        <!-- Cards -->
+        <!-- Project Grid -->
         <div class="portfolio-grid reveal" id="portfolioGrid">
-          <!-- Project 1 -->
-          <article class="project" data-category="web data" data-tags="fintech budgeting expense tracking reporting javascript api ui" data-title="SME Budgeting App">
+          
+          <!-- Project 1: SME Budgeting App -->
+          <article class="project" data-category="web data" data-tags="fintech budgeting expense tracking reporting javascript api ui ux" data-title="SME Budgeting App">
             <div class="project__media" aria-label="Project thumbnail"></div>
             <div class="project__body">
               <div class="project__top">
                 <h2 class="project__title">SME Budgeting App</h2>
-                <span class="project__pill">In progress</span>
+                <span class="project__pill">In Progress</span>
               </div>
 
               <p class="project__desc">
-                Budget tracking and reporting for SMEs with clean UX and clear insights.
+                Budget tracking and reporting tool designed for SMEs with intuitive UX, real-time insights, and comprehensive financial analytics.
               </p>
 
-              <ul class="tag-row" aria-label="Tags">
+              <ul class="tag-row" aria-label="Technologies used">
                 <li class="tag-chip">JavaScript</li>
                 <li class="tag-chip">Fintech</li>
                 <li class="tag-chip">APIs</li>
-                <li class="tag-chip">UI</li>
+                <li class="tag-chip">UI/UX</li>
               </ul>
 
               <div class="project__actions">
                 <a class="btn btn--ghost" href="#" target="_blank" rel="noopener">GitHub</a>
-                <a class="btn btn--primary" href="#" target="_blank" rel="noopener">Live</a>
+                <a class="btn btn--primary" href="#" target="_blank" rel="noopener">Live Demo</a>
               </div>
             </div>
           </article>
 
-          <!-- Project 2 -->
-          <article class="project" data-category="forecasting data" data-tags="time series seasonal adjustment x-13 stl diagnostics r econometrics" data-title="Seasonal Adjustment Toolkit">
+          <!-- Project 2: Seasonal Adjustment Toolkit -->
+          <article class="project" data-category="forecasting data" data-tags="time series seasonal adjustment x-13 stl diagnostics r econometrics statistical analysis" data-title="Seasonal Adjustment Toolkit">
             <div class="project__media" aria-label="Project thumbnail"></div>
             <div class="project__body">
               <div class="project__top">
@@ -139,24 +136,25 @@
               </div>
 
               <p class="project__desc">
-                Tools and experiments for deseasonalization workflows (X-13 / STL), diagnostics, and reporting.
+                Comprehensive tools and experiments for deseasonalization workflows using X-13 and STL methods, complete with diagnostics and automated reporting.
               </p>
 
-              <ul class="tag-row" aria-label="Tags">
+              <ul class="tag-row" aria-label="Technologies used">
                 <li class="tag-chip">R</li>
                 <li class="tag-chip">Time Series</li>
                 <li class="tag-chip">X-13</li>
                 <li class="tag-chip">STL</li>
+                <li class="tag-chip">Econometrics</li>
               </ul>
 
               <div class="project__actions">
-                <a class="btn btn--primary" href="#" target="_blank" rel="noopener">GitHub</a>
+                <a class="btn btn--primary" href="#" target="_blank" rel="noopener">View on GitHub</a>
               </div>
             </div>
           </article>
 
-          <!-- Project 3 -->
-          <article class="project" data-category="dashboard data" data-tags="power bi kpi monitoring visualization dax reporting" data-title="KPI Dashboards">
+          <!-- Project 3: KPI Dashboards -->
+          <article class="project" data-category="dashboard data" data-tags="power bi kpi monitoring visualization dax reporting analytics business intelligence" data-title="KPI Dashboards">
             <div class="project__media" aria-label="Project thumbnail"></div>
             <div class="project__body">
               <div class="project__top">
@@ -165,24 +163,25 @@
               </div>
 
               <p class="project__desc">
-                Decision-grade dashboards for monitoring indicators, trends, and reporting — built for clarity.
+                Decision-grade dashboards for monitoring key performance indicators, analyzing trends, and generating insightful reports — built with clarity and precision.
               </p>
 
-              <ul class="tag-row" aria-label="Tags">
+              <ul class="tag-row" aria-label="Technologies used">
                 <li class="tag-chip">Power BI</li>
                 <li class="tag-chip">KPIs</li>
                 <li class="tag-chip">Monitoring</li>
-                <li class="tag-chip">Reporting</li>
+                <li class="tag-chip">DAX</li>
+                <li class="tag-chip">Analytics</li>
               </ul>
 
               <div class="project__actions">
-                <a class="btn btn--ghost" href="contact.html">Request demo</a>
+                <a class="btn btn--ghost" href="contact.html">Request Demo</a>
               </div>
             </div>
           </article>
 
-          <!-- Project 4 -->
-          <article class="project" data-category="data" data-tags="data quality validation outliers consistency checks pipeline r python" data-title="Data Quality Toolkit">
+          <!-- Project 4: Data Quality Toolkit -->
+          <article class="project" data-category="data" data-tags="data quality validation outliers consistency checks pipeline r python automation" data-title="Data Quality Toolkit">
             <div class="project__media" aria-label="Project thumbnail"></div>
             <div class="project__body">
               <div class="project__top">
@@ -191,26 +190,28 @@
               </div>
 
               <p class="project__desc">
-                A set of consistency checks and validation routines to improve indicator reliability and reduce outliers.
+                Comprehensive set of consistency checks and validation routines designed to improve indicator reliability, reduce outliers, and ensure data integrity.
               </p>
 
-              <ul class="tag-row" aria-label="Tags">
+              <ul class="tag-row" aria-label="Technologies used">
                 <li class="tag-chip">Validation</li>
                 <li class="tag-chip">Outliers</li>
                 <li class="tag-chip">Pipelines</li>
-                <li class="tag-chip">Reproducible</li>
+                <li class="tag-chip">R</li>
+                <li class="tag-chip">Python</li>
               </ul>
 
               <div class="project__actions">
-                <a class="btn btn--ghost" href="contact.html">Ask details</a>
+                <a class="btn btn--ghost" href="contact.html">Ask Details</a>
               </div>
             </div>
           </article>
 
         </div>
 
-        <p class="portfolio-empty" id="portfolioEmpty" hidden>
-          No projects match your filters. Try a different keyword or choose “All”.
+        <!-- Empty State -->
+        <p class="portfolio-empty" id="portfolioEmpty" hidden style="opacity: 0; transition: opacity 0.3s ease;">
+          No projects match your filters. Try a different keyword or choose "All" to see all projects.
         </p>
       </div>
     </section>
