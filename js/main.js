@@ -1,5 +1,5 @@
 // =========================
-// main.js (multi-page safe)
+// main.js (enhanced multi-page)
 // =========================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,23 +14,43 @@ document.addEventListener("DOMContentLoaded", () => {
   const current = (location.pathname.split("/").pop() || "index.html").toLowerCase();
   $$(".nav__links a").forEach((a) => {
     const href = (a.getAttribute("href") || "").toLowerCase();
-    if (href === current) a.classList.add("is-active");
+    if (href === current) {
+      a.classList.add("is-active");
+      a.setAttribute("aria-current", "page");
+    }
   });
 
-  // Mobile menu (CSS-driven)
+  // Header scroll effect
   const header = $(".site-header");
+  let lastScroll = 0;
+
+  const handleHeaderScroll = () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 50) {
+      header?.classList.add("scrolled");
+    } else {
+      header?.classList.remove("scrolled");
+    }
+    
+    lastScroll = currentScroll;
+  };
+
+  // Mobile menu (CSS-driven with enhanced interactions)
   const toggleBtn = $(".nav__toggle");
 
   const closeMenu = () => {
     if (!toggleBtn || !header) return;
     toggleBtn.setAttribute("aria-expanded", "false");
     header.classList.remove("is-open");
+    document.body.style.overflow = "";
   };
 
   const openMenu = () => {
     if (!toggleBtn || !header) return;
     toggleBtn.setAttribute("aria-expanded", "true");
     header.classList.add("is-open");
+    document.body.style.overflow = "hidden";
   };
 
   if (toggleBtn && header) {
@@ -64,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const toTopBtn = $(".to-top");
 
   const updateUI = () => {
-    // progress bar
+    // Progress bar
     if (progressBar) {
       const doc = document.documentElement;
       const scrollTop = doc.scrollTop || document.body.scrollTop;
@@ -73,18 +93,35 @@ document.addEventListener("DOMContentLoaded", () => {
       progressBar.style.width = `${pct}%`;
     }
 
-    // back to top
+    // Back to top button
     if (toTopBtn) {
-      if (window.scrollY > 600) toTopBtn.classList.add("show");
-      else toTopBtn.classList.remove("show");
+      if (window.scrollY > 300) {
+        toTopBtn.classList.add("show");
+      } else {
+        toTopBtn.classList.remove("show");
+      }
     }
+
+    // Header scroll effect
+    handleHeaderScroll();
   };
 
   if (toTopBtn) {
-    toTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    toTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   }
 
-  window.addEventListener("scroll", updateUI, { passive: true });
+  // Throttle scroll events for better performance
+  let scrollTimeout;
+  window.addEventListener("scroll", () => {
+    if (scrollTimeout) return;
+    scrollTimeout = setTimeout(() => {
+      updateUI();
+      scrollTimeout = null;
+    }, 10);
+  }, { passive: true });
+
   updateUI();
 
   // Smooth scroll for same-page hashes (only when element exists)
@@ -102,5 +139,23 @@ document.addEventListener("DOMContentLoaded", () => {
       const top = target.getBoundingClientRect().top + window.pageYOffset - headerH - 10;
       window.scrollTo({ top, behavior: "smooth" });
     });
+  });
+
+  // Enhanced keyboard navigation
+  document.addEventListener("keydown", (e) => {
+    // Ctrl/Cmd + K for search focus
+    if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+      e.preventDefault();
+      const searchInput = $("#portfolioSearch");
+      if (searchInput) {
+        searchInput.focus();
+        searchInput.select();
+      }
+    }
+  });
+
+  // Add loading class removal after page loads
+  window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
   });
 });
