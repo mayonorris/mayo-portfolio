@@ -1,17 +1,47 @@
 /* =========================
-   Minimal CSS Reset
+   Enhanced CSS Reset
 ========================= */
+
 *,
 *::before,
-*::after { box-sizing: border-box; }
+*::after { 
+  box-sizing: border-box; 
+  margin: 0;
+  padding: 0;
+}
 
-html:focus-within { scroll-behavior: smooth; }
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html:focus-within { 
+  scroll-behavior: smooth; 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 body {
   margin: 0;
+  min-height: 100vh;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
 }
 
 img,
@@ -21,23 +51,161 @@ canvas,
 svg {
   display: block;
   max-width: 100%;
+  height: auto;
+}
+
+img {
+  font-style: italic;
+  background-repeat: no-repeat;
+  background-size: cover;
+  shape-margin: 1rem;
 }
 
 input,
 button,
 textarea,
-select { font: inherit; }
+select { 
+  font: inherit; 
+  color: inherit;
+}
 
 button {
   cursor: pointer;
   background: none;
   border: none;
+  padding: 0;
 }
 
-p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
 
-ul, ol { margin: 0; padding: 0; }
+p, h1, h2, h3, h4, h5, h6 { 
+  overflow-wrap: break-word; 
+  line-height: 1.3;
+}
 
-textarea { resize: vertical; }
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
 
-a { text-decoration: none; color: inherit; }
+p {
+  text-wrap: pretty;
+}
+
+ul, ol { 
+  margin: 0; 
+  padding: 0; 
+}
+
+textarea { 
+  resize: vertical; 
+  overflow: auto;
+}
+
+a { 
+  text-decoration: none; 
+  color: inherit; 
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Remove default link underline on focus */
+a:focus {
+  text-decoration: none;
+}
+
+/* Better table defaults */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Remove default list styles */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Improve form element defaults */
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+textarea {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+/* Remove spinner from number inputs */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Better selection styles */
+::selection {
+  background-color: rgba(124, 58, 237, 0.3);
+  color: inherit;
+}
+
+::-moz-selection {
+  background-color: rgba(124, 58, 237, 0.3);
+  color: inherit;
+}
+
+/* Scrollbar styling for webkit browsers */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(167, 139, 250, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(167, 139, 250, 0.5);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(167, 139, 250, 0.3) rgba(255, 255, 255, 0.05);
+}
+
+/* Accessibility - hidden but still accessible to screen readers */
+.visually-hidden:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
