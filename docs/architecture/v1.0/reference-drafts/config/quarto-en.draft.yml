@@ -1,3 +1,7 @@
+# Reference draft only.
+# Not production configuration.
+# Replace placeholder domains before activation.
+
 project:
   type: website
   output-dir: _site

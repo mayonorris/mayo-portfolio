@@ -17,7 +17,7 @@ Use the unelevated fallback only when administrator-approved setup is unavailabl
 ## Suggested project location
 
 ```text
-C:\Users\Mayo\code\mayo-portfolio
+C:\Users\<username>\code\mayo-portfolio
 ```
 
 Avoid synchronized folders that frequently lock files.

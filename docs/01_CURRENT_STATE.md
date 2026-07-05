@@ -6,6 +6,8 @@
 - Codex is the selected implementation tool.
 - No Next.js application has been initialized yet.
 - No Quarto application has been initialized yet.
-- No personal or confidential data has been integrated into the repository.
+- No new personal document, private source or confidential data has been integrated into the repository.
+- The legacy site still contains historical contact details that were previously published.
+- These contact details will be reviewed before the launch of the new portfolio.
 - The next project phase is Sprint 1.
 - The first Sprint 1 task will be selected after an implementation audit.

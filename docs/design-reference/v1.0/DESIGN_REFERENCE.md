@@ -8,6 +8,14 @@ The Claude Design file defines visual hierarchy, page families, color direction,
 
 It does not define production architecture.
 
+## Prototype content status
+
+The V3 prototype is a visual and interaction reference only.
+
+Its textual content, dates, roles, research statuses, placeholders and confidentiality notes are not official facts. They must not be treated as approved public profile content.
+
+Only content validated in future content registries may be published on the final site.
+
 ## Do not copy directly
 
 Do not copy state-based route simulation, navigation buttons used as links, large inline style blocks, hardcoded bilingual strings, internal design-review routes, prototype form simulation, placeholder article claims or synthetic figures presented as real evidence.
