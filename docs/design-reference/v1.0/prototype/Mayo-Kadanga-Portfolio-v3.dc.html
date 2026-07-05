@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+--paper:oklch(0.987 0.004 240);--paper-2:oklch(0.966 0.005 240);--panel:oklch(0.945 0.006 245);
+--ink:oklch(0.23 0.02 262);--ink-2:oklch(0.43 0.02 262);--ink-3:oklch(0.58 0.016 262);
+--line:oklch(0.905 0.006 250);--line-2:oklch(0.83 0.008 250);
+--accent:oklch(0.56 0.145 41);--accent-2:oklch(0.47 0.13 41);--accent-soft:oklch(0.94 0.03 55);
+--c-blue:oklch(0.55 0.10 250);--c-teal:oklch(0.58 0.09 190);--c-violet:oklch(0.52 0.10 300);--c-green:oklch(0.55 0.10 150);
+--dark:oklch(0.235 0.02 262);--focus:oklch(0.55 0.17 250);
+--sans:'Hanken Grotesk',system-ui,-apple-system,sans-serif;--serif:'Source Serif 4',Georgia,serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+[data-theme="dark"]{
+--paper:oklch(0.205 0.015 262);--paper-2:oklch(0.245 0.017 262);--panel:oklch(0.285 0.018 262);
+--ink:oklch(0.945 0.006 240);--ink-2:oklch(0.80 0.01 245);--ink-3:oklch(0.66 0.014 250);
+--line:oklch(0.34 0.02 262);--line-2:oklch(0.42 0.02 262);
+--accent:oklch(0.70 0.14 46);--accent-2:oklch(0.78 0.12 50);--accent-soft:oklch(0.31 0.05 45);
+--dark:oklch(0.16 0.014 262);--focus:oklch(0.72 0.15 245);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--accent-soft);color:var(--accent-2)}
+:focus-visible{outline:2.5px solid var(--focus);outline-offset:2px;border-radius:3px}
+::-webkit-scrollbar{width:11px;height:11px}::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:8px;border:3px solid var(--paper)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+@media(max-width:860px){.hd-nav{display:none!important}}
+@media(max-width:760px){.hd-lang,.hd-role,.hd-theme{display:none!important}.hd-cv{padding:8px 13px!important;font-size:13px!important}.hd-burger{display:flex!important;align-items:center;justify-content:center}}
+</style>
+</helmet>
+
+<div data-theme="{{ theme }}" lang="{{ lang }}" style="min-height:100vh;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;transition:background .3s,color .3s">
+
+<a href="#main" style="position:absolute;left:8px;top:-60px;z-index:200;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font:600 14px var(--sans);text-decoration:none" style-focus="top:8px">Skip to content</a>
+
+<!-- ============ HEADER ============ -->
+<header style="position:sticky;top:0;z-index:100;background:{{ headerbg }};backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)">
+  <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,56px);height:66px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+    <button onClick="{{ goHome }}" aria-label="Mayo Kadanga — home" style="display:flex;align-items:baseline;gap:10px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">
+      <span style="font:700 19px var(--sans);letter-spacing:-.01em;color:var(--ink)">Mayo Kadanga</span>
+      <span style="font:500 10.5px var(--mono);letter-spacing:.06em;color:var(--accent);text-transform:uppercase" class="hd-role">ISE · Data Scientist</span>
+    </button>
+
+    <nav aria-label="Primary" class="hd-nav" style="display:flex;align-items:center;gap:4px">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+        <button onClick="{{ n.on }}" aria-current="{{ n.cur }}" style="background:none;border:none;cursor:pointer;font:500 15px var(--sans);color:{{ n.color }};padding:8px 12px;border-radius:8px;position:relative" style-hover="background:var(--paper-2);color:var(--ink)">{{ n.label }}</button>
+      </sc-for>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:8px">
+      <div role="group" aria-label="Language" class="hd-lang" style="display:flex;border:1px solid var(--line-2);border-radius:8px;overflow:hidden">
+        <button onClick="{{ setEn }}" aria-pressed="{{ isEn }}" style="background:{{ enBg }};color:{{ enFg }};border:none;cursor:pointer;font:600 12.5px var(--mono);padding:6px 10px">EN</button>
+        <button onClick="{{ setFr }}" aria-pressed="{{ isFr }}" style="background:{{ frBg }};color:{{ frFg }};border:none;cursor:pointer;font:600 12.5px var(--mono);padding:6px 10px">FR</button>
+      </div>
+      <button onClick="{{ toggleTheme }}" aria-label="Toggle colour theme" class="hd-theme" style="width:36px;height:36px;border:1px solid var(--line-2);border-radius:8px;background:var(--paper);cursor:pointer;font-size:15px;color:var(--ink-2);display:flex;align-items:center;justify-content:center" style-hover="border-color:var(--ink-3)">{{ themeIcon }}</button>
+      <button onClick="{{ goCv }}" class="hd-cv" style="background:var(--accent);color:oklch(0.99 0 0);border:none;cursor:pointer;font:600 14px var(--sans);padding:9px 18px;border-radius:8px;display:flex;align-items:center;gap:7px" style-hover="background:var(--accent-2)">{{ t.nav.cv }} <span style="font-size:12px">↗</span></button>
+      <button onClick="{{ toggleMenu }}" aria-label="Open menu" aria-expanded="{{ menuOpen }}" class="hd-burger" style="display:none;width:38px;height:38px;border:1px solid var(--line-2);border-radius:8px;background:var(--paper);cursor:pointer;font-size:18px;color:var(--ink)">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- env indicator strip -->
+<sc-if value="{{ inNotebook }}" hint-placeholder-val="{{ false }}">
+  <div style="background:var(--dark);color:oklch(0.86 0.01 250)">
+    <div style="max-width:1240px;margin:0 auto;padding:7px clamp(20px,5vw,56px);display:flex;align-items:center;gap:10px;font:500 12px var(--mono)">
+      <span style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></span>
+      <span>{{ t.env.notebook }}</span>
+    </div>
+  </div>
+</sc-if>
+
+<!-- mobile menu -->
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-label="Menu" style="position:fixed;inset:0;z-index:150;background:var(--paper);display:flex;flex-direction:column">
+    <div style="padding:18px clamp(20px,5vw,56px);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)">
+      <span style="font:700 19px var(--sans)">Mayo Kadanga</span>
+      <button onClick="{{ toggleMenu }}" aria-label="Close menu" style="width:40px;height:40px;border:1px solid var(--line-2);border-radius:8px;background:none;font-size:20px;cursor:pointer;color:var(--ink)">✕</button>
+    </div>
+    <nav aria-label="Mobile" style="padding:12px clamp(20px,5vw,56px);display:flex;flex-direction:column;overflow-y:auto">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+        <button onClick="{{ n.on }}" aria-current="{{ n.cur }}" style="text-align:left;background:none;border:none;border-bottom:1px solid var(--line);cursor:pointer;font:600 26px var(--serif);color:{{ n.mcolor }};padding:18px 0;display:flex;justify-content:space-between;align-items:center"><span>{{ n.label }}</span><span style="font:500 12px var(--mono);color:var(--accent)">{{ n.dot }}</span></button>
+      </sc-for>
+      <button onClick="{{ goCv }}" style="margin-top:22px;background:var(--accent);color:#fff;border:none;cursor:pointer;font:600 18px var(--sans);padding:15px;border-radius:10px">{{ t.nav.cv }} ↗</button>
+      <div style="display:flex;gap:10px;margin-top:16px">
+        <button onClick="{{ setEn }}" aria-pressed="{{ isEn }}" style="flex:1;background:{{ enBg }};color:{{ enFg }};border:1px solid var(--line-2);cursor:pointer;font:600 14px var(--mono);padding:11px;border-radius:9px">EN</button>
+        <button onClick="{{ setFr }}" aria-pressed="{{ isFr }}" style="flex:1;background:{{ frBg }};color:{{ frFg }};border:1px solid var(--line-2);cursor:pointer;font:600 14px var(--mono);padding:11px;border-radius:9px">FR</button>
+        <button onClick="{{ toggleTheme }}" aria-label="Toggle theme" style="width:48px;background:var(--paper);color:var(--ink-2);border:1px solid var(--line-2);cursor:pointer;font-size:16px;border-radius:9px">{{ themeIcon }}</button>
+      </div>
+    </nav>
+  </div>
+</sc-if>
+
+<main id="main">
+
+<sc-if value="{{ isInternal }}" hint-placeholder-val="{{ false }}">
+  <div style="background:var(--accent-soft);border-bottom:1px solid var(--accent)">
+    <div style="max-width:1240px;margin:0 auto;padding:8px clamp(20px,5vw,56px);display:flex;align-items:center;gap:9px;font:500 12px var(--mono);color:var(--accent-2)">
+      <span style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></span>
+      <span>Internal design documentation · not part of the public site · development-only route</span>
+    </div>
+  </div>
+</sc-if>
+
+<!-- ================= HOME ================= -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div>
+  <!-- HERO -->
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(40px,6vw,84px) clamp(20px,5vw,56px) clamp(30px,4vw,52px)">
+    <div class="hero-grid" style="display:grid;grid-template-columns:{{ heroCols }};gap:clamp(28px,4vw,64px);align-items:center">
+      <div style="animation:fadeUp .6s ease both">
+        <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:18px">{{ t.hero.kicker }}</div>
+        <h1 style="font:600 clamp(36px,5.4vw,68px)/1.03 var(--serif);letter-spacing:-.02em;margin:0 0 20px;text-wrap:balance">{{ t.hero.role }}</h1>
+        <p style="font:400 clamp(16.5px,1.5vw,20px)/1.55 var(--sans);color:var(--ink-2);max-width:42ch;margin:0 0 14px">{{ t.hero.lede }}</p>
+        <p style="font:500 italic clamp(14.5px,1.3vw,17px) var(--serif);color:var(--ink-3);margin:0 0 30px">{{ t.hero.sig }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <button onClick="{{ goWork }}" style="background:var(--ink);color:var(--paper);border:none;cursor:pointer;font:600 15.5px var(--sans);padding:14px 24px;border-radius:10px;display:flex;align-items:center;gap:9px" style-hover="background:var(--accent);color:#fff">{{ t.hero.cta1 }} <span>→</span></button>
+          <button onClick="{{ goCv }}" style="background:none;color:var(--ink);border:1px solid var(--line-2);cursor:pointer;font:600 15.5px var(--sans);padding:14px 24px;border-radius:10px" style-hover="border-color:var(--ink)">{{ t.hero.cta2 }}</button>
+        </div>
+      </div>
+
+      <!-- SIGNATURE INTERACTION -->
+      <figure style="margin:0;background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,2vw,26px);animation:fadeUp .7s .1s ease both">
+        <figcaption style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px">
+          <span style="font:600 12px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)">{{ t.sig.title }}</span>
+          <span style="font:500 10.5px var(--mono);color:var(--ink-3);border:1px solid var(--line-2);padding:2px 7px;border-radius:20px">{{ t.sig.synthetic }}</span>
+        </figcaption>
+        <div style="font:400 13px/1.5 var(--sans);color:var(--ink-3);margin-bottom:4px">{{ t.sig.pipeline }}</div>
+        <div style="font:500 11.5px/1.5 var(--mono);color:var(--accent);margin-bottom:14px">{{ t.sig.disclaimer }}</div>
+        <div>{{ methodChart }}</div>
+        <div style="margin-top:14px">
+          <label style="display:flex;justify-content:space-between;font:500 13px var(--sans);color:var(--ink-2);margin-bottom:7px"><span>{{ t.sig.param }}</span><span style="font:600 13px var(--mono);color:var(--accent)">{{ accessLabel }}</span></label>
+          <input type="range" min="0" max="40" step="1" value="{{ access }}" onInput="{{ onAccess }}" aria-label="{{ sigAria }}" style="width:100%;accent-color:var(--accent);height:24px;cursor:pointer">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+          <div style="background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px">
+            <div style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3)">{{ t.sig.insight }}</div>
+            <div style="font:400 13.5px/1.45 var(--sans);color:var(--ink);margin-top:5px">{{ insight }}</div>
+          </div>
+          <div style="background:var(--accent-soft);border:1px solid var(--accent);border-radius:10px;padding:12px 14px">
+            <div style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--accent-2)">{{ t.sig.decision }}</div>
+            <div style="font:500 13.5px/1.45 var(--sans);color:var(--accent-2);margin-top:5px">{{ decision }}</div>
+          </div>
+        </div>
+        <button onClick="{{ goStoryboard }}" style="margin-top:12px;background:none;border:none;cursor:pointer;font:500 12px var(--mono);color:var(--ink-3);padding:0" style-hover="color:var(--accent)">{{ t.sig.how }} →</button>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PRACTICE AT A GLANCE -->
+  <section aria-label="Practice at a glance" style="border-block:1px solid var(--line);background:var(--paper-2)">
+    <div style="max-width:1240px;margin:0 auto;padding:26px clamp(20px,5vw,56px)">
+      <div style="font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin-bottom:16px">{{ t.proof.head }}</div>
+      <div style="display:grid;grid-template-columns:{{ proofCols }};gap:20px">
+        <sc-for list="{{ t.proof.items }}" as="p" hint-placeholder-count="4">
+          <div>
+            <div style="font:500 11px var(--mono);letter-spacing:.05em;color:var(--ink-3);margin-bottom:6px">{{ p.k }}</div>
+            <div style="font:600 15.5px/1.35 var(--sans);color:var(--ink)">{{ p.v }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELECTED WORK -->
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,5vw,56px)">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:34px">
+      <div>
+        <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px">{{ t.work.eyebrow }}</div>
+        <h2 style="font:600 clamp(28px,3.6vw,42px)/1.05 var(--serif);letter-spacing:-.01em;margin:0">{{ t.work.title }}</h2>
+      </div>
+      <button onClick="{{ goWork }}" class="hd-nav" style="background:none;border:none;cursor:pointer;font:600 14.5px var(--sans);color:var(--accent);white-space:nowrap" style-hover="color:var(--ink)">{{ t.work.viewAll }} →</button>
+    </div>
+    <div style="display:grid;grid-template-columns:{{ workCols }};gap:22px">
+      <sc-for list="{{ projects }}" as="p" hint-placeholder-count="4">
+        <button onClick="{{ p.on }}" style="text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;font-family:var(--sans);transition:border-color .2s,transform .2s,box-shadow .2s" style-hover="border-color:var(--ink-3);transform:translateY(-3px);box-shadow:0 14px 34px -18px oklch(0.4 0.03 262 / .5)">
+          <div style="height:158px;background:var(--panel);position:relative;overflow:hidden;border-bottom:1px solid var(--line)">
+            <div style="position:absolute;left:14px;top:12px;z-index:2;font:500 10.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);background:var(--paper);border:1px solid var(--line);padding:3px 9px;border-radius:20px">{{ p.type }}</div>
+            <div style="position:absolute;inset:0;padding:16px 14px 12px">{{ p.visual }}</div>
+          </div>
+          <div style="padding:20px 20px 22px;display:flex;flex-direction:column;gap:11px;flex:1">
+            <h3 style="font:600 20px/1.2 var(--serif);margin:0;color:var(--ink)">{{ p.title }}</h3>
+            <p style="font:400 14.5px/1.5 var(--sans);color:var(--ink-2);margin:0">{{ p.outcome }}</p>
+            <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;font:500 12.5px var(--sans)">
+              <span style="color:var(--ink-3)"><span style="color:var(--ink-2)">{{ t.work.role }}</span> {{ p.role }}</span>
+              <span style="color:var(--accent)">{{ t.work.view }} →</span>
+            </div>
+          </div>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section style="background:var(--paper-2);border-block:1px solid var(--line)">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,5vw,56px)">
+      <div style="max-width:56ch;margin-bottom:38px">
+        <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px">{{ t.cap.eyebrow }}</div>
+        <h2 style="font:600 clamp(28px,3.6vw,42px)/1.05 var(--serif);letter-spacing:-.01em;margin:0 0 14px">{{ t.cap.title }}</h2>
+        <p style="font:400 17px/1.6 var(--sans);color:var(--ink-2);margin:0">{{ t.cap.lead }}</p>
+      </div>
+      <div style="display:grid;grid-template-columns:{{ capCols }};gap:20px">
+        <sc-for list="{{ t.cap.groups }}" as="g" hint-placeholder-count="4">
+          <div style="background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px 22px">
+            <div style="font:600 12px var(--mono);color:var(--accent);margin-bottom:14px">{{ g.transform }}</div>
+            <h3 style="font:600 19px/1.25 var(--serif);margin:0 0 14px;color:var(--ink)">{{ g.title }}</h3>
+            <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="4">
+                <li style="font:400 14px/1.4 var(--sans);color:var(--ink-2);display:flex;gap:9px"><span style="color:var(--accent);flex:none">—</span><span>{{ it }}</span></li>
+              </sc-for>
+            </ul>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH & WRITING -->
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,5vw,56px)">
+    <div class="hero-grid" style="display:grid;grid-template-columns:{{ heroCols }};gap:clamp(28px,4vw,56px)">
+      <div>
+        <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px">{{ t.res.eyebrow }}</div>
+        <h2 style="font:600 clamp(28px,3.6vw,42px)/1.05 var(--serif);letter-spacing:-.01em;margin:0 0 16px">{{ t.res.title }}</h2>
+        <p style="font:400 17px/1.65 var(--sans);color:var(--ink-2);margin:0 0 14px">{{ t.res.focus }}</p>
+        <p style="font:400 14.5px/1.6 var(--sans);color:var(--ink-3);margin:0 0 22px">{{ t.res.split }}</p>
+        <div style="display:flex;gap:20px;flex-wrap:wrap">
+          <button onClick="{{ goResearch }}" style="background:none;border:none;cursor:pointer;font:600 15px var(--sans);color:var(--accent);padding:0" style-hover="color:var(--ink)">{{ t.res.viewR }} →</button>
+          <button onClick="{{ goWriting }}" style="background:none;border:none;cursor:pointer;font:600 15px var(--sans);color:var(--accent);padding:0" style-hover="color:var(--ink)">{{ t.res.viewW }} →</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <button onClick="{{ goArticle }}" style="text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;font-family:var(--sans)" style-hover="border-color:var(--ink-3)">
+          <div style="display:flex;gap:10px;align-items:center;margin-bottom:9px">
+            <span style="font:500 10.5px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:20px">{{ t.res.tagPaper }}</span>
+            <span style="font:500 11.5px var(--mono);color:var(--ink-3)">Research · Quarto</span>
+          </div>
+          <h3 style="font:600 18px/1.3 var(--serif);margin:0 0 6px;color:var(--ink)">{{ t.res.a1title }}</h3>
+          <p style="font:400 13.5px/1.5 var(--sans);color:var(--ink-2);margin:0">{{ t.res.a1desc }}</p>
+        </button>
+        <button onClick="{{ goWriting }}" style="text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;font-family:var(--sans)" style-hover="border-color:var(--ink-3)">
+          <div style="display:flex;gap:10px;align-items:center;margin-bottom:9px">
+            <span style="font:500 10.5px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--c-blue);background:var(--paper-2);border:1px solid var(--line);padding:3px 9px;border-radius:20px">{{ t.res.tagNote }}</span>
+            <span style="font:500 11.5px var(--mono);color:var(--ink-3)">Writing · R</span>
+          </div>
+          <h3 style="font:600 18px/1.3 var(--serif);margin:0 0 6px;color:var(--ink)">{{ t.res.a2title }}</h3>
+          <p style="font:400 13.5px/1.5 var(--sans);color:var(--ink-2);margin:0">{{ t.res.a2desc }}</p>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT PREVIEW + CONTACT -->
+  <section style="background:var(--dark);color:oklch(0.93 0.008 250)">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,100px) clamp(20px,5vw,56px)">
+      <div style="max-width:60ch;margin-bottom:44px">
+        <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:16px">{{ t.about.eyebrow }}</div>
+        <p style="font:400 clamp(21px,2.4vw,30px)/1.42 var(--serif);margin:0 0 20px;color:oklch(0.97 0.006 250);text-wrap:pretty">{{ t.about.body }}</p>
+        <button onClick="{{ goAbout }}" style="background:none;border:none;cursor:pointer;font:600 15px var(--sans);color:var(--accent-2);padding:0" style-hover="color:#fff">{{ t.about.more }} →</button>
+      </div>
+      <div style="border-top:1px solid oklch(0.4 0.02 262);padding-top:40px;display:grid;grid-template-columns:{{ heroCols }};gap:clamp(24px,4vw,56px);align-items:start">
+        <div>
+          <h2 style="font:600 clamp(26px,3.2vw,38px)/1.1 var(--serif);margin:0 0 14px;color:#fff">{{ t.contact.title }}</h2>
+          <p style="font:400 16px/1.6 var(--sans);color:oklch(0.82 0.01 250);margin:0 0 24px;max-width:40ch">{{ t.contact.lead }}</p>
+          <button onClick="{{ goContact }}" style="background:var(--accent);color:#fff;border:none;cursor:pointer;font:600 15.5px var(--sans);padding:14px 26px;border-radius:10px" style-hover="background:var(--accent-2)">{{ t.contact.cta }} →</button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <sc-for list="{{ t.contact.opts }}" as="o" hint-placeholder-count="5">
+            <span style="font:500 13.5px var(--sans);color:oklch(0.88 0.01 250);border:1px solid oklch(0.4 0.02 262);padding:9px 15px;border-radius:24px">{{ o }}</span>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- ================= WORK INDEX ================= -->
+<sc-if value="{{ isWork }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1240px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(20px,5vw,56px)">
+  <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px">{{ t.work.eyebrow }}</div>
+  <h1 style="font:600 clamp(34px,5vw,58px)/1.03 var(--serif);letter-spacing:-.015em;margin:0 0 16px">{{ t.work.title }}</h1>
+  <p style="font:400 18px/1.6 var(--sans);color:var(--ink-2);max-width:52ch;margin:0 0 36px">{{ t.work.lead }}</p>
+  <div style="display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)">
+    <sc-for list="{{ projects }}" as="p" hint-placeholder-count="4">
+      <button onClick="{{ p.on }}" style="text-align:left;background:none;border:none;border-bottom:1px solid var(--line);cursor:pointer;padding:24px 8px;display:grid;grid-template-columns:{{ workRowCols }};gap:22px;align-items:center;font-family:var(--sans)" style-hover="background:var(--paper-2)">
+        <div style="width:100%;aspect-ratio:16/9;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;position:relative"><div style="position:absolute;inset:0;padding:12px">{{ p.visual }}</div></div>
+        <div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px">
+            <span style="font:500 10.5px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2);border:1px solid var(--line-2);padding:2px 8px;border-radius:20px">{{ p.type }}</span>
+            <span style="font:500 11px var(--mono);color:var(--ink-3);padding:2px 0">{{ p.period }} · {{ p.location }}</span>
+          </div>
+          <h2 style="font:600 clamp(20px,2.4vw,26px)/1.2 var(--serif);margin:0 0 8px;color:var(--ink)">{{ p.title }}</h2>
+          <p style="font:400 15px/1.55 var(--sans);color:var(--ink-2);margin:0;max-width:60ch">{{ p.outcome }}</p>
+        </div>
+        <div style="font:500 13px var(--sans);color:var(--ink-3)">{{ t.work.role }}<br><span style="color:var(--ink)">{{ p.role }}</span></div>
+      </button>
+    </sc-for>
+  </div>
+</section>
+</sc-if>
+
+<!-- ================= CASE STUDY ================= -->
+<sc-if value="{{ isCase }}" hint-placeholder-val="{{ false }}">
+<article style="max-width:1240px;margin:0 auto;padding:clamp(30px,4vw,44px) clamp(20px,5vw,56px) clamp(56px,7vw,90px)">
+  <button onClick="{{ goWork }}" style="background:none;border:none;cursor:pointer;font:500 13.5px var(--sans);color:var(--ink-3);padding:0;margin-bottom:24px" style-hover="color:var(--accent)">← {{ t.work.viewAll }}</button>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px">
+    <span style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--accent);background:var(--accent-soft);padding:4px 11px;border-radius:20px">{{ cs.type }}</span>
+    <span style="font:500 11px var(--mono);color:var(--ink-3);border:1px solid var(--line-2);padding:4px 11px;border-radius:20px">{{ cs.confidentiality }}</span>
+  </div>
+  <h1 style="font:600 clamp(30px,4.6vw,54px)/1.04 var(--serif);letter-spacing:-.015em;margin:0 0 16px;max-width:20ch">{{ cs.title }}</h1>
+  <p style="font:400 clamp(18px,2vw,23px)/1.5 var(--serif);font-style:italic;color:var(--ink-2);margin:0 0 26px;max-width:46ch">{{ cs.outcome }}</p>
+
+  <figure style="margin:0 0 26px;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden">
+    <div style="height:clamp(180px,26vw,300px);padding:clamp(18px,3vw,30px)">{{ cs.visual }}</div>
+    <figcaption style="border-top:1px solid var(--line);padding:12px 18px;font:400 13px/1.5 var(--sans);color:var(--ink-3);background:var(--paper)">{{ cs.figcap }}</figcaption>
+  </figure>
+
+  <!-- FACT SHEET -->
+  <div style="display:grid;grid-template-columns:{{ factCols }};gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:14px">
+    <sc-for list="{{ cs.facts }}" as="f" hint-placeholder-count="6">
+      <div style="background:var(--paper);padding:16px 18px">
+        <div style="font:500 10.5px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-bottom:6px">{{ f.k }}</div>
+        <div style="font:600 14.5px/1.35 var(--sans);color:var(--ink)">{{ f.v }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <sc-if value="{{ cs.placeholder }}" hint-placeholder-val="{{ false }}">
+    <div style="background:var(--accent-soft);border:1px solid var(--accent);border-radius:10px;padding:14px 18px;margin-bottom:36px;font:500 13.5px/1.5 var(--sans);color:var(--accent-2)">{{ t.caseUI.placeholderNote }} <span style="font-family:var(--mono);font-size:12px">[CONTENT TO CONFIRM]</span></div>
+  </sc-if>
+
+  <sc-if value="{{ csFull }}" hint-placeholder-val="{{ false }}">
+  <div style="display:grid;grid-template-columns:{{ caseBodyCols }};gap:clamp(28px,4vw,56px);margin-top:38px;align-items:start">
+    <div style="min-width:0">
+      <div style="margin-bottom:40px">
+        <div style="font:500 11.5px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:12px">{{ t.caseUI.challenge }}</div>
+        <sc-for list="{{ cs.challenge }}" as="para" hint-placeholder-count="2">
+          <p style="font:400 17px/1.7 var(--sans);color:var(--ink);margin:0 0 14px;max-width:64ch">{{ para }}</p>
+        </sc-for>
+      </div>
+
+      <div style="margin-bottom:40px">
+        <div style="font:500 11.5px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:14px">{{ t.caseUI.contribution }}</div>
+        <div style="display:grid;grid-template-columns:{{ splitCols }};gap:14px">
+          <div style="background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:18px 20px">
+            <div style="font:600 13px var(--sans);color:var(--ink-2);margin-bottom:12px;display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:2px;background:var(--ink-3)"></span>{{ cs.sourceHead }}</div>
+            <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ cs.sourceItems }}" as="it" hint-placeholder-count="4">
+                <li style="font:400 14px/1.45 var(--sans);color:var(--ink-2)">{{ it }}</li>
+              </sc-for>
+            </ul>
+          </div>
+          <div style="background:var(--accent-soft);border:1px solid var(--accent);border-radius:12px;padding:18px 20px">
+            <div style="font:600 13px var(--sans);color:var(--accent-2);margin-bottom:12px;display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:2px;background:var(--accent)"></span>{{ cs.mineHead }}</div>
+            <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ cs.mineItems }}" as="it" hint-placeholder-count="5">
+                <li style="font:500 14px/1.45 var(--sans);color:var(--accent-2)">{{ it }}</li>
+              </sc-for>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:40px">
+        <div style="font:500 11.5px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:14px">{{ t.caseUI.approach }}</div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:16px">
+          <sc-for list="{{ cs.flow }}" as="s" hint-placeholder-count="6">
+            <span style="font:500 13px var(--sans);color:var(--ink);background:var(--paper-2);border:1px solid var(--line);padding:9px 14px;border-radius:8px">{{ s }}</span>
+          </sc-for>
+        </div>
+        <p style="font:400 16px/1.7 var(--sans);color:var(--ink-2);margin:0;max-width:64ch">{{ cs.approachText }}</p>
+      </div>
+
+      <div style="margin-bottom:40px">
+        <div style="font:500 11.5px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:14px">{{ t.caseUI.outputs }}</div>
+        <figure style="margin:0 0 18px;background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:20px">
+          <div style="font:500 12px var(--mono);color:var(--ink-3);margin-bottom:10px">{{ t.caseUI.fig1 }}</div>
+          <div>{{ methodChart }}</div>
+          <figcaption style="font:400 13px/1.5 var(--sans);color:var(--ink-3);margin-top:10px">{{ cs.outFig }}</figcaption>
+        </figure>
+        <div style="display:grid;grid-template-columns:{{ resultCols }};gap:12px">
+          <sc-for list="{{ cs.results }}" as="r" hint-placeholder-count="3">
+            <div style="background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px">
+              <div style="font:600 clamp(20px,2.2vw,25px) var(--serif);color:var(--ink)">{{ r.v }}</div>
+              <div style="font:400 13.5px/1.4 var(--sans);color:var(--ink-2);margin-top:4px">{{ r.k }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:{{ splitCols }};gap:20px;margin-bottom:20px">
+        <div>
+          <div style="font:500 11.5px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-bottom:10px">{{ t.caseUI.limitations }}</div>
+          <p style="font:400 14.5px/1.6 var(--sans);color:var(--ink-2);margin:0">{{ cs.limitations }}</p>
+        </div>
+        <div>
+          <div style="font:500 11.5px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-bottom:10px">{{ t.caseUI.lessons }}</div>
+          <p style="font:400 14.5px/1.6 var(--sans);color:var(--ink-2);margin:0">{{ cs.lessons }}</p>
+        </div>
+      </div>
+    </div>
+
+    <aside style="position:sticky;top:90px;display:flex;flex-direction:column;gap:16px">
+      <div style="border:1px solid var(--line);border-radius:12px;padding:18px">
+        <div style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-bottom:12px">{{ t.caseUI.methods }}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:7px">
+          <sc-for list="{{ cs.tech }}" as="tt" hint-placeholder-count="6">
+            <span style="font:500 12px var(--mono);color:var(--ink-2);background:var(--paper-2);border:1px solid var(--line);padding:4px 9px;border-radius:6px">{{ tt }}</span>
+          </sc-for>
+        </div>
+      </div>
+      <button onClick="{{ goArticle }}" style="text-align:left;border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--paper);cursor:pointer;font-family:var(--sans)" style-hover="border-color:var(--accent)">
+        <div style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:8px">{{ t.caseUI.related }}</div>
+        <div style="font:600 15px/1.35 var(--serif);color:var(--ink)">{{ t.caseUI.relatedText }}</div>
+      </button>
+      <button onClick="{{ goContact }}" style="border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--dark);color:#fff;cursor:pointer;font:600 15px var(--sans);text-align:left" style-hover="background:var(--accent)">{{ t.caseUI.discuss }}</button>
+    </aside>
+  </div>
+  </sc-if>
+
+  <div style="margin-top:48px;border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;align-items:center;gap:16px">
+    <span style="font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3)">{{ t.caseUI.next }}</span>
+    <button onClick="{{ goNextCase }}" style="background:none;border:none;cursor:pointer;font:600 clamp(18px,2.4vw,24px) var(--serif);color:var(--ink);text-align:right" style-hover="color:var(--accent)">{{ nextCaseTitle }} →</button>
+  </div>
+</article>
+</sc-if>
+
+<!-- ================= RESEARCH INDEX ================= -->
+<sc-if value="{{ isResearch }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1240px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(20px,5vw,56px)">
+  <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px">{{ t.nav.research }} · Quarto</div>
+  <h1 style="font:600 clamp(34px,5vw,58px)/1.03 var(--serif);letter-spacing:-.015em;margin:0 0 16px">{{ t.research.title }}</h1>
+  <p style="font:400 18px/1.65 var(--sans);color:var(--ink-2);max-width:58ch;margin:0 0 20px">{{ t.research.lead }}</p>
+  <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px">
+    <span style="font:500 12.5px var(--mono);color:var(--ink-2);border:1px solid var(--line-2);padding:6px 12px;border-radius:20px">Search ⌕</span>
+    <span style="font:500 12.5px var(--mono);color:var(--ink-2);border:1px solid var(--line-2);padding:6px 12px;border-radius:20px">RSS</span>
+    <sc-for list="{{ t.research.filters }}" as="f" hint-placeholder-count="5">
+      <span style="font:500 12.5px var(--mono);color:var(--ink-3);border:1px solid var(--line);padding:6px 12px;border-radius:20px">{{ f }}</span>
+    </sc-for>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:36px;margin-top:10px">
+    <sc-for list="{{ researchGroups }}" as="grp" hint-placeholder-count="4">
+      <div>
+        <div style="display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--line-2);padding-bottom:8px;margin-bottom:2px">
+          <h2 style="font:600 14px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin:0">{{ grp.head }}</h2>
+          <span style="font:500 11px var(--mono);color:var(--ink-3)">{{ grp.note }}</span>
+        </div>
+        <sc-for list="{{ grp.items }}" as="a" hint-placeholder-count="2">
+          <button onClick="{{ a.on }}" style="width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--line);cursor:pointer;padding:22px 8px;display:grid;grid-template-columns:{{ artRowCols }};gap:20px;align-items:baseline;font-family:var(--sans)" style-hover="background:var(--paper-2)">
+            <span style="font:500 12.5px var(--mono);color:var(--ink-3)">{{ a.date }}</span>
+            <div>
+              <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap"><span style="font:500 10.5px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:{{ a.tagColor }};background:var(--paper-2);border:1px solid var(--line);padding:2px 9px;border-radius:20px">{{ a.tag }}</span><span style="font:500 11px var(--mono);color:var(--ink-3)">{{ a.status }}</span></div>
+              <h3 style="font:600 clamp(19px,2.2vw,24px)/1.25 var(--serif);margin:0 0 6px;color:var(--ink)">{{ a.title }}</h3>
+              <p style="font:400 14.5px/1.5 var(--sans);color:var(--ink-2);margin:0;max-width:64ch">{{ a.desc }}</p>
+            </div>
+          </button>
+        </sc-for>
+      </div>
+    </sc-for>
+  </div>
+</section>
+</sc-if>
+
+<!-- ================= WRITING INDEX ================= -->
+<sc-if value="{{ isWriting }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1240px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(20px,5vw,56px)">
+  <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--c-blue);margin-bottom:14px">{{ t.nav.writing }} · Quarto</div>
+  <h1 style="font:600 clamp(34px,5vw,58px)/1.03 var(--serif);letter-spacing:-.015em;margin:0 0 16px">{{ t.writing.title }}</h1>
+  <p style="font:400 18px/1.65 var(--sans);color:var(--ink-2);max-width:58ch;margin:0 0 20px">{{ t.writing.lead }}</p>
+  <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px">
+    <sc-for list="{{ t.writing.filters }}" as="f" hint-placeholder-count="6">
+      <span style="font:500 12.5px var(--mono);color:var(--ink-3);border:1px solid var(--line);padding:6px 12px;border-radius:20px">{{ f }}</span>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:{{ writeCols }};gap:18px;margin-top:8px">
+    <sc-for list="{{ writingItems }}" as="a" hint-placeholder-count="4">
+      <button onClick="{{ a.on }}" style="text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px;cursor:pointer;font-family:var(--sans);display:flex;flex-direction:column;gap:10px" style-hover="border-color:var(--ink-3)">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="font:500 10.5px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:{{ a.tagColor }};background:var(--paper-2);border:1px solid var(--line);padding:2px 9px;border-radius:20px">{{ a.tag }}</span><span style="font:500 11.5px var(--mono);color:var(--ink-3)">{{ a.date }}</span></div>
+        <h2 style="font:600 20px/1.25 var(--serif);margin:0;color:var(--ink)">{{ a.title }}</h2>
+        <p style="font:400 14px/1.5 var(--sans);color:var(--ink-2);margin:0">{{ a.desc }}</p>
+      </button>
+    </sc-for>
+  </div>
+</section>
+</sc-if>
+
+<!-- ================= QUARTO ARTICLE ================= -->
+<sc-if value="{{ isArticle }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:1240px;margin:0 auto;padding:clamp(30px,4vw,48px) clamp(20px,5vw,56px) clamp(56px,7vw,90px)">
+  <button onClick="{{ goResearch }}" style="background:none;border:none;cursor:pointer;font:500 13.5px var(--sans);color:var(--ink-3);padding:0;margin-bottom:22px" style-hover="color:var(--accent)">← {{ t.nav.research }}</button>
+  <div style="display:grid;grid-template-columns:{{ articleCols }};gap:clamp(28px,4vw,52px);align-items:start">
+    <article style="min-width:0;max-width:70ch">
+      <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+        <span style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--accent);background:var(--accent-soft);padding:4px 11px;border-radius:20px">Prototype · reproducible article</span>
+        <span style="font:500 11px var(--mono);color:var(--ink-3);border:1px solid var(--line-2);padding:4px 11px;border-radius:20px">[CONTENT TO CONFIRM]</span>
+      </div>
+      <h1 style="font:600 clamp(28px,3.8vw,44px)/1.1 var(--serif);letter-spacing:-.01em;margin:0 0 12px">Financial inclusion and mobile-money adoption: a survey-based analysis</h1>
+      <p style="font:400 clamp(17px,1.8vw,21px)/1.5 var(--sans);color:var(--ink-2);margin:0 0 18px">What household-level factors are associated with the transition from financial exclusion to regular use of formal and mobile-money services?</p>
+      <div style="display:flex;flex-wrap:wrap;gap:18px;padding:14px 0;border-block:1px solid var(--line);margin-bottom:8px;font:500 13px var(--sans);color:var(--ink-2)">
+        <span>Mayo T. N. Kadanga</span><span style="color:var(--ink-3)">Published [DATE TO CONFIRM]</span><span style="color:var(--ink-3)">Modified [DATE TO CONFIRM]</span>
+      </div>
+      <sc-if value="{{ isFr }}" hint-placeholder-val="{{ false }}">
+        <div style="background:var(--accent-soft);border:1px solid var(--accent);border-radius:8px;padding:10px 14px;margin:14px 0;font:500 13px var(--sans);color:var(--accent-2)">⚑ Article body not yet translated — showing English. <span style="font-family:var(--mono);font-size:12px">[TRANSLATION REQUIRED]</span></div>
+      </sc-if>
+
+      <div style="background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:18px 20px;margin:22px 0">
+        <div style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:8px">Abstract</div>
+        <p style="font:400 15px/1.65 var(--sans);color:var(--ink);margin:0">Using nationally-representative survey data, we combine Multiple Correspondence Analysis with logistic regression to identify drivers of financial inclusion. We report marginal effects as actionable policy levers and provide a fully reproducible R + Quarto pipeline. <span style="font-family:var(--mono);font-size:12px;color:var(--ink-3)">[CONTENT TO CONFIRM]</span></p>
+      </div>
+
+      <h2 style="font:600 26px/1.2 var(--serif);margin:34px 0 12px;color:var(--ink)" id="sec-model">1 · Model specification</h2>
+      <p style="font:400 16px/1.75 var(--sans);color:var(--ink);margin:0 0 16px">We model the probability that household <em>i</em> is financially included as a logistic function of agent access, distance to the nearest branch, and a set of socio-economic controls:</p>
+      <div data-om-raster="true" style="background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:20px;text-align:center;font:400 18px var(--serif);font-style:italic;color:var(--ink);margin:0 0 20px;overflow-x:auto">
+        logit(p<sub style="font-size:.7em">i</sub>) = β<sub style="font-size:.7em">0</sub> + β<sub style="font-size:.7em">1</sub>·access<sub style="font-size:.7em">i</sub> + β<sub style="font-size:.7em">2</sub>·distance<sub style="font-size:.7em">i</sub> + <span style="font-style:normal">Xᵢ</span>γ + ε<sub style="font-size:.7em">i</sub>
+      </div>
+
+      <h2 style="font:600 26px/1.2 var(--serif);margin:34px 0 12px;color:var(--ink)">2 · Reproducible estimation</h2>
+      <p style="font:400 16px/1.75 var(--sans);color:var(--ink);margin:0 0 14px">The full model is estimated in R; every figure in this article is generated from the code below.</p>
+      <div style="border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0 0 8px">
+        <div style="background:var(--dark);padding:8px 14px;display:flex;gap:10px;align-items:center">
+          <span style="width:9px;height:9px;border-radius:50%;background:var(--accent)"></span>
+          <span style="font:500 11.5px var(--mono);color:oklch(0.8 0.01 250)">inclusion-model.R</span>
+        </div>
+        <pre style="margin:0;background:oklch(0.16 0.014 262);color:oklch(0.9 0.01 250);padding:16px;overflow-x:auto;font:400 13px/1.7 var(--mono)"><span style="color:oklch(0.65 0.09 150)"># fit logistic inclusion model</span>
+model <span style="color:var(--accent-2)">&lt;-</span> glm(included <span style="color:var(--accent-2)">~</span> access <span style="color:var(--accent-2)">+</span> distance <span style="color:var(--accent-2)">+</span> educ <span style="color:var(--accent-2)">+</span> income,
+             data <span style="color:var(--accent-2)">=</span> hh, family <span style="color:var(--accent-2)">=</span> binomial)
+<span style="color:oklch(0.65 0.09 150)"># marginal effect of agent access</span>
+margins(model, variables <span style="color:var(--accent-2)">=</span> <span style="color:oklch(0.72 0.1 60)">"access"</span>)</pre>
+      </div>
+      <div style="font:400 12.5px var(--mono);color:var(--ink-3);margin-bottom:22px">Code · illustrative · <span style="color:var(--accent)">[CODE TO VERIFY]</span></div>
+
+      <h2 style="font:600 26px/1.2 var(--serif);margin:34px 0 12px;color:var(--ink)">3 · Results</h2>
+      <figure style="margin:0 0 20px;border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--paper-2)">
+        <div>{{ methodChart }}</div>
+        <figcaption style="font:400 13px/1.5 var(--sans);color:var(--ink-3);margin-top:10px"><strong style="color:var(--ink-2)">Figure 1.</strong> Illustrative analytical workflow — model confidence vs. evidence assembled (synthetic). No empirical result. <span style="font-family:var(--mono);font-size:12px">[METRIC TO VERIFY]</span></figcaption>
+      </figure>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 8px">
+      <table style="width:100%;border-collapse:collapse;font:400 14px var(--sans);min-width:360px">
+        <thead><tr style="border-bottom:2px solid var(--line-2)"><th style="text-align:left;padding:9px 8px;font:600 12.5px var(--mono);text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2)">Term</th><th style="text-align:right;padding:9px 8px;font:600 12.5px var(--mono);text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2)">Coef.</th><th style="text-align:right;padding:9px 8px;font:600 12.5px var(--mono);text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2)">Std. err</th></tr></thead>
+        <tbody>
+          <sc-for list="{{ artTable }}" as="row" hint-placeholder-count="4">
+            <tr style="border-bottom:1px solid var(--line)"><td style="padding:9px 8px;color:var(--ink)">{{ row.term }}</td><td style="padding:9px 8px;text-align:right;font-family:var(--mono);color:var(--ink)">{{ row.coef }}</td><td style="padding:9px 8px;text-align:right;font-family:var(--mono);color:var(--ink-3)">{{ row.se }}</td></tr>
+          </sc-for>
+        </tbody>
+      </table>
+      </div>
+      <div style="font:400 12.5px var(--sans);color:var(--ink-3);margin-bottom:24px">Table 1 · Illustrative model-output component — symbolic placeholders, not estimates. <span style="font-family:var(--mono)">[METRIC TO VERIFY]</span></div>
+
+      <div style="background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--c-blue);border-radius:10px;padding:16px 18px;margin:0 0 24px">
+        <div style="font:600 12px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--c-blue);margin-bottom:6px">Note</div>
+        <p style="font:400 14.5px/1.6 var(--sans);color:var(--ink);margin:0">Marginal effects are non-constant in logistic models: the same increase in agent access has a larger effect near the middle of the distribution than at the extremes.<sup style="color:var(--accent)">1</sup></p>
+      </div>
+
+      <h2 style="font:600 26px/1.2 var(--serif);margin:34px 0 12px;color:var(--ink)">References &amp; footnotes</h2>
+      <ol style="font:400 13.5px/1.7 var(--sans);color:var(--ink-2);padding-left:20px;margin:0 0 24px">
+        <li id="fn1">Marginal effect derived from ∂p/∂x = β·p(1−p). <span style="font-family:var(--mono);font-size:12px">[CONTENT TO CONFIRM]</span></li>
+        <li>Reference list managed via BibTeX in the Quarto source. <span style="font-family:var(--mono);font-size:12px">[CONTENT TO CONFIRM]</span></li>
+      </ol>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <span style="font:500 13px var(--sans);color:var(--ink-2);border:1px solid var(--line-2);padding:8px 14px;border-radius:8px">⤓ PDF [ASSET REQUIRED]</span>
+        <span style="font:500 13px var(--sans);color:var(--ink-2);border:1px solid var(--line-2);padding:8px 14px;border-radius:8px">⤓ .qmd source</span>
+        <span style="font:500 13px var(--sans);color:var(--ink-2);border:1px solid var(--line-2);padding:8px 14px;border-radius:8px">↗ Cite (BibTeX)</span>
+      </div>
+    </article>
+
+    <aside class="hd-nav" style="position:sticky;top:100px">
+      <div style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-bottom:12px">On this page</div>
+      <nav style="display:flex;flex-direction:column;gap:9px;border-left:1px solid var(--line);padding-left:14px">
+        <span style="font:500 13.5px var(--sans);color:var(--accent)">1 · Model specification</span>
+        <span style="font:400 13.5px var(--sans);color:var(--ink-2)">2 · Reproducible estimation</span>
+        <span style="font:400 13.5px var(--sans);color:var(--ink-2)">3 · Results</span>
+        <span style="font:400 13.5px var(--sans);color:var(--ink-2)">References &amp; footnotes</span>
+      </nav>
+      <div style="margin-top:22px;padding-top:16px;border-top:1px solid var(--line)">
+        <div style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-bottom:10px">Related work</div>
+        <button onClick="{{ goCase }}" style="background:none;border:none;cursor:pointer;text-align:left;font:600 14px/1.35 var(--serif);color:var(--ink);padding:0" style-hover="color:var(--accent)">Financial Inclusion case study →</button>
+      </div>
+    </aside>
+  </div>
+</div>
+</sc-if>
+
+<!-- ================= ABOUT ================= -->
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:900px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(20px,5vw,56px)">
+  <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px">{{ t.about.eyebrow }}</div>
+  <div style="display:grid;grid-template-columns:{{ aboutHeadCols }};gap:clamp(24px,4vw,44px);align-items:start;margin-bottom:clamp(32px,4vw,48px)">
+    <div>
+      <h1 style="font:600 clamp(32px,4.6vw,52px)/1.05 var(--serif);letter-spacing:-.015em;margin:0 0 8px">Mayo T. N. Kadanga</h1>
+      <div style="font:500 12.5px var(--mono);color:var(--accent);margin-bottom:18px">{{ t.about.positioning }}</div>
+      <p style="font:400 clamp(18px,2vw,22px)/1.55 var(--serif);color:var(--ink);margin:0 0 16px">{{ t.about.body }}</p>
+      <p style="font:400 15px/1.6 var(--sans);color:var(--ink-2);margin:0">{{ t.about.focus }}</p>
+    </div>
+    <figure style="margin:0;display:flex;flex-direction:column;gap:10px">
+      <div role="img" aria-label="{{ t.about.portraitAlt }}" style="aspect-ratio:4/5;background:var(--paper-2);border:1px solid var(--line-2);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;overflow:hidden;position:relative">
+        <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent,transparent 11px,var(--line) 11px,var(--line) 12px);opacity:.4"></div>
+        <div style="font:600 clamp(40px,7vw,60px) var(--serif);color:var(--ink-3);letter-spacing:.06em;position:relative">MTNK</div>
+        <div style="font:500 11px var(--mono);color:var(--accent);border:1px dashed var(--accent);padding:4px 11px;border-radius:20px;position:relative">[PORTRAIT REQUIRED]</div>
+      </div>
+      <figcaption style="font:500 12.5px var(--sans);color:var(--ink-2)">{{ t.about.portraitCap }}<br><span style="color:var(--ink-3);font-weight:400">{{ t.about.portraitLoc }}</span></figcaption>
+    </figure>
+  </div>
+
+  <div style="max-width:68ch">
+  <sc-for list="{{ aboutSections }}" as="s" hint-placeholder-count="6">
+    <div style="margin-bottom:28px">
+      <h2 style="font:600 12px var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--accent);margin:0 0 10px">{{ s.h }}</h2>
+      <p style="font:400 16.5px/1.75 var(--sans);color:var(--ink-2);margin:0">{{ s.p }}</p>
+    </div>
+  </sc-for>
+  </div>
+
+  <div style="display:grid;grid-template-columns:{{ splitCols }};gap:16px;margin-top:8px">
+    <div style="border:1px solid var(--line);border-radius:12px;padding:20px">
+      <div style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:10px">{{ t.about.principlesHead }}</div>
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font:400 14.5px/1.4 var(--sans);color:var(--ink-2)">
+        <sc-for list="{{ t.about.principles }}" as="pr" hint-placeholder-count="4"><li>{{ pr }}</li></sc-for>
+      </ul>
+    </div>
+    <div style="border:1px solid var(--line);border-radius:12px;padding:20px">
+      <div style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:10px">{{ t.about.langHead }}</div>
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font:400 14.5px var(--sans);color:var(--ink-2)">
+        <sc-for list="{{ t.about.langs }}" as="lg" hint-placeholder-count="2"><li>{{ lg }}</li></sc-for>
+      </ul>
+    </div>
+  </div>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:26px">
+    <button onClick="{{ goExperience }}" style="background:var(--ink);color:var(--paper);border:none;cursor:pointer;font:600 15px var(--sans);padding:13px 22px;border-radius:10px" style-hover="background:var(--accent);color:#fff">{{ t.about.seeExp }} →</button>
+    <button onClick="{{ goContact }}" style="background:none;color:var(--ink);border:1px solid var(--line-2);cursor:pointer;font:600 15px var(--sans);padding:13px 22px;border-radius:10px" style-hover="border-color:var(--ink)">{{ t.contact.cta }}</button>
+  </div>
+</section>
+</sc-if>
+
+<!-- ================= EXPERIENCE ================= -->
+<sc-if value="{{ isExperience }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:900px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(20px,5vw,56px)">
+  <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px">{{ t.exp.eyebrow }}</div>
+  <h1 style="font:600 clamp(32px,4.6vw,52px)/1.05 var(--serif);letter-spacing:-.015em;margin:0 0 12px">{{ t.exp.title }}</h1>
+  <p style="font:400 17px/1.6 var(--sans);color:var(--ink-2);max-width:56ch;margin:0 0 36px">{{ t.exp.lead }}</p>
+  <div style="border-left:2px solid var(--line);padding-left:26px;display:flex;flex-direction:column;gap:32px">
+    <sc-for list="{{ timeline }}" as="e" hint-placeholder-count="6">
+      <div style="position:relative">
+        <span style="position:absolute;left:-33px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid {{ e.dot }}"></span>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:5px">
+          <span style="font:500 10.5px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:{{ e.dot }};border:1px solid var(--line-2);padding:2px 8px;border-radius:20px">{{ e.kind }}</span>
+          <span style="font:500 12px var(--mono);color:var(--ink-3)">{{ e.period }}</span>
+        </div>
+        <h2 style="font:600 20px/1.25 var(--serif);margin:0 0 3px;color:var(--ink)">{{ e.role }}</h2>
+        <div style="font:500 14px var(--sans);color:var(--accent-2);margin-bottom:8px">{{ e.org }} <span style="color:var(--ink-3);font-weight:400">· {{ e.loc }}</span></div>
+        <p style="font:400 15px/1.6 var(--sans);color:var(--ink-2);margin:0;max-width:62ch">{{ e.desc }}</p>
+      </div>
+    </sc-for>
+  </div>
+</section>
+</sc-if>
+
+<!-- ================= CV ================= -->
+<sc-if value="{{ isCv }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:880px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(20px,5vw,56px)">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+    <div>
+      <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px">{{ t.cv.eyebrow }}</div>
+      <h1 style="font:600 clamp(30px,4.4vw,48px)/1.05 var(--serif);letter-spacing:-.015em;margin:0">Mayo T. N. Kadanga</h1>
+      <p style="font:400 16px var(--sans);color:var(--ink-2);margin:6px 0 0">{{ t.cv.sub }}</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <span style="font:600 13px var(--sans);color:#fff;background:var(--accent);padding:10px 16px;border-radius:9px">⤓ {{ t.cv.enPdf }} <span style="font-family:var(--mono);font-size:10px;opacity:.85">[ASSET REQUIRED]</span></span>
+      <span style="font:600 13px var(--sans);color:var(--ink);background:none;border:1px solid var(--line-2);padding:10px 16px;border-radius:9px">⤓ {{ t.cv.frPdf }} <span style="font-family:var(--mono);font-size:10px;color:var(--ink-3)">[ASSET REQUIRED]</span></span>
+    </div>
+  </div>
+  <div style="height:1px;background:var(--line);margin:24px 0"></div>
+  <sc-for list="{{ cvSections }}" as="s" hint-placeholder-count="8">
+    <div style="display:grid;grid-template-columns:{{ cvCols }};gap:20px;padding:8px 0 24px;border-bottom:1px solid var(--line);margin-bottom:24px">
+      <h2 style="font:600 13px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin:0">{{ s.head }}</h2>
+      <div style="display:flex;flex-direction:column;gap:15px">
+        <sc-for list="{{ s.items }}" as="i" hint-placeholder-count="3">
+          <div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="font:600 16px var(--serif);color:var(--ink)">{{ i.t }}</span><span style="font:500 12.5px var(--mono);color:var(--ink-3);white-space:nowrap">{{ i.d }}</span></div>
+            <div style="font:400 14px/1.5 var(--sans);color:var(--ink-2);margin-top:3px">{{ i.s }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-for>
+</section>
+</sc-if>
+
+<!-- ================= CONTACT ================= -->
+<sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1240px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(20px,5vw,56px)">
+  <div style="display:grid;grid-template-columns:{{ heroCols }};gap:clamp(28px,4vw,56px);align-items:start">
+    <div>
+      <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px">{{ t.contact.eyebrow }}</div>
+      <h1 style="font:600 clamp(32px,4.6vw,52px)/1.05 var(--serif);letter-spacing:-.015em;margin:0 0 18px">{{ t.contact.title }}</h1>
+      <p style="font:400 18px/1.65 var(--sans);color:var(--ink-2);max-width:40ch;margin:0 0 26px">{{ t.contact.lead }}</p>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="font:500 13px var(--sans);color:var(--ink-3)">{{ t.form.direct }}</div>
+        <span style="font:500 15px var(--mono);color:var(--ink)">[EMAIL TO CONFIRM]</span>
+        <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap">
+          <span style="font:500 13px var(--sans);color:var(--ink-2);border:1px solid var(--line-2);padding:8px 15px;border-radius:8px">GitHub — mayonorris ↗ [LINK TO CONFIRM]</span>
+          <span style="font:500 13px var(--sans);color:var(--ink-2);border:1px solid var(--line-2);padding:8px 15px;border-radius:8px">LinkedIn ↗ [LINK TO CONFIRM]</span>
+        </div>
+      </div>
+      <div style="margin-top:26px;border-top:1px solid var(--line);padding-top:16px">
+        <div style="font:500 10.5px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-bottom:9px">{{ t.form.statesLabel }}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <sc-for list="{{ formStates }}" as="fs" hint-placeholder-count="5">
+            <button onClick="{{ fs.on }}" style="font:500 11.5px var(--mono);color:{{ fs.color }};background:{{ fs.bg }};border:1px solid var(--line-2);padding:5px 10px;border-radius:7px;cursor:pointer">{{ fs.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <form onSubmit="{{ onSubmit }}" novalidate style="background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:16px">
+      <div>
+        <label for="cf-name" style="display:block;font:500 13px var(--sans);color:var(--ink-2);margin-bottom:6px">{{ t.form.name }}</label>
+        <input id="cf-name" type="text" value="{{ fName }}" onInput="{{ onName }}" aria-invalid="{{ nameErr }}" style="width:100%;padding:12px 14px;border:1px solid {{ nameBorder }};border-radius:9px;background:var(--paper);color:var(--ink);font:400 15px var(--sans)" style-focus="border-color:var(--accent)">
+        <sc-if value="{{ nameErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="font:500 12.5px var(--sans);color:var(--accent-2);margin-top:6px">{{ t.form.errName }}</div></sc-if>
+      </div>
+      <div>
+        <label for="cf-email" style="display:block;font:500 13px var(--sans);color:var(--ink-2);margin-bottom:6px">{{ t.form.email }}</label>
+        <input id="cf-email" type="email" value="{{ fEmail }}" onInput="{{ onEmail }}" aria-invalid="{{ emailErr }}" style="width:100%;padding:12px 14px;border:1px solid {{ emailBorder }};border-radius:9px;background:var(--paper);color:var(--ink);font:400 15px var(--sans)" style-focus="border-color:var(--accent)">
+        <sc-if value="{{ emailErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="font:500 12.5px var(--sans);color:var(--accent-2);margin-top:6px">{{ t.form.errEmail }}</div></sc-if>
+      </div>
+      <div>
+        <label for="cf-type" style="display:block;font:500 13px var(--sans);color:var(--ink-2);margin-bottom:6px">{{ t.form.reason }}</label>
+        <select id="cf-type" style="width:100%;padding:12px 14px;border:1px solid var(--line-2);border-radius:9px;background:var(--paper);color:var(--ink);font:400 15px var(--sans)">
+          <sc-for list="{{ t.form.reasons }}" as="ro" hint-placeholder-count="5"><option>{{ ro }}</option></sc-for>
+        </select>
+      </div>
+      <div>
+        <label for="cf-msg" style="display:block;font:500 13px var(--sans);color:var(--ink-2);margin-bottom:6px">{{ t.form.message }}</label>
+        <textarea id="cf-msg" rows="4" value="{{ fMsg }}" onInput="{{ onMsg }}" aria-invalid="{{ msgErr }}" style="width:100%;padding:12px 14px;border:1px solid {{ msgBorder }};border-radius:9px;background:var(--paper);color:var(--ink);font:400 15px var(--sans);resize:vertical" style-focus="border-color:var(--accent)"></textarea>
+        <sc-if value="{{ msgErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="font:500 12.5px var(--sans);color:var(--accent-2);margin-top:6px">{{ t.form.errMsg }}</div></sc-if>
+      </div>
+      <button type="submit" disabled="{{ sending }}" style="background:var(--accent);color:#fff;border:none;cursor:pointer;font:600 15.5px var(--sans);padding:14px;border-radius:10px;opacity:{{ btnOpacity }}" style-hover="background:var(--accent-2)">{{ contactBtn }}</button>
+      <div role="status" aria-live="polite">
+        <sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}"><div style="font:500 13.5px/1.5 var(--sans);color:var(--c-green);text-align:center;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:12px">{{ t.form.sent }}</div></sc-if>
+        <sc-if value="{{ isServerErr }}" hint-placeholder-val="{{ false }}"><div style="font:500 13.5px/1.5 var(--sans);color:var(--accent-2);text-align:center;background:var(--accent-soft);border:1px solid var(--accent);border-radius:9px;padding:12px">{{ t.form.serverErr }}</div></sc-if>
+      </div>
+    </form>
+  </div>
+</section>
+</sc-if>
+
+<!-- ================= POSITIONING COMPARISON (internal) ================= -->
+<sc-if value="{{ isPositioning }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1100px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(20px,5vw,56px)">
+  <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px">Internal · positioning review</div>
+  <h1 style="font:600 clamp(30px,4.4vw,48px)/1.05 var(--serif);letter-spacing:-.015em;margin:0 0 14px">Hero positioning — three variants</h1>
+  <p style="font:400 17px/1.65 var(--sans);color:var(--ink-2);max-width:60ch;margin:0 0 34px">A private comparison frame for validation — not shown on the public homepage. <strong style="color:var(--ink)">Variant B</strong> is the provisional primary; it is currently live in the hero.</p>
+  <div style="display:grid;grid-template-columns:{{ posCols }};gap:18px">
+    <sc-for list="{{ posVariants }}" as="v" hint-placeholder-count="3">
+      <div style="border:2px solid {{ v.border }};border-radius:16px;padding:24px;background:var(--paper);display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font:600 12px var(--mono);color:var(--accent)">{{ v.tag }}</span>
+          <span style="font:500 10.5px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:{{ v.pillColor }};background:{{ v.pillBg }};padding:3px 9px;border-radius:20px">{{ v.pill }}</span>
+        </div>
+        <div style="font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)">Ingénieur Statisticien Économiste</div>
+        <div style="font:600 25px/1.12 var(--serif);color:var(--ink)">{{ v.title }}</div>
+        <div style="font:400 14px/1.55 var(--sans);color:var(--ink-2)">{{ v.support }}</div>
+        <div style="border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:7px">
+          <sc-for list="{{ v.scores }}" as="sc" hint-placeholder-count="5">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+              <span style="font:400 12.5px var(--sans);color:var(--ink-2)">{{ sc.k }}</span>
+              <span style="font:600 12px var(--mono);color:{{ sc.color }}">{{ sc.v }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+</sc-if>
+
+<!-- ================= PORTRAIT PLACEMENT (internal) ================= -->
+<sc-if value="{{ isPortrait }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1000px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(20px,5vw,56px)">
+  <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px">Internal · portrait placement</div>
+  <h1 style="font:600 clamp(30px,4.4vw,48px)/1.05 var(--serif);letter-spacing:-.015em;margin:0 0 14px">Profile-picture placement — two options</h1>
+  <p style="font:400 17px/1.65 var(--sans);color:var(--ink-2);max-width:64ch;margin:0 0 32px"><strong style="color:var(--ink)">Option 1 is the recommended default.</strong> The homepage keeps the signature analytical interaction as its only hero visual; the portrait is placed as an editorial 4:5 crop on the About page. No final image is supplied yet — a deliberate <span style="font-family:var(--mono);font-size:13px">[PORTRAIT REQUIRED]</span> monogram slot stands in.</p>
+  <div style="display:grid;grid-template-columns:{{ splitCols }};gap:18px;margin-bottom:32px">
+    <sc-for list="{{ portraitOptions }}" as="o" hint-placeholder-count="2">
+      <div style="border:2px solid {{ o.border }};border-radius:16px;padding:24px;background:var(--paper);display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font:600 12px var(--mono);color:var(--accent)">{{ o.tag }}</span>
+          <span style="font:500 10.5px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:{{ o.pillColor }};background:{{ o.pillBg }};padding:3px 9px;border-radius:20px">{{ o.pill }}</span>
+        </div>
+        <div style="font:600 19px/1.25 var(--serif);color:var(--ink)">{{ o.title }}</div>
+        <div style="font:400 14px/1.55 var(--sans);color:var(--ink-2)">{{ o.desc }}</div>
+        <div style="border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:7px">
+          <sc-for list="{{ o.scores }}" as="sc" hint-placeholder-count="5">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+              <span style="font:400 12.5px var(--sans);color:var(--ink-2)">{{ sc.k }}</span>
+              <span style="font:600 12px var(--mono);color:{{ sc.color }}">{{ sc.v }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="border:1px solid var(--line);border-radius:12px;padding:22px;background:var(--paper-2)">
+    <div style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:12px">Treatment & technical spec</div>
+    <div style="display:grid;grid-template-columns:{{ splitCols }};gap:10px 24px;font:400 14px/1.6 var(--sans);color:var(--ink-2)">
+      <div>• 4:5 or 3:4 editorial crop — rectangular, subtle border, restrained radius</div>
+      <div>• No circular avatar, cut-out, neon outline or floating badges</div>
+      <div>• Realistic skin tones; no accent-colour overlay on the face; no default duotone</div>
+      <div>• Mobile: portrait after the title + short intro, before the full narrative</div>
+      <div>• Intentional crop + <span style="font-family:var(--mono);font-size:12.5px">object-position</span> focal point (not browser-cut)</div>
+      <div>• Strip EXIF metadata; responsive sizes; modern formats; lazy-load below the fold</div>
+      <div>• Alt text: “Portrait of Mayo T. N. Kadanga.” (no inferred traits)</div>
+      <div>• May feed <span style="font-family:var(--mono);font-size:12.5px">Person</span> / <span style="font-family:var(--mono);font-size:12.5px">ProfilePage</span> structured data + social card — not repeated on every page</div>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<!-- ================= SIGNATURE STORYBOARD (internal) ================= -->
+<sc-if value="{{ isStoryboard }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1000px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(20px,5vw,56px)">
+  <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px">Internal · interaction spec</div>
+  <h1 style="font:600 clamp(30px,4.4vw,48px)/1.05 var(--serif);letter-spacing:-.015em;margin:0 0 14px">Signature interaction — storyboard</h1>
+  <p style="font:400 17px/1.65 var(--sans);color:var(--ink-2);max-width:62ch;margin:0 0 30px">The homepage figure demonstrates a professional analytical process end to end. It carries an explicit <em>synthetic</em> label and makes no empirical claim.</p>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:34px">
+    <sc-for list="{{ storySteps }}" as="s" hint-placeholder-count="5">
+      <div style="display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:var(--paper)">
+        <div style="width:44px;height:44px;border-radius:10px;background:var(--accent-soft);color:var(--accent-2);display:flex;align-items:center;justify-content:center;font:600 16px var(--mono)">{{ s.n }}</div>
+        <div>
+          <h2 style="font:600 18px/1.25 var(--serif);margin:0 0 5px;color:var(--ink)">{{ s.h }}</h2>
+          <p style="font:400 14.5px/1.6 var(--sans);color:var(--ink-2);margin:0">{{ s.p }}</p>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:{{ splitCols }};gap:16px">
+    <div style="border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--paper-2)">
+      <div style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:10px">Reduced-motion behaviour</div>
+      <p style="font:400 14.5px/1.65 var(--sans);color:var(--ink-2);margin:0">The chart renders as a static state; the slider still updates values on input with no animated transition. No looping motion, no autoplay, no scroll-linked animation.</p>
+    </div>
+    <div style="border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--paper-2)">
+      <div style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:10px">Mobile &amp; accessibility</div>
+      <p style="font:400 14.5px/1.65 var(--sans);color:var(--ink-2);margin:0">Simplified layout, full-width slider (44px target), keyboard-operable range input, and an SVG <span style="font-family:var(--mono);font-size:12px">aria-label</span> describing the current predicted value in words.</p>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<!-- ================= CONTENT-GAP REGISTER (internal) ================= -->
+<sc-if value="{{ isGaps }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1000px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(20px,5vw,56px)">
+  <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px">Internal · content-gap register</div>
+  <h1 style="font:600 clamp(30px,4.4vw,48px)/1.05 var(--serif);letter-spacing:-.015em;margin:0 0 14px">What must be confirmed before launch</h1>
+  <p style="font:400 17px/1.65 var(--sans);color:var(--ink-2);max-width:60ch;margin:0 0 22px">Every unverified item in the prototype, by page and severity. Nothing here is presented as fact in the public views.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px">
+    <span style="font:500 11px var(--mono);color:#fff;background:var(--accent-2);padding:4px 10px;border-radius:6px">Critical before validation</span>
+    <span style="font:500 11px var(--mono);color:var(--ink);background:var(--accent-soft);padding:4px 10px;border-radius:6px">Required before development</span>
+    <span style="font:500 11px var(--mono);color:var(--ink-2);background:var(--paper-2);border:1px solid var(--line);padding:4px 10px;border-radius:6px">Required before launch</span>
+    <span style="font:500 11px var(--mono);color:var(--ink-3);border:1px dashed var(--line-2);padding:4px 10px;border-radius:6px">Optional</span>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <sc-for list="{{ gapGroups }}" as="g" hint-placeholder-count="6">
+      <div style="border:1px solid var(--line);border-radius:12px;overflow:hidden">
+        <div style="background:var(--paper-2);padding:12px 18px;font:600 14px var(--serif);color:var(--ink);border-bottom:1px solid var(--line)">{{ g.page }}</div>
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:{{ gapCols }};gap:14px;padding:12px 18px;border-bottom:1px solid var(--line);align-items:center">
+              <span style="font:400 14px/1.45 var(--sans);color:var(--ink-2)">{{ r.item }}</span>
+              <span style="font:500 10.5px var(--mono);color:{{ r.color }};background:{{ r.bg }};border:1px solid {{ r.bd }};padding:3px 9px;border-radius:6px;justify-self:start;white-space:nowrap">{{ r.sev }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+</sc-if>
+
+<!-- ================= CHANGELOG (internal) ================= -->
+<sc-if value="{{ isChangelog }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:820px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(20px,5vw,56px)">
+  <div style="font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px">Internal · changelog</div>
+  <h1 style="font:600 clamp(30px,4.4vw,48px)/1.05 var(--serif);letter-spacing:-.015em;margin:0 0 8px">Version 0.2 → 0.3</h1>
+  <p style="font:400 16px var(--mono);color:var(--ink-3);margin:0 0 30px">Design-freeze candidate · foundation preserved</p>
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <sc-for list="{{ changelog }}" as="c" hint-placeholder-count="8">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;border-bottom:1px solid var(--line);padding-bottom:14px">
+        <span style="font:500 10.5px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:{{ c.color }};background:{{ c.bg }};padding:3px 9px;border-radius:6px;white-space:nowrap">{{ c.tag }}</span>
+        <span style="font:400 15px/1.55 var(--sans);color:var(--ink-2)">{{ c.text }}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+</sc-if>
+
+<!-- ================= 404 ================= -->
+<sc-if value="{{ is404 }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:700px;margin:0 auto;padding:clamp(70px,10vw,140px) clamp(20px,5vw,56px);text-align:center">
+  <div style="font:600 clamp(72px,14vw,140px)/1 var(--serif);color:var(--accent);letter-spacing:-.03em">404</div>
+  <h1 style="font:600 clamp(24px,3vw,34px)/1.15 var(--serif);margin:14px 0 12px">{{ t.err.title }}</h1>
+  <p style="font:400 17px/1.6 var(--sans);color:var(--ink-2);margin:0 0 28px">{{ t.err.body }}</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <button onClick="{{ goHome }}" style="background:var(--ink);color:var(--paper);border:none;cursor:pointer;font:600 15px var(--sans);padding:13px 24px;border-radius:10px">{{ t.err.home }}</button>
+    <button onClick="{{ goWork }}" style="background:none;border:1px solid var(--line-2);color:var(--ink);cursor:pointer;font:600 15px var(--sans);padding:13px 24px;border-radius:10px">{{ t.err.work }}</button>
+  </div>
+</section>
+</sc-if>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer style="background:var(--dark);color:oklch(0.82 0.01 250);border-top:1px solid oklch(0.4 0.02 262)">
+  <div style="max-width:1240px;margin:0 auto;padding:clamp(40px,5vw,64px) clamp(20px,5vw,56px)">
+    <div style="display:grid;grid-template-columns:{{ footCols }};gap:32px;margin-bottom:36px">
+      <div>
+        <div style="font:700 20px var(--sans);color:#fff;margin-bottom:8px">Mayo Kadanga</div>
+        <p style="font:400 14px/1.6 var(--sans);color:oklch(0.72 0.01 250);margin:0;max-width:34ch">{{ t.hero.sig }}</p>
+      </div>
+      <sc-for list="{{ footCols2 }}" as="c" hint-placeholder-count="3">
+        <div>
+          <div style="font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:oklch(0.6 0.01 250);margin-bottom:12px">{{ c.head }}</div>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ c.links }}" as="l" hint-placeholder-count="4">
+              <button onClick="{{ l.on }}" style="background:none;border:none;cursor:pointer;text-align:left;font:400 14px var(--sans);color:oklch(0.82 0.01 250);padding:0" style-hover="color:#fff">{{ l.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="border-top:1px solid oklch(0.35 0.02 262);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font:400 12.5px var(--mono);color:oklch(0.6 0.01 250)">
+      <span>© 2026 Mayo T. N. Kadanga · Built with Next.js + Quarto</span>
+      <span>{{ t.footer.privacy }} · EN / FR · Prototype v0.3</span>
+    </div>
+  </div>
+</footer>
+
+<template id="__bundler_thumbnail" data-bg-color="#f4f2ee">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#f4f2ee"/>
+    <rect x="150" y="250" width="520" height="42" rx="6" fill="#33302c"/>
+    <rect x="150" y="316" width="380" height="42" rx="6" fill="#33302c"/>
+    <rect x="150" y="404" width="300" height="20" rx="5" fill="#8a857d"/>
+    <rect x="150" y="470" width="150" height="46" rx="10" fill="#b45a34"/>
+    <rect x="720" y="250" width="330" height="300" rx="18" fill="#eae7e1" stroke="#d9d5cd" stroke-width="2"/>
+    <path d="M745 470 Q820 460 860 400 T1020 300" fill="none" stroke="#b45a34" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="935" cy="352" r="12" fill="#b45a34"/>
+  </svg>
+</template>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:760}}">
+class Component extends DCLogic {
+  state = { route:'home', arg:'fintech', lang:'en', theme:'light', menuOpen:false, w:(typeof window!=='undefined'?window.innerWidth:1400), access:14,
+    form:'idle', fName:'', fEmail:'', fMsg:'', nameErr:false, emailErr:false, msgErr:false };
+
+  componentDidMount(){
+    this._r=()=>this.setState({w:window.innerWidth}); window.addEventListener('resize',this._r);
+    this._esc=(e)=>{ if(e.key==='Escape'&&this.state.menuOpen) this.setState({menuOpen:false}); };
+    window.addEventListener('keydown',this._esc);
+  }
+  componentDidUpdate(){ if(typeof document!=='undefined') document.body.style.overflow=this.state.menuOpen?'hidden':''; }
+  componentWillUnmount(){ window.removeEventListener('resize',this._r); window.removeEventListener('keydown',this._esc); if(typeof document!=='undefined') document.body.style.overflow=''; }
+
+  go(route,arg){ const s={route,menuOpen:false}; if(arg!==undefined)s.arg=arg; this.setState(s); if(typeof window!=='undefined')window.scrollTo({top:0,behavior:'auto'}); }
+  logistic(x){ return 1/(1+Math.exp(-(-2.2+0.12*x))); }
+  L(en,fr){ return this.state.lang==='fr'?fr:en; }
+
+  buildChart(){
+    const R=React.createElement, W=560,H=250, x0=48,x1=524, y0=22,y1=210, access=this.state.access;
+    const sx=v=>x0+(v/40)*(x1-x0), sy=p=>y1-p*(y1-y0);
+    let d=''; for(let v=0;v<=40;v++){ const px=sx(v),py=sy(this.logistic(v)); d+=(v===0?'M':'L')+px.toFixed(1)+' '+py.toFixed(1)+' '; }
+    const pts=[]; for(let i=0;i<44;i++){ const rx=(i*97%40); const p=this.logistic(rx); const j=((i*53%100)/100); const inc=j<p; pts.push(R('circle',{key:i,cx:sx(rx),cy:inc?sy(0.86)+((i*29%40)-20)*0.5:sy(0.14)+((i*17%40)-20)*0.5,r:3,fill:inc?'var(--accent)':'var(--ink-3)',opacity:0.55})); }
+    const mp=this.logistic(access);
+    const grid=[0,0.25,0.5,0.75,1].map((g,i)=>R('g',{key:'g'+i},
+      R('line',{x1:x0,x2:x1,y1:sy(g),y2:sy(g),stroke:'var(--line)',strokeWidth:1}),
+      R('text',{x:x0-8,y:sy(g)+4,textAnchor:'end',fontSize:10,fontFamily:'var(--mono)',fill:'var(--ink-3)'},(g*100)+'%')));
+    const xt=[0,10,20,30,40].map((v,i)=>R('text',{key:'x'+i,x:sx(v),y:y1+18,textAnchor:'middle',fontSize:10,fontFamily:'var(--mono)',fill:'var(--ink-3)'},v));
+    const ariaTxt=this.L('Illustrative analytical workflow. As more evidence enters the model, model confidence rises along an S-curve. Synthetic demonstration — not an empirical result. Current confidence '+Math.round(mp*100)+' percent.','Atelier analytique illustratif. À mesure que des éléments entrent dans le modèle, la confiance augmente selon une courbe en S. Démonstration synthétique — pas un résultat empirique. Confiance actuelle '+Math.round(mp*100)+' pour cent.');
+    return R('svg',{viewBox:'0 0 '+W+' '+H,width:'100%',role:'img','aria-label':ariaTxt,style:{display:'block',overflow:'visible'}},
+      grid, pts,
+      R('path',{d,fill:'none',stroke:'var(--accent)',strokeWidth:2.5,strokeLinecap:'round'}),
+      R('line',{x1:sx(access),x2:sx(access),y1:y0-4,y2:y1,stroke:'var(--ink)',strokeWidth:1.5,strokeDasharray:'4 4',opacity:0.5}),
+      R('circle',{cx:sx(access),cy:sy(mp),r:6,fill:'var(--accent)',stroke:'var(--paper)',strokeWidth:2.5}),
+      R('text',{x:sx(access),y:sy(mp)-12,textAnchor:'middle',fontSize:13,fontWeight:700,fontFamily:'var(--sans)',fill:'var(--ink)'},Math.round(mp*100)+'%'),
+      xt,
+      R('text',{x:(x0+x1)/2,y:H-2,textAnchor:'middle',fontSize:10.5,fontFamily:'var(--mono)',fill:'var(--ink-3)'},this.L('evidence assembled → model confidence','éléments réunis → confiance du modèle')));
+  }
+
+  // distinct schematic visual per project
+  buildVisual(id, aria){
+    const R=React.createElement;
+    const wrap=(vb,kids)=>R('svg',{viewBox:vb,width:'100%',height:'100%',preserveAspectRatio:'xMidYMid meet',role:'img','aria-label':aria,style:{display:'block'}},kids);
+    if(id==='em2'){
+      // browser frame + bilingual toggle + IA columns
+      const bar=R('g',{key:'bar'}, R('rect',{x:0,y:0,width:300,height:22,rx:6,fill:'var(--paper-2)',stroke:'var(--line)'}),
+        R('circle',{cx:12,cy:11,r:3,fill:'var(--ink-3)'}),R('circle',{cx:22,cy:11,r:3,fill:'var(--ink-3)'}),R('circle',{cx:32,cy:11,r:3,fill:'var(--ink-3)'}),
+        R('rect',{x:236,y:5,width:24,height:12,rx:6,fill:'var(--accent)'}), R('text',{x:248,y:14,textAnchor:'middle',fontSize:8,fontFamily:'var(--mono)',fill:'#fff'},'EN'),
+        R('rect',{x:264,y:5,width:24,height:12,rx:6,fill:'none',stroke:'var(--line-2)'}), R('text',{x:276,y:14,textAnchor:'middle',fontSize:8,fontFamily:'var(--mono)',fill:'var(--ink-3)'},'FR'));
+      const body=R('g',{key:'b',transform:'translate(0,30)'},
+        R('rect',{x:0,y:0,width:300,height:120,rx:6,fill:'var(--paper)',stroke:'var(--line)'}),
+        R('rect',{x:14,y:16,width:150,height:14,rx:3,fill:'var(--accent)'}),
+        R('rect',{x:14,y:38,width:120,height:6,rx:3,fill:'var(--ink-3)',opacity:0.5}),
+        R('rect',{x:14,y:50,width:100,height:6,rx:3,fill:'var(--ink-3)',opacity:0.5}),
+        R('rect',{x:14,y:74,width:38,height:34,rx:4,fill:'var(--accent)',opacity:0.2}),
+        R('rect',{x:22,y:88,width:22,height:20,fill:'var(--accent)'}),
+        R('rect',{x:190,y:16,width:96,height:92,rx:6,fill:'var(--paper-2)',stroke:'var(--line)'}),
+        R('rect',{x:202,y:76,width:12,height:22,fill:'var(--ink-3)',opacity:0.6}),
+        R('rect',{x:220,y:60,width:12,height:38,fill:'var(--accent)'}),
+        R('rect',{x:238,y:70,width:12,height:28,fill:'var(--ink-3)',opacity:0.6}),
+        R('rect',{x:256,y:48,width:12,height:50,fill:'var(--accent)'}));
+      return wrap('0 0 300 150',[bar,body]);
+    }
+    if(id==='decentralization'){
+      // TWO distinct diagrams: administrative hierarchy vs. household sampling design
+      const col=(x0,head,rows,accentIdx)=>{
+        const kids=[R('text',{key:'h',x:x0+62,y:13,textAnchor:'middle',fontSize:7.5,fontWeight:700,letterSpacing:'0.06em',fontFamily:'var(--mono)',fill:'var(--ink-2)'},head)];
+        rows.forEach((rw,i)=>{
+          const y=24+i*38; const on=i===accentIdx;
+          kids.push(R('rect',{key:'r'+i,x:x0,y:y,width:124,height:26,rx:5,fill:on?'var(--accent-soft)':'var(--paper)',stroke:on?'var(--accent)':'var(--line-2)',strokeWidth:1}));
+          kids.push(R('text',{key:'t'+i,x:x0+62,y:y+16,textAnchor:'middle',fontSize:8,fontFamily:'var(--mono)',fill:on?'var(--accent-2)':'var(--ink-2)'},rw));
+          if(i<rows.length-1) kids.push(R('text',{key:'a'+i,x:x0+62,y:y+35,textAnchor:'middle',fontSize:11,fill:'var(--ink-3)'},'↓'));
+        });
+        return kids;
+      };
+      const adm=this.L(['Region','Prefecture','Commune'],['Région','Préfecture','Commune']);
+      const smp=this.L(['Domain / stratum','EA — PPS','Household — SRS'],['Domaine / strate','ZD — PPT','Ménage — TAS']);
+      return wrap('0 0 300 150',[
+        col(8,this.L('ADMINISTRATION','ADMINISTRATION'),adm,-1),
+        R('line',{key:'div',x1:150,y1:8,x2:150,y2:142,stroke:'var(--line)',strokeWidth:1,strokeDasharray:'3 3'}),
+        col(168,this.L('SAMPLING DESIGN','PLAN DE SONDAGE'),smp,2)
+      ]);
+    }
+    if(id==='indicators'){
+      // raw jagged vs seasonally-adjusted smooth
+      const raw=[]; const adj=[]; const x0=20,x1=284,y0=20,y1=118;
+      for(let i=0;i<=24;i++){ const t=i/24; const x=x0+t*(x1-x0);
+        const trend=y1-(t*0.6+0.15)*(y1-y0);
+        const seas=Math.sin(t*Math.PI*6)*14 + (i%3===0?6:-4);
+        raw.push((i===0?'M':'L')+x.toFixed(1)+' '+(trend+seas).toFixed(1));
+        adj.push((i===0?'M':'L')+x.toFixed(1)+' '+trend.toFixed(1)); }
+      return wrap('0 0 300 150',[
+        R('line',{key:'ax',x1:x0,y1:y1,x2:x1,y2:y1,stroke:'var(--line)',strokeWidth:1}),
+        R('path',{key:'raw',d:raw.join(' '),fill:'none',stroke:'var(--ink-3)',strokeWidth:1.4,opacity:0.7}),
+        R('path',{key:'adj',d:adj.join(' '),fill:'none',stroke:'var(--accent)',strokeWidth:2.5,strokeLinecap:'round'}),
+        R('circle',{key:'d1',cx:x0+8,cy:132,r:3,fill:'var(--ink-3)'}),R('text',{key:'t1',x:x0+16,y:135,fontSize:8.5,fontFamily:'var(--mono)',fill:'var(--ink-3)'},'raw series'),
+        R('circle',{key:'d2',cx:150,cy:132,r:3,fill:'var(--accent)'}),R('text',{key:'t2',x:158,y:135,fontSize:8.5,fontFamily:'var(--mono)',fill:'var(--ink-3)'},'seasonally adjusted')]);
+    }
+    // fintech -> MCA quadrant map
+    const R2=React.createElement;
+    const cx=150,cy=72;
+    const clusterA=[], clusterB=[];
+    for(let i=0;i<16;i++){ const a=i*137.5*Math.PI/180; const rr=10+(i%5)*7; clusterA.push(R2('circle',{key:'a'+i,cx:cx-42+Math.cos(a)*rr,cy:cy-14+Math.sin(a)*rr*0.7,r:3,fill:'var(--ink-3)',opacity:0.55})); }
+    for(let i=0;i<16;i++){ const a=i*137.5*Math.PI/180; const rr=10+(i%5)*7; clusterB.push(R2('circle',{key:'b'+i,cx:cx+46+Math.cos(a)*rr,cy:cy+16+Math.sin(a)*rr*0.7,r:3,fill:'var(--accent)',opacity:0.6})); }
+    return wrap('0 0 300 150',[
+      R2('line',{key:'ax1',x1:20,y1:cy,x2:280,y2:cy,stroke:'var(--line-2)',strokeWidth:1}),
+      R2('line',{key:'ax2',x1:cx,y1:12,x2:cx,y2:132,stroke:'var(--line-2)',strokeWidth:1}),
+      R2('text',{key:'d1l',x:274,y:cy-5,textAnchor:'end',fontSize:8,fontFamily:'var(--mono)',fill:'var(--ink-3)'},'dim 1'),
+      R2('text',{key:'d2l',x:cx+5,y:20,fontSize:8,fontFamily:'var(--mono)',fill:'var(--ink-3)'},'dim 2'),
+      clusterA, clusterB,
+      R2('circle',{key:'ca',cx:cx-42,cy:cy-14,r:5,fill:'none',stroke:'var(--ink-3)',strokeWidth:1.5}),
+      R2('circle',{key:'cb',cx:cx+46,cy:cy+16,r:5,fill:'var(--accent)',stroke:'var(--paper)',strokeWidth:1.5}),
+      R2('text',{key:'lx',x:cx-42,y:cy-24,textAnchor:'middle',fontSize:8,fontFamily:'var(--mono)',fill:'var(--ink-3)'},'excluded'),
+      R2('text',{key:'li',x:cx+46,y:cy+40,textAnchor:'middle',fontSize:8,fontFamily:'var(--mono)',fill:'var(--accent-2)'},'included')]);
+  }
+
+  dict(){ return {
+    en:{
+      nav:{work:'Work',research:'Research',writing:'Writing',about:'About',contact:'Contact',cv:'CV'},
+      hero:{kicker:'Ingénieur Statisticien Économiste',role:'Economic Data Scientist & Analytics Builder',lede:'I transform economic questions, complex data, and institutional needs into models, analytical systems, and decision-ready digital products.',sig:'From evidence to decisions. From models to digital systems.',cta1:'View selected work',cta2:'Open CV'},
+      sig:{title:'The method, live',pipeline:'Raw data → structure → model → insight → decision. Move the parameter to watch the process advance.',disclaimer:'Illustrative analytical workflow · synthetic · no empirical result is presented.',param:'Evidence in the model',synthetic:'Synthetic',insight:'Stage',decision:'Readiness',how:'How this works — storyboard',stages:['Data incomplete','Structure detected','Model estimated','Signal interpretable','Decision-ready scenario'],decisions:['Not enough evidence to act','Pattern emerging — keep collecting','Stable model forming','Interpretable result available','Decision scenario available']},
+      proof:{head:'Practice at a glance',items:[{k:'Economic & statistical analysis',v:'Official statistics, econometrics & indicators'},{k:'Public & institutional data systems',v:'Surveys, sampling & data collection at scale'},{k:'Data science & econometrics',v:'R / Python modelling & reproducible pipelines'},{k:'Digital analytical products',v:'Shiny, full-stack builds & decision tools'}]},
+      work:{eyebrow:'Selected work',title:'Evidence, systems & products',lead:'Four engagements spanning public-policy evaluation, official statistics, applied econometrics, and full-stack product delivery.',role:'Role:',view:'Open case',viewAll:'All work'},
+      cap:{eyebrow:'Capabilities',title:'Organised around transformations, not tool lists',lead:'What I do is move problems along a chain — from open questions to systems people can rely on.',groups:[
+        {transform:'Questions → evidence',title:'Economic & Statistical Analysis',items:['Econometrics & causal inference','Official statistics & indicators','Survey methodology & sampling','Time-series & seasonal adjustment']},
+        {transform:'Raw data → reliable systems',title:'Data Science & Econometrics',items:['R & Python analysis pipelines','Multivariate analysis (MCA/PCA)','Probabilistic & predictive models','Reproducible, documented workflows']},
+        {transform:'Models → decision tools',title:'Decision Systems & Data Products',items:['Shiny & interactive dashboards','Full-stack builds (Next.js)','Budget & scenario simulation','Deployment, SEO & accessibility']},
+        {transform:'Knowledge → transferable methods',title:'Research & Knowledge Transfer',items:['Quarto reproducible publishing','Teaching & technical notes','Method documentation','Bilingual EN/FR communication']}]},
+      res:{eyebrow:'Research & writing',title:'Reproducible, decision-oriented work',focus:'Current focus: financial inclusion, decentralization impact, and turning official statistics into decision-support tools — published reproducibly with Quarto.',split:'Research holds formal and ongoing studies; Writing holds technical notes, tutorials and teaching resources. They are separate sections.',viewR:'Go to Research',viewW:'Go to Writing',tagPaper:'Applied study',tagNote:'Technical note',a1title:'Financial inclusion and mobile-money adoption',a1desc:'MCA + probit/logit models identifying drivers of inclusion (FinScope Benin 2018), fully reproducible.',a2title:'Reproducible seasonal adjustment with R and Quarto',a2desc:'Turning raw economic series into decision-ready indicators, end to end.'},
+      research:{title:'Research',lead:'Formal and ongoing research: working papers, research projects, proposals, and methodological studies. Distinct from Writing.',filters:['Working Paper','Research Project','Proposal','Methodology','Completed Study','Work in Progress']},
+      writing:{title:'Writing',lead:'Technical notes, econometric explanations, statistical tutorials, and teaching resources — the reflective and educational companion to Research.',filters:['Econometrics','Statistics','Data Science','Economics','Finance','Software Engineering','Teaching']},
+      about:{eyebrow:'About',body:'I build the whole chain — from survey design and estimation to the applications and reports that put results in decision-makers’ hands.',more:'Read the full story',positioning:'Economic Data Scientist & Analytics Builder · Ingénieur Statisticien Économiste',focus:'Currently: financial inclusion, decentralization impact, and turning official statistics into decision-support tools.',portraitCap:'Mayo T. N. Kadanga',portraitLoc:'Lomé, Togo · available remotely',portraitAlt:'Portrait of Mayo T. N. Kadanga.',principlesHead:'Working principles',principles:['Evidence before opinion','Interpretable over black-box','Reproducible by default','Built to be decided upon'],langHead:'Languages',langs:['French — native','English — professional'],seeExp:'See full experience'},
+      contact:{eyebrow:'Contact',title:'Let’s talk about your data problem',lead:'Open to employment, consulting, research collaboration, technical builds, and speaking or teaching.',cta:'Start a conversation',opts:['Employment','Consulting','Research collaboration','Technical collaboration','Speaking / teaching']},
+      caseUI:{challenge:'01 · Challenge & context',contribution:'02 · Contribution',approach:'03 · Approach',outputs:'04 · Outputs & results',limitations:'Limitations',lessons:'Lessons',methods:'Methods & stack',related:'Related research note',relatedText:'Read the reproducible Quarto write-up →',discuss:'Discuss a similar engagement →',next:'Next project',fig1:'Illustrative workflow — model confidence vs. evidence — synthetic',placeholderNote:'This case shows the header, visual and fact sheet only. The Financial Inclusion study is the fully-built reference implementation of the case-study system.'},
+      form:{name:'Name',email:'Email',reason:'Reason for reaching out',message:'Message',reasons:['Employment opportunity','Consulting assignment','Research collaboration','Technical collaboration','Speaking or teaching'],errName:'Please enter your name.',errEmail:'Please enter a valid email address.',errMsg:'Please add a short message.',sent:'✓ Received. This is a prototype — no message was actually sent.',serverErr:'✕ Something went wrong sending your message. Please try again. (simulated)',statesLabel:'Prototype · preview form states',direct:'Direct',send:'Send message',sending:'Sending…'},
+      exp:{eyebrow:'Experience',title:'A career built across disciplines',lead:'Verified chronology of employment, entrepreneurship, consulting, teaching and internships. A completed assignment shows its end date, never as ongoing.'},
+      cv:{eyebrow:'Curriculum Vitae',sub:'Economic Data Scientist & Analytics Builder · Ingénieur Statisticien Économiste',enPdf:'English PDF',frPdf:'French PDF'},
+      err:{title:'This page hasn’t been modelled yet',body:'The link may be outdated, or the content moved between the portfolio and research environments.',home:'Back home',work:'View work'},
+      env:{notebook:'Research notebook · Reproducible R & Python'},
+      footer:{privacy:'Privacy',navHead:'Navigate',moreHead:'More',internalHead:'Design review — internal'}
+    },
+    fr:{
+      nav:{work:'Travaux',research:'Recherche',writing:'Écrits',about:'À propos',contact:'Contact',cv:'CV'},
+      hero:{kicker:'Ingénieur Statisticien Économiste',role:'Data Scientist économique et concepteur de systèmes analytiques',lede:'Je transforme les questions économiques, les données complexes et les besoins institutionnels en modèles, systèmes analytiques et produits numériques d'+"'"+'aide à la décision.',sig:'De la preuve à la décision. Des modèles aux systèmes numériques.',cta1:'Voir mes projets',cta2:'Consulter le CV'},
+      sig:{title:'La méthode, en direct',pipeline:'Données brutes → structure → modèle → constat → décision. Déplacez le paramètre pour voir le processus avancer.',disclaimer:'Atelier analytique illustratif · synthétique · aucun résultat empirique n’est présenté.',param:'Éléments réunis dans le modèle',synthetic:'Synthétique',insight:'Étape',decision:'Maturité',how:'Comment ça marche — storyboard',stages:['Données incomplètes','Structure détectée','Modèle estimé','Signal interprétable','Scénario prêt pour la décision'],decisions:['Preuves insuffisantes pour agir','Motif émergent — poursuivre la collecte','Modèle stable en formation','Résultat interprétable disponible','Scénario de décision disponible']},
+      proof:{head:'Aperçu de ma pratique',items:[{k:'Analyse économique & statistique',v:'Statistique officielle, économétrie & indicateurs'},{k:'Systèmes de données publics & institutionnels',v:'Enquêtes, échantillonnage & collecte à grande échelle'},{k:'Data science & économétrie',v:'Modélisation R / Python & pipelines reproductibles'},{k:'Produits analytiques numériques',v:'Shiny, développement full-stack & outils de décision'}]},
+      work:{eyebrow:'Projets sélectionnés',title:'Preuves, systèmes & produits',lead:'Quatre missions couvrant l'+"'"+'évaluation de politiques publiques, la statistique officielle, l'+"'"+'économétrie appliquée et le développement full-stack.',role:'Rôle :',view:'Voir l'+"'"+'étude',viewAll:'Tous les projets'},
+      cap:{eyebrow:'Compétences',title:'Organisées autour de transformations, pas d'+"'"+'outils',lead:'Mon travail fait avancer les problèmes le long d'+"'"+'une chaîne — des questions ouvertes aux systèmes fiables.',groups:[
+        {transform:'Questions → preuves',title:'Analyse économique & statistique',items:['Économétrie & inférence causale','Statistique officielle & indicateurs','Méthodologie d'+"'"+'enquête & échantillonnage','Séries temporelles & désaisonnalisation']},
+        {transform:'Données brutes → systèmes fiables',title:'Data Science & Économétrie',items:['Pipelines R & Python','Analyse multivariée (ACM/ACP)','Modèles probabilistes & prédictifs','Workflows reproductibles & documentés']},
+        {transform:'Modèles → outils de décision',title:'Systèmes de décision & produits data',items:['Shiny & tableaux de bord','Développement full-stack (Next.js)','Simulation budgétaire & de scénarios','Déploiement, SEO & accessibilité']},
+        {transform:'Savoir → méthodes transférables',title:'Recherche & transfert de connaissances',items:['Publication reproductible Quarto','Enseignement & notes techniques','Documentation méthodologique','Communication bilingue FR/EN']}]},
+      res:{eyebrow:'Recherche & écrits',title:'Un travail reproductible, orienté décision',focus:'Axe actuel : inclusion financière, impact de la décentralisation, et transformation de la statistique officielle en outils d'+"'"+'aide à la décision — publiés de façon reproductible avec Quarto.',split:'La Recherche regroupe les études formelles et en cours ; les Écrits regroupent notes techniques, tutoriels et ressources pédagogiques. Ce sont deux sections distinctes.',viewR:'Aller à Recherche',viewW:'Aller à Écrits',tagPaper:'Étude appliquée',tagNote:'Note technique',a1title:'Inclusion financière et adoption du mobile-money',a1desc:'ACM + modèles probit/logit identifiant les déterminants de l’inclusion (FinScope Bénin 2018), entièrement reproductible.',a2title:'Désaisonnalisation reproductible avec R et Quarto',a2desc:'Transformer des séries économiques brutes en indicateurs prêts pour la décision.'},
+      research:{title:'Recherche',lead:'Recherche formelle et en cours : documents de travail, projets de recherche, propositions et études méthodologiques. Distinct des Écrits.',filters:['Document de travail','Projet de recherche','Proposition','Méthodologie','Étude achevée','En cours']},
+      writing:{title:'Écrits',lead:'Notes techniques, explications économétriques, tutoriels statistiques et ressources pédagogiques — le pendant réflexif et éducatif de la Recherche.',filters:['Économétrie','Statistique','Data Science','Économie','Finance','Génie logiciel','Enseignement']},
+      about:{eyebrow:'À propos',body:'Je construis toute la chaîne — de la conception d’enquête et l’estimation jusqu’aux applications et rapports qui mettent les résultats entre les mains des décideurs.',more:'Lire le parcours complet',positioning:'Data Scientist économique & concepteur de systèmes analytiques · Ingénieur Statisticien Économiste',focus:'Actuellement : inclusion financière, impact de la décentralisation, et transformation de la statistique officielle en outils d’aide à la décision.',portraitCap:'Mayo T. N. Kadanga',portraitLoc:'Lomé, Togo · disponible à distance',portraitAlt:'Portrait de Mayo T. N. Kadanga.',principlesHead:'Principes de travail',principles:['La preuve avant l’opinion','L’interprétable plutôt que la boîte noire','Reproductible par défaut','Conçu pour décider'],langHead:'Langues',langs:['Français — natif','Anglais — professionnel'],seeExp:'Voir le parcours complet'},
+      contact:{eyebrow:'Contact',title:'Parlons de votre problème de données',lead:'Ouvert aux opportunités d’emploi, au conseil, à la collaboration de recherche, aux développements techniques et à l’enseignement.',cta:'Démarrer un échange',opts:['Emploi','Conseil','Collaboration de recherche','Collaboration technique','Conférence / enseignement']},
+      caseUI:{challenge:'01 · Enjeu & contexte',contribution:'02 · Contribution',approach:'03 · Démarche',outputs:'04 · Résultats & livrables',limitations:'Limites',lessons:'Enseignements',methods:'Méthodes & outils',related:'Note de recherche associée',relatedText:'Lire la version reproductible Quarto →',discuss:'Discuter d’une mission similaire →',next:'Projet suivant',fig1:'Atelier illustratif — confiance du modèle vs. éléments réunis — synthétique',placeholderNote:'Cette étude n’affiche que l’en-tête, le visuel et la fiche. L’étude Inclusion financière est l’implémentation de référence complète du système d’étude de cas.'},
+      form:{name:'Nom',email:'E-mail',reason:'Motif du contact',message:'Message',reasons:['Opportunité d’emploi','Mission de conseil','Collaboration de recherche','Collaboration technique','Conférence ou enseignement'],errName:'Veuillez saisir votre nom.',errEmail:'Veuillez saisir une adresse e-mail valide.',errMsg:'Veuillez ajouter un court message.',sent:'✓ Bien reçu. Ceci est un prototype — aucun message n’a réellement été envoyé.',serverErr:'✕ Une erreur est survenue lors de l’envoi. Veuillez réessayer. (simulé)',statesLabel:'Prototype · aperçu des états du formulaire',direct:'Direct',send:'Envoyer',sending:'Envoi…'},
+      exp:{eyebrow:'Parcours',title:'Une carrière au croisement des disciplines',lead:'Chronologie vérifiée : emploi, entrepreneuriat, conseil, enseignement et stages. Une mission achevée affiche sa date de fin, jamais comme « en cours ».'},
+      cv:{eyebrow:'Curriculum Vitae',sub:'Data Scientist économique & concepteur de systèmes analytiques · Ingénieur Statisticien Économiste',enPdf:'CV anglais (PDF)',frPdf:'CV français (PDF)'},
+      err:{title:'Cette page n’a pas encore été modélisée',body:'Le lien est peut-être obsolète, ou le contenu a été déplacé entre le portfolio et l’environnement de recherche.',home:'Accueil',work:'Voir les projets'},
+      env:{notebook:'Carnet de recherche · Analyses reproductibles en R et Python'},
+      footer:{privacy:'Confidentialité',navHead:'Naviguer',moreHead:'Plus',internalHead:'Revue de conception — interne'}
+    }
+  }; }
+
+  projects(){ const L=(a,b)=>this.L(a,b); return [
+    {id:'em2',num:'01',type:L('Product & Frontend','Produit & Frontend'),period:'2026',location:L('Togo / remote','Togo / à distance'),title:'EM² Data & AI Lab website',outcome:L('Bilingual analytics-lab site: product strategy, information architecture, full-stack build, deployment, SEO & accessibility.','Site bilingue du lab analytique : stratégie produit, architecture de l’information, développement full-stack, déploiement, SEO & accessibilité.'),role:L('Product & full-stack','Produit & full-stack')},
+    {id:'decentralization',num:'02',type:L('Public-Policy Evaluation','Évaluation de politique publique'),period:L('2026 · covers 2019–2025','2026 · couvre 2019–2025'),location:'Togo',title:L('Impact of decentralization in Togo','Impact de la décentralisation au Togo'),outcome:L('Sampling design, evaluation methodology, Kobo/XLSForm instruments, R & Shiny simulation, field operations and budget scenarios.','Plan de sondage, méthodologie d’évaluation, instruments Kobo/XLSForm, simulation R & Shiny, opérations de terrain et scénarios budgétaires.'),role:L('Statistical methodology','Méthodologie statistique')},
+    {id:'indicators',num:'03',type:L('Official Statistics','Statistique officielle'),period:'2024–2025',location:'INSEED, Togo',title:L('Economic indicators & seasonal adjustment','Indicateurs économiques & désaisonnalisation'),outcome:L('Reproducible time-series pipeline turning raw economic series into decision-ready, seasonally-adjusted indicators.','Pipeline de séries temporelles reproductible transformant des séries brutes en indicateurs désaisonnalisés, prêts pour la décision.'),role:L('Time-series & pipeline','Séries temporelles & pipeline')},
+    {id:'fintech',num:'04',type:L('Applied Econometrics','Économétrie appliquée'),period:'[STUDY PERIOD TO VERIFY]',location:'Benin',title:L('Financial inclusion & FinTech analysis','Inclusion financière & analyse FinTech'),outcome:L('Analysis of FinScope Benin 2018 microdata with MCA and probit/logit models, informing financial-inclusion policy insight.','Analyse des microdonnées FinScope Bénin 2018 avec ACM et modèles probit/logit, éclairant l’inclusion financière.'),role:L('Analysis & modelling','Analyse & modélisation')}
+  ]; }
+
+  caseData(id){
+    const L=(a,b)=>this.L(a,b);
+    const P=this.projects().find(p=>p.id===id)||this.projects()[3];
+    const full=id==='fintech';
+    const figcaps={
+      em2:L('Schematic of the bilingual site: browser chrome, EN/FR toggle, information architecture and component blocks. [IMAGE REQUIRED — annotated interface frames]','Schéma du site bilingue : fenêtre navigateur, bascule EN/FR, architecture de l’information et blocs de composants. [IMAGE REQUISE — cadres d’interface annotés]'),
+      decentralization:L('Two distinct diagrams: the administrative hierarchy (Region → Prefecture → Commune) and the retained household sampling design (stratum → enumeration area selected with probability proportional to size → household by simple random sampling). Illustrative. [CONFIDENTIALITY REVIEW]','Deux schémas distincts : la hiérarchie administrative (Région → Préfecture → Commune) et le plan de sondage des ménages retenu (strate → zone de dénombrement tirée à probabilité proportionnelle à la taille → ménage par tirage aléatoire simple). Illustratif. [REVUE DE CONFIDENTIALITÉ]'),
+      indicators:L('Raw versus seasonally-adjusted series (illustrative data). [IMAGE REQUIRED — real series pending release]','Série brute vs. série désaisonnalisée (données illustratives). [IMAGE REQUISE — série réelle en attente de diffusion]'),
+      fintech:L('Multiple Correspondence Analysis map: excluded vs. included household clusters across two dimensions (synthetic).','Carte d’analyse des correspondances multiples : nuages de ménages exclus vs. inclus sur deux dimensions (synthétique).')
+    };
+    const collab={ em2:L('EM² Data & AI Lab team','Équipe EM² Data & AI Lab'), decentralization:'[CONFIDENTIALITY REVIEW]', indicators:L('INSEED technical team','Équipe technique INSEED'), fintech:L('Independent analysis · secondary microdata','Analyse indépendante · microdonnées secondaires') };
+    const facts=[ {k:L('Period','Période'),v:P.period},{k:L('Type','Type'),v:P.type},{k:L('Location','Lieu'),v:P.location},{k:L('Role','Rôle'),v:P.role} ];
+    if(id==='fintech') facts.push({k:L('Dataset','Jeu de données'),v:'FinScope Benin 2018'});
+    if(id==='indicators') facts.push({k:L('Detailed period','Période détaillée'),v:'[DATE TO CONFIRM]'});
+    facts.push({k:L('Collaborators','Collaborateurs'),v:collab[id]});
+    facts.push({k:L('Status','Statut'),v: full?L('Synthetic figures','Figures synthétiques'):'[REVIEW]'});
+    return { id:P.id, type:P.type, title:P.title, outcome:P.outcome, placeholder:!full, full,
+      visual:this.buildVisual(P.id, P.title+' — schematic visual'),
+      figcap: figcaps[P.id]||'',
+      confidentiality: full?L('Public methodology · synthetic figures','Méthodologie publique · figures synthétiques'):'[CONFIDENTIALITY REVIEW]',
+      facts,
+      challenge: full?[
+        L('The Financial Inclusion analysis draws on FinScope Benin 2018 — a nationally-representative household survey conducted independently. Working from the secondary microdata, the question for decision-makers was: which household factors are associated with the move from financial exclusion toward regular use of formal and mobile-money services?','L’analyse d’inclusion financière s’appuie sur FinScope Bénin 2018 — une enquête ménages représentative au niveau national, menée de façon indépendante. À partir des microdonnées secondaires, la question posée aux décideurs était : quels facteurs des ménages sont associés au passage de l’exclusion financière à un usage régulier des services formels et de mobile-money ?'),
+        L('Constraints: categorical survey variables, non-linear relationships, and the need for interpretable results — not a black-box score.','Contraintes : variables d’enquête catégorielles, relations non linéaires, et besoin de résultats interprétables — pas d’un score « boîte noire ».')
+      ]:[],
+      sourceHead:L('Source study & data infrastructure','Étude source & infrastructure de données'),
+      sourceItems:[
+        L('FinScope Benin 2018 household survey','Enquête ménages FinScope Bénin 2018'),
+        L('Existing survey methodology & questionnaire','Méthodologie et questionnaire d’enquête existants'),
+        L('Secondary microdata used for the analysis','Microdonnées secondaires utilisées pour l’analyse'),
+        L('Original field collection conducted independently of my analytical work','Collecte de terrain d’origine réalisée indépendamment de mon travail analytique')
+      ],
+      mineHead:L('My personal contribution','Ma contribution personnelle'),
+      mineItems:[
+        L('Preparation of the data for the research question','Préparation des données pour la question de recherche'),
+        L('Construction & interpretation of financial-inclusion indicators','Construction et interprétation des indicateurs d’inclusion financière'),
+        L('Multiple Correspondence Analysis','Analyse des correspondances multiples'),
+        L('Probit & logit modelling','Modélisation probit et logit'),
+        L('Model diagnostics','Diagnostics de modèle'),
+        L('Economic interpretation & policy recommendations','Interprétation économique et recommandations de politique'),
+        L('Reproducible analytical outputs','Sorties analytiques reproductibles')
+      ],
+      flow:[L('FinScope microdata','Microdonnées FinScope'),L('Prepare & encode','Préparer & encoder'),L('MCA (structure)','ACM (structure)'),L('Probit / logit','Probit / logit'),L('Diagnostics','Diagnostics'),L('Interpretation','Interprétation')],
+      approachText:L('MCA reduced dozens of categorical indicators to a small set of interpretable dimensions. Households were then modelled with probit and logit specifications to describe the probability of inclusion. Effects are read qualitatively, as illustrative directions — not as verified policy impacts.','L’ACM a réduit des dizaines d’indicateurs catégoriels à un petit ensemble de dimensions interprétables. Les ménages ont ensuite été modélisés par des spécifications probit et logit pour décrire la probabilité d’inclusion. Les effets sont lus qualitativement, comme des directions illustratives — non comme des impacts de politique vérifiés.'),
+      results:[
+        {v:'MCA',k:L('Categorical drivers reduced to interpretable dimensions','Déterminants catégoriels réduits en dimensions interprétables')},
+        {v:'Probit / Logit',k:L('Probabilistic inclusion models with diagnostics','Modèles d’inclusion probabilistes avec diagnostics')},
+        {v:'Quarto',k:L('Reproducible, review-ready analytical outputs','Sorties analytiques reproductibles, prêtes à la relecture')}
+      ],
+      outFig:L('Illustrative analytical workflow — model confidence vs. evidence assembled. Synthetic demonstration; no empirical result. [METRIC TO VERIFY]','Atelier analytique illustratif — confiance du modèle vs. éléments réunis. Démonstration synthétique ; aucun résultat empirique. [MÉTRIQUE À VÉRIFIER]'),
+      limitations:L('Cross-sectional data limits causal claims; results describe association, not proven impact. Self-reported usage may bias adoption estimates.','Les données transversales limitent les conclusions causales ; les résultats décrivent une association, pas un impact prouvé. L’usage auto-déclaré peut biaiser les estimations d’adoption.'),
+      lessons:L('Interpretable models earned institutional trust faster than higher-accuracy black boxes. A reproducible pipeline made the analysis auditable end to end.','Les modèles interprétables ont gagné la confiance institutionnelle plus vite que des boîtes noires plus précises. Un pipeline reproductible a rendu l’analyse auditable de bout en bout.'),
+      tech:['R','tidyverse','FactoMineR','probit / logit','Quarto','ggplot2']
+    };
+  }
+
+  researchGroups(){ const L=(a,b)=>this.L(a,b); return [
+    {head:L('Current research agenda','Programme de recherche actuel'),note:'[TO CONFIRM]',items:[
+      {tag:L('Research agenda','Programme'),tagColor:'var(--c-violet)',date:'2026–',status:L('Doctoral direction','Orientation doctorale'),title:L('Macro-financial vulnerabilities & early-warning systems','Vulnérabilités macro-financières & systèmes d’alerte précoce'),desc:L('Planned doctoral themes: growth reversals, financial cycles, economic forecasting, and machine-learning + econometric models for WAEMU and ECOWAS. [TO CONFIRM]','Thèmes doctoraux envisagés : retournements de croissance, cycles financiers, prévision économique, et modèles mêlant apprentissage automatique et économétrie pour l’UEMOA et la CEDEAO. [À CONFIRMER]')}
+    ]},
+    {head:L('Applied research','Recherche appliquée'),note:'',items:[
+      {tag:L('Applied study','Étude appliquée'),tagColor:'var(--accent)',date:'[DATE TO VERIFY]',status:L('Work in progress','En cours'),title:L('Financial inclusion & mobile-money adoption (FinScope Benin 2018)','Inclusion financière & adoption du mobile-money (FinScope Bénin 2018)'),desc:L('MCA with probit/logit models on secondary FinScope Benin 2018 microdata; reproducible R + Quarto.','ACM avec modèles probit/logit sur microdonnées secondaires FinScope Bénin 2018 ; R + Quarto reproductibles.')},
+      {tag:L('Applied study','Étude appliquée'),tagColor:'var(--c-blue)',date:'2023',status:L('Completed study','Étude achevée'),title:L('Trade volatility in WAEMU','Volatilité commerciale dans l’UEMOA'),desc:L('Econometric analysis during an internship at the Direction Générale de l’Économie, Benin.','Analyse économétrique lors d’un stage à la Direction Générale de l’Économie, Bénin.')}
+    ]},
+    {head:L('Institutional research projects','Projets de recherche institutionnels'),note:'',items:[
+      {tag:L('Research project','Projet de recherche'),tagColor:'var(--c-violet)',date:'2026',status:L('In progress','En cours'),title:L('Decentralization impact evaluation, Togo (2019–2025)','Évaluation de l’impact de la décentralisation, Togo (2019–2025)'),desc:L('Sampling design, methodology and simulation for a national impact study.','Plan de sondage, méthodologie et simulation pour une étude d’impact nationale.')},
+      {tag:L('Methodology','Méthodologie'),tagColor:'var(--c-teal)',date:'2024–2025',status:L('Official statistics','Statistique officielle'),title:L('Economic indicators & seasonal adjustment','Indicateurs économiques & désaisonnalisation'),desc:L('Reproducible time-series methodology at INSEED (IPI, IPPI, national accounts).','Méthodologie de séries temporelles reproductible à l’INSEED (IPI, IPPI, comptes nationaux).')}
+    ]},
+    {head:L('Archive','Archives'),note:'',items:[
+      {tag:L('Completed study','Étude achevée'),tagColor:'var(--ink-3)',date:'2023',status:L('Internship','Stage'),title:L('Public finance & the 2023 Finance Act','Finances publiques & la Loi de finances 2023'),desc:L('Public-finance analysis, Direction Générale de l’Économie, Benin.','Analyse des finances publiques, Direction Générale de l’Économie, Bénin.')},
+      {tag:L('Methodology','Méthodologie'),tagColor:'var(--ink-3)',date:'2019–2020',status:L('Early research','Recherche initiale'),title:L('Mortality modelling in R','Modélisation de la mortalité en R'),desc:L('Demographic statistics, Observatoire Démographique et Statistique, Lomé.','Statistiques démographiques, Observatoire Démographique et Statistique, Lomé.')}
+    ]}
+  ]; }
+
+  writingArticles(){ const L=(a,b)=>this.L(a,b); return [
+    {id:'note',date:'[DATE TO CONFIRM]',tag:L('Data Science','Data Science'),tagColor:'var(--c-blue)',title:L('Reproducible seasonal adjustment with R and Quarto','Désaisonnalisation reproductible avec R et Quarto'),desc:L('A worked, reproducible pipeline for turning raw economic series into decision-ready indicators.','Un pipeline reproductible et détaillé pour transformer des séries économiques brutes en indicateurs prêts pour la décision.')},
+    {id:'note',date:'[DATE TO CONFIRM]',tag:L('Statistics','Statistique'),tagColor:'var(--c-teal)',title:L('Designing survey samples for policy evaluation','Concevoir des échantillons d’enquête pour l’évaluation'),desc:L('Sampling design decisions and their consequences for institutional impact evaluation.','Les choix de plan de sondage et leurs conséquences pour l’évaluation d’impact institutionnelle.')},
+    {id:'note',date:'[DATE TO CONFIRM]',tag:L('Econometrics','Économétrie'),tagColor:'var(--accent)',title:L('Reading marginal effects in logistic models','Lire les effets marginaux dans les modèles logistiques'),desc:L('Why the same change in an input moves the outcome differently across the distribution.','Pourquoi une même variation d’entrée déplace différemment le résultat selon la distribution.')},
+    {id:'note',date:'[DATE TO CONFIRM]',tag:L('Teaching','Enseignement'),tagColor:'var(--c-violet)',title:L('Notes for teaching operations research','Notes pour enseigner la recherche opérationnelle'),desc:L('Teaching resources on optimisation and numerical methods for higher-education courses.','Ressources pédagogiques sur l’optimisation et les méthodes numériques pour l’enseignement supérieur.')}
+  ]; }
+
+  aboutSections(){ const L=(a,b)=>this.L(a,b); return [
+    {h:L('From mathematics to economics','Des mathématiques à l’économie'),p:L('My path begins in mathematics — a Bachelor’s degree from Université de Lomé (2018) in analysis, algebra and optimisation. That rigour is what lets me move confidently between a proof, an estimator and a piece of production code.','Mon parcours commence en mathématiques — une licence de l’Université de Lomé (2018) en analyse, algèbre et optimisation. Cette rigueur me permet de circuler avec aisance entre une démonstration, un estimateur et du code de production.')},
+    {h:L('Training as an Ingénieur Statisticien Économiste','La formation d’Ingénieur Statisticien Économiste'),p:L('I trained as an ISE at ENEAM in Cotonou, defending my engineering thesis in September 2023. The programme brought statistics, econometrics and economics together into one discipline: how to measure, how to estimate, and how to reason about policy under uncertainty.','Je me suis formé comme ISE à l’ENEAM de Cotonou, avec une thèse d’ingénieur soutenue en septembre 2023. La formation réunit statistique, économétrie et économie en une seule discipline : mesurer, estimer, et raisonner sur les politiques en situation d’incertitude.')},
+    {h:L('Inside official statistics','Au cœur de la statistique officielle'),p:L('At INSEED I worked in national accounts and economic forecasting (Feb–Oct 2024), then on large-scale business-census and industrial-index operations under PHASAO (Nov 2024–Dec 2025): field supervision, digital data collection, team training, validation and quality control on official indicators.','À l’INSEED, j’ai travaillé aux comptes nationaux et à la prévision économique (fév.–oct. 2024), puis sur des opérations de recensement des entreprises et d’indices industriels dans le cadre du PHASAO (nov. 2024–déc. 2025) : supervision de terrain, collecte numérique, formation d’équipes, validation et contrôle qualité des indicateurs officiels.')},
+    {h:L('Economic & econometric research','Recherche économique & économétrique'),p:L('Earlier internships — at the Direction Générale de l’Économie in Benin (2023) and the Observatoire Démographique et Statistique in Lomé (2019–2020) — grounded me in applied econometrics, public finance, demographic statistics and mortality modelling in R.','Des stages antérieurs — à la Direction Générale de l’Économie au Bénin (2023) et à l’Observatoire Démographique et Statistique à Lomé (2019–2020) — m’ont ancré dans l’économétrie appliquée, les finances publiques, la statistique démographique et la modélisation de la mortalité en R.')},
+    {h:L('Into data science and software','Vers la data science et le logiciel'),p:L('The same questions kept needing better tools, so I built them: reproducible R and Python pipelines, multivariate analysis, and full-stack applications that carry a result all the way to a decision-maker’s screen.','Les mêmes questions exigeaient de meilleurs outils, alors je les ai construits : pipelines reproductibles R et Python, analyse multivariée, et applications full-stack qui portent un résultat jusqu’à l’écran du décideur.')},
+    {h:L('Consulting, teaching & the CaSEG → EM² story','Conseil, enseignement & l’histoire CaSEG → EM²'),p:L('I co-founded CaSEG in May 2020 as its Head of Statistics; in 2026 it became EM² Data & AI Lab, where I lead the Statistical & Information Systems Division. Alongside this I teach mathematics, statistics and operations research (2024–2026) and take on consulting assignments, including a Ministry of Justice baseline study (2026).','J’ai cofondé CaSEG en mai 2020 comme responsable de la statistique ; en 2026, elle est devenue EM² Data & AI Lab, où je dirige la Division des systèmes statistiques et d’information. En parallèle, j’enseigne les mathématiques, la statistique et la recherche opérationnelle (2024–2026) et je réalise des missions de conseil, dont une étude de référence pour le Ministère de la Justice (2026).')},
+    {h:L('What I am building now','Ce que je construis aujourd’hui'),p:L('Current focus: financial inclusion, decentralization impact evaluation, and turning official statistics into decision-support tools — all published reproducibly.','Axe actuel : inclusion financière, évaluation d’impact de la décentralisation, et transformation de la statistique officielle en outils d’aide à la décision — le tout publié de façon reproductible.')}
+  ]; }
+
+  timeline(){ const L=(a,b)=>this.L(a,b); return [
+    {kind:L('Consulting','Conseil'),dot:'var(--accent)',period:'2026',role:L('Consultant — baseline study & survey methodology','Consultant — étude de référence & méthodologie d’enquête'),org:L('Ministry of Justice (assignment)','Ministère de la Justice (mission)'),loc:'Togo',desc:L('Survey methodology, sampling, indicator metadata, Kobo/XLSForm design and data-quality work for public-policy evaluation. [CONTENT TO CONFIRM]','Méthodologie d’enquête, échantillonnage, métadonnées d’indicateurs, conception Kobo/XLSForm et travail sur la qualité des données pour l’évaluation de politique publique. [CONTENU À CONFIRMER]')},
+    {kind:L('Entrepreneurship','Entrepreneuriat'),dot:'var(--accent)',period:L('May 2020 — present','mai 2020 — présent'),role:L('Co-founder · Head, Statistical & Information Systems Division','Cofondateur · Responsable, Division systèmes statistiques & d’information'),org:L('CaSEG → EM² Data & AI Lab (rebranded 2026)','CaSEG → EM² Data & AI Lab (renommée en 2026)'),loc:'Togo',desc:L('Founded as CaSEG (Head of Statistics) in May 2020; rebranded to EM² Data & AI Lab in 2026. Statistical consulting, surveys, data systems, analytical products, training and web applications.','Fondée sous le nom CaSEG (responsable de la statistique) en mai 2020 ; renommée EM² Data & AI Lab en 2026. Conseil statistique, enquêtes, systèmes de données, produits analytiques, formation et applications web.')},
+    {kind:L('Teaching','Enseignement'),dot:'var(--c-violet)',period:'2024 — 2026',role:L('Higher-education instructor','Enseignant du supérieur'),org:L('Mathematics, statistics & operations research','Mathématiques, statistique & recherche opérationnelle'),loc:'Togo',desc:L('Teaching analysis, algebra, statistics, operations research and numerical analysis. [INSTITUTION — CONTENT TO CONFIRM]','Enseignement de l’analyse, l’algèbre, la statistique, la recherche opérationnelle et l’analyse numérique. [ÉTABLISSEMENT — À CONFIRMER]')},
+    {kind:L('Employment','Emploi'),dot:'var(--c-blue)',period:L('Nov 2024 — Dec 2025','nov. 2024 — déc. 2025'),role:L('Junior Consultant, PHASAO','Consultant junior, PHASAO'),org:'INSEED',loc:'Togo',desc:L('Business-census operations, field supervision, digital data collection and team training; validation and quality control for official indicators including the Index of Industrial Production and the Industrial Producer Price Index.','Opérations de recensement des entreprises, supervision de terrain, collecte numérique et formation d’équipes ; validation et contrôle qualité d’indicateurs officiels dont l’Indice de la Production Industrielle et l’Indice des Prix à la Production Industrielle.')},
+    {kind:L('Employment','Emploi'),dot:'var(--c-blue)',period:L('Feb 2024 — Oct 2024','fév. 2024 — oct. 2024'),role:L('Research Officer, National Accounts & Economic Forecasting','Chargé d’études, Comptes nationaux & prévision économique'),org:'INSEED',loc:'Togo',desc:L('National and quarterly accounts, economic-activity indicators, seasonal adjustment, methodological notes and macroeconomic analysis.','Comptes nationaux et trimestriels, indicateurs d’activité économique, désaisonnalisation, notes méthodologiques et analyse macroéconomique.')},
+    {kind:L('Internship','Stage'),dot:'var(--ink-3)',period:L('May 2023 — Aug 2023','mai 2023 — août 2023'),role:L('Intern — economic analysis','Stagiaire — analyse économique'),org:'Direction Générale de l’Économie',loc:L('Benin','Bénin'),desc:L('Economic analysis of trade volatility in WAEMU, public finance and the 2023 Finance Act; econometric research.','Analyse économique de la volatilité commerciale dans l’UEMOA, finances publiques et Loi de finances 2023 ; recherche économétrique.')},
+    {kind:L('Internship','Stage'),dot:'var(--ink-3)',period:L('Sep 2019 — Apr 2020','sept. 2019 — avr. 2020'),role:L('Intern — demographic statistics','Stagiaire — statistique démographique'),org:'Observatoire Démographique et Statistique',loc:'Lomé',desc:L('Demographic statistics, mortality modelling and statistical analysis in R.','Statistique démographique, modélisation de la mortalité et analyse statistique en R.')}
+  ]; }
+
+  cvSections(){ const L=(a,b)=>this.L(a,b); return [
+    {head:L('Professional summary','Résumé professionnel'),items:[{t:L('Economic Data Scientist & Analytics Builder','Data Scientist économique & concepteur de systèmes analytiques'),d:'',s:L('Ingénieur Statisticien Économiste working across economics, statistics, econometrics and software — from survey design and estimation to decision-ready digital products.','Ingénieur Statisticien Économiste au croisement de l’économie, la statistique, l’économétrie et le logiciel — de la conception d’enquête et l’estimation jusqu’aux produits numériques prêts pour la décision.')}]},
+    {head:L('Professional experience','Expérience professionnelle'),items:[
+      {t:'Junior Consultant, PHASAO — INSEED',d:L('Nov 2024 – Dec 2025','nov. 2024 – déc. 2025'),s:L('Business-census operations, field supervision, digital data collection, training, validation; IIP & IPPI quality control.','Opérations de recensement des entreprises, supervision de terrain, collecte numérique, formation, validation ; contrôle qualité IPI & IPPI.')},
+      {t:'Research Officer, National Accounts & Forecasting — INSEED',d:L('Feb 2024 – Oct 2024','fév. 2024 – oct. 2024'),s:L('National & quarterly accounts, activity indicators, seasonal adjustment, methodological notes.','Comptes nationaux & trimestriels, indicateurs d’activité, désaisonnalisation, notes méthodologiques.')}]},
+    {head:L('Consulting','Conseil'),items:[
+      {t:L('Baseline study & survey methodology — Ministry of Justice','Étude de référence & méthodologie — Ministère de la Justice'),d:'2026',s:L('Sampling, indicator metadata, Kobo/XLSForm, data quality & audit. [CONTENT TO CONFIRM]','Échantillonnage, métadonnées d’indicateurs, Kobo/XLSForm, qualité & audit des données. [À CONFIRMER]')}]},
+    {head:L('Entrepreneurship','Entrepreneuriat'),items:[
+      {t:'Co-founder · Head, Statistical & Information Systems Division — EM² Data & AI Lab',d:L('2026 – present','2026 – présent'),s:L('Rebranded from CaSEG (2026). Consulting, surveys, data systems, analytical products, training, web apps.','Renommée depuis CaSEG (2026). Conseil, enquêtes, systèmes de données, produits analytiques, formation, applications web.')},
+      {t:'Co-founder · Head of Statistics — CaSEG',d:L('May 2020 – 2026','mai 2020 – 2026'),s:L('Founding statistical practice, later evolving into EM² Data & AI Lab.','Pratique statistique fondatrice, devenue ensuite EM² Data & AI Lab.')}]},
+    {head:L('Selected projects','Projets sélectionnés'),items:[
+      {t:'EM² Data & AI Lab website',d:'2026',s:L('Bilingual full-stack build, IA, deployment, SEO & accessibility.','Développement full-stack bilingue, AI, déploiement, SEO & accessibilité.')},
+      {t:L('Decentralization impact evaluation, Togo','Évaluation d’impact de la décentralisation, Togo'),d:L('2026 (covers 2019–2025)','2026 (couvre 2019–2025)'),s:L('Sampling, methodology, Kobo/XLSForm, R & Shiny simulation.','Sondage, méthodologie, Kobo/XLSForm, simulation R & Shiny.')},
+      {t:L('Economic indicators & seasonal adjustment','Indicateurs économiques & désaisonnalisation'),d:'2024–2025',s:L('Reproducible time-series pipeline (IPI, IPPI).','Pipeline de séries temporelles reproductible (IPI, IPPI).')},
+      {t:L('Financial inclusion & FinTech analysis','Inclusion financière & analyse FinTech'),d:'[STUDY PERIOD TO VERIFY]',s:L('FinScope Benin 2018; MCA + probit/logit models.','FinScope Bénin 2018 ; ACM + modèles probit/logit.')}]},
+    {head:L('Research','Recherche'),items:[
+      {t:L('Financial inclusion — applied study','Inclusion financière — étude appliquée'),d:L('Work in progress','En cours'),s:L('MCA + probit/logit on FinScope Benin 2018; reproducible R + Quarto.','ACM + probit/logit sur FinScope Bénin 2018 ; R + Quarto reproductibles.')},
+      {t:L('Trade volatility in WAEMU','Volatilité commerciale dans l’UEMOA'),d:'2023',s:L('Econometric research (DG Économie, Benin internship).','Recherche économétrique (DG Économie, stage Bénin).')},
+      {t:L('Mortality modelling in R','Modélisation de la mortalité en R'),d:'2019–2020',s:L('Demographic statistics (ODS, Lomé internship).','Statistique démographique (ODS, stage Lomé).')}]},
+    {head:L('Teaching','Enseignement'),items:[{t:L('Mathematics, statistics & operations research','Mathématiques, statistique & recherche opérationnelle'),d:'2024 – 2026',s:L('Analysis, algebra, statistics, operations research, numerical analysis. [INSTITUTION — CONFIRM]','Analyse, algèbre, statistique, recherche opérationnelle, analyse numérique. [ÉTABLISSEMENT — À CONFIRMER]')}]},
+    {head:L('Education','Formation'),items:[
+      {t:'Ingénieur Statisticien Économiste (ISE)',d:L('thesis defended Sep 2023','thèse soutenue sept. 2023'),s:'ENEAM, Cotonou'},
+      {t:L('Bachelor’s degree in Mathematics','Licence de Mathématiques'),d:'2018',s:'Université de Lomé'}]},
+    {head:L('Training & certifications','Formations & certifications'),items:[
+      {t:'ALX AI for Developers',d:'2025',s:''},
+      {t:'ALX Software Engineering',d:'2023',s:''},
+      {t:'ALX Data Analyst',d:'2022',s:''},
+      {t:'Udacity Data Analyst',d:'2022',s:''}]},
+    {head:L('Technical skills','Compétences techniques'),items:[
+      {t:L('Methods','Méthodes'),d:'',s:L('Econometrics · survey sampling · time-series & seasonal adjustment · MCA/PCA · probit/logit models.','Économétrie · sondage · séries temporelles & désaisonnalisation · ACM/ACP · modèles probit/logit.')},
+      {t:L('Tools','Outils'),d:'',s:'R · Python · Shiny · Next.js · Quarto · Kobo/XLSForm · Git.'}]},
+    {head:L('Languages','Langues'),items:[{t:L('French — native · English — professional','Français — natif · Anglais — professionnel'),d:'',s:''}]},
+    {head:L('Links','Liens'),items:[
+      {t:'GitHub — mayonorris',d:'',s:'github.com/mayonorris [LINK TO CONFIRM]'},
+      {t:'LinkedIn',d:'',s:'[LINK TO CONFIRM]'},
+      {t:'EM² Data & AI Lab',d:'',s:'[LINK TO CONFIRM]'}]}
+  ]; }
+
+  renderVals(){
+    const S=this.state, D=this.dict()[S.lang], R=S.route, isFr=S.lang==='fr';
+    const w=S.w, mobile=w<760, tablet=w<1024;
+    const cur=k=>R===k?'page':undefined;
+    const navKeys=['work','research','writing','about','contact'];
+    const navItems=navKeys.map(k=>({label:D.nav[k],on:()=>this.go(k),cur:cur(k),
+      color:(R===k)?'var(--accent)':'var(--ink-2)', mcolor:(R===k)?'var(--accent)':'var(--ink)', dot:(R===k)?'●':''}));
+
+    const cs=this.caseData(S.arg); const projs=this.projects();
+    const idx=projs.findIndex(p=>p.id===cs.id); const next=projs[(idx+1)%projs.length];
+
+    const f=S.access/40; const stageIdx = f>=1?4:Math.max(0,Math.floor(f*5));
+    const insight = D.sig.stages[stageIdx];
+    const decision = D.sig.decisions[stageIdx];
+    const sigAria = this.L('Illustrative workflow parameter: how much evidence is in the model, from 0 to 40. No empirical result is presented.','Paramètre de l’atelier illustratif : quantité d’éléments réunis dans le modèle, de 0 à 40. Aucun résultat empirique n’est présenté.');
+
+    const footLinks=(arr)=>arr.map(a=>({label:a.l,on:()=>this.go(a.r)}));
+
+    // form
+    const emailValid=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(S.fEmail.trim());
+    const chip=(k,label)=>({label,on:()=>this.setState({form:k,nameErr:false,emailErr:false,msgErr:false}),
+      color:S.form===k?'#fff':'var(--ink-2)', bg:S.form===k?'var(--ink)':'var(--paper)'});
+    const showErr=S.form==='error';
+
+    return {
+      theme:S.theme, t:D, navItems,
+      goHome:()=>this.go('home'), goWork:()=>this.go('work'), goCv:()=>this.go('cv'), goAbout:()=>this.go('about'),
+      goExperience:()=>this.go('experience'),
+      goResearch:()=>this.go('research'), goWriting:()=>this.go('writing'), goArticle:()=>this.go('article','fintech'), goContact:()=>this.go('contact'),
+      goCase:()=>this.go('case','fintech'), goStoryboard:()=>this.go('storyboard'),
+      toggleTheme:()=>this.setState(s=>({theme:s.theme==='light'?'dark':'light'})), themeIcon:S.theme==='light'?'◐':'◑',
+      setEn:()=>this.setState({lang:'en'}), setFr:()=>this.setState({lang:'fr'}),
+      isEn:S.lang==='en', isFr:S.lang==='fr',
+      enBg:S.lang==='en'?'var(--ink)':'transparent', enFg:S.lang==='en'?'var(--paper)':'var(--ink-2)',
+      frBg:S.lang==='fr'?'var(--ink)':'transparent', frFg:S.lang==='fr'?'var(--paper)':'var(--ink-2)',
+      toggleMenu:()=>this.setState(s=>({menuOpen:!s.menuOpen})), menuOpen:S.menuOpen,
+      headerbg:S.theme==='light'?'oklch(0.987 0.004 240 / .82)':'oklch(0.205 0.015 262 / .82)',
+
+      isHome:R==='home', isWork:R==='work', isCase:R==='case', isResearch:R==='research', isWriting:R==='writing', isArticle:R==='article',
+      isAbout:R==='about', isContact:R==='contact', isExperience:R==='experience', isCv:R==='cv', is404:R==='404',
+      isPositioning:R==='positioning', isStoryboard:R==='storyboard', isGaps:R==='gaps', isChangelog:R==='changelog', isPortrait:R==='portrait',
+      isInternal: ['positioning','storyboard','gaps','changelog','portrait'].includes(R),
+      lang:S.lang, goPortrait:()=>this.go('portrait'), sigAria,
+      inNotebook: R==='research'||R==='writing'||R==='article',
+
+      heroCols: mobile?'1fr':'1.05fr .95fr',
+      proofCols: mobile?'1fr':tablet?'1fr 1fr':'repeat(4,1fr)',
+      workCols: mobile?'1fr': tablet?'1fr 1fr':'repeat(4,1fr)',
+      capCols: mobile?'1fr': tablet?'1fr 1fr':'repeat(4,1fr)',
+      workRowCols: mobile?'1fr':'150px 1fr 140px',
+      artRowCols: mobile?'1fr':'130px 1fr',
+      writeCols: mobile?'1fr':'1fr 1fr',
+      factCols: mobile?'1fr 1fr':'repeat(3,1fr)',
+      caseBodyCols: tablet?'1fr':'1fr 300px',
+      articleCols: tablet?'1fr':'1fr 240px',
+      splitCols: mobile?'1fr':'1fr 1fr',
+      resultCols: mobile?'1fr':'repeat(3,1fr)',
+      cvCols: mobile?'1fr':'170px 1fr',
+      footCols: mobile?'1fr':'1.4fr 1fr 1fr 1fr',
+      posCols: tablet?'1fr':'repeat(3,1fr)',
+      gapCols:'1fr auto',
+      aboutHeadCols: mobile?'1fr':'1.4fr .6fr',
+
+      projects:projs.map(pr=>({...pr,on:()=>this.go('case',pr.id),visual:this.buildVisual(pr.id, pr.title+' — schematic visual')})),
+      methodChart:this.buildChart(), access:S.access, accessLabel:S.access+' / 40',
+      onAccess:(e)=>this.setState({access:+e.target.value}),
+      insight, decision,
+
+      cs, csFull:cs.full,
+      csFlow:['Survey micro-data','Clean & encode','MCA (structure)','Logistic model','Marginal effects','Policy levers'],
+      csResults:[{v:'MCA',k:'Categorical drivers reduced to interpretable dimensions'},{v:'Logit',k:'Probability model with reported marginal effects'},{v:'Quarto',k:'Fully reproducible, review-ready pipeline'}],
+      csTech:['R','tidyverse','FactoMineR','glm','Quarto','ggplot2','XLSForm'],
+      nextCaseTitle:next.title, goNextCase:()=>this.go('case',next.id),
+
+      researchGroups:this.researchGroups().map(g=>({...g,items:g.items.map(a=>({...a,on:()=>this.go('article','fintech')}))})),
+      writingItems:this.writingArticles().map(a=>({...a,on:()=>this.go('article','fintech')})),
+      artTable:[{term:'β₀ (intercept)',coef:'—',se:'—'},{term:'β₁ (evidence)',coef:'β₁',se:'SE(β₁)'},{term:'p-value',coef:'p',se:'—'},{term:'Marginal effect ∂p/∂x',coef:'β·p(1−p)',se:'—'}],
+
+      aboutSections:this.aboutSections(),
+      timeline:this.timeline(),
+      cvSections:this.cvSections(),
+
+      // contact form
+      fName:S.fName, fEmail:S.fEmail, fMsg:S.fMsg,
+      onName:(e)=>this.setState({fName:e.target.value,nameErr:false,form:'idle'}),
+      onEmail:(e)=>this.setState({fEmail:e.target.value,emailErr:false,form:'idle'}),
+      onMsg:(e)=>this.setState({fMsg:e.target.value,msgErr:false,form:'idle'}),
+      nameErr:S.nameErr||showErr, emailErr:S.emailErr||showErr, msgErr:S.msgErr||showErr,
+      nameBorder:(S.nameErr||showErr)?'var(--accent)':'var(--line-2)',
+      emailBorder:(S.emailErr||showErr)?'var(--accent)':'var(--line-2)',
+      msgBorder:(S.msgErr||showErr)?'var(--accent)':'var(--line-2)',
+      sending:S.form==='sending', btnOpacity:S.form==='sending'?0.6:1,
+      isSent:S.form==='sent', isServerErr:S.form==='servererr',
+      contactBtn: S.form==='sending'?D.form.sending:D.form.send,
+      onSubmit:(e)=>{ e.preventDefault();
+        const ne=!S.fName.trim(), ee=!emailValid, me=!S.fMsg.trim();
+        if(ne||ee||me){ this.setState({nameErr:ne,emailErr:ee,msgErr:me,form:'idle'}); return; }
+        this.setState({form:'sending',nameErr:false,emailErr:false,msgErr:false});
+        setTimeout(()=>this.setState({form:'sent'}),900);
+      },
+      formStates:[chip('idle','default'),chip('error','error'),chip('sending','sending'),chip('sent','success'),chip('servererr','server error')],
+
+      // positioning
+      posVariants:[
+        {tag:'Variant A',pill:'Longest',pillColor:'var(--ink-3)',pillBg:'var(--paper-2)',border:'var(--line)',
+          title:'Economic Data Scientist & Full-Stack Analytics Builder',support:'Original V0.1 wording. Distinctive but long; can be hard to parse at a glance.',
+          scores:[{k:'Recruiter clarity',v:'Medium',color:'var(--ink-3)'},{k:'Institutional credibility',v:'High',color:'var(--c-green)'},{k:'Technical credibility',v:'High',color:'var(--c-green)'},{k:'Memorability',v:'Medium',color:'var(--ink-3)'},{k:'FR translation',v:'Awkward',color:'var(--accent-2)'}]},
+        {tag:'Variant B',pill:'Provisional primary',pillColor:'#fff',pillBg:'var(--accent)',border:'var(--accent)',
+          title:'Economic Data Scientist & Analytics Builder',support:'Supported by: Ingénieur Statisticien Économiste combining econometrics, data science and full-stack development.',
+          scores:[{k:'Recruiter clarity',v:'High',color:'var(--c-green)'},{k:'Institutional credibility',v:'High',color:'var(--c-green)'},{k:'Technical credibility',v:'High',color:'var(--c-green)'},{k:'Memorability',v:'High',color:'var(--c-green)'},{k:'FR translation',v:'Clean',color:'var(--c-green)'}]},
+        {tag:'Variant C',pill:'Most formal',pillColor:'var(--ink-3)',pillBg:'var(--paper-2)',border:'var(--line)',
+          title:'Statistician Economist, Data Scientist & Digital Systems Builder',support:'Leads with the formal title; strongest for academic/institutional readers, longer for recruiters.',
+          scores:[{k:'Recruiter clarity',v:'Medium',color:'var(--ink-3)'},{k:'Institutional credibility',v:'Very high',color:'var(--c-green)'},{k:'Research credibility',v:'Very high',color:'var(--c-green)'},{k:'Memorability',v:'Medium',color:'var(--ink-3)'},{k:'International read',v:'Good',color:'var(--c-green)'}]}
+      ],
+
+      // storyboard
+      storySteps:[
+        {n:'1',h:'Starting state — incomplete evidence',p:'The figure opens on a synthetic scatter with a fitted S-curve and a clear "Synthetic" badge. At low evidence the model is not yet informative — the readout says "Data incomplete".'},
+        {n:'2',h:'Structure',p:'Categorical survey variables are conceptually reduced (MCA) into interpretable dimensions — represented by the two-cluster shape on the case-study visual.'},
+        {n:'3',h:'Model + user input',p:'The visitor moves the evidence slider. The illustrative model recomputes its confidence at that input — no stored, empirical or estimated value is shown.'},
+        {n:'4',h:'Insight — qualitative stage',p:'A qualitative label appears (structure detected → model estimated → signal interpretable), framed explicitly as illustrative. No coefficient or percentage-point effect is asserted.'},
+        {n:'5',h:'Decision readiness',p:'The stage maps to a readiness statement (e.g. "Decision scenario available") — showing the full chain from data to decision-readiness, without claiming any real policy finding.'}
+      ],
+
+      // gaps register
+      gapGroups:this.gapGroups(),
+
+      // changelog
+      changelog:this.changelog(),
+
+      footCols2:[
+        {head:D.footer.navHead,links:footLinks([{l:D.nav.work,r:'work'},{l:D.nav.research,r:'research'},{l:D.nav.writing,r:'writing'},{l:D.nav.about,r:'about'}])},
+        {head:D.footer.moreHead,links:footLinks([{l:this.L('Experience','Parcours'),r:'experience'},{l:D.nav.cv,r:'cv'},{l:D.nav.contact,r:'contact'},{l:'404',r:'404'}])},
+        {head:D.footer.internalHead,links:footLinks([{l:'Positioning review',r:'positioning'},{l:'Portrait placement',r:'portrait'},{l:'Interaction storyboard',r:'storyboard'},{l:'Content-gap register',r:'gaps'},{l:'Changelog v0.2→0.3',r:'changelog'}])}
+      ],
+      portraitOptions:[
+        {tag:'Option 1',pill:'Recommended default',pillColor:'#fff',pillBg:'var(--accent)',border:'var(--accent)',
+          title:'No portrait on the homepage · full editorial portrait on About',
+          desc:'The signature analytical interaction stays the sole hero visual. The portrait lives on About as a 4:5 editorial crop. Keeps the analytical identity intact and avoids visual repetition.',
+          scores:[{k:'Professional credibility',v:'High',color:'var(--c-green)'},{k:'Analytical identity',v:'Preserved',color:'var(--c-green)'},{k:'Visual repetition risk',v:'Low',color:'var(--c-green)'},{k:'Mobile behaviour',v:'Clean',color:'var(--c-green)'},{k:'Recruiter recognition',v:'Good',color:'var(--c-green)'}]},
+        {tag:'Option 2',pill:'Alternative',pillColor:'var(--ink-3)',pillBg:'var(--paper-2)',border:'var(--line)',
+          title:'Small portrait in homepage About preview + full portrait on About',
+          desc:'Adds a compact portrait to the dark About preview. Slightly warmer, but risks competing with the contact CTA and duplicating the About portrait. Use only if the supplied image is strong.',
+          scores:[{k:'Human connection',v:'Higher',color:'var(--c-green)'},{k:'Analytical identity',v:'Slightly diluted',color:'var(--accent-2)'},{k:'Visual repetition risk',v:'Medium',color:'var(--accent-2)'},{k:'Mobile behaviour',v:'Needs care',color:'var(--accent-2)'},{k:'CTA competition',v:'Possible',color:'var(--accent-2)'}]}
+      ]
+    };
+  }
+
+  gapGroups(){
+    const S=(sev)=>{ const m={
+      c:{sev:'Critical',color:'#fff',bg:'var(--accent-2)',bd:'var(--accent-2)'},
+      d:{sev:'Before dev',color:'var(--ink)',bg:'var(--accent-soft)',bd:'var(--accent)'},
+      l:{sev:'Before launch',color:'var(--ink-2)',bg:'var(--paper-2)',bd:'var(--line)'},
+      o:{sev:'Optional',color:'var(--ink-3)',bg:'transparent',bd:'var(--line-2)'} }; return m[sev]; };
+    const row=(item,sev)=>({item,...S(sev)});
+    return [
+      {page:'Global',rows:[row('Confirm official email, GitHub (mayonorris) & LinkedIn URLs','c'),row('EN & FR CV PDF files','c'),row('Set <html lang> to active locale in production','d')]},
+      {page:'Home / Hero',rows:[row('Sign-off on Variant B positioning (EN + FR)','c'),row('Confirm practice-at-a-glance category wording','l')]},
+      {page:'Financial Inclusion (Benin)',rows:[row('Verify study period','c'),row('Confirm FinScope Benin 2018 citation & usage rights','c'),row('Confirm no survey-collection role is implied','d')]},
+      {page:'Decentralization',rows:[row('Confidentiality review of data & figures','c'),row('Confirm admin-hierarchy vs sampling-design diagrams','d'),row('Replace schematic with real field/sampling visuals','d')]},
+      {page:'Work — other projects',rows:[row('Economic indicators: detailed project period','d'),row('Replace schematic visuals with real annotated images','d'),row('Confirm collaborators per project','l')]},
+      {page:'Research vs Writing',rows:[row('Confirm four-layer classification per item','d'),row('Real article dates & statuses','d'),row('Confirm doctoral research agenda themes','d')]},
+      {page:'Article (Quarto)',rows:[row('Replace symbolic table with verified or clearly-prototype output','c'),row('Real abstract, references & BibTeX','d'),row('Publish/modified dates','l'),row('PDF & .qmd downloadable assets','l')]},
+      {page:'Portrait & imagery',rows:[row('Final portrait selected','c'),row('Image rights confirmed','c'),row('Desktop crop approved','d'),row('Mobile crop / object-position approved','d'),row('Alt text approved','l'),row('EXIF metadata removed','l'),row('Social preview card approved','o'),row('Person / ProfilePage structured-data image','o')]},
+      {page:'About / Experience / CV',rows:[row('Confirm teaching institution name','d'),row('Confirm consulting client naming vs confidentiality','d'),row('Additional certifications from CV','o')]},
+      {page:'Contact',rows:[row('Real form backend / endpoint','d'),row('Direct contact details','c')]}
+    ];
+  }
+
+  changelog(){
+    const T=(tag,color,bg,text)=>({tag,color,bg,text});
+    const acc={color:'#fff',bg:'var(--accent-2)'}, add={color:'var(--ink)',bg:'var(--accent-soft)'}, keep={color:'var(--ink-2)',bg:'var(--paper-2)'};
+    return [
+      T('Fixed',acc.color,acc.bg,'Financial Inclusion corrected to Benin / FinScope Benin 2018. The contribution block now separates the source study & data infrastructure (independent field collection) from Mayo’s personal analytical contribution — no survey-collection role is implied.'),
+      T('Fixed',acc.color,acc.bg,'Decentralization visual split into two distinct diagrams: the administrative hierarchy (Region → Prefecture → Commune) and the retained household sampling design (stratum → EA by PPS → household by SRS). No misleading three-stage cascade.'),
+      T('Fixed',acc.color,acc.bg,'Signature interaction is now qualitative: no invented coefficients, marginal effects or policy postures. States read Data incomplete → Structure detected → Model estimated → Signal interpretable → Decision-ready scenario, with an explicit synthetic disclaimer.'),
+      T('Fixed',acc.color,acc.bg,'Quarto article uses a symbolic model-output component (β₀, β₁, SE, p, ∂p/∂x) instead of invented numbers; reproducibility/asset claims marked [CODE TO VERIFY] / [ASSET REQUIRED].'),
+      T('Fixed',acc.color,acc.bg,'Collaborators are now project-specific (independent analysis for FinScope; INSEED team for indicators; confidentiality review for decentralization) rather than a blanket EM² label.'),
+      T('Changed',add.color,add.bg,'Research restructured into four layers: current research agenda, applied research, institutional research projects, and archive — with accurate statuses (no false working-paper labels).'),
+      T('Added',add.color,add.bg,'Full EN/FR localization of projects, work index, case study, research, writing, about, experience, CV, contact (labels, options, validation, messages), footer and 404.'),
+      T('Added',add.color,add.bg,'About page redesigned with an editorial two-column portrait placement (4:5 crop, MTNK monogram fallback, [PORTRAIT REQUIRED]) and verified education (Maths, Université de Lomé 2018; ISE, ENEAM Cotonou, thesis Sep 2023) + ALX/Udacity certifications.'),
+      T('Added',add.color,add.bg,'New internal “Portrait placement” comparison frame; internal docs now flagged “Internal design documentation” and kept out of the public production sitemap.'),
+      T('Kept',keep.color,keep.bg,'Editorial-intelligence direction, typography, palette, dark theme, homepage hierarchy, case-study architecture, Next.js–Quarto model, and Variant B positioning — preserved by design.')
+    ];
+  }
+}
+</script>
+</body>
+</html>

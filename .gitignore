@@ -13,10 +13,16 @@ pnpm-debug.log*
 
 # Dependencies and build output
 node_modules/
+.next/
+.quarto/
+_site/
 dist/
 build/
 .cache/
+coverage/
 
 # Local environment files
+.private-context/
 .env
 .env.*
+!.env.example

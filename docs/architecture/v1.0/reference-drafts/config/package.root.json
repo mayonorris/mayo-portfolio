@@ -1,0 +1,18 @@
+{
+  "name": "mayo-portfolio",
+  "private": true,
+  "packageManager": "pnpm@11.2.0",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev:web": "pnpm --filter web dev",
+    "build:web": "pnpm --filter web build",
+    "build:tokens": "node packages/design-tokens/scripts/build-tokens.mjs",
+    "build:knowledge": "pnpm --filter knowledge build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "check": "pnpm build:tokens && pnpm lint && pnpm typecheck && pnpm build:web && pnpm build:knowledge"
+  }
+}

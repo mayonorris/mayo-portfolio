@@ -1,0 +1,42 @@
+project:
+  type: website
+  output-dir: _site
+  resources:
+    - ../shared/assets
+
+lang: fr
+
+website:
+  title: "Mayo T. N. Kadanga"
+  site-url: "https://YOUR_DOMAIN/fr"
+  search:
+    location: navbar
+    type: overlay
+  navbar:
+    left:
+      - text: "Travaux"
+        href: "https://YOUR_DOMAIN/fr/work"
+      - text: "Recherche"
+        href: "/research/"
+      - text: "Écrits"
+        href: "/writing/"
+      - text: "À propos"
+        href: "https://YOUR_DOMAIN/fr/about"
+      - text: "Contact"
+        href: "https://YOUR_DOMAIN/fr/contact"
+  page-footer:
+    left: "© 2026 Mayo T. N. Kadanga"
+    right: "Construit avec Next.js et Quarto"
+
+format:
+  html:
+    theme:
+      - default
+      - styles.scss
+    toc: true
+    code-copy: true
+    code-fold: true
+    link-external-newwindow: true
+
+execute:
+  freeze: auto

@@ -1,0 +1,53 @@
+:root {
+  --color-paper: oklch(0.987 0.004 240);
+  --color-paper2: oklch(0.966 0.005 240);
+  --color-panel: oklch(0.945 0.006 245);
+  --color-ink: oklch(0.23 0.02 262);
+  --color-ink2: oklch(0.43 0.02 262);
+  --color-ink3: oklch(0.58 0.016 262);
+  --color-line: oklch(0.905 0.006 250);
+  --color-line2: oklch(0.83 0.008 250);
+  --color-accent: oklch(0.56 0.145 41);
+  --color-accent2: oklch(0.47 0.13 41);
+  --color-accent-soft: oklch(0.94 0.03 55);
+  --color-dark: oklch(0.235 0.02 262);
+  --color-focus: oklch(0.55 0.17 250);
+  --font-sans: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --width-wide: 1240px;
+  --width-reading: 760px;
+  --width-article: 70ch;
+  --radius-small: 8px;
+  --radius-medium: 10px;
+  --radius-large: 14px;
+  --radius-card: 16px;
+  --motion-fast: 140ms;
+  --motion-normal: 220ms;
+  --motion-slow: 380ms;
+  --motion-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --color-paper: oklch(0.205 0.015 262);
+  --color-paper2: oklch(0.245 0.017 262);
+  --color-panel: oklch(0.285 0.018 262);
+  --color-ink: oklch(0.945 0.006 240);
+  --color-ink2: oklch(0.80 0.01 245);
+  --color-ink3: oklch(0.66 0.014 250);
+  --color-line: oklch(0.34 0.02 262);
+  --color-line2: oklch(0.42 0.02 262);
+  --color-accent: oklch(0.70 0.14 46);
+  --color-accent2: oklch(0.78 0.12 50);
+  --color-accent-soft: oklch(0.31 0.05 45);
+  --color-dark: oklch(0.16 0.014 262);
+  --color-focus: oklch(0.72 0.15 245);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 1ms;
+    --motion-normal: 1ms;
+    --motion-slow: 1ms;
+  }
+}
