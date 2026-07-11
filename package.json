@@ -1,0 +1,14 @@
+{
+  "name": "mayo-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bilingual portfolio monorepo for the Mayo Kadanga public portfolio.",
+  "packageManager": "pnpm@11.2.0",
+  "scripts": {
+    "check:workspace": "pnpm -r --if-present lint && pnpm -r --if-present typecheck && pnpm -r --if-present test && pnpm -r --if-present build"
+  },
+  "engines": {
+    "node": ">=24 <25",
+    "pnpm": ">=11 <12"
+  }
+}
