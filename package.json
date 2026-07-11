@@ -5,6 +5,14 @@
   "description": "Bilingual portfolio monorepo for the Mayo Kadanga public portfolio.",
   "packageManager": "pnpm@11.2.0",
   "scripts": {
+    "dev": "pnpm --filter web dev",
+    "dev:web": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "build:web": "pnpm --filter web build",
+    "lint": "pnpm --filter web lint",
+    "lint:web": "pnpm --filter web lint",
+    "typecheck": "pnpm --filter web typecheck",
+    "typecheck:web": "pnpm --filter web typecheck",
     "check:workspace": "pnpm -r --if-present lint && pnpm -r --if-present typecheck && pnpm -r --if-present test && pnpm -r --if-present build"
   },
   "engines": {
