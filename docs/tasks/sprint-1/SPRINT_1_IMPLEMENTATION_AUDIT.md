@@ -8,7 +8,7 @@ Scope: repository state compared with `docs/architecture/v1.0/04_SPRINT_1_BACKLO
 
 - Completed before development start: repository creation, legacy archive, documentation integration, public-safety notes, `.gitignore`, and `.gitattributes`.
 - Completed during Sprint 1 foundation work: Node and pnpm runtime pinning, root package metadata, initial pnpm workspace manifest, and the minimal Next.js web application.
-- Current global Sprint 1 status: partial. The web foundation exists and validates, but Quarto projects, design tokens, content schemas, locale routing, rewrites, full formatting policy, and CI do not exist yet.
+- Current global Sprint 1 status: partial. The web foundation and locale routing exist and validate, but Quarto projects, design tokens, content schemas, rewrites, full formatting policy, and CI do not exist yet.
 
 ## Task Audit
 
@@ -21,18 +21,20 @@ Scope: repository state compared with `docs/architecture/v1.0/04_SPRINT_1_BACKLO
 | S1-05 Initialize Quarto projects | not_started | `apps/knowledge` does not exist. | EN and FR Quarto configs, sample indexes, sample articles, shared SCSS import. | Workspace foundation. | Initialize localized Quarto projects when selected. |
 | S1-06 Create token source | not_started | `packages/design-tokens` does not exist. | Semantic `tokens.json` with light and dark values. | Workspace package structure. | Add shared design token source after package workspace creation. |
 | S1-07 Generate CSS and SCSS | not_started | No token generator or generated outputs exist. | Deterministic generator, CSS output, SCSS output, stale-output check. | S1-06. | Implement after token source is added. |
-| S1-08 Add locale routing | not_started | The current app only exposes the root scaffold page. | `/`, `/en`, `/fr`, locale rejection, localized metadata. | S1-04. | Add locale routing foundation. |
-| S1-09 Add typed dictionaries | not_started | No app dictionary structure exists. | EN and FR interface dictionaries and key-parity guard. | S1-04, S1-08. | Add after locale routing. |
+| S1-08 Add locale routing | completed | pps/web/app/[locale] renders /en and /fr; pps/web/proxy.ts redirects / to /en; unsupported locales return 404; document language and metadata are locale-aware; language switcher links equivalent locale routes. | Future nested route mapping will be needed as sections are added. | S1-04. | Continue with downstream bilingual interface work. |
+| S1-09 Add typed dictionaries | partial | Basic typed dictionaries exist for the S1-08 shell, metadata, route placeholder, and language switcher. | Full interface dictionary coverage and an explicit key-parity guard are not implemented yet. | S1-04, S1-08. | Formalize dictionary parity and shared interface labels. |
 | S1-10 Add Zod schemas | not_started | `packages/content-schema` does not exist. | Project, experience, education, certification, link, status, confidentiality schemas. | Workspace package structure. | Add content schema package. |
 | S1-11 Add sample registry | blocked | No schema package exists. | One non-sensitive sample registry and validation entry point. | S1-10. | Wait for content schemas. |
 | S1-12 Deploy Quarto test origin | blocked | No Quarto project exists. | Rendered EN and FR static outputs and gated preview workflow. | S1-05. | Wait for Quarto initialization. |
-| S1-13 Add rewrites | blocked | No Quarto origin exists and locale routing is not yet implemented. | Rewrites for `/en/research`, `/fr/research`, `/en/writing`, `/fr/writing`. | S1-04, S1-05, S1-12. | Wait for locale routing and Quarto preview origin. |
+| S1-13 Add rewrites | blocked | Locale routing exists, but no Quarto origin exists. | Rewrites for `/en/research`, `/fr/research`, `/en/writing`, `/fr/writing`. | S1-04, S1-05, S1-12. | Wait for locale routing and Quarto preview origin. |
 | S1-14 Configure formatting and linting | partial | `apps/web` has ESLint and a root `lint` script delegates to the web workspace. | Repository-wide Prettier, Markdown/JSON/YAML checks, and formatting scripts are not configured. | Package structure. | Configure full repository quality policy later in Sprint 1. |
 | S1-15 Add CI | blocked | No `.github/workflows` validation workflow exists. | Install, token generation, typecheck, lint, web build, Quarto renders. | S1-04, S1-05, S1-07, S1-14. | Add after local checks exist. |
 
 ## Implementation Performed
 
-Selected task: S1-04 Initialize Next.js manually.
+Latest selected task: S1-08 Add bilingual locale routing.
+
+Previous selected task: S1-04 Initialize Next.js manually.
 
 Implementation details:
 
@@ -54,4 +56,4 @@ Implementation details:
 
 ## Remaining Immediate Work
 
-Next recommended technical task: S1-05 Initialize Quarto EN and FR projects, or S1-08 Add locale routing if the web route foundation should be completed before Quarto.
+Next recommended technical task: S1-09 Formalize typed interface dictionaries and key-parity checks, or S1-05 Initialize Quarto EN and FR projects if the knowledge layer should come next.
