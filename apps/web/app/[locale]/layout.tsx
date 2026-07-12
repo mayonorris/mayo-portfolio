@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -11,21 +10,6 @@ type LocaleLayoutProps = Readonly<{
   params: Promise<{ locale: string }>;
 }>;
 
-const themeInitScript = `
-(function () {
-  try {
-    var storageKey = "mayo-portfolio-theme";
-    var stored = window.localStorage.getItem(storageKey);
-    var theme = stored === "light" || stored === "dark"
-      ? stored
-      : window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-    document.documentElement.dataset.theme = theme;
-    document.documentElement.style.colorScheme = theme;
-  } catch (error) {}
-})();
-`;
 
 function parseLocale(value: string): Locale {
   if (!isLocale(value)) {
@@ -69,13 +53,8 @@ export default async function LocaleLayout({
   const dictionary = getDictionary(locale);
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} data-locale={locale} suppressHydrationWarning>
       <body>
-        <Script
-          dangerouslySetInnerHTML={{ __html: themeInitScript }}
-          id="theme-init"
-          strategy="beforeInteractive"
-        />
         <AppShell dictionary={dictionary} locale={locale}>
           {children}
         </AppShell>

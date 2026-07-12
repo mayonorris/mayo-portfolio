@@ -689,6 +689,13 @@ a {
   }
 }
 
+
+@media (min-width: 720px) {
+  [data-locale="fr"] .hero-title {
+    max-width: min(100%, 21.5ch);
+    font-size: clamp(2.85rem, 4.6vw, 4.35rem);
+  }
+}
 @media (min-width: 1280px) {
   .site-header__inner {
     grid-template-columns: max-content minmax(0, 1fr);

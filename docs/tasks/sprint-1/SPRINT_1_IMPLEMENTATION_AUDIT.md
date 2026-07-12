@@ -32,7 +32,9 @@ Scope: repository state compared with `docs/architecture/v1.0/04_SPRINT_1_BACKLO
 
 ## Implementation Performed
 
-Latest selected task: Sprint 1 Editorial Visual Foundation.
+Latest selected task: Final visual QA for the Sprint 1 Editorial Intelligence foundation.
+
+Previous selected visual task: Sprint 1 Editorial Visual Foundation.
 
 Previous selected tasks: S1-08 Add bilingual locale routing; S1-04 Initialize Next.js manually.
 

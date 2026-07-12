@@ -1,6 +1,6 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
 
 type Theme = "light" | "dark";
@@ -74,6 +74,11 @@ export function ThemeToggle({ labels }: ThemeToggleProps) {
   );
   const nextTheme: Theme = theme === "dark" ? "light" : "dark";
   const currentLabel = theme === "dark" ? labels.dark : labels.light;
+
+  useEffect(() => {
+    applyTheme(getStoredTheme() ?? getSystemTheme());
+    notifyThemeSubscribers();
+  }, []);
 
   return (
     <button
