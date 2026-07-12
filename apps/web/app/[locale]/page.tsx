@@ -111,16 +111,10 @@ export default async function LocaleHomePage({ params }: LocaleHomePageProps) {
               <Eyebrow>{content.brand.eyebrow}</Eyebrow>
               <h2 id="brand-title">{content.brand.title}</h2>
             </div>
-            <dl className="brand-facts">
-              <div>
-                <dt>{content.brand.currentRoleLabel}</dt>
-                <dd>{publicProfile.ventureRole}</dd>
-              </div>
-              <div>
-                <dt>{content.brand.identityLabel}</dt>
-                <dd>{publicProfile.brandRule[locale]}</dd>
-              </div>
-            </dl>
+            <div className="brand-facts">
+              <p className="brand-facts__label">{content.brand.label}</p>
+              <p>{content.brand.text}</p>
+            </div>
           </div>
         </Container>
       </Section>

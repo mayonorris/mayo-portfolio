@@ -22,10 +22,6 @@ export const publicProfile = {
   qualification: "Ingénieur Statisticien Économiste",
   positioning: "Economic Data Scientist & Analytics Builder",
   ventureRole: "Co-founder and Head of Data, EM² Data & AI Lab",
-  brandRule: {
-    en: "EM² Data & AI Lab is the current public identity. CaSEG is the former identity or origin context of the initiative.",
-    fr: "EM² Data & AI Lab est l’identité publique actuelle. CaSEG est l’ancienne identité ou le contexte d’origine de l’initiative.",
-  },
   links: [
     {
       id: "github",
@@ -54,8 +50,8 @@ export const publicProfile = {
         fr: "Février à octobre 2024",
       },
       marker: {
-        en: "Economic monitoring",
-        fr: "Conjoncture économique",
+        en: "National accounts",
+        fr: "Comptes nationaux",
       },
       description: {
         en: "Supported national accounts, economic monitoring, and forecasting work at INSEED Togo, including quarterly national accounts, the Monthly Indicator of Economic Activity, and seasonal adjustment work, from February to October 2024.",
@@ -81,8 +77,8 @@ export const publicProfile = {
         fr: "Contrôle qualité",
       },
       description: {
-        en: "Junior Consultant under the West Africa Harmonizing and Improving Statistics Project at INSEED Togo, from November 2024 to December 2025. Contributed to economic indicator production, field-operation supervision, quality control, and data validation.",
-        fr: "Junior Consultant dans le cadre du Projet d’Harmonisation et d’Amélioration des Statistiques en Afrique de l’Ouest à l’INSEED Togo, de novembre 2024 à décembre 2025. Contribution à la production d’indicateurs économiques, à la supervision d’opérations de collecte, au contrôle qualité et à la validation des données.",
+        en: "Junior Consultant under the West Africa Harmonizing and Improving Statistics Project at INSEED Togo, from November 2024 to December 2025. Contributed to economic indicator production, field-operation supervision, quality control, and data review.",
+        fr: "Junior Consultant dans le cadre du Projet d’Harmonisation et d’Amélioration des Statistiques en Afrique de l’Ouest à l’INSEED Togo, de novembre 2024 à décembre 2025. Contribution à la production d’indicateurs économiques, à la supervision d’opérations de collecte, au contrôle qualité et à la revue des données.",
       },
     },
     {
@@ -93,19 +89,19 @@ export const publicProfile = {
       },
       role: {
         en: "Co-founder and Head of Data",
-        fr: "Co-founder and Head of Data",
+        fr: "Cofondateur et responsable Data",
       },
       period: {
-        en: "Current public identity",
-        fr: "Identité publique actuelle",
+        en: "Current role",
+        fr: "Fonction actuelle",
       },
       marker: {
-        en: "Public identity",
-        fr: "Identité publique",
+        en: "Entrepreneurship",
+        fr: "Entrepreneuriat",
       },
       description: {
-        en: "Co-founder and Head of Data, EM² Data & AI Lab. CaSEG is the former identity or origin context of the initiative.",
-        fr: "Co-founder and Head of Data, EM² Data & AI Lab. CaSEG constitue l’ancienne identité ou le contexte d’origine de l’initiative.",
+        en: "Co-founder and Head of Data, EM² Data & AI Lab.",
+        fr: "Cofondateur et responsable Data, EM² Data & AI Lab.",
       },
     },
     {
