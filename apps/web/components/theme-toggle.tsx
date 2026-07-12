@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
 
 type Theme = "light" | "dark";
@@ -10,36 +10,31 @@ type ThemeToggleProps = {
 };
 
 const storageKey = "mayo-portfolio-theme";
+const themeChangeEvent = "mayo-portfolio-themechange";
 
 function getStoredTheme(): Theme | null {
-  if (typeof window === "undefined") {
-    return null;
-  }
-
   const value = window.localStorage.getItem(storageKey);
   return value === "light" || value === "dark" ? value : null;
 }
 
 function getSystemTheme(): Theme {
-  if (typeof window === "undefined") {
-    return "light";
-  }
-
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
 }
 
-function getInitialTheme(): Theme {
-  if (typeof document !== "undefined") {
-    const currentTheme = document.documentElement.dataset.theme;
+function getThemeSnapshot(): Theme {
+  const currentTheme = document.documentElement.dataset.theme;
 
-    if (currentTheme === "light" || currentTheme === "dark") {
-      return currentTheme;
-    }
+  if (currentTheme === "light" || currentTheme === "dark") {
+    return currentTheme;
   }
 
   return getStoredTheme() ?? getSystemTheme();
+}
+
+function getServerThemeSnapshot(): Theme {
+  return "light";
 }
 
 function applyTheme(theme: Theme) {
@@ -47,14 +42,38 @@ function applyTheme(theme: Theme) {
   document.documentElement.style.colorScheme = theme;
 }
 
+function notifyThemeSubscribers() {
+  window.dispatchEvent(new Event(themeChangeEvent));
+}
+
+function subscribeToTheme(onStoreChange: () => void) {
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  const handleSystemThemeChange = () => {
+    if (getStoredTheme() === null) {
+      applyTheme(getSystemTheme());
+      notifyThemeSubscribers();
+    }
+  };
+
+  window.addEventListener(themeChangeEvent, onStoreChange);
+  window.addEventListener("storage", onStoreChange);
+  media.addEventListener("change", handleSystemThemeChange);
+
+  return () => {
+    window.removeEventListener(themeChangeEvent, onStoreChange);
+    window.removeEventListener("storage", onStoreChange);
+    media.removeEventListener("change", handleSystemThemeChange);
+  };
+}
+
 export function ThemeToggle({ labels }: ThemeToggleProps) {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const theme = useSyncExternalStore(
+    subscribeToTheme,
+    getThemeSnapshot,
+    getServerThemeSnapshot,
+  );
   const nextTheme: Theme = theme === "dark" ? "light" : "dark";
   const currentLabel = theme === "dark" ? labels.dark : labels.light;
-
-  useEffect(() => {
-    applyTheme(theme);
-  }, [theme]);
 
   return (
     <button
@@ -63,9 +82,9 @@ export function ThemeToggle({ labels }: ThemeToggleProps) {
       className="theme-toggle"
       onClick={() => {
         window.localStorage.setItem(storageKey, nextTheme);
-        setTheme(nextTheme);
+        applyTheme(nextTheme);
+        notifyThemeSubscribers();
       }}
-      suppressHydrationWarning
       type="button"
     >
       <span className="theme-toggle__indicator" aria-hidden="true" />

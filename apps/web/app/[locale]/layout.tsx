@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -69,10 +70,12 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
       <body>
+        <Script
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+          id="theme-init"
+          strategy="beforeInteractive"
+        />
         <AppShell dictionary={dictionary} locale={locale}>
           {children}
         </AppShell>
