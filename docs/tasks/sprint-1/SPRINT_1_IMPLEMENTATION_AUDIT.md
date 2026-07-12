@@ -8,7 +8,7 @@ Scope: repository state compared with `docs/architecture/v1.0/04_SPRINT_1_BACKLO
 
 - Completed before development start: repository creation, legacy archive, documentation integration, public-safety notes, `.gitignore`, and `.gitattributes`.
 - Completed during Sprint 1 foundation work: Node and pnpm runtime pinning, root package metadata, initial pnpm workspace manifest, minimal Next.js web application, locale routing, and the first Editorial Intelligence visual foundation.
-- Current global Sprint 1 status: partial. The web foundation now has bilingual routing, a shared editorial shell, CSS design tokens, light/dark themes, navigation, footer, and a provisional analytical hero. Quarto projects, the official shared design-token package, content schemas, rewrites, full formatting policy, and CI do not exist yet.
+- Current global Sprint 1 status: partial. The web foundation now has bilingual routing, a shared editorial shell, CSS design tokens, light/dark themes, navigation, footer, and a validated homepage MVP using only D1-A and D1-B/B01 public content. Quarto projects, the official shared design-token package, content schemas, rewrites, full formatting policy, and CI do not exist yet.
 
 ## Task Audit
 
@@ -32,7 +32,7 @@ Scope: repository state compared with `docs/architecture/v1.0/04_SPRINT_1_BACKLO
 
 ## Implementation Performed
 
-Latest selected task: Final visual QA for the Sprint 1 Editorial Intelligence foundation.
+Latest selected task: Validated homepage MVP using only public content approved in D1-A and D1-B/B01.
 
 Previous selected visual task: Sprint 1 Editorial Visual Foundation.
 
@@ -44,9 +44,11 @@ Implementation details:
 - Configured the approved typography roles through CSS font stacks: Hanken Grotesk for interface and body, Source Serif 4 for editorial headings, and IBM Plex Mono for labels and metadata. No font binaries or network font loading were added.
 - Refactored the shared application shell with header, primary navigation, language switcher, accessible theme toggle, main landmark, skip link, and minimal footer.
 - Added base UI components: `Container`, `Section`, `Eyebrow`, `LinkButton`, `Surface`, `Divider`, `MainNavigation`, `ThemeToggle`, and `AnalyticalPreview`.
-- Replaced the routing scaffold page with the approved provisional bilingual hero copy and an abstract analytical preview that contains no real data, professional facts, portrait, CV, projects, legacy content, or vault content.
-- Preserved `/en`, `/fr`, root redirect behavior, typed dictionaries, and locale-aware metadata.
-- Placeholder navigation links point to future locale-prefixed routes and may render the framework 404 until those pages are implemented.
+- Replaced the provisional hero with a bilingual public homepage MVP using only the validated D1-A identity, validated GitHub and LinkedIn links, and the five D1-B/B01 approved experience wordings.
+- Added typed public content sources in `apps/web/content/` so approved profile facts are separated from React components and can later be replaced by a validated content registry.
+- Added minimal localized pages for Work/Projets, Research/Recherche, Writing/Publications, About/À propos, and Contact so primary navigation does not lead to 404 pages.
+- Preserved `/en`, `/fr`, root redirect behavior, typed dictionaries, locale-aware metadata, light/dark themes, the abstract analytical hero module, and the Editorial Intelligence visual direction.
+- No portrait, CV, diploma, certificate, private contact details, vault content, legacy content, prototype content, unvalidated projects, unvalidated publications, or unvalidated skills were introduced.
 
 ## Validation Results
 
@@ -59,4 +61,4 @@ Implementation details:
 
 ## Remaining Immediate Work
 
-Next recommended technical task: S1-06 Promote the current CSS token baseline into the official shared design-token package, or S1-09 formalize dictionary key parity if interface text governance should come first.
+Next recommended technical task: S1-09 formalize dictionary key parity and shared interface text governance, or S1-06 promote the current CSS token baseline into the official shared design-token package.

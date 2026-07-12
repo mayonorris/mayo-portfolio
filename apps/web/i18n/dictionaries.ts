@@ -1,3 +1,4 @@
+import { publicProfile } from "@/content/public-profile";
 import type { Locale } from "./locales";
 
 type NavItem = {
@@ -16,8 +17,8 @@ export type Dictionary = {
     status: string;
     navLabel: string;
     footer: {
-      label: string;
-      status: string;
+      linksLabel: string;
+      externalNote: string;
     };
   };
   navigation: {
@@ -38,35 +39,23 @@ export type Dictionary = {
       dark: string;
     };
   };
-  home: {
-    eyebrow: string;
-    title: string;
-    body: string;
-    actionsLabel: string;
-    preview: {
-      ariaLabel: string;
-      label: string;
-      caption: string;
-      layers: string[];
-    };
-  };
 };
 
 export const dictionaries = {
   en: {
     metadata: {
-      title: "Portfolio visual foundation",
+      title: `${publicProfile.name} | Portfolio`,
       description:
-        "Technical visual foundation for the bilingual public portfolio.",
+        "Public bilingual portfolio for economic data science and analytical work.",
     },
     shell: {
       skipLink: "Skip to main content",
-      brand: "Portfolio System",
-      status: "Sprint 1 visual foundation",
+      brand: publicProfile.name,
+      status: publicProfile.positioning,
       navLabel: "Primary navigation",
       footer: {
-        label: "Editorial Intelligence",
-        status: "Technical foundation. Public content is pending validation.",
+        linksLabel: "Professional links",
+        externalNote: "opens in a new tab",
       },
     },
     navigation: {
@@ -100,33 +89,21 @@ export const dictionaries = {
         dark: "Switch to dark theme",
       },
     },
-    home: {
-      eyebrow: "PORTFOLIO SYSTEM PREVIEW",
-      title: "Editorial intelligence for complex decisions",
-      body: "Visual foundation under active development.",
-      actionsLabel: "Preview navigation",
-      preview: {
-        ariaLabel: "Abstract analytical preview with no real data",
-        label: "System preview",
-        caption: "Abstract visual structure only",
-        layers: ["Signal", "Evidence", "Decision"],
-      },
-    },
   },
   fr: {
     metadata: {
-      title: "Fondation visuelle du portfolio",
+      title: `${publicProfile.name} | Portfolio`,
       description:
-        "Fondation visuelle technique pour le portfolio public bilingue.",
+        "Portfolio public bilingue pour la data science économique et les travaux analytiques.",
     },
     shell: {
       skipLink: "Aller au contenu principal",
-      brand: "Système Portfolio",
-      status: "Fondation visuelle Sprint 1",
+      brand: publicProfile.name,
+      status: publicProfile.positioning,
       navLabel: "Navigation principale",
       footer: {
-        label: "Editorial Intelligence",
-        status: "Fondation technique. Le contenu public reste à valider.",
+        linksLabel: "Liens professionnels",
+        externalNote: "s’ouvre dans un nouvel onglet",
       },
     },
     navigation: {
@@ -158,18 +135,6 @@ export const dictionaries = {
       switchTo: {
         light: "Passer au thème clair",
         dark: "Passer au thème sombre",
-      },
-    },
-    home: {
-      eyebrow: "APERÇU DU SYSTÈME DE PORTFOLIO",
-      title: "Une intelligence éditoriale au service des décisions complexes",
-      body: "Fondation visuelle en cours de développement.",
-      actionsLabel: "Navigation de prévisualisation",
-      preview: {
-        ariaLabel: "Aperçu analytique abstrait sans données réelles",
-        label: "Aperçu système",
-        caption: "Structure visuelle abstraite uniquement",
-        layers: ["Signal", "Preuve", "Décision"],
       },
     },
   },

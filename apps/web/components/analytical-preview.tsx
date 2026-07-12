@@ -1,9 +1,9 @@
-import type { Dictionary } from "@/i18n/dictionaries";
+import type { HomeContent } from "@/content/home";
 import { Eyebrow } from "./eyebrow";
 import { Surface } from "./surface";
 
 type AnalyticalPreviewProps = {
-  labels: Dictionary["home"]["preview"];
+  labels: HomeContent["preview"];
 };
 
 export function AnalyticalPreview({ labels }: AnalyticalPreviewProps) {

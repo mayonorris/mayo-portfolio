@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { publicProfile } from "@/content/public-profile";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/locales";
 import { Container } from "./container";
@@ -13,6 +14,8 @@ type AppShellProps = {
 };
 
 export function AppShell({ children, dictionary, locale }: AppShellProps) {
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main-content">
@@ -40,8 +43,23 @@ export function AppShell({ children, dictionary, locale }: AppShellProps) {
       <main id="main-content">{children}</main>
       <footer className="site-footer">
         <Container className="site-footer__inner">
-          <span>{dictionary.shell.footer.label}</span>
-          <span>{dictionary.shell.footer.status}</span>
+          <p className="site-footer__copyright">
+            © {currentYear} {publicProfile.name}
+          </p>
+          <nav aria-label={dictionary.shell.footer.linksLabel}>
+            <ul className="site-footer__links" role="list">
+              {publicProfile.links.map((link) => (
+                <li key={link.id}>
+                  <a href={link.href} rel="noreferrer" target="_blank">
+                    {link.label}
+                    <span className="sr-only">
+                      {` (${dictionary.shell.footer.externalNote})`}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </Container>
       </footer>
     </div>

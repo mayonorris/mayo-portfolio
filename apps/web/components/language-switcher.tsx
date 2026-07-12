@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { getAlternateLocale, type Locale, locales } from "@/i18n/locales";
 import { getLocalizedPath } from "@/lib/routes";
@@ -6,15 +9,26 @@ import { getLocalizedPath } from "@/lib/routes";
 type LanguageSwitcherProps = {
   locale: Locale;
   labels: Dictionary["languageSwitcher"];
-  equivalentPath?: string;
 };
 
-export function LanguageSwitcher({
-  locale,
-  labels,
-  equivalentPath = "/",
-}: LanguageSwitcherProps) {
+function getEquivalentPath(pathname: string, locale: Locale): string {
+  const localePrefix = `/${locale}`;
+
+  if (pathname === localePrefix) {
+    return "/";
+  }
+
+  if (pathname.startsWith(`${localePrefix}/`)) {
+    return pathname.slice(localePrefix.length);
+  }
+
+  return "/";
+}
+
+export function LanguageSwitcher({ locale, labels }: LanguageSwitcherProps) {
   const alternateLocale = getAlternateLocale(locale);
+  const pathname = usePathname();
+  const equivalentPath = getEquivalentPath(pathname, locale);
 
   return (
     <nav aria-label={labels.ariaLabel} className="language-switcher">

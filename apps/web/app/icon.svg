@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Mayo portfolio icon</title>
+  <rect width="64" height="64" rx="8" fill="#f5f1ea" />
+  <path d="M14 48V16h8l10 17 10-17h8v32h-7V28L35 42h-6L21 28v20z" fill="#2d2b2f" />
+  <path d="M14 52h36" stroke="#b45b2c" stroke-width="4" stroke-linecap="square" />
+</svg>
