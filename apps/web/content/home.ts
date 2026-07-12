@@ -1,197 +1,425 @@
 import type { Locale } from "@/i18n/locales";
+import type { RouteKey } from "@/lib/routes";
 
-export type RouteSlug = "work" | "research" | "writing" | "about" | "contact";
+export type WorkVisualVariant = "systems" | "research" | "signal" | "finance";
+
+export type MethodStage = {
+  label: string;
+  readiness: string;
+};
+
+export type PracticeArea = {
+  label: string;
+  value: string;
+};
+
+export type SelectedWorkItem = {
+  slug: string;
+  category: string;
+  title: string;
+  scope: string;
+  role: string;
+  visual: WorkVisualVariant;
+};
+
+export type CapabilityGroup = {
+  transform: string;
+  title: string;
+  items: string[];
+};
+
+export type PreviewCard = {
+  kind: string;
+  title: string;
+  body: string;
+  cta: string;
+  routeKey: RouteKey;
+};
 
 export type HomeContent = {
   hero: {
-    actionsLabel: string;
+    eyebrow: string;
+    title: string;
+    body: string;
+    signature: string;
     primaryCta: string;
     secondaryCta: string;
-    externalLinksLabel: string;
+    actionsLabel: string;
   };
-  preview: {
-    ariaLabel: string;
-    label: string;
-    caption: string;
-    layers: string[];
+  method: {
+    title: string;
+    note: string;
+    sliderLabel: string;
+    progressLabel: string;
+    currentStageLabel: string;
+    readinessLabel: string;
+    stages: MethodStage[];
   };
-  experience: {
+  practice: {
+    eyebrow: string;
+    items: PracticeArea[];
+  };
+  selectedWork: {
     eyebrow: string;
     title: string;
     intro: string;
-    listLabel: string;
+    viewAll: string;
+    cardCta: string;
+    roleLabel: string;
+    items: SelectedWorkItem[];
   };
-  brand: {
-    eyebrow: string;
-    title: string;
-    label: string;
-    text: string;
-  };
-  links: {
+  capabilities: {
     eyebrow: string;
     title: string;
     intro: string;
-    externalNote: string;
-    contactLabel: string;
+    groups: CapabilityGroup[];
+  };
+  researchWriting: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    cards: [PreviewCard, PreviewCard];
+  };
+  about: {
+    eyebrow: string;
+    statement: string;
+    cta: string;
+  };
+  contact: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    cta: string;
+    tags: string[];
+  };
+  footer: {
+    signature: string;
   };
 };
 
 export type RoutePageContent = {
-  slug: RouteSlug;
+  routeKey: RouteKey;
+  path: string;
   title: string;
   description: string;
+  eyebrow: string;
   status: string;
   backHome: string;
 };
 
+const selectedWorkItems = {
+  en: [
+    {
+      slug: "em2-data-ai-lab-website",
+      category: "Digital product",
+      title: "EM² Data & AI Lab website",
+      scope:
+        "A public web presence and analytical communication system for a data and AI initiative.",
+      role: "Product and data direction",
+      visual: "systems",
+    },
+    {
+      slug: "impact-decentralization-togo",
+      category: "Applied research",
+      title: "Impact of decentralization in Togo",
+      scope:
+        "A research-oriented case frame for studying governance, development, and public decision questions.",
+      role: "Economic analysis",
+      visual: "research",
+    },
+    {
+      slug: "economic-indicators-seasonal-adjustment",
+      category: "Official statistics",
+      title: "Economic indicators & seasonal adjustment",
+      scope:
+        "A workflow frame for turning economic activity series into clearer monitoring signals.",
+      role: "Statistical analysis",
+      visual: "signal",
+    },
+    {
+      slug: "financial-inclusion-fintech-analysis",
+      category: "Economic analysis",
+      title: "Financial inclusion & FinTech analysis",
+      scope:
+        "A case frame for studying access, adoption, and digital finance questions.",
+      role: "Data and econometric analysis",
+      visual: "finance",
+    },
+  ],
+  fr: [
+    {
+      slug: "em2-data-ai-lab-website",
+      category: "Produit numérique",
+      title: "EM² Data & AI Lab website",
+      scope:
+        "Une présence web publique et un système de communication analytique pour une initiative data et IA.",
+      role: "Direction produit et data",
+      visual: "systems",
+    },
+    {
+      slug: "impact-decentralization-togo",
+      category: "Recherche appliquée",
+      title: "Impact of decentralization in Togo",
+      scope:
+        "Un cadre de cas orienté recherche pour étudier des questions de gouvernance, de développement et de décision publique.",
+      role: "Analyse économique",
+      visual: "research",
+    },
+    {
+      slug: "economic-indicators-seasonal-adjustment",
+      category: "Statistique officielle",
+      title: "Economic indicators & seasonal adjustment",
+      scope:
+        "Un cadre de travail pour transformer des séries d’activité économique en signaux de suivi plus lisibles.",
+      role: "Analyse statistique",
+      visual: "signal",
+    },
+    {
+      slug: "financial-inclusion-fintech-analysis",
+      category: "Analyse économique",
+      title: "Financial inclusion & FinTech analysis",
+      scope:
+        "Un cadre de cas pour étudier les questions d’accès, d’adoption et de finance numérique.",
+      role: "Analyse data et économétrique",
+      visual: "finance",
+    },
+  ],
+} satisfies Record<Locale, SelectedWorkItem[]>;
+
 export const homeContent = {
   en: {
     hero: {
-      actionsLabel: "Portfolio actions",
-      primaryCta: "View selected experience",
-      secondaryCta: "Explore work",
-      externalLinksLabel: "Professional links",
+      eyebrow: "INGÉNIEUR STATISTICIEN ÉCONOMISTE",
+      title: "Economic Data Scientist & Analytics Builder",
+      body:
+        "I transform economic questions, complex data, and institutional needs into models, analytical systems, and decision-ready digital products.",
+      signature: "From evidence to decisions. From models to digital systems.",
+      primaryCta: "View selected work",
+      secondaryCta: "Experience",
+      actionsLabel: "Homepage actions",
     },
-    preview: {
-      ariaLabel: "Abstract analytical preview with no real data",
-      label: "Analytical frame",
-      caption: "Abstract signal only",
-      layers: ["Signal", "Evidence", "Decision"],
+    method: {
+      title: "THE METHOD, LIVE",
+      note:
+        "Illustrative analytical workflow · synthetic · no empirical result is presented.",
+      sliderLabel: "Move through the analytical workflow",
+      progressLabel: "Progress",
+      currentStageLabel: "Current stage",
+      readinessLabel: "Readiness",
+      stages: [
+        { label: "Raw data", readiness: "Inputs are gathered and limits are visible." },
+        { label: "Structure", readiness: "Relationships and definitions become explicit." },
+        { label: "Model", readiness: "A modelling frame can be tested and documented." },
+        { label: "Insight", readiness: "The signal can be interpreted with care." },
+        { label: "Decision", readiness: "The result can support a decision scenario." },
+      ],
     },
-    experience: {
-      eyebrow: "EXPERIENCE",
-      title: "Selected experience",
+    practice: {
+      eyebrow: "PRACTICE AT A GLANCE",
+      items: [
+        { label: "Economic & statistical analysis", value: "Official statistics, econometrics & indicators" },
+        { label: "Public & institutional data systems", value: "Surveys, sampling & data collection at scale" },
+        { label: "Data science & econometrics", value: "R / Python modelling & reproducible pipelines" },
+        { label: "Digital analytical products", value: "Shiny, full-stack builds & decision tools" },
+      ],
+    },
+    selectedWork: {
+      eyebrow: "SELECTED WORK",
+      title: "Evidence, systems & products",
       intro:
-        "A selection of roles and assignments across official statistics, economic analysis, data quality, and applied research.",
-      listLabel: "Selected experience",
+        "Draft case-study entries frame the portfolio around evidence, analytical systems and digital products.",
+      viewAll: "View all work",
+      cardCta: "Open case",
+      roleLabel: "Role",
+      items: selectedWorkItems.en,
     },
-    brand: {
-      eyebrow: "CURRENT ROLE",
-      title: "EM² Data & AI Lab",
-      label: "Co-founder and Head of Data",
-      text: "EM² Data & AI Lab is the current identity of the initiative originally developed as CaSEG.",
+    capabilities: {
+      eyebrow: "CAPABILITIES",
+      title: "Organised around transformations, not tool lists",
+      intro:
+        "What I do is move problems along a chain: from open questions to systems people can rely on.",
+      groups: [
+        {
+          transform: "Questions → evidence",
+          title: "Economic & Statistical Analysis",
+          items: ["econometrics and causal inference", "official statistics and indicators", "survey methodology and sampling", "time series and seasonal adjustment"],
+        },
+        {
+          transform: "Raw data → reliable systems",
+          title: "Data Science & Econometrics",
+          items: ["R and Python analysis pipelines", "multivariate analysis", "probabilistic and predictive models", "reproducible documented workflows"],
+        },
+        {
+          transform: "Models → decision tools",
+          title: "Decision Systems & Data Products",
+          items: ["Shiny and interactive dashboards", "full-stack builds", "budget and scenario simulation", "deployment, SEO and accessibility"],
+        },
+        {
+          transform: "Knowledge → transferable methods",
+          title: "Research & Knowledge Transfer",
+          items: ["reproducible publishing", "teaching and technical notes", "method documentation", "bilingual communication"],
+        },
+      ],
     },
-    links: {
-      eyebrow: "PROFESSIONAL LINKS",
-      title: "Connect",
-      intro: "Explore my technical work, professional background, or get in touch.",
-      externalNote: "opens in a new tab",
-      contactLabel: "Contact",
+    researchWriting: {
+      eyebrow: "RESEARCH & WRITING",
+      title: "Reproducible, decision-oriented work",
+      intro:
+        "Research and writing stay separate so analytical depth and public explanation each have room to breathe.",
+      cards: [
+        { kind: "Research", title: "Reproducible analytical work", body: "A space for research notes, methods, and decision-oriented analysis.", cta: "Go to research", routeKey: "research" },
+        { kind: "Writing", title: "Technical notes and essays", body: "A space for accessible explanations, implementation notes, and analytical writing.", cta: "Go to writing", routeKey: "writing" },
+      ],
+    },
+    about: {
+      eyebrow: "ABOUT",
+      statement:
+        "I build the whole chain: from survey design and estimation to the applications and reports that put results in decision-makers’ hands.",
+      cta: "Read the full story",
+    },
+    contact: {
+      eyebrow: "CONTACT",
+      title: "Let’s talk about your data problem",
+      body:
+        "Open to employment, consulting, research collaboration, technical builds, and speaking or teaching.",
+      cta: "Start a conversation",
+      tags: ["Employment", "Consulting", "Research collaboration", "Technical collaboration", "Speaking / teaching"],
+    },
+    footer: {
+      signature: "From evidence to decisions. From models to digital systems.",
     },
   },
   fr: {
     hero: {
-      actionsLabel: "Actions du portfolio",
-      primaryCta: "Voir les expériences sélectionnées",
-      secondaryCta: "Découvrir les projets",
-      externalLinksLabel: "Liens professionnels",
+      eyebrow: "INGÉNIEUR STATISTICIEN ÉCONOMISTE",
+      title: "Data Scientist économique et concepteur de systèmes analytiques",
+      body:
+        "Je transforme les questions économiques, les données complexes et les besoins institutionnels en modèles, systèmes analytiques et produits numériques d’aide à la décision.",
+      signature: "Des preuves aux décisions. Des modèles aux systèmes numériques.",
+      primaryCta: "Voir les travaux sélectionnés",
+      secondaryCta: "Parcours",
+      actionsLabel: "Actions de la page d’accueil",
     },
-    preview: {
-      ariaLabel: "Aperçu analytique abstrait sans données réelles",
-      label: "Cadre analytique",
-      caption: "Signal abstrait uniquement",
-      layers: ["Signal", "Preuve", "Décision"],
+    method: {
+      title: "LA MÉTHODE, EN DIRECT",
+      note:
+        "Flux analytique illustratif · données synthétiques · aucun résultat empirique n’est présenté.",
+      sliderLabel: "Parcourir le flux analytique",
+      progressLabel: "Progression",
+      currentStageLabel: "Étape actuelle",
+      readinessLabel: "Maturité",
+      stages: [
+        { label: "Données brutes", readiness: "Les intrants sont rassemblés et leurs limites sont visibles." },
+        { label: "Structure", readiness: "Les relations et définitions deviennent explicites." },
+        { label: "Modèle", readiness: "Un cadre de modélisation peut être testé et documenté." },
+        { label: "Enseignement", readiness: "Le signal peut être interprété avec prudence." },
+        { label: "Décision", readiness: "Le résultat peut soutenir un scénario de décision." },
+      ],
     },
-    experience: {
-      eyebrow: "EXPÉRIENCE",
-      title: "Expériences sélectionnées",
+    practice: {
+      eyebrow: "PRATIQUE EN UN COUP D’ŒIL",
+      items: [
+        { label: "Analyse économique et statistique", value: "Statistique officielle, économétrie et indicateurs" },
+        { label: "Systèmes de données publics et institutionnels", value: "Enquêtes, échantillonnage et collecte à grande échelle" },
+        { label: "Data science et économétrie", value: "Modélisation R / Python et pipelines reproductibles" },
+        { label: "Produits analytiques numériques", value: "Shiny, applications full-stack et outils décisionnels" },
+      ],
+    },
+    selectedWork: {
+      eyebrow: "TRAVAUX SÉLECTIONNÉS",
+      title: "Preuves, systèmes et produits",
       intro:
-        "Une sélection de fonctions et de missions en statistique publique, analyse économique, qualité des données et recherche appliquée.",
-      listLabel: "Expériences sélectionnées",
+        "Des entrées de cas structurent le portfolio autour des preuves, des systèmes analytiques et des produits numériques.",
+      viewAll: "Voir tous les travaux",
+      cardCta: "Voir le cas",
+      roleLabel: "Rôle",
+      items: selectedWorkItems.fr,
     },
-    brand: {
-      eyebrow: "FONCTION ACTUELLE",
-      title: "EM² Data & AI Lab",
-      label: "Cofondateur et responsable Data",
-      text: "EM² Data & AI Lab est l’identité actuelle de l’initiative initialement développée sous le nom de CaSEG.",
+    capabilities: {
+      eyebrow: "CAPACITÉS",
+      title: "Organisées autour des transformations, pas des listes d’outils",
+      intro:
+        "Mon travail consiste à faire progresser les problèmes le long d’une chaîne, des questions ouvertes vers des systèmes fiables.",
+      groups: [
+        {
+          transform: "Questions → preuves",
+          title: "Analyse économique et statistique",
+          items: ["econometrics and causal inference", "official statistics and indicators", "survey methodology and sampling", "time series and seasonal adjustment"],
+        },
+        {
+          transform: "Données brutes → systèmes fiables",
+          title: "Data science et économétrie",
+          items: ["R and Python analysis pipelines", "multivariate analysis", "probabilistic and predictive models", "reproducible documented workflows"],
+        },
+        {
+          transform: "Modèles → outils décisionnels",
+          title: "Systèmes décisionnels et produits data",
+          items: ["Shiny and interactive dashboards", "full-stack builds", "budget and scenario simulation", "deployment, SEO and accessibility"],
+        },
+        {
+          transform: "Savoir → méthodes transférables",
+          title: "Recherche et transfert de connaissances",
+          items: ["reproducible publishing", "teaching and technical notes", "method documentation", "bilingual communication"],
+        },
+      ],
     },
-    links: {
-      eyebrow: "LIENS PROFESSIONNELS",
-      title: "Échangeons",
-      intro: "Découvrez mes travaux techniques, mon parcours professionnel ou contactez-moi.",
-      externalNote: "s’ouvre dans un nouvel onglet",
-      contactLabel: "Contact",
+    researchWriting: {
+      eyebrow: "RECHERCHE ET PUBLICATIONS",
+      title: "Des travaux reproductibles orientés vers la décision",
+      intro:
+        "La recherche et les publications restent séparées pour laisser respirer la profondeur analytique et l’explication publique.",
+      cards: [
+        { kind: "Recherche", title: "Travaux analytiques reproductibles", body: "Un espace pour les notes de recherche, les méthodes et l’analyse orientée vers la décision.", cta: "Aller à la recherche", routeKey: "research" },
+        { kind: "Publications", title: "Notes techniques et essais", body: "Un espace pour les explications accessibles, les notes d’implémentation et l’écriture analytique.", cta: "Aller aux publications", routeKey: "writing" },
+      ],
+    },
+    about: {
+      eyebrow: "À PROPOS",
+      statement:
+        "Je construis l’ensemble de la chaîne, de la conception d’enquête et de l’estimation aux applications et rapports qui mettent les résultats entre les mains des décideurs.",
+      cta: "Découvrir le parcours",
+    },
+    contact: {
+      eyebrow: "CONTACT",
+      title: "Échangeons autour de votre problématique de données",
+      body:
+        "Ouvert aux opportunités d’emploi, au conseil, aux collaborations de recherche, aux constructions techniques et aux interventions ou formations.",
+      cta: "Prendre contact",
+      tags: ["Emploi", "Conseil", "Collaboration de recherche", "Collaboration technique", "Interventions et enseignement"],
+    },
+    footer: {
+      signature: "Des preuves aux décisions. Des modèles aux systèmes numériques.",
     },
   },
 } satisfies Record<Locale, HomeContent>;
 
 export const routePages = {
   en: [
-    {
-      slug: "work",
-      title: "Work",
-      description: "Selected work section.",
-      status: "Selected work will appear here as the portfolio expands.",
-      backHome: "Back to home",
-    },
-    {
-      slug: "research",
-      title: "Research",
-      description: "Research section.",
-      status: "Research notes and reproducible work will appear here later.",
-      backHome: "Back to home",
-    },
-    {
-      slug: "writing",
-      title: "Writing",
-      description: "Writing section.",
-      status: "Writing and publications will appear here later.",
-      backHome: "Back to home",
-    },
-    {
-      slug: "about",
-      title: "About",
-      description: "About section.",
-      status: "A fuller profile will appear here later.",
-      backHome: "Back to home",
-    },
-    {
-      slug: "contact",
-      title: "Contact",
-      description: "Contact section.",
-      status: "For now, use the professional links on the homepage.",
-      backHome: "Back to home",
-    },
+    { routeKey: "work", path: "work", title: "Work", description: "Selected analytical work and case-study previews.", eyebrow: "SELECTED WORK", status: "Selected work entries will expand into fuller case studies over time.", backHome: "Back to home" },
+    { routeKey: "research", path: "research", title: "Research", description: "Research and reproducible analytical work.", eyebrow: "RESEARCH", status: "Research notes and reproducible work will appear here as the knowledge layer grows.", backHome: "Back to home" },
+    { routeKey: "writing", path: "writing", title: "Writing", description: "Writing, technical notes and analytical essays.", eyebrow: "WRITING", status: "Technical notes, implementation essays, and public analytical writing will appear here.", backHome: "Back to home" },
+    { routeKey: "about", path: "about", title: "About", description: "Professional profile and working approach.", eyebrow: "ABOUT", status: "A fuller story will connect the portfolio’s analytical, institutional, and product-building threads.", backHome: "Back to home" },
+    { routeKey: "experience", path: "experience", title: "Experience", description: "Experience across official statistics, economic analysis and data products.", eyebrow: "EXPERIENCE", status: "Selected roles and assignments are presented as a dedicated professional timeline.", backHome: "Back to home" },
+    { routeKey: "contact", path: "contact", title: "Contact", description: "Professional contact options.", eyebrow: "CONTACT", status: "Use the professional links or start a conversation about a data problem.", backHome: "Back to home" },
   ],
   fr: [
-    {
-      slug: "work",
-      title: "Projets",
-      description: "Section projets.",
-      status: "Une sélection de projets apparaîtra ici à mesure que le portfolio s’enrichit.",
-      backHome: "Retour à l’accueil",
-    },
-    {
-      slug: "research",
-      title: "Recherche",
-      description: "Section recherche.",
-      status: "Les notes de recherche et travaux reproductibles apparaîtront ici ultérieurement.",
-      backHome: "Retour à l’accueil",
-    },
-    {
-      slug: "writing",
-      title: "Publications",
-      description: "Section publications.",
-      status: "Les textes et publications apparaîtront ici ultérieurement.",
-      backHome: "Retour à l’accueil",
-    },
-    {
-      slug: "about",
-      title: "À propos",
-      description: "Section à propos.",
-      status: "Un profil plus complet apparaîtra ici ultérieurement.",
-      backHome: "Retour à l’accueil",
-    },
-    {
-      slug: "contact",
-      title: "Contact",
-      description: "Section contact.",
-      status: "Pour le moment, utilisez les liens professionnels de la page d’accueil.",
-      backHome: "Retour à l’accueil",
-    },
+    { routeKey: "work", path: "projets", title: "Projets", description: "Travaux analytiques sélectionnés et aperçus de cas.", eyebrow: "TRAVAUX SÉLECTIONNÉS", status: "Les travaux sélectionnés s’enrichiront progressivement en études de cas plus complètes.", backHome: "Retour à l’accueil" },
+    { routeKey: "research", path: "recherche", title: "Recherche", description: "Recherche et travaux analytiques reproductibles.", eyebrow: "RECHERCHE", status: "Les notes de recherche et travaux reproductibles apparaîtront ici à mesure que la couche connaissance se développe.", backHome: "Retour à l’accueil" },
+    { routeKey: "writing", path: "publications", title: "Publications", description: "Publications, notes techniques et essais analytiques.", eyebrow: "PUBLICATIONS", status: "Les notes techniques, essais d’implémentation et textes analytiques publics apparaîtront ici.", backHome: "Retour à l’accueil" },
+    { routeKey: "about", path: "a-propos", title: "À propos", description: "Profil professionnel et manière de travailler.", eyebrow: "À PROPOS", status: "Un récit plus complet reliera les dimensions analytiques, institutionnelles et produit du portfolio.", backHome: "Retour à l’accueil" },
+    { routeKey: "experience", path: "parcours", title: "Parcours", description: "Parcours en statistique officielle, analyse économique et produits data.", eyebrow: "PARCOURS", status: "Les fonctions et missions sélectionnées sont présentées comme une chronologie professionnelle dédiée.", backHome: "Retour à l’accueil" },
+    { routeKey: "contact", path: "contact", title: "Contact", description: "Options de contact professionnel.", eyebrow: "CONTACT", status: "Utilisez les liens professionnels ou lancez une conversation autour d’une problématique de données.", backHome: "Retour à l’accueil" },
   ],
 } satisfies Record<Locale, RoutePageContent[]>;
 
-export function getRoutePage(locale: Locale, slug: string) {
-  return routePages[locale].find((page) => page.slug === slug);
+export function getRoutePage(locale: Locale, path: string) {
+  return routePages[locale].find((page) => page.path === path);
+}
+
+export function getRoutePageByKey(locale: Locale, routeKey: RouteKey) {
+  return routePages[locale].find((page) => page.routeKey === routeKey);
+}
+
+export function getSelectedWorkItem(locale: Locale, slug: string) {
+  return homeContent[locale].selectedWork.items.find((item) => item.slug === slug);
 }

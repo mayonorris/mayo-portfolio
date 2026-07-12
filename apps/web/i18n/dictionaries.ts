@@ -16,7 +16,9 @@ export type Dictionary = {
     brand: string;
     status: string;
     navLabel: string;
+    cta: string;
     footer: {
+      signatureLabel: string;
       linksLabel: string;
       externalNote: string;
     };
@@ -44,27 +46,29 @@ export type Dictionary = {
 export const dictionaries = {
   en: {
     metadata: {
-      title: `${publicProfile.name} | Portfolio`,
+      title: `${publicProfile.shortName} | Portfolio`,
       description:
-        "Public bilingual portfolio for economic data science and analytical work.",
+        "Economic data science, analytical systems, selected work, research, writing and contact.",
     },
     shell: {
       skipLink: "Skip to main content",
-      brand: publicProfile.name,
-      status: publicProfile.positioning,
+      brand: publicProfile.shortName,
+      status: publicProfile.compactDescriptor,
       navLabel: "Primary navigation",
+      cta: "Experience",
       footer: {
-        linksLabel: "Professional links",
+        signatureLabel: "Signature",
+        linksLabel: "Footer navigation",
         externalNote: "opens in a new tab",
       },
     },
     navigation: {
       items: [
-        { label: "Home", path: "/" },
         { label: "Work", path: "/work" },
         { label: "Research", path: "/research" },
         { label: "Writing", path: "/writing" },
         { label: "About", path: "/about" },
+        { label: "Experience", path: "/experience" },
         { label: "Contact", path: "/contact" },
       ],
     },
@@ -92,27 +96,29 @@ export const dictionaries = {
   },
   fr: {
     metadata: {
-      title: `${publicProfile.name} | Portfolio`,
+      title: `${publicProfile.shortName} | Portfolio`,
       description:
-        "Portfolio public bilingue pour la data science économique et les travaux analytiques.",
+        "Data science économique, systèmes analytiques, travaux sélectionnés, recherche, publications et contact.",
     },
     shell: {
       skipLink: "Aller au contenu principal",
-      brand: publicProfile.name,
-      status: publicProfile.positioning,
+      brand: publicProfile.shortName,
+      status: publicProfile.compactDescriptor,
       navLabel: "Navigation principale",
+      cta: "Parcours",
       footer: {
-        linksLabel: "Liens professionnels",
+        signatureLabel: "Signature",
+        linksLabel: "Navigation de pied de page",
         externalNote: "s’ouvre dans un nouvel onglet",
       },
     },
     navigation: {
       items: [
-        { label: "Accueil", path: "/" },
         { label: "Projets", path: "/work" },
         { label: "Recherche", path: "/research" },
         { label: "Publications", path: "/writing" },
         { label: "À propos", path: "/about" },
+        { label: "Parcours", path: "/experience" },
         { label: "Contact", path: "/contact" },
       ],
     },

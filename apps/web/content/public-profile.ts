@@ -19,7 +19,9 @@ export type PublicExperience = {
 
 export const publicProfile = {
   name: "Mayo Takémsi Norris KADANGA",
+  shortName: "Mayo Kadanga",
   qualification: "Ingénieur Statisticien Économiste",
+  compactDescriptor: "ISE · DATA SCIENTIST",
   positioning: "Economic Data Scientist & Analytics Builder",
   ventureRole: "Co-founder and Head of Data, EM² Data & AI Lab",
   links: [

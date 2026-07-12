@@ -1,9 +1,15 @@
-import type { HomeContent } from "@/content/home";
 import { Eyebrow } from "./eyebrow";
 import { Surface } from "./surface";
 
+type AnalyticalPreviewLabels = {
+  ariaLabel: string;
+  label: string;
+  caption: string;
+  layers: string[];
+};
+
 type AnalyticalPreviewProps = {
-  labels: HomeContent["preview"];
+  labels: AnalyticalPreviewLabels;
 };
 
 export function AnalyticalPreview({ labels }: AnalyticalPreviewProps) {
