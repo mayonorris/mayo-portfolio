@@ -111,11 +111,11 @@ const selectedWorkItems = {
   en: [
     {
       slug: "em2-data-ai-lab-website",
-      category: "Digital product",
+      category: "Analytical system",
       title: "EM² Data & AI Lab website",
       scope:
-        "A public web presence and analytical communication system for a data and AI initiative.",
-      role: "Product and data direction",
+        "A portfolio case study for presenting an editorial web interface and product architecture for a data and AI initiative.",
+      role: "Portfolio case study",
       visual: "systems",
     },
     {
@@ -123,37 +123,37 @@ const selectedWorkItems = {
       category: "Applied research",
       title: "Impact of decentralization in Togo",
       scope:
-        "A research-oriented case frame for studying governance, development, and public decision questions.",
-      role: "Economic analysis",
+        "A cautious applied-study frame for decentralization, territorial structure, and public decision questions in Togo.",
+      role: "Applied research",
       visual: "research",
     },
     {
       slug: "economic-indicators-seasonal-adjustment",
-      category: "Official statistics",
+      category: "Statistical workflow",
       title: "Economic indicators & seasonal adjustment",
       scope:
-        "A workflow frame for turning economic activity series into clearer monitoring signals.",
-      role: "Statistical analysis",
+        "A synthetic workflow frame for comparing raw economic signals with adjusted monitoring views.",
+      role: "Statistical workflow",
       visual: "signal",
     },
     {
       slug: "financial-inclusion-fintech-analysis",
-      category: "Economic analysis",
+      category: "Econometric analysis",
       title: "Financial inclusion & FinTech analysis",
       scope:
-        "A case frame for studying access, adoption, and digital finance questions.",
-      role: "Data and econometric analysis",
+        "An analytical case frame for financial inclusion and digital finance segmentation questions.",
+      role: "Econometric analysis",
       visual: "finance",
     },
   ],
   fr: [
     {
       slug: "em2-data-ai-lab-website",
-      category: "Produit numérique",
+      category: "Système analytique",
       title: "EM² Data & AI Lab website",
       scope:
-        "Une présence web publique et un système de communication analytique pour une initiative data et IA.",
-      role: "Direction produit et data",
+        "Une étude de cas portfolio pour présenter une interface web éditoriale et une architecture produit pour une initiative data et IA.",
+      role: "Étude de cas portfolio",
       visual: "systems",
     },
     {
@@ -161,26 +161,26 @@ const selectedWorkItems = {
       category: "Recherche appliquée",
       title: "Impact of decentralization in Togo",
       scope:
-        "Un cadre de cas orienté recherche pour étudier des questions de gouvernance, de développement et de décision publique.",
-      role: "Analyse économique",
+        "Un cadre d’étude appliquée prudent sur la décentralisation, la structure territoriale et les questions de décision publique au Togo.",
+      role: "Recherche appliquée",
       visual: "research",
     },
     {
       slug: "economic-indicators-seasonal-adjustment",
-      category: "Statistique officielle",
+      category: "Flux statistique",
       title: "Economic indicators & seasonal adjustment",
       scope:
-        "Un cadre de travail pour transformer des séries d’activité économique en signaux de suivi plus lisibles.",
-      role: "Analyse statistique",
+        "Un cadre de flux synthétique pour comparer des signaux économiques bruts avec des vues de suivi ajustées.",
+      role: "Flux statistique",
       visual: "signal",
     },
     {
       slug: "financial-inclusion-fintech-analysis",
-      category: "Analyse économique",
+      category: "Analyse économétrique",
       title: "Financial inclusion & FinTech analysis",
       scope:
-        "Un cadre de cas pour étudier les questions d’accès, d’adoption et de finance numérique.",
-      role: "Analyse data et économétrique",
+        "Un cadre analytique pour les questions d’inclusion financière et de segmentation de la finance numérique.",
+      role: "Analyse économétrique",
       visual: "finance",
     },
   ],
@@ -227,7 +227,7 @@ export const homeContent = {
       eyebrow: "SELECTED WORK",
       title: "Evidence, systems & products",
       intro:
-        "Draft case-study entries frame the portfolio around evidence, analytical systems and digital products.",
+        "A selection of analytical systems, applied studies and digital products.",
       viewAll: "View all work",
       cardCta: "Open case",
       roleLabel: "Role",
@@ -329,7 +329,7 @@ export const homeContent = {
       eyebrow: "TRAVAUX SÉLECTIONNÉS",
       title: "Preuves, systèmes et produits",
       intro:
-        "Des entrées de cas structurent le portfolio autour des preuves, des systèmes analytiques et des produits numériques.",
+        "Une sélection de systèmes analytiques, d’études appliquées et de produits numériques.",
       viewAll: "Voir tous les travaux",
       cardCta: "Voir le cas",
       roleLabel: "Rôle",

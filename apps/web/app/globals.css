@@ -1810,3 +1810,217 @@ main {
     padding: var(--space-4);
   }
 }
+/* Final homepage alignment pass */
+.site-header__identity {
+  flex-wrap: nowrap;
+  gap: var(--space-3);
+}
+
+.site-header__status {
+  display: none;
+  color: var(--color-accent);
+  font: 700 0.72rem / var(--leading-compact) var(--font-mono);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+@media (min-width: 1180px) {
+  .site-header__status {
+    display: inline-block;
+  }
+}
+
+.method-demo__stage-band {
+  fill: var(--color-accent-soft);
+  opacity: 0.78;
+  transition:
+    x var(--transition-normal),
+    opacity var(--transition-fast);
+}
+
+.method-demo__active-line {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-dasharray: 5 7;
+  stroke-linecap: round;
+  stroke-width: 2;
+  transition: d var(--transition-normal);
+}
+
+.method-demo__slider:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 0.45rem;
+}
+
+.work-visual {
+  display: grid;
+  min-height: 13.5rem;
+  place-items: stretch;
+}
+
+.work-visual::before,
+.work-visual::after {
+  content: none;
+}
+
+.work-visual__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 13.5rem;
+}
+
+.work-visual__svg * {
+  vector-effect: non-scaling-stroke;
+}
+
+.work-visual__svg .work-visual__axis,
+.work-visual__svg .work-visual__line,
+.work-visual__connector,
+.work-visual__raw,
+.work-visual__adjusted,
+.work-visual__divider {
+  position: static;
+  display: inline;
+  width: auto;
+  height: auto;
+  background: none;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.work-visual__frame,
+.work-visual__panel,
+.work-visual__sample {
+  fill: var(--color-paper-soft);
+  stroke: var(--color-line-strong);
+  stroke-width: 1.25;
+}
+
+.work-visual__panel--accent,
+.work-visual__sample--accent {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent);
+}
+
+.work-visual__svg .work-visual__line,
+.work-visual__connector,
+.work-visual__axis,
+.work-visual__divider {
+  stroke: var(--color-line-strong);
+  stroke-width: 2;
+}
+
+.work-visual__raw {
+  stroke: var(--color-ink-soft);
+  stroke-width: 2.5;
+  opacity: 0.74;
+}
+
+.work-visual__adjusted {
+  stroke: var(--color-accent);
+  stroke-width: 3.5;
+}
+
+.work-visual__cluster {
+  fill: color-mix(in oklch, var(--color-ink-soft) 12%, transparent);
+  stroke: var(--color-ink-soft);
+  stroke-dasharray: 5 6;
+  stroke-width: 1.5;
+}
+
+.work-visual__cluster--accent {
+  fill: color-mix(in oklch, var(--color-accent) 14%, transparent);
+  stroke: var(--color-accent);
+}
+
+.work-visual__scatter circle,
+.work-visual__dot {
+  position: static;
+  display: inline;
+  width: auto;
+  height: auto;
+  fill: var(--color-ink-soft);
+  stroke: var(--color-paper);
+  stroke-width: 2;
+}
+
+.work-visual__dot--accent,
+.work-visual__scatter circle:nth-child(2n) {
+  fill: var(--color-accent);
+}
+
+.work-visual__dot--ink {
+  fill: var(--color-ink);
+}
+
+.work-visual--systems .work-visual__svg,
+.work-visual--research .work-visual__svg,
+.work-visual--signal .work-visual__svg,
+.work-visual--finance .work-visual__svg {
+  background:
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px),
+    linear-gradient(180deg, var(--color-line) 1px, transparent 1px),
+    var(--color-surface);
+  background-size: 2.5rem 2.5rem, 2.5rem 2.5rem, auto;
+}
+
+.about-contact-section {
+  background:
+    linear-gradient(180deg, var(--color-paper-soft), var(--color-paper));
+  color: var(--color-ink);
+}
+
+.about-panel,
+.contact-panel {
+  border-top: var(--border-strong);
+}
+
+.about-panel h2,
+.contact-panel h2 {
+  color: var(--color-ink);
+}
+
+.contact-panel p {
+  color: var(--color-ink-muted);
+}
+
+.opportunity-tags li {
+  border: var(--border-thin);
+  background: var(--color-paper);
+  color: var(--color-ink-muted);
+}
+
+.about-contact-section .link-button--secondary {
+  border-color: var(--color-line-strong);
+  background: transparent;
+  color: var(--color-ink);
+}
+
+.about-contact-section .link-button--primary {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+[data-theme="dark"] .about-contact-section {
+  background:
+    linear-gradient(180deg, var(--color-paper-soft), var(--color-surface));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .about-contact-section {
+    background:
+      linear-gradient(180deg, var(--color-paper-soft), var(--color-surface));
+  }
+}
+
+.case-page .work-visual__svg {
+  min-height: 24rem;
+}
+
+@media (max-width: 760px) {
+  .work-visual__svg {
+    min-height: 12rem;
+  }
+}
