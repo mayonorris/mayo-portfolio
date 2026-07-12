@@ -10,6 +10,22 @@ type LocaleLayoutProps = Readonly<{
   params: Promise<{ locale: string }>;
 }>;
 
+const themeInitScript = `
+(function () {
+  try {
+    var storageKey = "mayo-portfolio-theme";
+    var stored = window.localStorage.getItem(storageKey);
+    var theme = stored === "light" || stored === "dark"
+      ? stored
+      : window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+  } catch (error) {}
+})();
+`;
+
 function parseLocale(value: string): Locale {
   if (!isLocale(value)) {
     notFound();
@@ -52,7 +68,10 @@ export default async function LocaleLayout({
   const dictionary = getDictionary(locale);
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
         <AppShell dictionary={dictionary} locale={locale}>
           {children}

@@ -1,6 +1,13 @@
 import { notFound } from "next/navigation";
+import { AnalyticalPreview } from "@/components/analytical-preview";
+import { Container } from "@/components/container";
+import { Divider } from "@/components/divider";
+import { Eyebrow } from "@/components/eyebrow";
+import { LinkButton } from "@/components/link-button";
+import { Section } from "@/components/section";
 import { getDictionary } from "@/i18n/dictionaries";
 import { isLocale, type Locale } from "@/i18n/locales";
+import { getLocalizedPath } from "@/lib/routes";
 
 type LocaleHomePageProps = {
   params: Promise<{ locale: string }>;
@@ -18,37 +25,38 @@ export default async function LocaleHomePage({ params }: LocaleHomePageProps) {
   const { locale: localeParam } = await params;
   const locale = parseLocale(localeParam);
   const dictionary = getDictionary(locale);
+  const [homeItem, workItem, researchItem] = dictionary.navigation.items;
 
   return (
-    <section className="px-6 py-16" aria-labelledby="routing-title">
-      <div className="mx-auto flex max-w-5xl flex-col gap-8">
-        <div className="max-w-3xl">
-          <p className="text-sm font-medium uppercase tracking-widest text-slate-500">
-            {dictionary.home.eyebrow}
-          </p>
-          <h1
-            className="mt-4 text-4xl font-semibold tracking-normal sm:text-5xl"
-            id="routing-title"
-          >
+    <Section className="hero-section" labelledBy="hero-title">
+      <Container className="hero-grid">
+        <div className="hero-copy">
+          <Eyebrow>{dictionary.home.eyebrow}</Eyebrow>
+          <h1 className="hero-title" id="hero-title">
             {dictionary.home.title}
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-slate-700">
-            {dictionary.home.intro}
-          </p>
+          <p className="hero-lead">{dictionary.home.body}</p>
+          <Divider />
+          <div className="hero-actions" aria-label={dictionary.home.actionsLabel}>
+            <LinkButton href={getLocalizedPath(locale, homeItem.path)}>
+              {homeItem.label}
+            </LinkButton>
+            <LinkButton
+              href={getLocalizedPath(locale, workItem.path)}
+              variant="secondary"
+            >
+              {workItem.label}
+            </LinkButton>
+            <LinkButton
+              href={getLocalizedPath(locale, researchItem.path)}
+              variant="secondary"
+            >
+              {researchItem.label}
+            </LinkButton>
+          </div>
         </div>
-        <section aria-labelledby="routing-checks">
-          <h2 className="text-base font-semibold" id="routing-checks">
-            {dictionary.home.checksLabel}
-          </h2>
-          <ul className="mt-4 grid gap-3 text-sm text-slate-700 sm:grid-cols-3">
-            {dictionary.home.checks.map((check) => (
-              <li className="rounded-md border border-slate-200 p-4" key={check}>
-                {check}
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
-    </section>
+        <AnalyticalPreview labels={dictionary.home.preview} />
+      </Container>
+    </Section>
   );
 }

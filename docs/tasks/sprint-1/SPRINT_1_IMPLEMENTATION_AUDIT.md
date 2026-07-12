@@ -1,14 +1,14 @@
 # Sprint 1 Implementation Audit
 
-Date: 2026-07-11
+Date: 2026-07-12
 
 Scope: repository state compared with `docs/architecture/v1.0/04_SPRINT_1_BACKLOG.md`.
 
 ## Summary
 
 - Completed before development start: repository creation, legacy archive, documentation integration, public-safety notes, `.gitignore`, and `.gitattributes`.
-- Completed during Sprint 1 foundation work: Node and pnpm runtime pinning, root package metadata, initial pnpm workspace manifest, and the minimal Next.js web application.
-- Current global Sprint 1 status: partial. The web foundation and locale routing exist and validate, but Quarto projects, design tokens, content schemas, rewrites, full formatting policy, and CI do not exist yet.
+- Completed during Sprint 1 foundation work: Node and pnpm runtime pinning, root package metadata, initial pnpm workspace manifest, minimal Next.js web application, locale routing, and the first Editorial Intelligence visual foundation.
+- Current global Sprint 1 status: partial. The web foundation now has bilingual routing, a shared editorial shell, CSS design tokens, light/dark themes, navigation, footer, and a provisional analytical hero. Quarto projects, the official shared design-token package, content schemas, rewrites, full formatting policy, and CI do not exist yet.
 
 ## Task Audit
 
@@ -19,10 +19,10 @@ Scope: repository state compared with `docs/architecture/v1.0/04_SPRINT_1_BACKLO
 | S1-03 Create pnpm workspace | partial | `pnpm-workspace.yaml` declares `apps/*` and `packages/*`; root scripts target the web workspace; pnpm discovers the root and `apps/web`; no nested Git repository found. | Shared package workspaces such as `packages/design-tokens` and `packages/content-schema` are not initialized yet. | S1-02. | Create package workspaces when their Sprint tasks start. |
 | S1-04 Initialize Next.js manually | completed | `apps/web` exists with App Router, TypeScript strict mode, Tailwind CSS, ESLint, alias `@/*`, neutral technical page, and no nested Git repository. `pnpm --filter web lint`, `typecheck`, and `build` pass. | Final locale routing, navigation, portfolio sections, and production design are intentionally out of scope. | S1-02, S1-03. | Proceed to the next non-blocked Sprint 1 task. |
 | S1-05 Initialize Quarto projects | not_started | `apps/knowledge` does not exist. | EN and FR Quarto configs, sample indexes, sample articles, shared SCSS import. | Workspace foundation. | Initialize localized Quarto projects when selected. |
-| S1-06 Create token source | not_started | `packages/design-tokens` does not exist. | Semantic `tokens.json` with light and dark values. | Workspace package structure. | Add shared design token source after package workspace creation. |
+| S1-06 Create token source | partial | `apps/web/app/globals.css` contains centralized CSS variables for the current web visual foundation, aligned with the reference drafts. | Official `packages/design-tokens/src/tokens.json` source, package scaffolding, and cross-engine token ownership are still missing. | Workspace package structure. | Promote the CSS token baseline into the shared design-token package when S1-06 formally starts. |
 | S1-07 Generate CSS and SCSS | not_started | No token generator or generated outputs exist. | Deterministic generator, CSS output, SCSS output, stale-output check. | S1-06. | Implement after token source is added. |
-| S1-08 Add locale routing | completed | pps/web/app/[locale] renders /en and /fr; pps/web/proxy.ts redirects / to /en; unsupported locales return 404; document language and metadata are locale-aware; language switcher links equivalent locale routes. | Future nested route mapping will be needed as sections are added. | S1-04. | Continue with downstream bilingual interface work. |
-| S1-09 Add typed dictionaries | partial | Basic typed dictionaries exist for the S1-08 shell, metadata, route placeholder, and language switcher. | Full interface dictionary coverage and an explicit key-parity guard are not implemented yet. | S1-04, S1-08. | Formalize dictionary parity and shared interface labels. |
+| S1-08 Add locale routing | completed | `apps/web/app/[locale]` renders /en and /fr; `apps/web/proxy.ts` redirects / to /en; unsupported locales return 404; document language and metadata are locale-aware; language switcher links equivalent locale routes. | Future nested route mapping will be needed as sections are added. | S1-04. | Continue with downstream bilingual interface work. |
+| S1-09 Add typed dictionaries | partial | Typed dictionaries now cover metadata, shell labels, primary navigation, language switcher, theme toggle, and provisional hero copy. | Explicit key-parity guard and full future interface coverage are not implemented yet. | S1-04, S1-08. | Formalize dictionary parity and shared interface labels. |
 | S1-10 Add Zod schemas | not_started | `packages/content-schema` does not exist. | Project, experience, education, certification, link, status, confidentiality schemas. | Workspace package structure. | Add content schema package. |
 | S1-11 Add sample registry | blocked | No schema package exists. | One non-sensitive sample registry and validation entry point. | S1-10. | Wait for content schemas. |
 | S1-12 Deploy Quarto test origin | blocked | No Quarto project exists. | Rendered EN and FR static outputs and gated preview workflow. | S1-05. | Wait for Quarto initialization. |
@@ -32,28 +32,29 @@ Scope: repository state compared with `docs/architecture/v1.0/04_SPRINT_1_BACKLO
 
 ## Implementation Performed
 
-Latest selected task: S1-08 Add bilingual locale routing.
+Latest selected task: Sprint 1 Editorial Visual Foundation.
 
-Previous selected task: S1-04 Initialize Next.js manually.
+Previous selected tasks: S1-08 Add bilingual locale routing; S1-04 Initialize Next.js manually.
 
 Implementation details:
 
-- Created `apps/web` with `create-next-app` using pnpm, App Router, TypeScript, Tailwind CSS, ESLint, alias `@/*`, no `src` directory, no nested Git repository, and skipped installation until the root workspace install step.
-- Removed generated demo and boilerplate files that were not appropriate for the monorepo.
-- Added a neutral technical scaffold page without portfolio content, personal data, legacy content, vault content, or prototype content.
-- Added root scripts for web development, lint, typecheck, and build.
-- Updated the workspace pnpm build-script policy for `sharp` and `unrs-resolver` so installs remain explicit and non-interactive.
+- Created a centralized CSS token layer in `apps/web/app/globals.css` for colors, typography roles, type scale, spacing, radii, borders, shadows, container widths, transitions, and z-index essentials.
+- Configured the approved typography roles through CSS font stacks: Hanken Grotesk for interface and body, Source Serif 4 for editorial headings, and IBM Plex Mono for labels and metadata. No font binaries or network font loading were added.
+- Refactored the shared application shell with header, primary navigation, language switcher, accessible theme toggle, main landmark, skip link, and minimal footer.
+- Added base UI components: `Container`, `Section`, `Eyebrow`, `LinkButton`, `Surface`, `Divider`, `MainNavigation`, `ThemeToggle`, and `AnalyticalPreview`.
+- Replaced the routing scaffold page with the approved provisional bilingual hero copy and an abstract analytical preview that contains no real data, professional facts, portrait, CV, projects, legacy content, or vault content.
+- Preserved `/en`, `/fr`, root redirect behavior, typed dictionaries, and locale-aware metadata.
+- Placeholder navigation links point to future locale-prefixed routes and may render the framework 404 until those pages are implemented.
 
 ## Validation Results
 
-- `pnpm.cmd install`: passed after explicit pnpm build-script policy was set.
+- `pnpm.cmd install`: passed; workspace already up to date.
 - `pnpm.cmd --filter web lint`: passed.
 - `pnpm.cmd --filter web typecheck`: passed.
 - `pnpm.cmd --filter web build`: passed.
 - `git diff --check`: passed.
-- No nested Git repository was found under `apps`.
-- No `.env`, private key, or obvious secret file was found outside ignored build and dependency folders.
+- No new dependency, `.env` file, font binary, vault content, real professional content, legacy content, or prototype file change was introduced.
 
 ## Remaining Immediate Work
 
-Next recommended technical task: S1-09 Formalize typed interface dictionaries and key-parity checks, or S1-05 Initialize Quarto EN and FR projects if the knowledge layer should come next.
+Next recommended technical task: S1-06 Promote the current CSS token baseline into the official shared design-token package, or S1-09 formalize dictionary key parity if interface text governance should come first.

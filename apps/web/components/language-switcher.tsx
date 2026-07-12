@@ -17,8 +17,8 @@ export function LanguageSwitcher({
   const alternateLocale = getAlternateLocale(locale);
 
   return (
-    <nav aria-label={labels.ariaLabel}>
-      <ul className="flex items-center gap-2 text-sm" role="list">
+    <nav aria-label={labels.ariaLabel} className="language-switcher">
+      <ul className="language-switcher__list" role="list">
         {locales.map((targetLocale) => {
           const isCurrent = targetLocale === locale;
           const label = isCurrent ? labels.current : labels.switchTo[targetLocale];
@@ -28,12 +28,8 @@ export function LanguageSwitcher({
               <Link
                 aria-current={isCurrent ? "page" : undefined}
                 aria-label={label}
-                className={[
-                  "inline-flex min-h-10 items-center rounded-full border px-4 font-medium transition-colors",
-                  isCurrent
-                    ? "border-slate-950 bg-slate-950 text-white"
-                    : "border-slate-300 text-slate-700 hover:border-slate-950 hover:text-slate-950",
-                ].join(" ")}
+                className="language-switcher__link"
+                data-current={isCurrent ? "true" : "false"}
                 href={getLocalizedPath(targetLocale, equivalentPath)}
                 hrefLang={targetLocale}
                 lang={targetLocale}
