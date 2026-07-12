@@ -2024,3 +2024,16 @@ main {
     min-height: 12rem;
   }
 }
+.not-found-page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 520px) {
+  .not-found-page__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

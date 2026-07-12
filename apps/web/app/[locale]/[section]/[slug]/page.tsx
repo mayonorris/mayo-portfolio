@@ -54,9 +54,18 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
     notFound();
   }
 
+  const title = `${item.title} | ${publicProfile.shortName}`;
+
   return {
-    title: `${item.title} | ${publicProfile.shortName}`,
+    title,
     description: item.scope,
+    openGraph: {
+      title,
+      description: item.scope,
+      siteName: "Mayo Kadanga Portfolio",
+      type: "article",
+      locale,
+    },
     alternates: {
       canonical: getCaseStudyPath(locale, item.slug),
       languages: {

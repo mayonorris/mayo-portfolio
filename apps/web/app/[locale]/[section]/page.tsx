@@ -45,9 +45,18 @@ export async function generateMetadata({
   const locale = parseLocale(localeParam);
   const page = parseRoutePage(locale, section);
 
+  const title = `${page.title} | ${publicProfile.shortName}`;
+
   return {
-    title: `${page.title} | ${publicProfile.shortName}`,
+    title,
     description: page.description,
+    openGraph: {
+      title,
+      description: page.description,
+      siteName: "Mayo Kadanga Portfolio",
+      type: "website",
+      locale,
+    },
     alternates: {
       canonical: getLocalizedRoutePath(locale, page.routeKey),
       languages: {

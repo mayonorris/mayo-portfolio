@@ -62,7 +62,7 @@ export function AppShell({ children, dictionary, locale }: AppShellProps) {
               ))}
               {publicProfile.links.map((link) => (
                 <li key={link.id}>
-                  <a href={link.href} rel="noreferrer" target="_blank">
+                  <a href={link.href} rel="noopener noreferrer" target="_blank">
                     {link.label}
                     <span className="sr-only">
                       {` (${dictionary.shell.footer.externalNote})`}

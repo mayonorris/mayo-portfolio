@@ -10,7 +10,6 @@ type LocaleLayoutProps = Readonly<{
   params: Promise<{ locale: string }>;
 }>;
 
-
 function parseLocale(value: string): Locale {
   if (!isLocale(value)) {
     notFound();
@@ -33,6 +32,22 @@ export async function generateMetadata({
   return {
     title: dictionary.metadata.title,
     description: dictionary.metadata.description,
+    robots: {
+      index: false,
+      follow: false,
+      googleBot: {
+        index: false,
+        follow: false,
+      },
+    },
+    openGraph: {
+      title: dictionary.metadata.title,
+      description: dictionary.metadata.description,
+      siteName: "Mayo Kadanga Portfolio",
+      type: "website",
+      locale,
+      alternateLocale: locales.filter((item) => item !== locale),
+    },
     alternates: {
       canonical: `/${locale}`,
       languages: {
