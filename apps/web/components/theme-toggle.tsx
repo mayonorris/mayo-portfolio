@@ -74,6 +74,8 @@ export function ThemeToggle({ labels }: ThemeToggleProps) {
   );
   const nextTheme: Theme = theme === "dark" ? "light" : "dark";
   const currentLabel = theme === "dark" ? labels.dark : labels.light;
+  const buttonLabel = labels.label + ": " + currentLabel + ". " + labels.switchTo[nextTheme];
+  const icon = theme === "dark" ? "?" : "?";
 
   useEffect(() => {
     applyTheme(getStoredTheme() ?? getSystemTheme());
@@ -82,7 +84,7 @@ export function ThemeToggle({ labels }: ThemeToggleProps) {
 
   return (
     <button
-      aria-label={`${labels.label}: ${currentLabel}. ${labels.switchTo[nextTheme]}`}
+      aria-label={buttonLabel}
       aria-pressed={theme === "dark"}
       className="theme-toggle"
       onClick={() => {
@@ -90,10 +92,14 @@ export function ThemeToggle({ labels }: ThemeToggleProps) {
         applyTheme(nextTheme);
         notifyThemeSubscribers();
       }}
+      title={buttonLabel}
       type="button"
     >
       <span className="theme-toggle__indicator" aria-hidden="true" />
-      <span className="theme-toggle__label">{currentLabel}</span>
+      <span className="theme-toggle__icon" aria-hidden="true">
+        {icon}
+      </span>
+      <span className="sr-only">{currentLabel}</span>
     </button>
   );
 }

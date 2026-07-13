@@ -31,6 +31,7 @@ export type Dictionary = {
     current: string;
     switchTo: Record<Locale, string>;
     names: Record<Locale, string>;
+    shortNames: Record<Locale, string>;
   };
   themeToggle: {
     label: string;
@@ -83,6 +84,10 @@ export const dictionaries = {
         en: "English",
         fr: "Français",
       },
+      shortNames: {
+        en: "EN",
+        fr: "FR",
+      },
     },
     themeToggle: {
       label: "Theme",
@@ -132,6 +137,10 @@ export const dictionaries = {
       names: {
         en: "English",
         fr: "Français",
+      },
+      shortNames: {
+        en: "EN",
+        fr: "FR",
       },
     },
     themeToggle: {

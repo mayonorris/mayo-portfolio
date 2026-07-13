@@ -65,9 +65,9 @@ Implementation details:
 
 - Added typed public-content registries for About, Experience, Work and external project links.
 - Implemented the About page with the approved editorial heading, serif statement, abstract monogram frame, four concise long-form sections and CTA row.
-- Restricted the Experience page to the five explicitly validated entries: EM? Data & AI Lab, INSEED / PHASAO, INSEED national accounts and forecasting, Directorate-General for Economic Affairs in Benin, and Office Data Science.
+- Restricted the Experience page to the five explicitly validated entries: EM² Data & AI Lab, INSEED / PHASAO, INSEED national accounts and forecasting, Directorate-General for Economic Affairs in Benin, and Office Data Science.
 - Kept excluded items out of the public timeline: Ministry of Justice assignment, teaching experience, BCEAO or other consulting, unverified institutions, and any content awaiting confirmation.
-- Preserved the four flagship Work cases and added locale-aware live links for EM? Data & AI Lab without replacing internal case routes.
+- Preserved the four flagship Work cases and added locale-aware live links for EM² Data & AI Lab without replacing internal case routes.
 - Added the Currency Converter as a secondary live utility build after the flagship Work cases.
 - Kept the header CTA on Experience / Parcours and did not add a CV button because no public CV asset is approved in the repository.
 - Removed visible internal-review wording from the updated public pages.
@@ -80,6 +80,36 @@ Validation results:
 - `pnpm.cmd --filter web build`: passed; 25 static pages generated including localized case routes.
 - `git diff --check`: passed.
 - Local preview QA covered /en/about, /fr/a-propos, /en/experience, /fr/parcours, /en/work and /fr/projets at 1920 px, 1440 px, 1366 px, tablet and mobile widths, in light and dark themes. Checks passed for one h1 per page, no horizontal overflow, footer/header presence, four Work cards, five Experience entries, four About sections, safe external-link attributes, and no visible internal wording.
+
+## Content Sprint V2 Update - 2026-07-13
+
+Selected task: Research, Writing and Contact public-content pass V2.
+
+Implementation details:
+
+- Added typed bilingual registries for Research, Writing and Contact content.
+- Completed `/en/research` and `/fr/recherche` with four applied-research entries and no unsupported metrics, venues, DOI or publication claims.
+- Completed `/en/writing` and `/fr/publications` with four planned technical or methodological note entries, using preparation status only.
+- Completed `/en/contact` and `/fr/contact` with the validated two-column composition: editorial content and direct public links on the left, large form card on the right.
+- Implemented the contact form as a no-backend LinkedIn message helper with client-side validation, clipboard preparation and no simulated message delivery.
+- Preserved approved public channels only: GitHub, LinkedIn and localized EM² Data & AI Lab links.
+- Applied the compact global shell controls: EN | FR segmented language switcher, icon-only theme button, and Experience / Parcours CTA.
+- Connected homepage Research and Writing preview cards to the new typed registries.
+- Removed visible public-facing review language from the new routes.
+
+Validation results:
+
+- `pnpm.cmd --filter web typecheck`: passed.
+- `pnpm.cmd --filter web lint`: passed.
+- `pnpm.cmd --filter web build`: passed; 25 static pages generated including localized section and case routes.
+- `git diff --check`: passed.
+- Local HTTP QA on `http://localhost:3000` returned 200 for `/en`, `/fr`, Research/Recherche, Writing/Publications, Contact, Work/Projets, About/À propos, Experience/Parcours and all four localized case-study routes.
+- Visible-text checks found no public occurrences of placeholder, draft, candidate, validation, internal, publication readiness, content to confirm, prototype, preview form states, or unapproved contact placeholders.
+- Contact route checks confirmed the four form fields, localized reason options, direct public channel links, and no Send message / Envoyer wording.
+
+Operational note:
+
+- `pnpm.cmd install` had already passed as up to date during the interrupted V2 run. After reboot, the rerun was not executed because the approval gate treated it as a potential network operation.
 
 ## Remaining Immediate Work
 

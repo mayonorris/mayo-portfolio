@@ -1,5 +1,7 @@
 ﻿import type { Locale } from "@/i18n/locales";
 import type { RouteKey } from "@/lib/routes";
+import { researchContent } from "./research";
+import { writingContent } from "./writing";
 import { workContent, type SelectedWorkItem } from "./work";
 
 export type MethodStage = {
@@ -178,8 +180,8 @@ export const homeContent = {
       intro:
         "Research and writing stay separate so analytical depth and public explanation each have room to breathe.",
       cards: [
-        { kind: "Research", title: "Reproducible analytical work", body: "A space for research notes, methods, and decision-oriented analysis.", cta: "Go to research", routeKey: "research" },
-        { kind: "Writing", title: "Technical notes and essays", body: "A space for accessible explanations, implementation notes, and analytical writing.", cta: "Go to writing", routeKey: "writing" },
+        researchContent.en.preview,
+        writingContent.en.preview,
       ],
     },
     about: {
@@ -307,11 +309,11 @@ export const homeContent = {
 export const routePages = {
   en: [
     { routeKey: "work", path: "work", title: "Work", description: "Selected analytical work and case-study previews.", eyebrow: "SELECTED WORK", status: "Selected work entries will expand into fuller case studies over time.", backHome: "Back to home" },
-    { routeKey: "research", path: "research", title: "Research", description: "Research and reproducible analytical work.", eyebrow: "RESEARCH", status: "Research notes and reproducible work will appear here as the knowledge layer grows.", backHome: "Back to home" },
-    { routeKey: "writing", path: "writing", title: "Writing", description: "Writing, technical notes and analytical essays.", eyebrow: "WRITING", status: "Technical notes, implementation essays, and public analytical writing will appear here.", backHome: "Back to home" },
+    { routeKey: "research", path: "research", title: "Research", description: "Applied research across econometrics, official statistics and data systems.", eyebrow: "RESEARCH", status: "Applied research across econometrics, official statistics and data systems.", backHome: "Back to home" },
+    { routeKey: "writing", path: "writing", title: "Writing", description: "Technical notes, methods and analytical explanations.", eyebrow: "WRITING", status: "Technical notes, methods and analytical explanations.", backHome: "Back to home" },
     { routeKey: "about", path: "about", title: "About", description: "Professional profile and working approach.", eyebrow: "ABOUT", status: "A fuller story will connect the portfolio’s analytical, institutional, and product-building threads.", backHome: "Back to home" },
     { routeKey: "experience", path: "experience", title: "Experience", description: "Experience across official statistics, economic analysis and data products.", eyebrow: "EXPERIENCE", status: "Selected roles and assignments are presented as a dedicated professional timeline.", backHome: "Back to home" },
-    { routeKey: "contact", path: "contact", title: "Contact", description: "Professional contact options.", eyebrow: "CONTACT", status: "Use the professional links or start a conversation about a data problem.", backHome: "Back to home" },
+    { routeKey: "contact", path: "contact", title: "Contact", description: "Professional contact options and a LinkedIn message helper.", eyebrow: "CONTACT", status: "Use the professional links or prepare a concise LinkedIn message.", backHome: "Back to home" },
   ],
   fr: [
     { routeKey: "work", path: "projets", title: "Projets", description: "Travaux analytiques sélectionnés et aperçus de cas.", eyebrow: "TRAVAUX SÉLECTIONNÉS", status: "Les travaux sélectionnés s’enrichiront progressivement en études de cas plus complètes.", backHome: "Retour à l’accueil" },

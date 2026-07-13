@@ -1,15 +1,20 @@
 ﻿import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
+import { ContactForm } from "@/components/contact-form";
 import { Container } from "@/components/container";
 import { Eyebrow } from "@/components/eyebrow";
 import { LinkButton } from "@/components/link-button";
 import { Section } from "@/components/section";
 import { WorkVisual } from "@/components/work-visual";
 import { aboutContent } from "@/content/about";
+import { contactContent } from "@/content/contact";
 import { experienceContent } from "@/content/experience";
 import { getExternalProjectLink } from "@/content/external-links";
 import { routePages } from "@/content/home";
 import { publicProfile } from "@/content/public-profile";
+import { researchContent } from "@/content/research";
+import { writingContent } from "@/content/writing";
 import { workContent } from "@/content/work";
 import { defaultLocale, isLocale, locales, type Locale } from "@/i18n/locales";
 import { getCaseStudyPath, getLocalizedPath, getLocalizedRoutePath } from "@/lib/routes";
@@ -81,38 +86,94 @@ export default async function LocalizedRoutePage({ params }: RoutePageProps) {
     const about = aboutContent[locale];
 
     return (
-      <Section className="route-page about-page" labelledBy="about-page-title">
+      <Section className="route-page about-page about-page--editorial" labelledBy="about-page-title">
         <Container className="about-page__hero">
           <div className="about-page__copy">
             <Eyebrow>{about.hero.eyebrow}</Eyebrow>
             <h1 id="about-page-title">{about.hero.name}</h1>
             <p className="about-page__descriptor">{about.hero.descriptor}</p>
             <p className="about-page__statement">{about.hero.statement}</p>
+            <p className="about-page__intro">{about.hero.intro}</p>
           </div>
-          <aside className="about-page__portrait" aria-label={about.portrait.label}>
-            <div className="about-page__monogram" aria-hidden="true">
-              {about.portrait.monogram}
+          <figure className="about-page__portrait-card" aria-label={about.portrait.label}>
+            <div className="about-page__photo-frame">
+              {about.portrait.imageSrc ? (
+                <Image
+                  alt={about.portrait.alt}
+                  className="about-page__photo"
+                  fill
+                  priority
+                  sizes="(min-width: 920px) 320px, 72vw"
+                  src={about.portrait.imageSrc}
+                />
+              ) : (
+                <div className="about-page__photo-fallback" aria-hidden="true">
+                  {about.portrait.fallback}
+                </div>
+              )}
             </div>
-            <p>{about.portrait.note}</p>
-          </aside>
+            <figcaption className="about-page__caption">
+              <span>{about.portrait.caption}</span>
+              <ul role="list">
+                {about.portrait.notes.map((note) => (
+                  <li key={note}>{note}</li>
+                ))}
+              </ul>
+            </figcaption>
+          </figure>
         </Container>
-        <Container className="about-page__sections">
-          {about.sections.map((aboutSection) => (
-            <article className="about-page__section" key={aboutSection.title}>
-              <Eyebrow>{aboutSection.eyebrow}</Eyebrow>
-              <h2>{aboutSection.title}</h2>
-              <p>{aboutSection.body}</p>
-            </article>
-          ))}
+
+        <Container className="about-page__narrative">
+          <div className="about-page__narrative-heading">
+            <Eyebrow>{about.narrative.eyebrow}</Eyebrow>
+            <h2>{about.narrative.title}</h2>
+            <p>{about.narrative.intro}</p>
+          </div>
+          <div className="about-page__story-grid">
+            {about.narrative.sections.map((aboutSection) => (
+              <article className="about-page__story-card" key={aboutSection.title}>
+                <Eyebrow>{aboutSection.eyebrow}</Eyebrow>
+                <h3>{aboutSection.title}</h3>
+                <p>{aboutSection.body}</p>
+              </article>
+            ))}
+          </div>
         </Container>
-        <Container className="about-page__cta-row">
-          <LinkButton href={getLocalizedPath(locale, "/experience")}>{about.ctas.experience}</LinkButton>
-          <LinkButton href={getLocalizedPath(locale, "/work")} variant="secondary">
-            {about.ctas.work}
-          </LinkButton>
-          <LinkButton href={getLocalizedPath(locale, "/contact")} variant="secondary">
-            {about.ctas.contact}
-          </LinkButton>
+
+        <Container className="about-page__closing-grid">
+          <article className="about-page__principles">
+            <Eyebrow>{about.principles.eyebrow}</Eyebrow>
+            <h2>{about.principles.title}</h2>
+            <ul role="list">
+              {about.principles.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+          <article className="about-page__languages">
+            <Eyebrow>{about.languages.eyebrow}</Eyebrow>
+            <h2>{about.languages.title}</h2>
+            <ul role="list">
+              {about.languages.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+        </Container>
+
+        <Container className="about-page__cta-panel">
+          <Eyebrow>{about.ctas.eyebrow}</Eyebrow>
+          <h2>{about.ctas.title}</h2>
+          <p>{about.ctas.body}</p>
+          <div className="about-page__cta-row">
+            <LinkButton href={getLocalizedPath(locale, "/experience")}>{about.ctas.experience}</LinkButton>
+            <LinkButton href={getLocalizedPath(locale, "/work")} variant="secondary">
+              {about.ctas.work}
+            </LinkButton>
+            <LinkButton href={getLocalizedPath(locale, "/contact")} variant="secondary">
+              {about.ctas.contact}
+            </LinkButton>
+          </div>
         </Container>
       </Section>
     );
@@ -188,32 +249,162 @@ export default async function LocalizedRoutePage({ params }: RoutePageProps) {
     );
   }
 
+  if (page.routeKey === "research") {
+    const research = researchContent[locale];
+
+    return (
+      <Section className="route-page knowledge-page knowledge-page--research" labelledBy="route-page-title">
+        <Container>
+          <div className="route-page__heading knowledge-page__heading">
+            <Eyebrow>{research.hero.eyebrow}</Eyebrow>
+            <h1 id="route-page-title">{research.hero.title}</h1>
+            <p>{research.hero.intro}</p>
+          </div>
+          <div className="knowledge-grid knowledge-grid--research">
+            {research.entries.map((entry) => (
+              <article className="knowledge-card knowledge-card--research" key={entry.id}>
+                <div className="knowledge-card__meta">
+                  <span>{entry.type}</span>
+                  <span>{entry.status}</span>
+                </div>
+                <h2>{entry.title}</h2>
+                <p>{entry.description}</p>
+              </article>
+            ))}
+          </div>
+          <div className="knowledge-page__actions">
+            <LinkButton href={getLocalizedRoutePath(locale, research.ctas.primaryRoute)}>
+              {research.ctas.primary}
+            </LinkButton>
+            <LinkButton
+              href={getLocalizedRoutePath(locale, research.ctas.secondaryRoute)}
+              variant="secondary"
+            >
+              {research.ctas.secondary}
+            </LinkButton>
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (page.routeKey === "writing") {
+    const writing = writingContent[locale];
+
+    return (
+      <Section className="route-page knowledge-page knowledge-page--writing" labelledBy="route-page-title">
+        <Container>
+          <div className="route-page__heading knowledge-page__heading">
+            <Eyebrow>{writing.hero.eyebrow}</Eyebrow>
+            <h1 id="route-page-title">{writing.hero.title}</h1>
+            <p>{writing.hero.intro}</p>
+          </div>
+          <div className="knowledge-grid knowledge-grid--writing">
+            {writing.entries.map((entry) => (
+              <article className="knowledge-card knowledge-card--writing" key={entry.id}>
+                <p className="knowledge-card__type">{entry.type}</p>
+                <h2>{entry.title}</h2>
+                <p>{entry.description}</p>
+                <p className="knowledge-card__status">{entry.status}</p>
+              </article>
+            ))}
+          </div>
+          <div className="knowledge-page__actions">
+            <LinkButton href={getLocalizedRoutePath(locale, writing.ctas.primaryRoute)}>
+              {writing.ctas.primary}
+            </LinkButton>
+            <LinkButton
+              href={getLocalizedRoutePath(locale, writing.ctas.secondaryRoute)}
+              variant="secondary"
+            >
+              {writing.ctas.secondary}
+            </LinkButton>
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (page.routeKey === "contact") {
+    const contact = contactContent[locale];
+    const linkedInChannel = contact.channels.items.find(
+      (channel) => channel.id === "linkedin",
+    );
+
+    return (
+      <Section className="route-page contact-route" labelledBy="route-page-title">
+        <Container className="contact-route__grid">
+          <div className="contact-route__content">
+            <Eyebrow>{contact.hero.eyebrow}</Eyebrow>
+            <h1 id="route-page-title">{contact.hero.title}</h1>
+            <p className="contact-route__intro">{contact.hero.intro}</p>
+            <div className="contact-route__channels" aria-labelledby="contact-channels-title">
+              <Eyebrow>{contact.channels.eyebrow}</Eyebrow>
+              <h2 id="contact-channels-title">{contact.channels.title}</h2>
+              <p>{contact.channels.intro}</p>
+              <ul className="contact-channel-list" role="list">
+                {contact.channels.items.map((channel) => (
+                  <li key={channel.id}>
+                    <a href={channel.href} rel="noopener noreferrer" target="_blank">
+                      <span>{channel.label}</span>
+                      <small>{channel.description}</small>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <aside className="contact-route__form-card" aria-labelledby="contact-form-title">
+            <Eyebrow>{contact.form.eyebrow}</Eyebrow>
+            <h2 id="contact-form-title">{contact.form.title}</h2>
+            <p>{contact.form.intro}</p>
+            {linkedInChannel ? (
+              <ContactForm content={contact.form} linkedinHref={linkedInChannel.href} />
+            ) : null}
+          </aside>
+        </Container>
+      </Section>
+    );
+  }
+
   if (page.routeKey === "experience") {
     const experience = experienceContent[locale];
 
     return (
       <Section className="route-page route-page--experience" labelledBy="route-page-title">
         <Container>
-          <div className="route-page__heading">
+          <div className="route-page__heading route-page__heading--narrative">
             <Eyebrow>{experience.eyebrow}</Eyebrow>
             <h1 id="route-page-title">{experience.title}</h1>
             <p>{experience.intro}</p>
           </div>
-          <ol className="experience-timeline" aria-label={experience.title} role="list">
+          <div className="experience-framing" aria-labelledby="experience-framing-title">
+            <h2 id="experience-framing-title">{experience.framing.title}</h2>
+            <p>{experience.framing.body}</p>
+            <ul className="experience-arc" role="list">
+              {experience.framing.arc.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <ol className="experience-timeline experience-timeline--editorial" aria-label={experience.title} role="list">
             {experience.entries.map((entry) => (
               <li className="experience-timeline__item" key={entry.id}>
                 <div className="experience-timeline__meta">
                   <span>{entry.category[locale]}</span>
                   <time>{entry.period[locale]}</time>
                 </div>
-                <div className="experience-timeline__body">
+                <span className="experience-timeline__rail" aria-hidden="true">
+                  <span className="experience-timeline__marker" />
+                </span>
+                <article className="experience-timeline__body">
                   <h2>{entry.role[locale]}</h2>
                   <p className="experience-timeline__organization">
                     {entry.organization}
                     {entry.location ? <span>{entry.location[locale]}</span> : null}
                   </p>
                   <p>{entry.description[locale]}</p>
-                </div>
+                </article>
               </li>
             ))}
           </ol>
@@ -228,16 +419,5 @@ export default async function LocalizedRoutePage({ params }: RoutePageProps) {
     );
   }
 
-  return (
-    <Section className="route-page" labelledBy="route-page-title">
-      <Container className="route-page__inner">
-        <Eyebrow>{page.eyebrow}</Eyebrow>
-        <h1 id="route-page-title">{page.title}</h1>
-        <p>{page.status}</p>
-        <LinkButton href={getLocalizedPath(locale, "/")} variant="secondary">
-          {page.backHome}
-        </LinkButton>
-      </Container>
-    </Section>
-  );
+  notFound();
 }
