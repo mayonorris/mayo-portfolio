@@ -1,7 +1,6 @@
-import type { Locale } from "@/i18n/locales";
+﻿import type { Locale } from "@/i18n/locales";
 import type { RouteKey } from "@/lib/routes";
-
-export type WorkVisualVariant = "systems" | "research" | "signal" | "finance";
+import { workContent, type SelectedWorkItem } from "./work";
 
 export type MethodStage = {
   label: string;
@@ -11,15 +10,6 @@ export type MethodStage = {
 export type PracticeArea = {
   label: string;
   value: string;
-};
-
-export type SelectedWorkItem = {
-  slug: string;
-  category: string;
-  title: string;
-  scope: string;
-  role: string;
-  visual: WorkVisualVariant;
 };
 
 export type CapabilityGroup = {
@@ -107,85 +97,6 @@ export type RoutePageContent = {
   backHome: string;
 };
 
-const selectedWorkItems = {
-  en: [
-    {
-      slug: "em2-data-ai-lab-website",
-      category: "Analytical system",
-      title: "EM² Data & AI Lab website",
-      scope:
-        "A portfolio case study for presenting an editorial web interface and product architecture for a data and AI initiative.",
-      role: "Portfolio case study",
-      visual: "systems",
-    },
-    {
-      slug: "impact-decentralization-togo",
-      category: "Applied research",
-      title: "Impact of decentralization in Togo",
-      scope:
-        "A cautious applied-study frame for decentralization, territorial structure, and public decision questions in Togo.",
-      role: "Applied research",
-      visual: "research",
-    },
-    {
-      slug: "economic-indicators-seasonal-adjustment",
-      category: "Statistical workflow",
-      title: "Economic indicators & seasonal adjustment",
-      scope:
-        "A synthetic workflow frame for comparing raw economic signals with adjusted monitoring views.",
-      role: "Statistical workflow",
-      visual: "signal",
-    },
-    {
-      slug: "financial-inclusion-fintech-analysis",
-      category: "Econometric analysis",
-      title: "Financial inclusion & FinTech analysis",
-      scope:
-        "An analytical case frame for financial inclusion and digital finance segmentation questions.",
-      role: "Econometric analysis",
-      visual: "finance",
-    },
-  ],
-  fr: [
-    {
-      slug: "em2-data-ai-lab-website",
-      category: "Système analytique",
-      title: "EM² Data & AI Lab website",
-      scope:
-        "Une étude de cas portfolio pour présenter une interface web éditoriale et une architecture produit pour une initiative data et IA.",
-      role: "Étude de cas portfolio",
-      visual: "systems",
-    },
-    {
-      slug: "impact-decentralization-togo",
-      category: "Recherche appliquée",
-      title: "Impact of decentralization in Togo",
-      scope:
-        "Un cadre d’étude appliquée prudent sur la décentralisation, la structure territoriale et les questions de décision publique au Togo.",
-      role: "Recherche appliquée",
-      visual: "research",
-    },
-    {
-      slug: "economic-indicators-seasonal-adjustment",
-      category: "Flux statistique",
-      title: "Economic indicators & seasonal adjustment",
-      scope:
-        "Un cadre de flux synthétique pour comparer des signaux économiques bruts avec des vues de suivi ajustées.",
-      role: "Flux statistique",
-      visual: "signal",
-    },
-    {
-      slug: "financial-inclusion-fintech-analysis",
-      category: "Analyse économétrique",
-      title: "Financial inclusion & FinTech analysis",
-      scope:
-        "Un cadre analytique pour les questions d’inclusion financière et de segmentation de la finance numérique.",
-      role: "Analyse économétrique",
-      visual: "finance",
-    },
-  ],
-} satisfies Record<Locale, SelectedWorkItem[]>;
-
 export const homeContent = {
   en: {
     hero: {
@@ -231,7 +142,7 @@ export const homeContent = {
       viewAll: "View all work",
       cardCta: "Open case",
       roleLabel: "Role",
-      items: selectedWorkItems.en,
+      items: workContent.en.items,
     },
     capabilities: {
       eyebrow: "CAPABILITIES",
@@ -333,7 +244,7 @@ export const homeContent = {
       viewAll: "Voir tous les travaux",
       cardCta: "Voir le cas",
       roleLabel: "Rôle",
-      items: selectedWorkItems.fr,
+      items: workContent.fr.items,
     },
     capabilities: {
       eyebrow: "CAPACITÉS",
@@ -418,8 +329,4 @@ export function getRoutePage(locale: Locale, path: string) {
 
 export function getRoutePageByKey(locale: Locale, routeKey: RouteKey) {
   return routePages[locale].find((page) => page.routeKey === routeKey);
-}
-
-export function getSelectedWorkItem(locale: Locale, slug: string) {
-  return homeContent[locale].selectedWork.items.find((item) => item.slug === slug);
 }

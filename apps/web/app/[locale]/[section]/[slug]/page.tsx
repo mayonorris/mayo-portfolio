@@ -1,12 +1,14 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/container";
 import { Eyebrow } from "@/components/eyebrow";
 import { LinkButton } from "@/components/link-button";
 import { Section } from "@/components/section";
 import { WorkVisual } from "@/components/work-visual";
-import { getSelectedWorkItem, homeContent, routePages } from "@/content/home";
+import { getExternalProjectLink } from "@/content/external-links";
+import { routePages } from "@/content/home";
 import { publicProfile } from "@/content/public-profile";
+import { getCaseStudyContent, getSelectedWorkItem, workContent } from "@/content/work";
 import { defaultLocale, isLocale, locales, type Locale } from "@/i18n/locales";
 import { getCaseStudyPath, getLocalizedPath, getRouteKeyForLocalizedSegment } from "@/lib/routes";
 
@@ -36,7 +38,7 @@ export function generateStaticParams() {
       return [];
     }
 
-    return homeContent[locale].selectedWork.items.map((item) => ({
+    return workContent[locale].items.map((item) => ({
       locale,
       section: workPage.path,
       slug: item.slug,
@@ -82,11 +84,14 @@ export default async function CasePage({ params }: CasePageProps) {
   const locale = parseLocale(localeParam);
   assertWorkSection(locale, section);
   const item = getSelectedWorkItem(locale, slug);
-  const content = homeContent[locale];
+  const work = workContent[locale];
+  const caseContent = getCaseStudyContent(locale, slug);
 
-  if (!item) {
+  if (!item || !caseContent) {
     notFound();
   }
+
+  const liveLink = item.liveLinkId ? getExternalProjectLink(item.liveLinkId, locale) : null;
 
   return (
     <Section className="case-page" labelledBy="case-page-title">
@@ -97,20 +102,39 @@ export default async function CasePage({ params }: CasePageProps) {
           <p>{item.scope}</p>
           <dl className="case-page__meta">
             <div>
-              <dt>{content.selectedWork.roleLabel}</dt>
+              <dt>{work.roleLabel}</dt>
               <dd>{item.role}</dd>
             </div>
           </dl>
           <div className="case-page__actions">
             <LinkButton href={getLocalizedPath(locale, "/work")} variant="secondary">
-              {content.selectedWork.viewAll}
+              {caseContent.backToWork}
             </LinkButton>
+            {liveLink && caseContent.liveSiteCta ? (
+              <LinkButton
+                ariaLabel={liveLink.accessibleLabel}
+                href={liveLink.href}
+                isExternal
+                variant="secondary"
+              >
+                {caseContent.liveSiteCta}
+              </LinkButton>
+            ) : null}
             <LinkButton href={getLocalizedPath(locale, "/contact")}>
-              {content.contact.cta}
+              {caseContent.contactCta}
             </LinkButton>
           </div>
         </div>
         <WorkVisual variant={item.visual} />
+      </Container>
+      <Container className="case-page__sections">
+        {caseContent.sections.map((caseSection) => (
+          <article className="case-page__section" key={caseSection.title}>
+            <Eyebrow>{caseSection.eyebrow}</Eyebrow>
+            <h2>{caseSection.title}</h2>
+            <p>{caseSection.body}</p>
+          </article>
+        ))}
       </Container>
     </Section>
   );

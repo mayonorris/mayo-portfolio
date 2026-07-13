@@ -1,6 +1,6 @@
 # Sprint 1 Implementation Audit
 
-Date: 2026-07-12
+Date: 2026-07-13
 
 Scope: repository state compared with `docs/architecture/v1.0/04_SPRINT_1_BACKLOG.md` and the official Sprint 1 task sequence.
 
@@ -56,6 +56,30 @@ Implementation details:
 - `git diff --check`: passed.
 - Local route checks: `/en`, `/fr`, Work/Projets, Research/Recherche, Writing/Publications, About/À propos, Experience/Parcours, Contact, and representative case routes returned 200.
 - Local responsive QA through Chrome DevTools covered `/en` and `/fr`, light and dark themes, 1920 px, 1440 px, 1366 px, tablet, and mobile. Checks passed for single H1, no horizontal overflow, no visible Next.js error overlay, footer presence, selected-work cards, capability cards, method interaction, language links, and theme toggle.
+
+## Content Sprint Update - 2026-07-13
+
+Selected task: About, Experience and Work public-content pass.
+
+Implementation details:
+
+- Added typed public-content registries for About, Experience, Work and external project links.
+- Implemented the About page with the approved editorial heading, serif statement, abstract monogram frame, four concise long-form sections and CTA row.
+- Restricted the Experience page to the five explicitly validated entries: EM? Data & AI Lab, INSEED / PHASAO, INSEED national accounts and forecasting, Directorate-General for Economic Affairs in Benin, and Office Data Science.
+- Kept excluded items out of the public timeline: Ministry of Justice assignment, teaching experience, BCEAO or other consulting, unverified institutions, and any content awaiting confirmation.
+- Preserved the four flagship Work cases and added locale-aware live links for EM? Data & AI Lab without replacing internal case routes.
+- Added the Currency Converter as a secondary live utility build after the flagship Work cases.
+- Kept the header CTA on Experience / Parcours and did not add a CV button because no public CV asset is approved in the repository.
+- Removed visible internal-review wording from the updated public pages.
+
+Validation results:
+
+- `pnpm.cmd install`: passed; workspace already up to date with pnpm 11.2.0.
+- `pnpm.cmd --filter web lint`: passed.
+- `pnpm.cmd --filter web typecheck`: passed.
+- `pnpm.cmd --filter web build`: passed; 25 static pages generated including localized case routes.
+- `git diff --check`: passed.
+- Local preview QA covered /en/about, /fr/a-propos, /en/experience, /fr/parcours, /en/work and /fr/projets at 1920 px, 1440 px, 1366 px, tablet and mobile widths, in light and dark themes. Checks passed for one h1 per page, no horizontal overflow, footer/header presence, four Work cards, five Experience entries, four About sections, safe external-link attributes, and no visible internal wording.
 
 ## Remaining Immediate Work
 

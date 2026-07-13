@@ -1,4 +1,4 @@
-import type { WorkVisualVariant } from "@/content/home";
+﻿import type { WorkVisualVariant } from "@/content/work";
 
 type WorkVisualProps = {
   variant: WorkVisualVariant;
