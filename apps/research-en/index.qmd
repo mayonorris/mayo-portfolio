@@ -6,14 +6,14 @@ lang: en
 
 
 <div class="article-intro">
-  <p class="article-kicker">Research ? Quarto source index</p>
+  <p class="article-kicker">Research · Quarto source index</p>
   <p class="article-display-title">Research</p>
   <div class="article-status">
     <p>This Quarto project stores long-form research article sources. The public portfolio index remains in Next.js.</p>
   </div>
 </div>
 
-## Available article frameworks
+## Available study pages
 
 - [Financial inclusion and mobile-money adoption: a survey-based analysis](articles/financial-inclusion-mobile-money/)
 

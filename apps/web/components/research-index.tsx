@@ -14,6 +14,18 @@ type ResearchIndexProps = {
   locale: Locale;
 };
 
+function renderSeparatedLabel(parts: [string, string]) {
+  return (
+    <>
+      <span>{parts[0]}</span>
+      <span className="text-separator" aria-hidden="true">
+        ·
+      </span>
+      <span>{parts[1]}</span>
+    </>
+  );
+}
+
 function entrySearchText(entry: ResearchContent["entries"][number]) {
   return [
     entry.title,
@@ -54,13 +66,13 @@ export function ResearchIndex({ content, locale }: ResearchIndexProps) {
     <>
       <div className="research-strip" aria-label={content.strip}>
         <Container className="research-strip__inner">
-          <span aria-hidden="true" />
-          <p>{content.strip}</p>
+          <span className="research-strip__dot" aria-hidden="true" />
+          <p>{renderSeparatedLabel(content.stripParts)}</p>
         </Container>
       </div>
       <Container>
         <div className="route-page__heading knowledge-page__heading research-index__hero">
-          <Eyebrow>{content.hero.eyebrow}</Eyebrow>
+          <Eyebrow>{renderSeparatedLabel(content.hero.eyebrowParts)}</Eyebrow>
           <h1 id="route-page-title">{content.hero.title}</h1>
           <p>{content.hero.intro}</p>
         </div>
@@ -126,11 +138,11 @@ export function ResearchIndex({ content, locale }: ResearchIndexProps) {
                           className="research-row__meta"
                           aria-label={[entry.period, entry.type, entry.status]
                             .filter(Boolean)
-                            .join(" ? ")}
+                            .join(" · ")}
                         >
-                          {entry.period ? <span>{entry.period}</span> : null}
-                          <span>{entry.type}</span>
-                          <span>{entry.status}</span>
+                          {entry.period ? <span className="research-row__type-badge">{entry.period}</span> : null}
+                          <span className="research-row__type-badge">{entry.type}</span>
+                          <span className="research-row__status">{entry.status}</span>
                         </div>
                         <div className="research-row__body">
                           <div>

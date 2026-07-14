@@ -42,8 +42,10 @@ export type ResearchEntry = {
 
 export type ResearchContent = {
   strip: string;
+  stripParts: [string, string];
   hero: {
     eyebrow: string;
+    eyebrowParts: [string, string];
     title: string;
     intro: string;
   };
@@ -77,9 +79,11 @@ export type ResearchContent = {
 
 export const researchContent = {
   en: {
-    strip: "Research notebook ? Reproducible R & Python",
+    strip: "Research notebook · Reproducible R & Python",
+    stripParts: ["Research notebook", "Reproducible R & Python"],
     hero: {
-      eyebrow: "RESEARCH ? QUARTO",
+      eyebrow: "RESEARCH · QUARTO",
+      eyebrowParts: ["RESEARCH", "QUARTO"],
       title: "Research",
       intro:
         "Formal and ongoing research: completed studies, applied projects, methodological work and research agendas. Distinct from Writing.",
@@ -119,20 +123,20 @@ export const researchContent = {
         description:
           "A research agenda on early-warning systems for macro-financial vulnerabilities and growth reversals in West Africa.",
         contextLabel: "West Africa",
-        unavailableLabel: "Article not available yet",
+        unavailableLabel: "Article in preparation",
       },
       {
         id: "financial-inclusion-mobile-money",
         groupId: "applied-research",
         filterIds: ["applied-study", "methodology", "completed-study"],
         type: "Applied study",
-        status: "Article framework available",
+        status: "Study page available",
         title: "Financial inclusion and mobile-money adoption",
         description:
           "An applied analysis of financial inclusion using FinScope Benin 2018 microdata and multivariate and binary-choice modelling.",
         contextLabel: "FinScope Benin 2018 microdata",
         articleHref: "/en/research/financial-inclusion-mobile-money",
-        articleLabel: "Open article framework",
+        articleLabel: "View study page",
       },
       {
         id: "exchange-rate-volatility-waemu",
@@ -144,7 +148,7 @@ export const researchContent = {
         description:
           "A study of exchange-rate volatility and regional trade using econometric modelling and macroeconomic data.",
         contextLabel: "WAEMU",
-        unavailableLabel: "Article not available yet",
+        unavailableLabel: "Article in preparation",
       },
       {
         id: "decentralization-living-conditions",
@@ -156,7 +160,7 @@ export const researchContent = {
         description:
           "A methodological and analytical framework for evaluating how decentralization relates to local living conditions in Togo.",
         contextLabel: "Togo",
-        unavailableLabel: "Article not available yet",
+        unavailableLabel: "Article in preparation",
       },
     ],
     ctas: {
@@ -175,34 +179,36 @@ export const researchContent = {
     },
   },
   fr: {
-    strip: "Carnet de recherche ? R et Python reproductibles",
+    strip: "Carnet de recherche · R et Python reproductibles",
+    stripParts: ["Carnet de recherche", "R et Python reproductibles"],
     hero: {
-      eyebrow: "RECHERCHE ? QUARTO",
+      eyebrow: "RECHERCHE · QUARTO",
+      eyebrowParts: ["RECHERCHE", "QUARTO"],
       title: "Recherche",
       intro:
-        "Travaux de recherche formels et en cours : ?tudes achev?es, projets appliqu?s, travaux m?thodologiques et agendas de recherche. Une section distincte des Publications.",
+        "Travaux de recherche formels et en cours : études achevées, projets appliqués, travaux méthodologiques et agendas de recherche. Une section distincte des Publications.",
     },
     controls: {
       searchLabel: "Rechercher",
       searchPlaceholder: "Rechercher dans les sujets de recherche",
       allLabel: "Tout",
       clearLabel: "Effacer les filtres",
-      resultsSingular: "?l?ment de recherche",
-      resultsPlural: "?l?ments de recherche",
-      emptyTitle: "Aucun ?l?ment de recherche ne correspond ? cette vue.",
+      resultsSingular: "élément de recherche",
+      resultsPlural: "éléments de recherche",
+      emptyTitle: "Aucun élément de recherche ne correspond à cette vue.",
       emptyBody: "Modifiez la recherche ou choisissez un autre filtre.",
     },
     filters: [
       { id: "research-agenda", label: "Agenda de recherche" },
-      { id: "applied-study", label: "?tude appliqu?e" },
+      { id: "applied-study", label: "Étude appliquée" },
       { id: "research-project", label: "Projet de recherche" },
-      { id: "methodology", label: "M?thodologie" },
-      { id: "completed-study", label: "?tude achev?e" },
+      { id: "methodology", label: "Méthodologie" },
+      { id: "completed-study", label: "Étude achevée" },
       { id: "work-in-progress", label: "Travail en cours" },
     ],
     groups: [
       { id: "current-research-agenda", label: "AGENDA DE RECHERCHE ACTUEL" },
-      { id: "applied-research", label: "RECHERCHE APPLIQU?E" },
+      { id: "applied-research", label: "RECHERCHE APPLIQUÉE" },
       { id: "institutional-research-projects", label: "PROJETS DE RECHERCHE INSTITUTIONNELS" },
       { id: "archive", label: "ARCHIVES" },
     ],
@@ -213,36 +219,36 @@ export const researchContent = {
         filterIds: ["research-agenda", "methodology", "work-in-progress"],
         type: "Agenda de recherche",
         status: "Travail en cours",
-        title: "Vuln?rabilit?s macrofinanci?res et retournements de croissance",
+        title: "Vulnérabilités macrofinancières et retournements de croissance",
         description:
-          "Un agenda de recherche sur les syst?mes d?alerte pr?coce appliqu?s aux vuln?rabilit?s macrofinanci?res et aux retournements de croissance en Afrique de l?Ouest.",
-        contextLabel: "Afrique de l?Ouest",
-        unavailableLabel: "Article non disponible",
+          "Un agenda de recherche sur les systèmes d’alerte précoce appliqués aux vulnérabilités macrofinancières et aux retournements de croissance en Afrique de l’Ouest.",
+        contextLabel: "Afrique de l’Ouest",
+        unavailableLabel: "Article en préparation",
       },
       {
         id: "financial-inclusion-mobile-money",
         groupId: "applied-research",
         filterIds: ["applied-study", "methodology", "completed-study"],
-        type: "?tude appliqu?e",
-        status: "Ossature d?article disponible",
-        title: "Inclusion financi?re et adoption du mobile money",
+        type: "Étude appliquée",
+        status: "Page d’étude disponible",
+        title: "Inclusion financière et adoption du mobile money",
         description:
-          "Une analyse appliqu?e de l?inclusion financi?re ? partir des microdonn?es FinScope B?nin 2018 et de m?thodes multivari?es et de choix binaire.",
-        contextLabel: "Microdonn?es FinScope B?nin 2018",
+          "Une analyse appliquée de l’inclusion financière à partir des microdonnées FinScope Bénin 2018 et de méthodes multivariées et de choix binaire.",
+        contextLabel: "Microdonnées FinScope Bénin 2018",
         articleHref: "/fr/recherche/inclusion-financiere-mobile-money",
-        articleLabel: "Ouvrir l?ossature d?article",
+        articleLabel: "Voir la page d’étude",
       },
       {
         id: "exchange-rate-volatility-waemu",
         groupId: "applied-research",
         filterIds: ["applied-study", "methodology", "completed-study"],
-        type: "?tude appliqu?e",
-        status: "?tude achev?e",
-        title: "Volatilit? du taux de change et commerce dans l?UEMOA",
+        type: "Étude appliquée",
+        status: "Étude achevée",
+        title: "Volatilité du taux de change et commerce dans l’UEMOA",
         description:
-          "Une ?tude de la volatilit? du taux de change et du commerce r?gional ? partir de mod?les ?conom?triques et de donn?es macro?conomiques.",
+          "Une étude de la volatilité du taux de change et du commerce régional à partir de modèles économétriques et de données macroéconomiques.",
         contextLabel: "UEMOA",
-        unavailableLabel: "Article non disponible",
+        unavailableLabel: "Article en préparation",
       },
       {
         id: "decentralization-living-conditions",
@@ -250,25 +256,25 @@ export const researchContent = {
         filterIds: ["research-project", "methodology", "work-in-progress"],
         type: "Projet de recherche",
         status: "Travail en cours",
-        title: "D?centralisation et conditions de vie locales",
+        title: "Décentralisation et conditions de vie locales",
         description:
-          "Un cadre m?thodologique et analytique pour ?valuer les liens entre la d?centralisation et les conditions de vie locales au Togo.",
+          "Un cadre méthodologique et analytique pour évaluer les liens entre la décentralisation et les conditions de vie locales au Togo.",
         contextLabel: "Togo",
-        unavailableLabel: "Article non disponible",
+        unavailableLabel: "Article en préparation",
       },
     ],
     ctas: {
-      primary: "D?couvrir les projets",
+      primary: "Découvrir les projets",
       primaryRoute: "work",
       secondary: "Lire les notes techniques",
       secondaryRoute: "writing",
     },
     preview: {
       kind: "Recherche",
-      title: "Recherche appliqu?e pour la d?cision",
+      title: "Recherche appliquée pour la décision",
       body:
-        "?conom?trie, statistique officielle et syst?mes de donn?es appliqu?s ? l?inclusion financi?re, aux politiques publiques et aux dynamiques ?conomiques.",
-      cta: "Aller ? la recherche",
+        "Économétrie, statistique officielle et systèmes de données appliqués à l’inclusion financière, aux politiques publiques et aux dynamiques économiques.",
+      cta: "Aller à la recherche",
       routeKey: "research",
     },
   },

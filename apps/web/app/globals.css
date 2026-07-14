@@ -264,7 +264,7 @@ a {
 .language-switcher__link,
 .theme-toggle,
 .link-button {
-  min-height: 2.25rem;
+  min-height: 2.1rem;
   border-radius: var(--radius-lg);
   transition:
     background-color var(--transition-fast),
@@ -783,7 +783,7 @@ main {
 .hero-links a,
 .professional-links a {
   display: inline-flex;
-  min-height: 2.25rem;
+  min-height: 2.1rem;
   align-items: center;
   border-bottom: 1px solid var(--color-line-strong);
   color: var(--color-ink-muted);
@@ -869,7 +869,7 @@ main {
   border: var(--border-thin);
   border-radius: var(--radius-sm);
   background: var(--color-paper-soft);
-  padding: var(--space-2) var(--space-3);
+  padding: 0.55rem 0.8rem;
 }
 
 .experience-item__body {
@@ -1037,7 +1037,7 @@ main {
 
 .site-header__cta {
   display: inline-flex;
-  min-height: 2.25rem;
+  min-height: 2.1rem;
   align-items: center;
   justify-content: center;
   border: var(--border-strong);
@@ -1240,7 +1240,7 @@ main {
 }
 
 .method-demo__stages li {
-  min-height: 2.25rem;
+  min-height: 2.1rem;
   border: var(--border-thin);
   border-radius: var(--radius-md);
   color: var(--color-ink-soft);
@@ -1576,7 +1576,7 @@ main {
   border-radius: var(--radius-md);
   color: color-mix(in oklch, var(--color-paper) 82%, transparent);
   font: 700 var(--text-mono-label) / var(--leading-compact) var(--font-mono);
-  padding: var(--space-2) var(--space-3);
+  padding: 0.55rem 0.8rem;
 }
 
 .about-contact-section .link-button--secondary {
@@ -1653,7 +1653,7 @@ main {
   background: var(--color-paper-soft);
   color: var(--color-accent);
   font: 700 var(--text-mono-label) / var(--leading-compact) var(--font-mono);
-  padding: var(--space-2) var(--space-3);
+  padding: 0.55rem 0.8rem;
   text-transform: uppercase;
 }
 
@@ -2196,7 +2196,7 @@ main {
   background: var(--color-paper-soft);
   color: var(--color-ink-soft);
   font: 700 var(--text-mono-label) / var(--leading-compact) var(--font-mono);
-  padding: var(--space-2) var(--space-3);
+  padding: 0.55rem 0.8rem;
   text-transform: uppercase;
 }
 
@@ -2428,7 +2428,7 @@ main {
   background: var(--color-paper);
   color: var(--color-ink-soft);
   font: 700 var(--text-mono-label) / var(--leading-compact) var(--font-mono);
-  padding: var(--space-2) var(--space-3);
+  padding: 0.55rem 0.8rem;
   text-transform: uppercase;
 }
 
@@ -2793,7 +2793,7 @@ main {
   justify-content: center;
   width: 2.25rem;
   min-width: 2.25rem;
-  min-height: 2.25rem;
+  min-height: 2.1rem;
   padding: 0;
 }
 
@@ -2882,7 +2882,7 @@ main {
   border-radius: var(--radius-sm);
   color: var(--color-accent);
   font: 700 var(--text-mono-label) / var(--leading-compact) var(--font-mono);
-  padding: var(--space-2) var(--space-3);
+  padding: 0.55rem 0.8rem;
   text-transform: uppercase;
 }
 
@@ -3205,10 +3205,10 @@ main {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  min-height: 2.5rem;
+  min-height: 2.1rem;
 }
 
-.research-strip__inner span {
+.research-strip__dot {
   width: 0.55rem;
   height: 0.55rem;
   border-radius: 50%;
@@ -3217,22 +3217,29 @@ main {
 }
 
 .research-strip__inner p {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
   margin: 0;
   color: var(--color-ink-muted);
   font: 700 var(--text-mono-label) / var(--leading-compact) var(--font-mono);
   text-transform: uppercase;
 }
 
+.text-separator {
+  color: var(--color-accent);
+}
+
 .research-index__hero {
-  padding-top: var(--space-12);
+  padding-top: var(--space-9);
 }
 
 .research-index__controls {
   display: grid;
-  gap: var(--space-4);
-  margin-top: var(--space-8);
+  gap: var(--space-3);
+  margin-top: var(--space-6);
   border-block: var(--border-strong);
-  padding-block: var(--space-5);
+  padding-block: var(--space-4);
 }
 
 .research-index__search {
@@ -3261,18 +3268,19 @@ main {
 .research-index__filters {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: 0.6rem;
+  align-self: end;
 }
 
 .research-index__filter {
-  min-height: 2.25rem;
+  min-height: 2.1rem;
   border: var(--border-thin);
   border-radius: var(--radius-sm);
   background: var(--color-paper);
   color: var(--color-ink-muted);
   cursor: pointer;
   font: 700 var(--text-mono-label) / var(--leading-compact) var(--font-mono);
-  padding: var(--space-2) var(--space-3);
+  padding: 0.55rem 0.8rem;
   text-transform: uppercase;
   transition:
     background-color var(--transition-fast),
@@ -3289,8 +3297,8 @@ main {
 
 .research-index__groups {
   display: grid;
-  gap: var(--space-10);
-  margin-top: var(--space-10);
+  gap: var(--space-8);
+  margin-top: var(--space-8);
 }
 
 .research-group {
@@ -3324,13 +3332,20 @@ main {
   gap: var(--space-2);
 }
 
-.research-row__meta span {
+.research-row__type-badge {
   border: var(--border-thin);
   border-radius: var(--radius-sm);
   background: var(--color-paper);
   color: var(--color-accent);
   font: 700 var(--text-mono-label) / var(--leading-compact) var(--font-mono);
-  padding: var(--space-2) var(--space-3);
+  padding: 0.55rem 0.8rem;
+  text-transform: uppercase;
+}
+
+.research-row__status {
+  color: var(--color-ink-soft);
+  font: 700 var(--text-mono-label) / var(--leading-compact) var(--font-mono);
+  padding: 0.58rem 0;
   text-transform: uppercase;
 }
 
@@ -3364,7 +3379,7 @@ main {
 .research-row__action span {
   display: inline-flex;
   width: fit-content;
-  min-height: 2.25rem;
+  min-height: 2.1rem;
   align-items: center;
   border-bottom: 1px solid var(--color-line-strong);
   color: var(--color-ink-muted);
@@ -3406,19 +3421,27 @@ main {
 
 @media (min-width: 820px) {
   .research-index__controls {
-    grid-template-columns: minmax(14rem, 0.8fr) minmax(0, 1.4fr);
+    grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.45fr);
     align-items: start;
   }
 
   .research-index__results {
     grid-column: 2;
+    margin-top: -0.1rem;
   }
 
   .research-row {
     grid-template-columns: minmax(11rem, 0.3fr) minmax(0, 1fr);
   }
 
-  .research-row__body {
+  .research-row__status {
+  color: var(--color-ink-soft);
+  font: 700 var(--text-mono-label) / var(--leading-compact) var(--font-mono);
+  padding: 0.58rem 0;
+  text-transform: uppercase;
+}
+
+.research-row__body {
     grid-template-columns: minmax(0, 1fr) max-content;
     align-items: start;
   }
@@ -3426,7 +3449,7 @@ main {
 
 @media (max-width: 560px) {
   .research-index__hero {
-    padding-top: var(--space-8);
+    padding-top: var(--space-6);
   }
 
   .research-index__filters {

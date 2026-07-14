@@ -3,10 +3,10 @@ title: "Financial inclusion and mobile-money adoption: a survey-based analysis"
 author: "Mayo T. N. Kadanga"
 lang: en
 type: "applied study"
-status: "structural article framework"
+status: "research article in preparation"
 dataset-label: "FinScope Benin 2018 microdata"
 draft: false
-description: "Article framework for a survey-based analysis of financial inclusion and mobile-money adoption."
+description: "Research article in preparation for a survey-based analysis of financial inclusion and mobile-money adoption."
 categories:
   - Financial inclusion
   - Mobile money
@@ -15,11 +15,11 @@ categories:
 
 
 
-<div class="article-intro"><p class="article-kicker">Applied study ? Quarto article framework</p><p class="article-display-title">Financial inclusion and mobile-money adoption: a survey-based analysis</p><p class="article-meta-line">Mayo T. N. Kadanga ? FinScope Benin 2018 microdata</p><div class="article-status"><p>Article framework. Empirical results and final interpretation will be added after source verification.</p></div><p class="article-question"><strong>Research question.</strong> Which household and individual characteristics are associated with financial inclusion and mobile-money adoption?</p></div>
+<div class="article-intro"><p class="article-kicker">Applied study · Quarto</p><p class="article-display-title">Financial inclusion and mobile-money adoption: a survey-based analysis</p><p class="article-meta-line">Mayo T. N. Kadanga · FinScope Benin 2018 microdata</p><div class="article-status"><p>Research article in preparation. Empirical results and final interpretation will be added after source verification.</p></div><p class="article-question"><strong>Research question.</strong> Which household and individual characteristics are associated with financial inclusion and mobile-money adoption?</p></div>
 
 ## Overview
 
-This article framework is designed for a study using FinScope Benin 2018 microdata to examine financial inclusion and mobile-money adoption. It sets out the intended structure for the completed analysis without presenting empirical findings.
+This research article in preparation is designed for a study using FinScope Benin 2018 microdata to examine financial inclusion and mobile-money adoption. It sets out the intended structure for the completed analysis without presenting empirical findings.
 
 The completed article will separate descriptive exploration, model specification, reproducible workflow and interpretation. It will avoid claiming representativeness, impact or causal effects unless those points are verified from approved sources.
 
@@ -108,7 +108,7 @@ The intended pipeline is Quarto source plus R or Python analysis scripts, genera
 
 ## References
 
-No bibliographic entries are displayed in this structural framework. References will be added after source verification.
+No bibliographic entries are displayed in this research article in preparation. References will be added after source verification.
 
 ## Related work
 
