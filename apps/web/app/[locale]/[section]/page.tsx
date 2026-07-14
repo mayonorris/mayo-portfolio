@@ -5,6 +5,7 @@ import { ContactForm } from "@/components/contact-form";
 import { Container } from "@/components/container";
 import { Eyebrow } from "@/components/eyebrow";
 import { LinkButton } from "@/components/link-button";
+import { ResearchIndex } from "@/components/research-index";
 import { Section } from "@/components/section";
 import { WorkVisual } from "@/components/work-visual";
 import { aboutContent } from "@/content/about";
@@ -254,48 +255,7 @@ export default async function LocalizedRoutePage({ params }: RoutePageProps) {
 
     return (
       <Section className="route-page knowledge-page knowledge-page--research" labelledBy="route-page-title">
-        <Container>
-          <div className="route-page__heading knowledge-page__heading">
-            <Eyebrow>{research.hero.eyebrow}</Eyebrow>
-            <h1 id="route-page-title">{research.hero.title}</h1>
-            <p>{research.hero.intro}</p>
-          </div>
-          <div className="knowledge-grid knowledge-grid--research">
-            {research.entries.map((entry) => {
-              const metadata = [entry.type, entry.status].filter(
-                (value, index, values) =>
-                  values.findIndex(
-                    (candidate) =>
-                      candidate.localeCompare(value, locale, { sensitivity: "base" }) ===
-                      0,
-                  ) === index,
-              );
-
-              return (
-                <article className="knowledge-card knowledge-card--research" key={entry.id}>
-                  <div className="knowledge-card__meta">
-                    {metadata.map((value) => (
-                      <span key={value}>{value}</span>
-                    ))}
-                  </div>
-                  <h2>{entry.title}</h2>
-                  <p>{entry.description}</p>
-                </article>
-              );
-            })}
-          </div>
-          <div className="knowledge-page__actions">
-            <LinkButton href={getLocalizedRoutePath(locale, research.ctas.primaryRoute)}>
-              {research.ctas.primary}
-            </LinkButton>
-            <LinkButton
-              href={getLocalizedRoutePath(locale, research.ctas.secondaryRoute)}
-              variant="secondary"
-            >
-              {research.ctas.secondary}
-            </LinkButton>
-          </div>
-        </Container>
+        <ResearchIndex content={research} locale={locale} />
       </Section>
     );
   }

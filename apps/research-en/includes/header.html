@@ -1,0 +1,27 @@
+<header class="article-header" role="banner"><div class="article-header__inner"><div class="article-brand"><strong>Mayo Kadanga</strong><span>ISE ? DATA SCIENTIST</span></div><nav class="article-nav" aria-label="Article navigation"><a data-portfolio-href="/en/research" href="/en/research">Back to Research</a><a data-locale-link href="/fr/recherche">FR</a><button class="article-theme-toggle" type="button" aria-label="Toggle article theme" data-theme-toggle><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button></nav></div></header>
+<script>
+(function () {
+  var root = document.documentElement;
+  var key = "mayo-research-theme";
+  var button = document.querySelector("[data-theme-toggle]");
+  var localeLink = document.querySelector("[data-locale-link]");
+  if (localeLink && location.pathname.indexOf("financial-inclusion-mobile-money") !== -1) {
+    localeLink.setAttribute("href", "/fr/recherche/inclusion-financiere-mobile-money");
+  }
+  function apply(theme) {
+    root.setAttribute("data-article-theme", theme);
+    if (button) button.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+  }
+  var stored = window.localStorage ? localStorage.getItem(key) : null;
+  if (stored === "light" || stored === "dark") apply(stored);
+  document.querySelectorAll("[data-portfolio-href]").forEach(function (link) { link.setAttribute("href", link.getAttribute("data-portfolio-href")); });
+  if (button) {
+    button.addEventListener("click", function () {
+      var current = root.getAttribute("data-article-theme");
+      var next = current === "dark" ? "light" : "dark";
+      apply(next);
+      if (window.localStorage) localStorage.setItem(key, next);
+    });
+  }
+}());
+</script>

@@ -1,0 +1,122 @@
+---
+title: "Financial inclusion and mobile-money adoption: a survey-based analysis"
+author: "Mayo T. N. Kadanga"
+lang: en
+type: "applied study"
+status: "structural article framework"
+dataset-label: "FinScope Benin 2018 microdata"
+draft: false
+description: "Article framework for a survey-based analysis of financial inclusion and mobile-money adoption."
+categories:
+  - Financial inclusion
+  - Mobile money
+  - Applied econometrics
+---
+
+
+
+<div class="article-intro"><p class="article-kicker">Applied study ? Quarto article framework</p><p class="article-display-title">Financial inclusion and mobile-money adoption: a survey-based analysis</p><p class="article-meta-line">Mayo T. N. Kadanga ? FinScope Benin 2018 microdata</p><div class="article-status"><p>Article framework. Empirical results and final interpretation will be added after source verification.</p></div><p class="article-question"><strong>Research question.</strong> Which household and individual characteristics are associated with financial inclusion and mobile-money adoption?</p></div>
+
+## Overview
+
+This article framework is designed for a study using FinScope Benin 2018 microdata to examine financial inclusion and mobile-money adoption. It sets out the intended structure for the completed analysis without presenting empirical findings.
+
+The completed article will separate descriptive exploration, model specification, reproducible workflow and interpretation. It will avoid claiming representativeness, impact or causal effects unless those points are verified from approved sources.
+
+## Research question
+
+The central question is: Which household and individual characteristics are associated with financial inclusion and mobile-money adoption?
+
+The intended contribution is to organize a survey-based analysis that can connect socioeconomic characteristics, access patterns and digital finance adoption in a reproducible and reviewable format.
+
+## Data and analytical scope
+
+Table: Article metadata for public readers
+
+| Field | Public status |
+|---|---|
+| Source | FinScope Benin 2018 microdata |
+| Unit of analysis | To be documented |
+| Outcome family | Financial inclusion and mobile-money adoption indicators |
+| Method family | Exploratory multivariate analysis and binary-choice modelling |
+| Software | R or Python workflow to be documented |
+| Reproducibility status | Framework prepared; analysis source pending verification |
+| Disclosure boundary | No personally identifiable information will be displayed |
+
+## Methodological framework
+
+The final study is expected to combine exploratory multivariate analysis with binary-choice modelling. The interpretation will focus on associations and, where appropriate, marginal-effect style summaries after the final model specification is verified.
+
+**Generic binary-choice model structure**
+
+$$
+\Pr(Y_i = 1 \mid X_i) = F(\alpha + X_i^{\prime}\beta)
+$$
+
+This equation is illustrative only. The final specification will be generated from the verified analysis source and will not use unverified variables in the public article.
+
+## Reproducible workflow
+
+The public article is intended to be produced from a Quarto source file linked to analysis scripts, generated tables and generated figures.
+
+**Illustrative workflow scaffold**
+
+```text
+# Load verified analysis inputs
+# Prepare the documented analysis sample
+# Run exploratory multivariate analysis
+# Estimate the verified binary-choice model
+# Export reviewed tables and figures
+```
+
+<div class="workflow-note"><p>This scaffold is not final production code. It shows the order of the reproducible workflow without referring to unpublished data files or unverified variables.</p></div>
+
+## Results framework
+
+Table: Results-table schema planned for the verified article
+
+| Output | Intended content | Current public status |
+|---|---|---|
+| Descriptive table | Sample structure and outcome definitions | To be documented |
+| Exploratory table | Multivariate dimensions or grouping summary | To be documented |
+| Model table | Verified coefficient or marginal-effect summary | To be documented |
+| Robustness note | Scope checks and model limitations | To be documented |
+
+<figure class="figure-frame">
+  <div class="figure-frame__panel" role="img" aria-label="Planned figure frame for verified financial inclusion results">Verified result figure will appear here after source verification</div>
+  <figcaption>No empirical result is displayed in this structural framework. The final figure will be generated from the verified analysis source.</figcaption>
+</figure>
+
+## Interpretation and policy relevance
+
+The final interpretation must answer the following questions before any public conclusion is shown:
+
+- Which associations are stable enough to discuss publicly?
+- Which results are descriptive rather than causal?
+- What uncertainty, sample restriction or data-use boundary should accompany each interpretation?
+- Which findings can responsibly inform a policy or product discussion?
+
+## Limitations and ethics
+
+This framework treats the analysis as secondary-data work. The completed article must document source limitations, sample restrictions, variable construction and disclosure boundaries.
+
+The article will distinguish association from causality. It will not display personally identifiable information, raw private data, signatures, document numbers, or restricted institutional material.
+
+## Reproducibility statement
+
+The intended pipeline is Quarto source plus R or Python analysis scripts, generated tables, generated figures and an environment or dependency record. Any public release of analysis materials is subject to data-use permissions and source verification.
+
+## References
+
+No bibliographic entries are displayed in this structural framework. References will be added after source verification.
+
+## Related work
+
+<ul class="related-links">
+  <li><a href="/en/work">Work</a></li>
+  <li><a href="/en/research">Research index</a></li>
+  <li><a href="/en/writing">Writing</a></li>
+  <li><a href="/en/contact">Contact</a></li>
+</ul>
+
+<footer class="article-footer" role="contentinfo"><div class="article-footer__inner"><p>Quarto article source. Static output is served through the portfolio.</p><a href="/en/research">Back to Research</a></div></footer>

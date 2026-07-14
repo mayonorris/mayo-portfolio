@@ -8,7 +8,7 @@ Scope: repository state compared with `docs/architecture/v1.0/04_SPRINT_1_BACKLO
 
 - Completed before development start: repository creation, legacy archive, documentation integration, public-safety notes, `.gitignore`, and `.gitattributes`.
 - Completed during Sprint 1 foundation work: Node and pnpm runtime pinning, root package metadata, pnpm workspace manifest, initial Next.js web application, bilingual locale routing, typed shell dictionaries, Editorial Intelligence visual foundation, public homepage MVP, and Home realignment to Design Reference 1.0.
-- Current global Sprint 1 status: partial. The web foundation now has bilingual routing, a compact editorial shell, CSS design tokens, light/dark themes, locale-aware routes, a Design Reference 1.0-aligned Home, selected-work case placeholders, and a dedicated Experience/Parcours route. Quarto projects, the official shared design-token package, content schemas, rewrites, full formatting policy, and CI do not exist yet.
+- Current global Sprint 1 status: partial. The web foundation now has bilingual routing, a compact editorial shell, CSS design tokens, light/dark themes, locale-aware routes, a Design Reference 1.0-aligned Home, selected-work case placeholders, and a dedicated Experience/Parcours route. Research Quarto source projects, pre-rendered static output and the first clean Research article rewrite now exist. The official shared design-token package, content schemas, full formatting policy, Writing Quarto output and CI are still pending.
 
 ## Task Audit
 
@@ -18,15 +18,15 @@ Scope: repository state compared with `docs/architecture/v1.0/04_SPRINT_1_BACKLO
 | S1-02 Pin runtime | completed | `.nvmrc`, root `package.json` with `packageManager`, `engines`, and `pnpm-lock.yaml`; active toolchain verified with Node 24 and pnpm 11.2.0. | None for the pinning baseline. | Node 24 and pnpm policy from blueprint. | Use these pins for all later framework work. |
 | S1-03 Create pnpm workspace | partial | `pnpm-workspace.yaml` declares `apps/*` and `packages/*`; root scripts target the web workspace; pnpm discovers the root and `apps/web`; no nested Git repository found. | Shared package workspaces such as `packages/design-tokens` and `packages/content-schema` are not initialized yet. | S1-02. | Create package workspaces when their Sprint tasks start. |
 | S1-04 Initialize Next.js manually | completed | `apps/web` exists with App Router, TypeScript strict mode, Tailwind CSS, ESLint, alias `@/*`, neutral technical baseline, and no nested Git repository. | Production deployment wiring remains out of scope. | S1-02, S1-03. | Continue downstream web tasks. |
-| S1-05 Initialize Quarto projects | not_started | `apps/knowledge` does not exist. | EN and FR Quarto configs, sample indexes, sample articles, shared SCSS import. | Workspace foundation. | Initialize localized Quarto projects when selected. |
+| S1-05 Initialize Quarto projects | partial | `apps/research-en` and `apps/research-fr` exist for the Research publishing foundation, with localized Quarto configs, indexes, article sources and shared CSS. | The older `apps/knowledge` shape and Writing Quarto layer are not implemented yet. | Workspace foundation and approved Research publishing task. | Continue with shared token promotion and later Writing Quarto work. |
 | S1-06 Create token source | partial | `apps/web/app/globals.css` contains centralized CSS variables and the current visual token baseline. | Official `packages/design-tokens/src/tokens.json` source, package scaffolding, and cross-engine token ownership are still missing. | Workspace package structure. | Promote the CSS token baseline into the shared design-token package when S1-06 formally starts. |
 | S1-07 Generate CSS and SCSS | not_started | No token generator or generated outputs exist. | Deterministic generator, CSS output, SCSS output, stale-output check. | S1-06. | Implement after token source is added. |
 | S1-08 Add locale routing | completed | `apps/web/app/[locale]` renders `/en` and `/fr`; `apps/web/proxy.ts` redirects `/` to `/en`; unsupported locales return 404; document language and metadata are locale-aware; language switcher maps equivalent localized paths. | Future Quarto rewrites are not present. | S1-04. | Continue with content and routing governance. |
 | S1-09 Add typed dictionaries | partial | Typed dictionaries cover metadata, shell labels, footer labels, language switcher, theme toggle, and localized navigation. Home content is centralized in typed registries. | Explicit key-parity guard and full future interface coverage are not implemented yet. | S1-04, S1-08. | Formalize dictionary parity and shared interface labels. |
 | S1-10 Add Zod schemas | not_started | `packages/content-schema` does not exist. | Project, experience, education, certification, link, status, confidentiality schemas. | Workspace package structure. | Add content schema package. |
 | S1-11 Add sample registry | blocked | No schema package exists. | One non-sensitive sample registry and validation entry point. | S1-10. | Wait for content schemas. |
-| S1-12 Deploy Quarto test origin | blocked | No Quarto project exists. | Rendered EN and FR static outputs and gated preview workflow. | S1-05. | Wait for Quarto initialization. |
-| S1-13 Add rewrites | blocked | Locale routing exists, but no Quarto origin exists. | Rewrites for research and writing origins once Quarto is available. | S1-04, S1-05, S1-12. | Wait for locale routing and Quarto preview origin. |
+| S1-12 Deploy Quarto test origin | partial | EN and FR Research Quarto projects render into `apps/web/public/research/` for the first deployment model. | No CI artifact workflow or separate static origin exists yet. | S1-05. | Add CI rendering and publication workflow later. |
+| S1-13 Add rewrites | partial | Clean rewrites exist for the first bilingual Financial Inclusion Research article routes. | General Research and Writing rewrite families are not complete. | S1-04, S1-05, S1-12. | Extend rewrites when additional Quarto articles or a static origin exist. |
 | S1-14 Configure formatting and linting | partial | `apps/web` has ESLint and root scripts delegate to the web workspace; `git diff --check` is used locally. | Repository-wide Prettier, Markdown/JSON/YAML checks, and formatting scripts are not configured. | Package structure. | Configure full repository quality policy later in Sprint 1. |
 | S1-15 Add CI | blocked | No `.github/workflows` validation workflow exists. | Install, token generation, typecheck, lint, web build, Quarto renders. | S1-04, S1-05, S1-07, S1-14. | Add after local checks exist. |
 
@@ -143,3 +143,23 @@ Operational note:
 ## Remaining Immediate Work
 
 Next recommended technical task: S1-09 formalize dictionary key parity and interface text governance, or S1-06 promote the current CSS token baseline into the official shared design-token package.
+
+
+## Research Publishing Foundation
+
+Selected task: Research Publishing Foundation - Next.js index plus Quarto article skeleton.
+
+Changes recorded:
+
+- Rebuilt /en/research and /fr/recherche as typed, searchable Next.js editorial indexes with grouped rows and derived filters.
+- Added localized Quarto source projects in apps/research-en and apps/research-fr.
+- Added the first bilingual Financial Inclusion article framework without empirical results, coefficients, charts, publication date, DOI or venue claim.
+- Rendered Quarto output is intended to live under apps/web/public/research/en and apps/web/public/research/fr for the first Vercel deployment model.
+- Added clean article rewrites for /en/research/financial-inclusion-mobile-money and /fr/recherche/inclusion-financiere-mobile-money.
+- Documented the source/output workflow in docs/architecture/v1.0/RESEARCH_PUBLISHING_WORKFLOW.md.
+
+Safety notes:
+
+- The first article is an article framework, not a completed study.
+- Non-Financial Inclusion Research entries remain non-clickable until their article routes exist.
+- The Quarto theme currently uses a local article-level theme toggle and respects prefers-color-scheme; it does not yet share Next.js theme state.

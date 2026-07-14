@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Quarto-generated deployment output. Source lives in apps/research-*/*.qmd.
+    "public/research/**",
   ]),
 ]);
 

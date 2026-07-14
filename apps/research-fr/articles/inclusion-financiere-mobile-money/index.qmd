@@ -1,0 +1,122 @@
+---
+title: "Inclusion financi?re et adoption du mobile money : une analyse fond?e sur les donn?es d?enqu?te"
+author: "Mayo T. N. Kadanga"
+lang: fr
+type: "?tude appliqu?e"
+status: "ossature structurelle d?article"
+dataset-label: "Microdonn?es FinScope B?nin 2018"
+draft: false
+description: "Ossature d?article pour une analyse fond?e sur les donn?es d?enqu?te de l?inclusion financi?re et de l?adoption du mobile money."
+categories:
+  - Inclusion financi?re
+  - Mobile money
+  - ?conom?trie appliqu?e
+---
+
+
+
+<div class="article-intro"><p class="article-kicker">?tude appliqu?e ? Ossature d?article Quarto</p><p class="article-display-title">Inclusion financi?re et adoption du mobile money : une analyse fond?e sur les donn?es d?enqu?te</p><p class="article-meta-line">Mayo T. N. Kadanga ? Microdonn?es FinScope B?nin 2018</p><div class="article-status"><p>Ossature d?article. Les r?sultats empiriques et l?interpr?tation finale seront ajout?s apr?s v?rification des sources.</p></div><p class="article-question"><strong>Question de recherche.</strong> Quelles caract?ristiques des m?nages et des individus sont associ?es ? l?inclusion financi?re et ? l?adoption du mobile money ?</p></div>
+
+## Vue d?ensemble
+
+Cette ossature d?article est con?ue pour une ?tude utilisant les microdonn?es FinScope B?nin 2018 afin d?examiner l?inclusion financi?re et l?adoption du mobile money. Elle ?tablit la structure pr?vue pour l?analyse achev?e sans pr?senter de r?sultats empiriques.
+
+L?article final s?parera l?exploration descriptive, la sp?cification du mod?le, le workflow reproductible et l?interpr?tation. Il ?vitera toute affirmation de repr?sentativit?, d?impact ou d?effet causal tant que ces points ne sont pas v?rifi?s ? partir de sources approuv?es.
+
+## Question de recherche
+
+La question centrale est la suivante : Quelles caract?ristiques des m?nages et des individus sont associ?es ? l?inclusion financi?re et ? l?adoption du mobile money ?
+
+La contribution attendue est d?organiser une analyse fond?e sur enqu?te qui relie caract?ristiques socio?conomiques, acc?s aux services financiers et adoption de la finance num?rique dans un format reproductible et v?rifiable.
+
+## Donn?es et p?rim?tre analytique
+
+Table: M?tadonn?es de l?article pour les lecteurs publics
+
+| Champ | Statut public |
+|---|---|
+| Source | Microdonn?es FinScope B?nin 2018 |
+| Unit? d?analyse | ? documenter |
+| Famille de r?sultats | Indicateurs d?inclusion financi?re et d?adoption du mobile money |
+| Famille de m?thodes | Analyse multivari?e exploratoire et mod?les de choix binaire |
+| Logiciels | Workflow R ou Python ? documenter |
+| Statut de reproductibilit? | Ossature pr?par?e; source d?analyse en attente de v?rification |
+| Limite de divulgation | Aucune information personnellement identifiable ne sera affich?e |
+
+## Cadre m?thodologique
+
+L??tude finale devrait combiner une analyse multivari?e exploratoire et des mod?les de choix binaire. L?interpr?tation portera sur les associations et, le cas ?ch?ant, sur des synth?ses de type effets marginaux apr?s v?rification de la sp?cification finale du mod?le.
+
+**Structure g?n?rique de mod?le de choix binaire**
+
+$$
+\Pr(Y_i = 1 \mid X_i) = F(\alpha + X_i^{\prime}\beta)
+$$
+
+Cette ?quation est illustrative seulement. La sp?cification finale sera g?n?r?e ? partir de la source d?analyse v?rifi?e et n?utilisera pas de variables non v?rifi?es dans l?article public.
+
+## Workflow reproductible
+
+L?article public est destin? ? ?tre produit ? partir d?un fichier source Quarto reli? ? des scripts d?analyse, des tableaux g?n?r?s et des figures g?n?r?es.
+
+**Ossature illustrative du workflow**
+
+```text
+# Charger les entr?es d?analyse v?rifi?es
+# Pr?parer l??chantillon d?analyse document?
+# Ex?cuter l?analyse multivari?e exploratoire
+# Estimer le mod?le de choix binaire v?rifi?
+# Exporter les tableaux et figures relus
+```
+
+<div class="workflow-note"><p>Cette ossature n?est pas le code final de production. Elle montre l?ordre du workflow reproductible sans r?f?rencer de fichiers de donn?es non publi?s ni de variables non v?rifi?es.</p></div>
+
+## Cadre des r?sultats
+
+Table: Sch?ma de tableau de r?sultats pr?vu pour l?article v?rifi?
+
+| Sortie | Contenu attendu | Statut public actuel |
+|---|---|---|
+| Tableau descriptif | Structure de l??chantillon et d?finitions des indicateurs | ? documenter |
+| Tableau exploratoire | Dimensions multivari?es ou synth?se de groupement | ? documenter |
+| Tableau de mod?le | Synth?se v?rifi?e de coefficients ou d?effets marginaux | ? documenter |
+| Note de robustesse | Contr?les de p?rim?tre et limites du mod?le | ? documenter |
+
+<figure class="figure-frame">
+  <div class="figure-frame__panel" role="img" aria-label="Cadre de figure pr?vu pour les r?sultats v?rifi?s sur l?inclusion financi?re">La figure de r?sultats v?rifi?s appara?tra ici apr?s v?rification des sources</div>
+  <figcaption>Aucun r?sultat empirique n?est affich? dans cette ossature structurelle. La figure finale sera g?n?r?e ? partir de la source d?analyse v?rifi?e.</figcaption>
+</figure>
+
+## Interpr?tation et pertinence pour les politiques publiques
+
+L?interpr?tation finale devra r?pondre aux questions suivantes avant toute conclusion publique :
+
+- Quelles associations sont suffisamment stables pour ?tre discut?es publiquement ?
+- Quels r?sultats rel?vent de la description plut?t que de la causalit? ?
+- Quelle incertitude, restriction d??chantillon ou limite d?usage des donn?es doit accompagner chaque interpr?tation ?
+- Quelles conclusions peuvent nourrir de mani?re responsable une discussion de politique publique ou de produit ?
+
+## Limites et ?thique
+
+Cette ossature traite l?analyse comme un travail sur donn?es secondaires. L?article achev? devra documenter les limites de source, les restrictions d??chantillon, la construction des variables et les limites de divulgation.
+
+L?article distinguera association et causalit?. Il n?affichera aucune information personnellement identifiable, donn?e priv?e brute, signature, num?ro de document ou mat?riel institutionnel restreint.
+
+## D?claration de reproductibilit?
+
+Le pipeline pr?vu repose sur une source Quarto, des scripts d?analyse R ou Python, des tableaux g?n?r?s, des figures g?n?r?es et un enregistrement d?environnement ou de d?pendances. Toute publication de mat?riels d?analyse reste soumise aux droits d?usage des donn?es et ? la v?rification des sources.
+
+## R?f?rences
+
+Aucune entr?e bibliographique n?est affich?e dans cette ossature structurelle. Les r?f?rences seront ajout?es apr?s v?rification des sources.
+
+## Travaux associ?s
+
+<ul class="related-links">
+  <li><a href="/fr/projets">Projets</a></li>
+  <li><a href="/fr/recherche">Index Recherche</a></li>
+  <li><a href="/fr/publications">Publications</a></li>
+  <li><a href="/fr/contact">Contact</a></li>
+</ul>
+
+<footer class="article-footer" role="contentinfo"><div class="article-footer__inner"><p>Source d?article Quarto. La sortie statique est servie ? travers le portfolio.</p><a href="/fr/recherche">Retour ? la recherche</a></div></footer>

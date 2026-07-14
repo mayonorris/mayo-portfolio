@@ -1,0 +1,25 @@
+---
+title: "Recherche"
+description: "Index source Quarto pour les articles de recherche long-form."
+lang: fr
+---
+
+
+<div class="article-intro">
+  <p class="article-kicker">Recherche ? Index source Quarto</p>
+  <p class="article-display-title">Recherche</p>
+  <div class="article-status">
+    <p>Ce projet Quarto contient les sources des articles de recherche long-form. L?index public du portfolio reste dans Next.js.</p>
+  </div>
+</div>
+
+## Ossatures d?articles disponibles
+
+- [Inclusion financi?re et adoption du mobile money : une analyse fond?e sur les donn?es d?enqu?te](articles/inclusion-financiere-mobile-money/)
+
+<footer class="article-footer" role="contentinfo">
+  <div class="article-footer__inner">
+    <p>Sortie Quarto servie ? travers le portfolio.</p>
+    <a href="/fr/recherche">Index Recherche</a>
+  </div>
+</footer>

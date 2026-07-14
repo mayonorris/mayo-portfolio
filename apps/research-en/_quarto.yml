@@ -1,0 +1,31 @@
+project:
+  type: website
+  output-dir: ../web/public/research/en
+  render:
+    - index.qmd
+    - articles/**/*.qmd
+
+website:
+  title: "Mayo Kadanga Research"
+  navbar: false
+  search: false
+
+lang: en
+bibliography: references.bib
+execute:
+  freeze: auto
+
+format:
+  html:
+    theme: none
+    css: styles/research.css
+    include-before-body: includes/header.html
+    toc: true
+    toc-title: "On this page"
+    number-sections: true
+    code-fold: true
+    code-tools: false
+    anchor-sections: true
+    html-math-method: mathml
+    highlight-style: github
+    fig-responsive: true
