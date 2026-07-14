@@ -111,6 +111,35 @@ Operational note:
 
 - `pnpm.cmd install` had already passed as up to date during the interrupted V2 run. After reboot, the rerun was not executed because the approval gate treated it as a potential network operation.
 
+## QA Correction Update - 2026-07-14
+
+Selected task: targeted QA correction for Research, Writing and Contact.
+
+Implementation details:
+
+- Replaced the fragile text theme glyph with inline SVG sun and moon icons while preserving persisted and system theme behavior.
+- Reworked the language switcher into a true compact EN / FR segmented control with no visible separator, equal segment heights and focus states.
+- Restored the warm-paper light theme through centralized color tokens while keeping dark theme tokens unchanged.
+- Deduplicated Research metadata badges at render time when type and status are identical, preserving the typed registry values.
+- Reduced excess empty space in Research and Writing cards by removing forced minimum card height and tightening metadata, title, body and status rhythm.
+- Made GitHub, LinkedIn and EM? direct channels fully actionable rows with external-link SVG cues, target blank and noopener noreferrer.
+- Corrected the Contact flow to pre-open a safe blank window during the user click, copy the structured message, then navigate to LinkedIn; fallback keeps values and exposes a direct LinkedIn link.
+
+Validation results:
+
+- `pnpm.cmd install`: passed; workspace already up to date with pnpm 11.2.0.
+- `pnpm.cmd --filter web lint`: passed.
+- `pnpm.cmd --filter web typecheck`: passed.
+- `pnpm.cmd --filter web build`: passed; 25 static pages generated.
+- `git diff --check`: passed.
+- Chrome DevTools QA covered `/en/research`, `/fr/recherche`, `/en/writing`, `/fr/publications`, `/en/contact` and `/fr/contact` at 1920 px, 1440 px, 1366 px, tablet and mobile widths in light and dark themes.
+- Automated checks passed for no horizontal overflow, one h1, correct lang, no Next.js dialog overlay, no public internal wording, compact locale control, SVG theme icon, Research badge deduplication and actionable Contact links.
+- Contact form QA passed for structured clipboard message, LinkedIn profile opening from a real click, and the denied clipboard or popup fallback path with entered values preserved.
+
+Operational note:
+
+- Representative screenshots were generated during QA, but the local image-view helper was unavailable because of the Windows sandbox helper issue; DOM, layout and interaction checks were completed through Chrome DevTools Protocol.
+
 ## Remaining Immediate Work
 
 Next recommended technical task: S1-09 formalize dictionary key parity and interface text governance, or S1-06 promote the current CSS token baseline into the official shared design-token package.

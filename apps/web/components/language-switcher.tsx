@@ -1,6 +1,5 @@
 "use client";
 
-import { Fragment } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -34,32 +33,25 @@ export function LanguageSwitcher({ locale, labels }: LanguageSwitcherProps) {
   return (
     <nav aria-label={labels.ariaLabel} className="language-switcher">
       <ul className="language-switcher__list" role="list">
-        {locales.map((targetLocale, index) => {
+        {locales.map((targetLocale) => {
           const isCurrent = targetLocale === locale;
           const label = isCurrent ? labels.current : labels.switchTo[targetLocale];
 
           return (
-            <Fragment key={targetLocale}>
-              <li>
-                <Link
-                  aria-current={isCurrent ? "page" : undefined}
-                  aria-label={label}
-                  className="language-switcher__link"
-                  data-current={isCurrent ? "true" : "false"}
-                  href={getLocalizedPath(targetLocale, equivalentPath)}
-                  hrefLang={targetLocale}
-                  lang={targetLocale}
-                  title={labels.names[targetLocale]}
-                >
-                  {labels.shortNames[targetLocale]}
-                </Link>
-              </li>
-              {index < locales.length - 1 ? (
-                <li aria-hidden="true" className="language-switcher__separator">
-                  |
-                </li>
-              ) : null}
-            </Fragment>
+            <li key={targetLocale}>
+              <Link
+                aria-current={isCurrent ? "page" : undefined}
+                aria-label={label}
+                className="language-switcher__link"
+                data-current={isCurrent ? "true" : "false"}
+                href={getLocalizedPath(targetLocale, equivalentPath)}
+                hrefLang={targetLocale}
+                lang={targetLocale}
+                title={labels.names[targetLocale]}
+              >
+                {labels.shortNames[targetLocale]}
+              </Link>
+            </li>
           );
         })}
       </ul>

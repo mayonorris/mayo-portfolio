@@ -66,6 +66,33 @@ function subscribeToTheme(onStoreChange: () => void) {
   };
 }
 
+function MoonIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="theme-toggle__svg"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path d="M20.1 14.4A7.2 7.2 0 0 1 9.6 3.9 8.6 8.6 0 1 0 20.1 14.4Z" />
+    </svg>
+  );
+}
+
+function SunIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="theme-toggle__svg"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2.5v2.2M12 19.3v2.2M4.7 4.7l1.6 1.6M17.7 17.7l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.7 19.3l1.6-1.6M17.7 6.3l1.6-1.6" />
+    </svg>
+  );
+}
+
 export function ThemeToggle({ labels }: ThemeToggleProps) {
   const theme = useSyncExternalStore(
     subscribeToTheme,
@@ -75,7 +102,6 @@ export function ThemeToggle({ labels }: ThemeToggleProps) {
   const nextTheme: Theme = theme === "dark" ? "light" : "dark";
   const currentLabel = theme === "dark" ? labels.dark : labels.light;
   const buttonLabel = labels.label + ": " + currentLabel + ". " + labels.switchTo[nextTheme];
-  const icon = theme === "dark" ? "?" : "?";
 
   useEffect(() => {
     applyTheme(getStoredTheme() ?? getSystemTheme());
@@ -96,9 +122,7 @@ export function ThemeToggle({ labels }: ThemeToggleProps) {
       type="button"
     >
       <span className="theme-toggle__indicator" aria-hidden="true" />
-      <span className="theme-toggle__icon" aria-hidden="true">
-        {icon}
-      </span>
+      {theme === "dark" ? <MoonIcon /> : <SunIcon />}
       <span className="sr-only">{currentLabel}</span>
     </button>
   );

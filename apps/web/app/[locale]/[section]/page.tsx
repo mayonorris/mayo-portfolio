@@ -261,16 +261,28 @@ export default async function LocalizedRoutePage({ params }: RoutePageProps) {
             <p>{research.hero.intro}</p>
           </div>
           <div className="knowledge-grid knowledge-grid--research">
-            {research.entries.map((entry) => (
-              <article className="knowledge-card knowledge-card--research" key={entry.id}>
-                <div className="knowledge-card__meta">
-                  <span>{entry.type}</span>
-                  <span>{entry.status}</span>
-                </div>
-                <h2>{entry.title}</h2>
-                <p>{entry.description}</p>
-              </article>
-            ))}
+            {research.entries.map((entry) => {
+              const metadata = [entry.type, entry.status].filter(
+                (value, index, values) =>
+                  values.findIndex(
+                    (candidate) =>
+                      candidate.localeCompare(value, locale, { sensitivity: "base" }) ===
+                      0,
+                  ) === index,
+              );
+
+              return (
+                <article className="knowledge-card knowledge-card--research" key={entry.id}>
+                  <div className="knowledge-card__meta">
+                    {metadata.map((value) => (
+                      <span key={value}>{value}</span>
+                    ))}
+                  </div>
+                  <h2>{entry.title}</h2>
+                  <p>{entry.description}</p>
+                </article>
+              );
+            })}
           </div>
           <div className="knowledge-page__actions">
             <LinkButton href={getLocalizedRoutePath(locale, research.ctas.primaryRoute)}>
@@ -345,8 +357,23 @@ export default async function LocalizedRoutePage({ params }: RoutePageProps) {
               <ul className="contact-channel-list" role="list">
                 {contact.channels.items.map((channel) => (
                   <li key={channel.id}>
-                    <a href={channel.href} rel="noopener noreferrer" target="_blank">
-                      <span>{channel.label}</span>
+                    <a
+                      aria-label={channel.label + ": " + channel.description}
+                      href={channel.href}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <span className="contact-channel-list__label">
+                        {channel.label}
+                        <svg
+                          aria-hidden="true"
+                          className="contact-channel-list__icon"
+                          focusable="false"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M5 3h8v8M13 3 4 12" />
+                        </svg>
+                      </span>
                       <small>{channel.description}</small>
                     </a>
                   </li>

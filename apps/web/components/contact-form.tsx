@@ -95,7 +95,8 @@ export function ContactForm({ content, linkedinHref }: ContactFormProps) {
       return;
     }
 
-    const openedWindow = window.open(linkedinHref, "_blank", "noopener,noreferrer");
+    const openedWindow = window.open("about:blank", "_blank");
+    let copiedToClipboard = false;
 
     if (openedWindow) {
       openedWindow.opener = null;
@@ -103,9 +104,17 @@ export function ContactForm({ content, linkedinHref }: ContactFormProps) {
 
     try {
       await navigator.clipboard.writeText(formatMessage(content, values));
+      copiedToClipboard = true;
       setNotice(content.notice.copied);
     } catch {
       setNotice(content.notice.clipboardUnavailable);
+    }
+
+    if (openedWindow) {
+      openedWindow.location.href = linkedinHref;
+    }
+
+    if (!openedWindow || !copiedToClipboard) {
       setShowLinkedInFallback(true);
     }
   }
@@ -123,7 +132,12 @@ export function ContactForm({ content, linkedinHref }: ContactFormProps) {
   return (
     <form className="contact-form" noValidate onSubmit={handleSubmit}>
       <div className="contact-form__field">
-        <label htmlFor={nameId}>{content.nameLabel}</label>
+        <label htmlFor={nameId}>
+          {content.nameLabel}
+          <span className="contact-form__required" aria-hidden="true">
+            *
+          </span>
+        </label>
         <input
           aria-describedby={messages.name ? `${nameId}-message` : undefined}
           aria-invalid={messages.name ? "true" : "false"}
@@ -143,7 +157,12 @@ export function ContactForm({ content, linkedinHref }: ContactFormProps) {
       </div>
 
       <div className="contact-form__field">
-        <label htmlFor={emailId}>{content.emailLabel}</label>
+        <label htmlFor={emailId}>
+          {content.emailLabel}
+          <span className="contact-form__required" aria-hidden="true">
+            *
+          </span>
+        </label>
         <input
           aria-describedby={messages.email ? `${emailId}-message` : undefined}
           aria-invalid={messages.email ? "true" : "false"}
@@ -164,7 +183,12 @@ export function ContactForm({ content, linkedinHref }: ContactFormProps) {
       </div>
 
       <div className="contact-form__field">
-        <label htmlFor={reasonId}>{content.reasonLabel}</label>
+        <label htmlFor={reasonId}>
+          {content.reasonLabel}
+          <span className="contact-form__required" aria-hidden="true">
+            *
+          </span>
+        </label>
         <select
           aria-describedby={messages.reason ? `${reasonId}-message` : undefined}
           aria-invalid={messages.reason ? "true" : "false"}
@@ -189,7 +213,12 @@ export function ContactForm({ content, linkedinHref }: ContactFormProps) {
       </div>
 
       <div className="contact-form__field">
-        <label htmlFor={messageId}>{content.messageLabel}</label>
+        <label htmlFor={messageId}>
+          {content.messageLabel}
+          <span className="contact-form__required" aria-hidden="true">
+            *
+          </span>
+        </label>
         <textarea
           aria-describedby={messages.message ? `${messageId}-message` : undefined}
           aria-invalid={messages.message ? "true" : "false"}
