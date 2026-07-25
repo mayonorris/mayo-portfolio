@@ -2259,6 +2259,10 @@ main {
   margin-bottom: var(--space-3);
 }
 
+.case-page__section p + p {
+  margin-top: var(--space-4);
+}
+
 @media (min-width: 760px) {
   .about-page__hero {
     grid-template-columns: minmax(0, 1fr) minmax(15rem, 20rem);

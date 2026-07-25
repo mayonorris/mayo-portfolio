@@ -105,6 +105,12 @@ export default async function CasePage({ params }: CasePageProps) {
               <dt>{work.roleLabel}</dt>
               <dd>{item.role}</dd>
             </div>
+            {item.period ? (
+              <div>
+                <dt>{work.periodLabel}</dt>
+                <dd>{item.period}</dd>
+              </div>
+            ) : null}
           </dl>
           <div className="case-page__actions">
             <LinkButton href={getLocalizedPath(locale, "/work")} variant="secondary">
@@ -132,7 +138,11 @@ export default async function CasePage({ params }: CasePageProps) {
           <article className="case-page__section" key={caseSection.title}>
             <Eyebrow>{caseSection.eyebrow}</Eyebrow>
             <h2>{caseSection.title}</h2>
-            <p>{caseSection.body}</p>
+            {Array.isArray(caseSection.body) ? (
+              caseSection.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)
+            ) : (
+              <p>{caseSection.body}</p>
+            )}
           </article>
         ))}
       </Container>
