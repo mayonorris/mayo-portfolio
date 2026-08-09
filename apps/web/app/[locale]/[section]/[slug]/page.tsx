@@ -135,7 +135,10 @@ export default async function CasePage({ params }: CasePageProps) {
       </Container>
       <Container className="case-page__sections">
         {caseContent.sections.map((caseSection) => (
-          <article className="case-page__section" key={caseSection.title}>
+          <article
+            className={`case-page__section case-page__section--${caseSection.kind ?? "standard"}`}
+            key={caseSection.title}
+          >
             <Eyebrow>{caseSection.eyebrow}</Eyebrow>
             <h2>{caseSection.title}</h2>
             {Array.isArray(caseSection.body) ? (
@@ -143,6 +146,11 @@ export default async function CasePage({ params }: CasePageProps) {
             ) : (
               <p>{caseSection.body}</p>
             )}
+            {caseSection.steps ? (
+              <ol className="case-page__workflow">
+                {caseSection.steps.map((step) => <li key={step}>{step}</li>)}
+              </ol>
+            ) : null}
           </article>
         ))}
       </Container>

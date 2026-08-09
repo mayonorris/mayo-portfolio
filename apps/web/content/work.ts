@@ -1,7 +1,8 @@
 ﻿import type { Locale } from "@/i18n/locales";
 import type { ExternalProjectLinkId } from "./external-links";
+import { workBatchCases, workBatchEarlierProjects, workBatchItems } from "./work-batch";
 
-export type WorkVisualVariant = "systems" | "research" | "signal" | "finance";
+export type WorkVisualVariant = "systems" | "research" | "signal" | "finance" | "data-quality" | "volatility";
 
 export type SelectedWorkItem = {
   slug: string;
@@ -26,6 +27,15 @@ export type CaseStudySection = {
   eyebrow: string;
   title: string;
   body: string | string[];
+  kind?: "standard" | "confidentiality" | "workflow";
+  steps?: string[];
+};
+
+export type EarlierProject = {
+  title: string;
+  status: string;
+  description: string;
+  skills: string;
 };
 
 export type CaseStudyContent = {
@@ -45,11 +55,15 @@ export type WorkContent = {
   periodLabel: string;
   liveSiteLabel: string;
   items: SelectedWorkItem[];
+  earlierProjects: {
+    eyebrow: string;
+    items: EarlierProject[];
+  };
   additionalBuild: AdditionalBuild;
   cases: Record<string, CaseStudyContent>;
 };
 
-const workItems = {
+const workItems: Record<Locale, SelectedWorkItem[]> = {
   en: [
     {
       slug: "em2-data-ai-lab-website",
@@ -89,6 +103,7 @@ const workItems = {
       role: "Econometric analysis",
       visual: "finance",
     },
+    ...workBatchItems.en,
   ],
   fr: [
     {
@@ -129,8 +144,9 @@ const workItems = {
       role: "Analyse économétrique",
       visual: "finance",
     },
+    ...workBatchItems.fr,
   ],
-} satisfies Record<Locale, SelectedWorkItem[]>;
+};
 
 export const workContent = {
   en: {
@@ -144,6 +160,7 @@ export const workContent = {
     periodLabel: "Period",
     liveSiteLabel: "Live site",
     items: workItems.en,
+    earlierProjects: workBatchEarlierProjects.en,
     additionalBuild: {
       eyebrow: "ADDITIONAL BUILD",
       title: "Currency Converter",
@@ -153,6 +170,7 @@ export const workContent = {
       linkId: "currencyConverter",
     },
     cases: {
+      ...workBatchCases.en,
       "em2-data-ai-lab-website": {
         backToWork: "Back to selected work",
         contactCta: "Start a conversation",
@@ -338,6 +356,7 @@ export const workContent = {
     periodLabel: "Période",
     liveSiteLabel: "Site en ligne",
     items: workItems.fr,
+    earlierProjects: workBatchEarlierProjects.fr,
     additionalBuild: {
       eyebrow: "PROJET COMPLÉMENTAIRE",
       title: "Convertisseur de devises",
@@ -347,6 +366,7 @@ export const workContent = {
       linkId: "currencyConverter",
     },
     cases: {
+      ...workBatchCases.fr,
       "em2-data-ai-lab-website": {
         backToWork: "Retour aux projets",
         contactCta: "Prendre contact",

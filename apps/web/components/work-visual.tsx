@@ -67,6 +67,43 @@ function FinanceVisual() {
   );
 }
 
+function DataQualityVisual() {
+  const nodes = [64, 122, 180, 238, 296, 354];
+
+  return (
+    <svg className="work-visual__svg" viewBox="0 0 420 220">
+      <path className="work-visual__connector" d="M54 110 H366" />
+      {nodes.map((cx, index) => (
+        <g key={cx}>
+          <circle
+            className={index === 2 || index === 4 ? "work-visual__dot work-visual__dot--accent" : "work-visual__dot"}
+            cx={cx}
+            cy="110"
+            r="12"
+          />
+          {index < nodes.length - 1 ? (
+            <path className="work-visual__chevron" d={`M${cx + 20} 102 l8 8 -8 8`} />
+          ) : null}
+        </g>
+      ))}
+      <path className="work-visual__quality-line" d="M64 72 C122 48 180 86 238 58 C296 36 326 66 354 46" />
+      <path className="work-visual__quality-line work-visual__quality-line--muted" d="M64 158 C122 136 180 166 238 142 C296 124 326 146 354 130" />
+    </svg>
+  );
+}
+
+function VolatilityVisual() {
+  return (
+    <svg className="work-visual__svg" viewBox="0 0 420 220">
+      <path className="work-visual__axis" d="M52 174 H370 M52 44 V174" />
+      <path className="work-visual__threshold" d="M54 132 H368" />
+      <path className="work-visual__volatility" d="M60 138 C88 130 104 146 126 136 C148 126 156 144 174 132 L194 48 L212 82 L230 74 L248 104 L268 98 L286 120 L306 116 L326 132 L348 128 L366 134" />
+      <circle className="work-visual__dot work-visual__dot--accent" cx="194" cy="48" r="7" />
+      <circle className="work-visual__dot work-visual__dot--ink" cx="348" cy="128" r="7" />
+    </svg>
+  );
+}
+
 export function WorkVisual({ variant }: WorkVisualProps) {
   return (
     <div className={`work-visual work-visual--${variant}`} aria-hidden="true">
@@ -74,6 +111,8 @@ export function WorkVisual({ variant }: WorkVisualProps) {
       {variant === "research" ? <ResearchVisual /> : null}
       {variant === "signal" ? <SignalVisual /> : null}
       {variant === "finance" ? <FinanceVisual /> : null}
+      {variant === "data-quality" ? <DataQualityVisual /> : null}
+      {variant === "volatility" ? <VolatilityVisual /> : null}
     </div>
   );
 }

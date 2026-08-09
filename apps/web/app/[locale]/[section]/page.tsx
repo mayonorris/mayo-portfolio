@@ -229,6 +229,20 @@ export default async function LocalizedRoutePage({ params }: RoutePageProps) {
               );
             })}
           </div>
+          <section className="earlier-work" aria-labelledby="earlier-work-title">
+            <Eyebrow>{work.earlierProjects.eyebrow}</Eyebrow>
+            <h2 id="earlier-work-title">{work.earlierProjects.eyebrow}</h2>
+            <div className="earlier-work__grid">
+              {work.earlierProjects.items.map((item) => (
+                <article className="earlier-work__card" key={item.title}>
+                  <p className="earlier-work__status">{item.status}</p>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <p className="earlier-work__skills">{item.skills}</p>
+                </article>
+              ))}
+            </div>
+          </section>
           <article className="additional-build" aria-labelledby="additional-build-title">
             <div>
               <Eyebrow>{work.additionalBuild.eyebrow}</Eyebrow>
