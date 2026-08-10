@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Mayo T. N. Kadanga">
-<meta name="description" content="Research article in preparation for a survey-based analysis of financial inclusion and mobile-money adoption.">
+<meta name="author" content="Projet académique collectif">
+<meta name="description" content="Une étude collective sur la relation entre inclusion financière et pauvreté multidimensionnelle au Bénin.">
 
-<title>Financial inclusion and mobile-money adoption: a survey-based analysis – Mayo Kadanga Research</title>
+<title>Inclusion financière et pauvreté multidimensionnelle au Bénin – Recherche Mayo Kadanga</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -44,23 +44,29 @@ ul.task-list li input[type="checkbox"] {
 
 <body>
 
-<header class="article-header" role="banner"><div class="article-header__inner"><div class="article-brand"><strong>Mayo Kadanga</strong><span>ISE · DATA SCIENTIST</span></div><nav class="article-nav" aria-label="Article navigation"><a data-portfolio-href="/en/research" href="../../en/research">Back to Research</a><a data-locale-link="" href="../../fr/recherche">FR</a><button class="article-theme-toggle" type="button" aria-label="Toggle article theme" data-theme-toggle=""><svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg></button></nav></div></header>
+<header class="article-header" role="banner"><div class="article-header__inner"><div class="article-brand"><strong>Mayo Kadanga</strong><span>ISE · DATA SCIENTIST</span></div><nav class="article-nav" aria-label="Navigation de l’article"><a data-portfolio-href="/fr/recherche" href="../../fr/recherche">Retour à la recherche</a><a data-locale-link="" href="../../en/research">EN</a><button class="article-theme-toggle" type="button" aria-label="Changer le thème de l’article" data-theme-toggle=""><svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg></button></nav></div></header>
 <script>
 (function () {
   var root = document.documentElement;
-  var key = "mayo-research-theme";
+  var key = "mayo-portfolio-theme";
   var button = document.querySelector("[data-theme-toggle]");
   var localeLink = document.querySelector("[data-locale-link]");
-  if (localeLink && location.pathname.indexOf("financial-inclusion-mobile-money") !== -1) {
-    localeLink.setAttribute("href", "/fr/recherche/inclusion-financiere-mobile-money");
-  }
+  var articleRoutes = { "inclusion-financiere-pauvrete-multidimensionnelle": "/en/research/financial-inclusion-multidimensional-poverty" };
+  var routeKey = Object.keys(articleRoutes).find(function (slug) { return location.pathname.indexOf(slug) !== -1; });
+
+  if (localeLink && routeKey) localeLink.setAttribute("href", articleRoutes[routeKey]);
+
   function apply(theme) {
     root.setAttribute("data-article-theme", theme);
     if (button) button.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
   }
+
   var stored = window.localStorage ? localStorage.getItem(key) : null;
-  if (stored === "light" || stored === "dark") apply(stored);
+  var systemTheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  apply(stored === "light" || stored === "dark" ? stored : systemTheme);
+
   document.querySelectorAll("[data-portfolio-href]").forEach(function (link) { link.setAttribute("href", link.getAttribute("data-portfolio-href")); });
+
   if (button) {
     button.addEventListener("click", function () {
       var current = root.getAttribute("data-article-theme");
@@ -73,199 +79,129 @@ ul.task-list li input[type="checkbox"] {
 </script>
 
 <header id="title-block-header">
-<h1 class="title">Financial inclusion and mobile-money adoption: a survey-based analysis</h1>
-<p class="author">Mayo T. N. Kadanga</p>
+<h1 class="title">Inclusion financière et pauvreté multidimensionnelle au Bénin</h1>
+<p class="author">Projet académique collectif</p>
 
 </header>
 
 <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Sur cette page</h2>
 
   <ul>
-  <li><a href="#overview" id="toc-overview"><span class="header-section-number">1</span> Overview</a></li>
-  <li><a href="#research-question" id="toc-research-question"><span class="header-section-number">2</span> Research question</a></li>
-  <li><a href="#data-and-analytical-scope" id="toc-data-and-analytical-scope"><span class="header-section-number">3</span> Data and analytical scope</a></li>
-  <li><a href="#methodological-framework" id="toc-methodological-framework"><span class="header-section-number">4</span> Methodological framework</a></li>
-  <li><a href="#reproducible-workflow" id="toc-reproducible-workflow"><span class="header-section-number">5</span> Reproducible workflow</a></li>
-  <li><a href="#results-framework" id="toc-results-framework"><span class="header-section-number">6</span> Results framework</a></li>
-  <li><a href="#interpretation-and-policy-relevance" id="toc-interpretation-and-policy-relevance"><span class="header-section-number">7</span> Interpretation and policy relevance</a></li>
-  <li><a href="#limitations-and-ethics" id="toc-limitations-and-ethics"><span class="header-section-number">8</span> Limitations and ethics</a></li>
-  <li><a href="#reproducibility-statement" id="toc-reproducibility-statement"><span class="header-section-number">9</span> Reproducibility statement</a></li>
-  <li><a href="#references" id="toc-references"><span class="header-section-number">10</span> References</a></li>
-  <li><a href="#related-work" id="toc-related-work"><span class="header-section-number">11</span> Related work</a></li>
+  <li><a href="#vue-densemble" id="toc-vue-densemble"><span class="header-section-number">1</span> Vue d’ensemble</a></li>
+  <li><a href="#question-de-recherche" id="toc-question-de-recherche"><span class="header-section-number">2</span> Question de recherche</a></li>
+  <li><a href="#données-et-périmètre-analytique" id="toc-données-et-périmètre-analytique"><span class="header-section-number">3</span> Données et périmètre analytique</a></li>
+  <li><a href="#cadre-méthodologique" id="toc-cadre-méthodologique"><span class="header-section-number">4</span> Cadre méthodologique</a></li>
+  <li><a href="#reconstruction-reproductible" id="toc-reconstruction-reproductible"><span class="header-section-number">5</span> Reconstruction reproductible</a></li>
+  <li><a href="#limites-dinterprétation" id="toc-limites-dinterprétation"><span class="header-section-number">6</span> Limites d’interprétation</a></li>
+  <li><a href="#travaux-associés" id="toc-travaux-associés"><span class="header-section-number">7</span> Travaux associés</a></li>
   </ul>
 </nav>
 <div class="article-intro">
 <p class="article-kicker">
-Applied study · Quarto
+Étude appliquée · Quarto
 </p>
 <p class="article-display-title">
-Financial inclusion and mobile-money adoption: a survey-based analysis
+Inclusion financière et pauvreté multidimensionnelle au Bénin
 </p>
 <p class="article-meta-line">
-Mayo T. N. Kadanga · FinScope Benin 2018 microdata
+Étude collective achevée · Microdonnées FinScope Bénin 2018
 </p>
 <div class="article-status">
 <p>
-Research article in preparation. Empirical results and final interpretation will be added after source verification.
+L’étude est achevée. Les tableaux empiriques et résultats numériques finaux sont omis de cette reconstruction publique jusqu’à la revue délibérée de la source analytique originale.
 </p>
 </div>
 <p class="article-question">
-<strong>Research question.</strong> Which household and individual characteristics are associated with financial inclusion and mobile-money adoption?
+<strong>Question de recherche.</strong> Comment l’inclusion financière est-elle associée à la pauvreté multidimensionnelle au Bénin, et quelles caractéristiques socioéconomiques sont liées à l’inclusion financière ?
 </p>
 </div>
-<h2 data-number="1" id="overview" class="anchored"><span class="header-section-number">1</span> Overview</h2>
-<p>This research article in preparation is designed for a study using FinScope Benin 2018 microdata to examine financial inclusion and mobile-money adoption. It sets out the intended structure for the completed analysis without presenting empirical findings.</p>
-<p>The completed article will separate descriptive exploration, model specification, reproducible workflow and interpretation. It will avoid claiming representativeness, impact or causal effects unless those points are verified from approved sources.</p>
-<h2 data-number="2" id="research-question" class="anchored"><span class="header-section-number">2</span> Research question</h2>
-<p>The central question is: Which household and individual characteristics are associated with financial inclusion and mobile-money adoption?</p>
-<p>The intended contribution is to organize a survey-based analysis that can connect socioeconomic characteristics, access patterns and digital finance adoption in a reproducible and reviewable format.</p>
-<h2 data-number="3" id="data-and-analytical-scope" class="anchored"><span class="header-section-number">3</span> Data and analytical scope</h2>
+<h2 data-number="1" id="vue-densemble" class="anchored"><span class="header-section-number">1</span> Vue d’ensemble</h2>
+<p>Cette étude académique collective achevée examine la relation entre inclusion financière et pauvreté multidimensionnelle au Bénin à partir des microdonnées FinScope Bénin 2018, d’analyses multivariées et de modèles de choix binaire.</p>
+<p><strong>Note de contribution.</strong> Travail collectif. J’ai assuré la majeure partie de l’implémentation analytique et du workflow empirique. L’étude reste présentée publiquement comme une réalisation académique de groupe.</p>
+<h2 data-number="2" id="question-de-recherche" class="anchored"><span class="header-section-number">2</span> Question de recherche</h2>
+<p>Comment l’inclusion financière est-elle associée à la pauvreté multidimensionnelle au Bénin, et quelles caractéristiques socioéconomiques sont liées à l’inclusion financière ?</p>
+<p>L’interprétation publique se limite aux associations. Elle ne présente aucun effet causal.</p>
+<h2 data-number="3" id="données-et-périmètre-analytique" class="anchored"><span class="header-section-number">3</span> Données et périmètre analytique</h2>
 <table class="caption-top">
-<caption>Article metadata for public readers</caption>
 <colgroup>
 <col style="width: 50%">
 <col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Field</th>
-<th>Public status</th>
+<th>Champ</th>
+<th>Description publique</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Source</td>
-<td>FinScope Benin 2018 microdata</td>
+<td>Microdonnées FinScope Bénin 2018</td>
 </tr>
 <tr class="even">
-<td>Unit of analysis</td>
-<td>To be documented</td>
+<td>Cadre de l’étude</td>
+<td>Projet académique collectif achevé</td>
 </tr>
 <tr class="odd">
-<td>Outcome family</td>
-<td>Financial inclusion and mobile-money adoption indicators</td>
+<td>Famille d’indicateurs</td>
+<td>Inclusion financière et pauvreté multidimensionnelle</td>
 </tr>
 <tr class="even">
-<td>Method family</td>
-<td>Exploratory multivariate analysis and binary-choice modelling</td>
+<td>Famille de méthodes</td>
+<td>Analyse multivariée, probit ou modèles de choix binaire, et interprétation des effets marginaux lorsque la source vérifiée le permet</td>
 </tr>
 <tr class="odd">
-<td>Software</td>
-<td>R or Python workflow to be documented</td>
+<td>Résultats publics</td>
+<td>Tableaux empiriques et estimations numériques finales omis en attendant la reconstruction depuis l’étude originale</td>
 </tr>
 <tr class="even">
-<td>Reproducibility status</td>
-<td>Framework prepared; analysis source pending verification</td>
-</tr>
-<tr class="odd">
-<td>Disclosure boundary</td>
-<td>No personally identifiable information will be displayed</td>
+<td>Limite de divulgation</td>
+<td>Aucune donnée personnellement identifiable ou source restreinte affichée</td>
 </tr>
 </tbody>
 </table>
-<h2 data-number="4" id="methodological-framework" class="anchored"><span class="header-section-number">4</span> Methodological framework</h2>
-<p>The final study is expected to combine exploratory multivariate analysis with binary-choice modelling. The interpretation will focus on associations and, where appropriate, marginal-effect style summaries after the final model specification is verified.</p>
-<p><strong>Generic binary-choice model structure</strong></p>
+<h2 data-number="4" id="cadre-méthodologique" class="anchored"><span class="header-section-number">4</span> Cadre méthodologique</h2>
+<p>La famille analytique combine la construction et l’analyse d’indicateurs d’inclusion financière et de pauvreté multidimensionnelle, l’analyse multivariée et les modèles de choix binaire. Les effets marginaux ne pourront être interprétés que si la source originale vérifiée les étaye.</p>
+<p><strong>Structure générique de choix binaire</strong></p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Pr</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>Y</mi><mi>i</mi></msub><mo>=</mo><mn>1</mn><mo>∣</mo><msub><mi>X</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>+</mo><msubsup><mi>X</mi><mi>i</mi><mi>′</mi></msubsup><mi>β</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
 \Pr(Y_i = 1 \mid X_i) = F(\alpha + X_i^{\prime}\beta)
 </annotation></semantics></math></p>
-<p>This equation is illustrative only. The final specification will be generated from the verified analysis source and will not use unverified variables in the public article.</p>
-<h2 data-number="5" id="reproducible-workflow" class="anchored"><span class="header-section-number">5</span> Reproducible workflow</h2>
-<p>The public article is intended to be produced from a Quarto source file linked to analysis scripts, generated tables and generated figures.</p>
-<p><strong>Illustrative workflow scaffold</strong></p>
-<pre class="text"><code># Load verified analysis inputs
-# Prepare the documented analysis sample
-# Run exploratory multivariate analysis
-# Estimate the verified binary-choice model
-# Export reviewed tables and figures</code></pre>
+<p>Cette équation décrit uniquement la famille de méthodes. Elle ne constitue pas une affirmation sur la spécification ou les résultats finaux.</p>
+<h2 data-number="5" id="reconstruction-reproductible" class="anchored"><span class="header-section-number">5</span> Reconstruction reproductible</h2>
+<pre class="text"><code># Examiner la source analytique originale approuvée
+# Documenter les indicateurs et l’échantillon d’analyse
+# Reconstruire les analyses multivariées et les modèles de choix binaire
+# Vérifier les tableaux, effets marginaux et limites
+# Publier uniquement les sorties relues</code></pre>
 <div class="workflow-note">
 <p>
-This scaffold is not final production code. It shows the order of the reproducible workflow without referring to unpublished data files or unverified variables.
+Cette page publique décrit le cadrage vérifié de l’étude. Elle n’expose aucune donnée brute, aucun fichier privé ni résultat empirique non vérifié.
 </p>
 </div>
-<h2 data-number="6" id="results-framework" class="anchored"><span class="header-section-number">6</span> Results framework</h2>
-<table class="caption-top">
-<caption>Results-table schema planned for the verified article</caption>
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Output</th>
-<th>Intended content</th>
-<th>Current public status</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Descriptive table</td>
-<td>Sample structure and outcome definitions</td>
-<td>To be documented</td>
-</tr>
-<tr class="even">
-<td>Exploratory table</td>
-<td>Multivariate dimensions or grouping summary</td>
-<td>To be documented</td>
-</tr>
-<tr class="odd">
-<td>Model table</td>
-<td>Verified coefficient or marginal-effect summary</td>
-<td>To be documented</td>
-</tr>
-<tr class="even">
-<td>Robustness note</td>
-<td>Scope checks and model limitations</td>
-<td>To be documented</td>
-</tr>
-</tbody>
-</table>
-<figure class="figure-frame">
-<div class="figure-frame__panel" role="img" aria-label="Planned figure frame for verified financial inclusion results">
-Verified result figure will appear here after source verification
-</div>
-<figcaption>
-No empirical result is displayed in this structural framework. The final figure will be generated from the verified analysis source.
-</figcaption>
-</figure>
-<h2 data-number="7" id="interpretation-and-policy-relevance" class="anchored"><span class="header-section-number">7</span> Interpretation and policy relevance</h2>
-<p>The final interpretation must answer the following questions before any public conclusion is shown:</p>
-<ul>
-<li>Which associations are stable enough to discuss publicly?</li>
-<li>Which results are descriptive rather than causal?</li>
-<li>What uncertainty, sample restriction or data-use boundary should accompany each interpretation?</li>
-<li>Which findings can responsibly inform a policy or product discussion?</li>
-</ul>
-<h2 data-number="8" id="limitations-and-ethics" class="anchored"><span class="header-section-number">8</span> Limitations and ethics</h2>
-<p>This framework treats the analysis as secondary-data work. The completed article must document source limitations, sample restrictions, variable construction and disclosure boundaries.</p>
-<p>The article will distinguish association from causality. It will not display personally identifiable information, raw private data, signatures, document numbers, or restricted institutional material.</p>
-<h2 data-number="9" id="reproducibility-statement" class="anchored"><span class="header-section-number">9</span> Reproducibility statement</h2>
-<p>The intended pipeline is Quarto source plus R or Python analysis scripts, generated tables, generated figures and an environment or dependency record. Any public release of analysis materials is subject to data-use permissions and source verification.</p>
-<h2 data-number="10" id="references" class="anchored"><span class="header-section-number">10</span> References</h2>
-<p>No bibliographic entries are displayed in this research article in preparation. References will be added after source verification.</p>
-<h2 data-number="11" id="related-work" class="anchored"><span class="header-section-number">11</span> Related work</h2>
+<h2 data-number="6" id="limites-dinterprétation" class="anchored"><span class="header-section-number">6</span> Limites d’interprétation</h2>
+<p>La reconstruction finale devra distinguer association et causalité, documenter la construction des indicateurs et les restrictions d’échantillon, et ne publier les résultats numériques qu’après vérification directe avec l’étude originale.</p>
+<h2 data-number="7" id="travaux-associés" class="anchored"><span class="header-section-number">7</span> Travaux associés</h2>
 <ul class="related-links">
 <li>
-<a href="../../en/work">Work</a>
+<a href="../../fr/projets">Projets</a>
 </li>
 <li>
-<a href="../../en/research">Research index</a>
+<a href="../../fr/recherche">Index Recherche</a>
 </li>
 <li>
-<a href="../../en/writing">Writing</a>
+<a href="../../fr/publications">Publications</a>
 </li>
 <li>
-<a href="../../en/contact">Contact</a>
+<a href="../../fr/contact">Contact</a>
 </li>
 </ul>
 <footer class="article-footer" role="contentinfo">
 <div class="article-footer__inner">
 <p>
-Quarto article source. Static output is served through the portfolio.
+Page d’étude Quarto. La sortie statique est servie à travers le portfolio.
 </p>
-<a href="../../en/research">Back to Research</a>
+<a href="../../fr/recherche">Retour à la recherche</a>
 </div>
 </footer>
 
@@ -299,12 +235,12 @@ Quarto article source. Static output is served through the portfolio.
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "Copié");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "Copié");
         tooltip = new bootstrap.Tooltip(button,
           { trigger: "manual",
             customClass: "code-copy-button-tooltip",

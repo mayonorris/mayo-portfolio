@@ -18,10 +18,10 @@
   --color-header: oklch(0.985 0.008 78 / 0.92);
   --color-shadow: oklch(0.40 0.03 262 / 0.18);
 
-  --font-sans: "Hanken Grotesk", system-ui, -apple-system, BlinkMacSystemFont,
+  --font-sans: var(--font-hanken-grotesk), "Hanken Grotesk", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
-  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono",
+  --font-serif: var(--font-source-serif), "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-ibm-plex-mono), "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono",
     monospace;
 
   --text-display: clamp(3rem, 5vw, 4.65rem);
@@ -2316,6 +2316,20 @@ main {
   display: block;
   margin-bottom: var(--space-2);
   color: var(--color-accent);
+}
+
+.work-group {
+  margin-top: var(--space-8);
+}
+
+.work-group + .work-group {
+  margin-top: var(--space-10);
+}
+
+.work-group__title {
+  margin: 0 0 var(--space-5);
+  color: var(--color-ink);
+  font: 650 clamp(1.35rem, 2vw, 1.8rem) / var(--leading-heading) var(--font-sans);
 }
 
 .earlier-work {

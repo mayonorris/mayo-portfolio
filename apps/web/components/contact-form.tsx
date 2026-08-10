@@ -92,6 +92,17 @@ export function ContactForm({ content, linkedinHref }: ContactFormProps) {
     setShowLinkedInFallback(false);
 
     if (Object.keys(nextMessages).length > 0) {
+      const firstInvalidField = Object.keys(nextMessages)[0] as keyof ContactFormValues;
+      const fieldIds: Record<keyof ContactFormValues, string> = {
+        name: nameId,
+        email: emailId,
+        reason: reasonId,
+        message: messageId,
+      };
+
+      window.requestAnimationFrame(() => {
+        document.getElementById(fieldIds[firstInvalidField])?.focus();
+      });
       return;
     }
 

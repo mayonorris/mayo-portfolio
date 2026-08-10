@@ -97,7 +97,9 @@ export default async function LocaleHomePage({ params }: LocaleHomePageProps) {
                     href={getCaseStudyPath(locale, item.slug)}
                     variant="secondary"
                   >
-                    {content.selectedWork.cardCta}
+                    {item.maturity === "overview"
+                      ? content.selectedWork.overviewCta
+                      : content.selectedWork.cardCta}
                   </LinkButton>
                 </div>
               </article>

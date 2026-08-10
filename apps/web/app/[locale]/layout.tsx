@@ -1,9 +1,31 @@
 import type { Metadata } from "next";
+import { Hanken_Grotesk, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
 import { getDictionary } from "@/i18n/dictionaries";
 import { defaultLocale, isLocale, locales, type Locale } from "@/i18n/locales";
 import "../globals.css";
+
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-hanken-grotesk",
+  display: "swap",
+});
+
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin"],
+  variable: "--font-source-serif",
+  display: "swap",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-ibm-plex-mono",
+  display: "swap",
+});
+
+const productionUrl = new URL("https://mayokadanga-portfolio.vercel.app");
 
 type LocaleLayoutProps = Readonly<{
   children: React.ReactNode;
@@ -30,14 +52,15 @@ export async function generateMetadata({
   const dictionary = getDictionary(locale);
 
   return {
+    metadataBase: productionUrl,
     title: dictionary.metadata.title,
     description: dictionary.metadata.description,
     robots: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
       googleBot: {
-        index: false,
-        follow: false,
+        index: true,
+        follow: true,
       },
     },
     openGraph: {
@@ -47,6 +70,11 @@ export async function generateMetadata({
       type: "website",
       locale,
       alternateLocale: locales.filter((item) => item !== locale),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dictionary.metadata.title,
+      description: dictionary.metadata.description,
     },
     alternates: {
       canonical: `/${locale}`,
@@ -68,7 +96,12 @@ export default async function LocaleLayout({
   const dictionary = getDictionary(locale);
 
   return (
-    <html lang={locale} data-locale={locale} suppressHydrationWarning>
+    <html
+      className={`${hankenGrotesk.variable} ${sourceSerif.variable} ${ibmPlexMono.variable}`}
+      lang={locale}
+      data-locale={locale}
+      suppressHydrationWarning
+    >
       <body>
         <AppShell dictionary={dictionary} locale={locale}>
           {children}

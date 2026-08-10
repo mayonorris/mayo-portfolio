@@ -66,6 +66,13 @@ export async function generateMetadata({
       siteName: "Mayo Kadanga Portfolio",
       type: "website",
       locale,
+      images: [{ url: `/${locale}/opengraph-image`, width: 1200, height: 630, alt: "Mayo Kadanga portfolio" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: page.description,
+      images: [`/${locale}/opengraph-image`],
     },
     alternates: {
       canonical: getLocalizedRoutePath(locale, page.routeKey),
@@ -192,43 +199,50 @@ export default async function LocalizedRoutePage({ params }: RoutePageProps) {
             <h1 id="route-page-title">{page.title}</h1>
             <p>{work.intro}</p>
           </div>
-          <div className="selected-work-grid selected-work-grid--route">
-            {work.items.map((item) => {
-              const liveLink = item.liveLinkId
-                ? getExternalProjectLink(item.liveLinkId, locale)
-                : null;
+          {(["featured", "analytical"] as const).map((group) => (
+            <section className="work-group" key={group} aria-labelledby={`work-group-${group}`}>
+              <h2 className="work-group__title" id={`work-group-${group}`}>
+                {work.groupLabels[group]}
+              </h2>
+              <div className="selected-work-grid selected-work-grid--route">
+                {work.items.filter((item) => item.group === group).map((item) => {
+                  const liveLink = item.liveLinkId
+                    ? getExternalProjectLink(item.liveLinkId, locale)
+                    : null;
 
-              return (
-                <article className="work-card" key={item.slug}>
-                  <WorkVisual variant={item.visual} />
-                  <div className="work-card__body">
-                    <p className="work-card__category">{item.category}</p>
-                    <h2>{item.title}</h2>
-                    <p>{item.scope}</p>
-                    <p className="work-card__role">
-                      <span>{work.roleLabel}</span>
-                      {item.role}
-                    </p>
-                    <div className="work-card__actions">
-                      <LinkButton href={getCaseStudyPath(locale, item.slug)}>
-                        {work.cardCta}
-                      </LinkButton>
-                      {liveLink ? (
-                        <LinkButton
-                          ariaLabel={liveLink.accessibleLabel}
-                          href={liveLink.href}
-                          isExternal
-                          variant="secondary"
-                        >
-                          {liveLink.label}
-                        </LinkButton>
-                      ) : null}
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+                  return (
+                    <article className="work-card" key={item.slug}>
+                      <WorkVisual variant={item.visual} />
+                      <div className="work-card__body">
+                        <p className="work-card__category">{item.category}</p>
+                        <h3>{item.title}</h3>
+                        <p>{item.scope}</p>
+                        <p className="work-card__role">
+                          <span>{work.roleLabel}</span>
+                          {item.role}
+                        </p>
+                        <div className="work-card__actions">
+                          <LinkButton href={getCaseStudyPath(locale, item.slug)}>
+                            {item.maturity === "overview" ? work.overviewCta : work.cardCta}
+                          </LinkButton>
+                          {liveLink ? (
+                            <LinkButton
+                              ariaLabel={liveLink.accessibleLabel}
+                              href={liveLink.href}
+                              isExternal
+                              variant="secondary"
+                            >
+                              {liveLink.label}
+                            </LinkButton>
+                          ) : null}
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+          ))}
           <section className="earlier-work" aria-labelledby="earlier-work-title">
             <Eyebrow>{work.earlierProjects.eyebrow}</Eyebrow>
             <h2 id="earlier-work-title">{work.earlierProjects.eyebrow}</h2>

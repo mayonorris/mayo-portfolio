@@ -1,0 +1,78 @@
+---
+title: "Financial inclusion and multidimensional poverty in Benin"
+author: "Collective academic project"
+lang: en
+type: "applied study"
+status: "completed group study"
+dataset-label: "FinScope Benin 2018 microdata"
+draft: false
+description: "A group study examining the relationship between financial inclusion and multidimensional poverty in Benin."
+categories:
+  - Financial inclusion
+  - Multidimensional poverty
+  - Applied econometrics
+---
+
+<div class="article-intro"><p class="article-kicker">Applied study · Quarto</p><p class="article-display-title">Financial inclusion and multidimensional poverty in Benin</p><p class="article-meta-line">Completed group study · FinScope Benin 2018 microdata</p><div class="article-status"><p>The study is complete. Empirical tables and final numerical results are omitted from this public reconstruction until the original analytical source is deliberately reviewed for publication.</p></div><p class="article-question"><strong>Research question.</strong> How is financial inclusion associated with multidimensional poverty in Benin, and which socioeconomic characteristics are related to financial inclusion?</p></div>
+
+## Overview
+
+This completed academic group study examines the relationship between financial inclusion and multidimensional poverty in Benin using FinScope Benin 2018 microdata, multivariate analysis and binary-choice modelling.
+
+**Contribution note.** Group project. I carried out most of the analytical implementation and empirical workflow. The study is presented publicly as a collective academic project.
+
+## Research question
+
+How is financial inclusion associated with multidimensional poverty in Benin, and which socioeconomic characteristics are related to financial inclusion?
+
+The public interpretation is limited to associations. It does not claim causal effects.
+
+## Data and analytical scope
+
+| Field | Public description |
+|---|---|
+| Source | FinScope Benin 2018 microdata |
+| Study design | Completed academic group project |
+| Indicator family | Financial inclusion and multidimensional-poverty indicators |
+| Method family | Multivariate analysis, probit or binary-choice modelling, and marginal-effect interpretation where supported by the verified source |
+| Public results | Empirical tables and final numerical estimates omitted pending reconstruction from the original study |
+| Disclosure boundary | No personally identifiable or restricted source data displayed |
+
+## Methodological framework
+
+The analytical family combines construction and analysis of financial-inclusion and multidimensional-poverty indicators, multivariate analysis, and binary-choice modelling. Marginal effects may be interpreted only where supported by the verified original source.
+
+**Generic binary-choice structure**
+
+$$
+\Pr(Y_i = 1 \mid X_i) = F(\alpha + X_i^{\prime}\beta)
+$$
+
+This equation describes the method family only. It is not a claim about the final specification or results.
+
+## Reproducible reconstruction
+
+~~~text
+# Review the approved original analytical source
+# Document indicator construction and the analysis sample
+# Rebuild multivariate and binary-choice procedures
+# Verify tables, marginal effects and limitations
+# Publish only reviewed outputs
+~~~
+
+<div class="workflow-note"><p>This public page describes the verified study framing. It does not expose raw data, private files or unverified empirical results.</p></div>
+
+## Interpretation boundaries
+
+The final reconstruction must distinguish association from causality, document indicator construction and sample restrictions, and publish numerical results only after direct verification against the original study.
+
+## Related work
+
+<ul class="related-links">
+  <li><a href="/en/work">Work</a></li>
+  <li><a href="/en/research">Research index</a></li>
+  <li><a href="/en/writing">Writing</a></li>
+  <li><a href="/en/contact">Contact</a></li>
+</ul>
+
+<footer class="article-footer" role="contentinfo"><div class="article-footer__inner"><p>Quarto study page. Static output is served through the portfolio.</p><a href="/en/research">Back to Research</a></div></footer>

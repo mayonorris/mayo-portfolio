@@ -15,7 +15,7 @@ lang: en
 
 ## Available study pages
 
-- [Financial inclusion and mobile-money adoption: a survey-based analysis](articles/financial-inclusion-mobile-money/)
+- [Financial inclusion and multidimensional poverty in Benin](articles/financial-inclusion-multidimensional-poverty/)
 
 <footer class="article-footer" role="contentinfo">
   <div class="article-footer__inner">

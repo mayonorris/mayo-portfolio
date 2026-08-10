@@ -11,6 +11,8 @@ export const workBatchItems = {
       role: "R pipeline development \u00b7 Collaborative Stata workflow",
       period: "April\u2013May 2026",
       visual: "data-quality",
+      maturity: "detailed-case",
+      group: "featured",
     },
     {
       slug: "garch-volatility-persistence",
@@ -20,6 +22,8 @@ export const workBatchItems = {
       role: "Confidential analytical assignment",
       period: "2020 \u00b7 Four-month assignment",
       visual: "volatility",
+      maturity: "detailed-case",
+      group: "analytical",
     },
   ],
   fr: [
@@ -31,6 +35,8 @@ export const workBatchItems = {
       role: "D\u00e9veloppement du pipeline R \u00b7 Workflow Stata collaboratif",
       period: "Avril\u2013mai 2026",
       visual: "data-quality",
+      maturity: "detailed-case",
+      group: "featured",
     },
     {
       slug: "garch-volatility-persistence",
@@ -40,6 +46,8 @@ export const workBatchItems = {
       role: "Mission analytique confidentielle",
       period: "2020 \u00b7 Mission de quatre mois",
       visual: "volatility",
+      maturity: "detailed-case",
+      group: "analytical",
     },
   ],
 } satisfies Record<Locale, SelectedWorkItem[]>;

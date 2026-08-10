@@ -1,0 +1,78 @@
+---
+title: "Inclusion financière et pauvreté multidimensionnelle au Bénin"
+author: "Projet académique collectif"
+lang: fr
+type: "étude appliquée"
+status: "étude collective achevée"
+dataset-label: "Microdonnées FinScope Bénin 2018"
+draft: false
+description: "Une étude collective sur la relation entre inclusion financière et pauvreté multidimensionnelle au Bénin."
+categories:
+  - Inclusion financière
+  - Pauvreté multidimensionnelle
+  - Économétrie appliquée
+---
+
+<div class="article-intro"><p class="article-kicker">Étude appliquée · Quarto</p><p class="article-display-title">Inclusion financière et pauvreté multidimensionnelle au Bénin</p><p class="article-meta-line">Étude collective achevée · Microdonnées FinScope Bénin 2018</p><div class="article-status"><p>L’étude est achevée. Les tableaux empiriques et résultats numériques finaux sont omis de cette reconstruction publique jusqu’à la revue délibérée de la source analytique originale.</p></div><p class="article-question"><strong>Question de recherche.</strong> Comment l’inclusion financière est-elle associée à la pauvreté multidimensionnelle au Bénin, et quelles caractéristiques socioéconomiques sont liées à l’inclusion financière ?</p></div>
+
+## Vue d’ensemble
+
+Cette étude académique collective achevée examine la relation entre inclusion financière et pauvreté multidimensionnelle au Bénin à partir des microdonnées FinScope Bénin 2018, d’analyses multivariées et de modèles de choix binaire.
+
+**Note de contribution.** Travail collectif. J’ai assuré la majeure partie de l’implémentation analytique et du workflow empirique. L’étude reste présentée publiquement comme une réalisation académique de groupe.
+
+## Question de recherche
+
+Comment l’inclusion financière est-elle associée à la pauvreté multidimensionnelle au Bénin, et quelles caractéristiques socioéconomiques sont liées à l’inclusion financière ?
+
+L’interprétation publique se limite aux associations. Elle ne présente aucun effet causal.
+
+## Données et périmètre analytique
+
+| Champ | Description publique |
+|---|---|
+| Source | Microdonnées FinScope Bénin 2018 |
+| Cadre de l’étude | Projet académique collectif achevé |
+| Famille d’indicateurs | Inclusion financière et pauvreté multidimensionnelle |
+| Famille de méthodes | Analyse multivariée, probit ou modèles de choix binaire, et interprétation des effets marginaux lorsque la source vérifiée le permet |
+| Résultats publics | Tableaux empiriques et estimations numériques finales omis en attendant la reconstruction depuis l’étude originale |
+| Limite de divulgation | Aucune donnée personnellement identifiable ou source restreinte affichée |
+
+## Cadre méthodologique
+
+La famille analytique combine la construction et l’analyse d’indicateurs d’inclusion financière et de pauvreté multidimensionnelle, l’analyse multivariée et les modèles de choix binaire. Les effets marginaux ne pourront être interprétés que si la source originale vérifiée les étaye.
+
+**Structure générique de choix binaire**
+
+$$
+\Pr(Y_i = 1 \mid X_i) = F(\alpha + X_i^{\prime}\beta)
+$$
+
+Cette équation décrit uniquement la famille de méthodes. Elle ne constitue pas une affirmation sur la spécification ou les résultats finaux.
+
+## Reconstruction reproductible
+
+~~~text
+# Examiner la source analytique originale approuvée
+# Documenter les indicateurs et l’échantillon d’analyse
+# Reconstruire les analyses multivariées et les modèles de choix binaire
+# Vérifier les tableaux, effets marginaux et limites
+# Publier uniquement les sorties relues
+~~~
+
+<div class="workflow-note"><p>Cette page publique décrit le cadrage vérifié de l’étude. Elle n’expose aucune donnée brute, aucun fichier privé ni résultat empirique non vérifié.</p></div>
+
+## Limites d’interprétation
+
+La reconstruction finale devra distinguer association et causalité, documenter la construction des indicateurs et les restrictions d’échantillon, et ne publier les résultats numériques qu’après vérification directe avec l’étude originale.
+
+## Travaux associés
+
+<ul class="related-links">
+  <li><a href="/fr/projets">Projets</a></li>
+  <li><a href="/fr/recherche">Index Recherche</a></li>
+  <li><a href="/fr/publications">Publications</a></li>
+  <li><a href="/fr/contact">Contact</a></li>
+</ul>
+
+<footer class="article-footer" role="contentinfo"><div class="article-footer__inner"><p>Page d’étude Quarto. La sortie statique est servie à travers le portfolio.</p><a href="/fr/recherche">Retour à la recherche</a></div></footer>

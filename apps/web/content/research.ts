@@ -126,16 +126,16 @@ export const researchContent = {
         unavailableLabel: "Article in preparation",
       },
       {
-        id: "financial-inclusion-mobile-money",
+        id: "financial-inclusion-multidimensional-poverty",
         groupId: "applied-research",
         filterIds: ["applied-study", "methodology", "completed-study"],
         type: "Applied study",
-        status: "Study page available",
-        title: "Financial inclusion and mobile-money adoption",
+        status: "Completed group study",
+        title: "Financial inclusion and multidimensional poverty in Benin",
         description:
-          "An applied analysis of financial inclusion using FinScope Benin 2018 microdata and multivariate and binary-choice modelling.",
+          "A group study examining the relationship between financial inclusion and multidimensional poverty in Benin using FinScope Benin 2018 microdata, multivariate analysis and binary-choice modelling.",
         contextLabel: "FinScope Benin 2018 microdata",
-        articleHref: "/en/research/financial-inclusion-mobile-money",
+        articleHref: "/en/research/financial-inclusion-multidimensional-poverty",
         articleLabel: "View study page",
       },
       {
@@ -226,16 +226,16 @@ export const researchContent = {
         unavailableLabel: "Article en préparation",
       },
       {
-        id: "financial-inclusion-mobile-money",
+        id: "inclusion-financiere-pauvrete-multidimensionnelle",
         groupId: "applied-research",
         filterIds: ["applied-study", "methodology", "completed-study"],
         type: "Étude appliquée",
-        status: "Page d’étude disponible",
-        title: "Inclusion financière et adoption du mobile money",
+        status: "Étude collective achevée",
+        title: "Inclusion financière et pauvreté multidimensionnelle au Bénin",
         description:
-          "Une analyse appliquée de l’inclusion financière à partir des microdonnées FinScope Bénin 2018 et de méthodes multivariées et de choix binaire.",
+          "Une étude collective sur la relation entre inclusion financière et pauvreté multidimensionnelle au Bénin, à partir des microdonnées FinScope Bénin 2018, d’analyses multivariées et de modèles de choix binaire.",
         contextLabel: "Microdonnées FinScope Bénin 2018",
-        articleHref: "/fr/recherche/inclusion-financiere-mobile-money",
+        articleHref: "/fr/recherche/inclusion-financiere-pauvrete-multidimensionnelle",
         articleLabel: "Voir la page d’étude",
       },
       {

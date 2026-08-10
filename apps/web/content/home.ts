@@ -2,7 +2,7 @@
 import type { RouteKey } from "@/lib/routes";
 import { researchContent } from "./research";
 import { writingContent } from "./writing";
-import { workContent, type SelectedWorkItem } from "./work";
+import { getHomepageWorkItems, type SelectedWorkItem } from "./work";
 
 export type MethodStage = {
   label: string;
@@ -57,6 +57,7 @@ export type HomeContent = {
     intro: string;
     viewAll: string;
     cardCta: string;
+    overviewCta: string;
     roleLabel: string;
     items: SelectedWorkItem[];
   };
@@ -143,8 +144,9 @@ export const homeContent = {
         "A selection of analytical systems, applied studies and digital products.",
       viewAll: "View all work",
       cardCta: "Open case",
+      overviewCta: "Project overview",
       roleLabel: "Role",
-      items: workContent.en.items,
+      items: getHomepageWorkItems("en"),
     },
     capabilities: {
       eyebrow: "CAPABILITIES",
@@ -245,8 +247,9 @@ export const homeContent = {
         "Une sélection de systèmes analytiques, d’études appliquées et de produits numériques.",
       viewAll: "Voir tous les travaux",
       cardCta: "Voir le cas",
+      overviewCta: "Aperçu du projet",
       roleLabel: "Rôle",
-      items: workContent.fr.items,
+      items: getHomepageWorkItems("fr"),
     },
     capabilities: {
       eyebrow: "CAPACITÉS",
@@ -257,22 +260,22 @@ export const homeContent = {
         {
           transform: "Questions → preuves",
           title: "Analyse économique et statistique",
-          items: ["econometrics and causal inference", "official statistics and indicators", "survey methodology and sampling", "time series and seasonal adjustment"],
+          items: ["économétrie et inférence causale", "statistique officielle et indicateurs", "méthodologie d’enquête et échantillonnage", "séries temporelles et désaisonnalisation"],
         },
         {
           transform: "Données brutes → systèmes fiables",
           title: "Data science et économétrie",
-          items: ["R and Python analysis pipelines", "multivariate analysis", "probabilistic and predictive models", "reproducible documented workflows"],
+          items: ["pipelines d’analyse en R et Python", "analyse multivariée", "modèles probabilistes et prédictifs", "workflows reproductibles et documentés"],
         },
         {
           transform: "Modèles → outils décisionnels",
           title: "Systèmes décisionnels et produits data",
-          items: ["Shiny and interactive dashboards", "full-stack builds", "budget and scenario simulation", "deployment, SEO and accessibility"],
+          items: ["Shiny et tableaux de bord interactifs", "applications full-stack", "simulation budgétaire et scénarios", "déploiement, SEO et accessibilité"],
         },
         {
           transform: "Savoir → méthodes transférables",
           title: "Recherche et transfert de connaissances",
-          items: ["reproducible publishing", "teaching and technical notes", "method documentation", "bilingual communication"],
+          items: ["publication reproductible", "enseignement et notes techniques", "documentation méthodologique", "communication bilingue"],
         },
       ],
     },

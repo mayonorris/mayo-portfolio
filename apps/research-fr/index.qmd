@@ -15,7 +15,7 @@ lang: fr
 
 ## Pages d’?tude disponibles
 
-- [Inclusion financière et adoption du mobile money : une analyse fondée sur les données d’enquête](articles/inclusion-financiere-mobile-money/)
+- [Inclusion financière et pauvreté multidimensionnelle au Bénin](articles/inclusion-financiere-pauvrete-multidimensionnelle/)
 
 <footer class="article-footer" role="contentinfo">
   <div class="article-footer__inner">

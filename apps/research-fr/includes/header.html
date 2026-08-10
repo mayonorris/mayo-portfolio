@@ -2,19 +2,25 @@
 <script>
 (function () {
   var root = document.documentElement;
-  var key = "mayo-research-theme";
+  var key = "mayo-portfolio-theme";
   var button = document.querySelector("[data-theme-toggle]");
   var localeLink = document.querySelector("[data-locale-link]");
-  if (localeLink && location.pathname.indexOf("inclusion-financiere-mobile-money") !== -1) {
-    localeLink.setAttribute("href", "/en/research/financial-inclusion-mobile-money");
-  }
+  var articleRoutes = { "inclusion-financiere-pauvrete-multidimensionnelle": "/en/research/financial-inclusion-multidimensional-poverty" };
+  var routeKey = Object.keys(articleRoutes).find(function (slug) { return location.pathname.indexOf(slug) !== -1; });
+
+  if (localeLink && routeKey) localeLink.setAttribute("href", articleRoutes[routeKey]);
+
   function apply(theme) {
     root.setAttribute("data-article-theme", theme);
     if (button) button.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
   }
+
   var stored = window.localStorage ? localStorage.getItem(key) : null;
-  if (stored === "light" || stored === "dark") apply(stored);
+  var systemTheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  apply(stored === "light" || stored === "dark" ? stored : systemTheme);
+
   document.querySelectorAll("[data-portfolio-href]").forEach(function (link) { link.setAttribute("href", link.getAttribute("data-portfolio-href")); });
+
   if (button) {
     button.addEventListener("click", function () {
       var current = root.getAttribute("data-article-theme");

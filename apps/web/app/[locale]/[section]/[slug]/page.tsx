@@ -67,6 +67,13 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
       siteName: "Mayo Kadanga Portfolio",
       type: "article",
       locale,
+      images: [{ url: `/${locale}/opengraph-image`, width: 1200, height: 630, alt: "Mayo Kadanga portfolio" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: item.scope,
+      images: [`/${locale}/opengraph-image`],
     },
     alternates: {
       canonical: getCaseStudyPath(locale, item.slug),

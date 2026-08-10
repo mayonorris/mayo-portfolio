@@ -4,6 +4,9 @@ import { workBatchCases, workBatchEarlierProjects, workBatchItems } from "./work
 
 export type WorkVisualVariant = "systems" | "research" | "signal" | "finance" | "data-quality" | "volatility";
 
+export type WorkMaturity = "detailed-case" | "overview";
+export type WorkGroup = "featured" | "analytical";
+
 export type SelectedWorkItem = {
   slug: string;
   category: string;
@@ -13,6 +16,8 @@ export type SelectedWorkItem = {
   period?: string;
   visual: WorkVisualVariant;
   liveLinkId?: ExternalProjectLinkId;
+  maturity: WorkMaturity;
+  group: WorkGroup;
 };
 
 export type AdditionalBuild = {
@@ -51,6 +56,8 @@ export type WorkContent = {
   intro: string;
   viewAll: string;
   cardCta: string;
+  overviewCta: string;
+  groupLabels: Record<WorkGroup, string>;
   roleLabel: string;
   periodLabel: string;
   liveSiteLabel: string;
@@ -75,6 +82,8 @@ const workItems: Record<Locale, SelectedWorkItem[]> = {
       period: "January-June 2026",
       visual: "systems",
       liveLinkId: "em2",
+      maturity: "detailed-case",
+      group: "featured",
     },
     {
       slug: "impact-decentralization-togo",
@@ -84,6 +93,8 @@ const workItems: Record<Locale, SelectedWorkItem[]> = {
         "A cautious applied-study frame for decentralization, territorial structure, and public decision questions in Togo.",
       role: "Applied research",
       visual: "research",
+      maturity: "overview",
+      group: "featured",
     },
     {
       slug: "economic-indicators-seasonal-adjustment",
@@ -93,6 +104,8 @@ const workItems: Record<Locale, SelectedWorkItem[]> = {
         "A synthetic workflow frame for comparing raw economic signals with adjusted monitoring views.",
       role: "Statistical workflow",
       visual: "signal",
+      maturity: "overview",
+      group: "featured",
     },
     {
       slug: "financial-inclusion-fintech-analysis",
@@ -102,6 +115,8 @@ const workItems: Record<Locale, SelectedWorkItem[]> = {
         "An analytical case frame for financial inclusion and digital finance segmentation questions.",
       role: "Econometric analysis",
       visual: "finance",
+      maturity: "overview",
+      group: "analytical",
     },
     ...workBatchItems.en,
   ],
@@ -116,33 +131,41 @@ const workItems: Record<Locale, SelectedWorkItem[]> = {
       period: "Janvier-juin 2026",
       visual: "systems",
       liveLinkId: "em2",
+      maturity: "detailed-case",
+      group: "featured",
     },
     {
       slug: "impact-decentralization-togo",
       category: "Recherche appliquée",
-      title: "Impact of decentralization in Togo",
+      title: "Évaluation de l’impact de la décentralisation au Togo",
       scope:
         "Un cadre d’étude appliquée prudent sur la décentralisation, la structure territoriale et les questions de décision publique au Togo.",
       role: "Recherche appliquée",
       visual: "research",
+      maturity: "overview",
+      group: "featured",
     },
     {
       slug: "economic-indicators-seasonal-adjustment",
       category: "Flux statistique",
-      title: "Economic indicators & seasonal adjustment",
+      title: "Indicateurs économiques et désaisonnalisation",
       scope:
         "Un cadre de flux synthétique pour comparer des signaux économiques bruts avec des vues de suivi ajustées.",
       role: "Flux statistique",
       visual: "signal",
+      maturity: "overview",
+      group: "featured",
     },
     {
       slug: "financial-inclusion-fintech-analysis",
       category: "Analyse économétrique",
-      title: "Financial inclusion & FinTech analysis",
+      title: "Inclusion financière et analyse de la finance numérique",
       scope:
         "Un cadre analytique pour les questions d’inclusion financière et de segmentation de la finance numérique.",
       role: "Analyse économétrique",
       visual: "finance",
+      maturity: "overview",
+      group: "analytical",
     },
     ...workBatchItems.fr,
   ],
@@ -156,6 +179,8 @@ export const workContent = {
       "A selection of analytical systems, applied studies and digital products.",
     viewAll: "View all work",
     cardCta: "Open case",
+    overviewCta: "Project overview",
+    groupLabels: { featured: "Featured & institutional work", analytical: "Detailed analytical work" },
     roleLabel: "Role",
     periodLabel: "Period",
     liveSiteLabel: "Live site",
@@ -352,6 +377,8 @@ export const workContent = {
       "Une sélection de systèmes analytiques, d’études appliquées et de produits numériques.",
     viewAll: "Voir tous les travaux",
     cardCta: "Voir le cas",
+    overviewCta: "Aperçu du projet",
+    groupLabels: { featured: "Travaux phares et institutionnels", analytical: "Travaux analytiques détaillés" },
     roleLabel: "Rôle",
     periodLabel: "Période",
     liveSiteLabel: "Site en ligne",
@@ -542,6 +569,25 @@ export const workContent = {
     },
   },
 } satisfies Record<Locale, WorkContent>;
+
+const homepageWorkSlugs = [
+  "em2-data-ai-lab-website",
+  "bceao-survey-data-quality",
+  "garch-volatility-persistence",
+  "economic-indicators-seasonal-adjustment",
+] as const;
+
+export function getHomepageWorkItems(locale: Locale): SelectedWorkItem[] {
+  return homepageWorkSlugs.map((slug) => {
+    const item = workContent[locale].items.find((candidate) => candidate.slug === slug);
+
+    if (!item) {
+      throw new Error(`Missing curated homepage Work item: ${slug}`);
+    }
+
+    return item;
+  });
+}
 
 export function getSelectedWorkItem(locale: Locale, slug: string): SelectedWorkItem | undefined {
   return workContent[locale].items.find((item) => item.slug === slug);
