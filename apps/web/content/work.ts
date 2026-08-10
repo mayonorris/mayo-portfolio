@@ -107,17 +107,6 @@ const workItems: Record<Locale, SelectedWorkItem[]> = {
       maturity: "overview",
       group: "featured",
     },
-    {
-      slug: "financial-inclusion-fintech-analysis",
-      category: "Econometric analysis",
-      title: "Financial inclusion & FinTech analysis",
-      scope:
-        "An analytical case frame for financial inclusion and digital finance segmentation questions.",
-      role: "Econometric analysis",
-      visual: "finance",
-      maturity: "overview",
-      group: "analytical",
-    },
     ...workBatchItems.en,
   ],
   fr: [
@@ -155,17 +144,6 @@ const workItems: Record<Locale, SelectedWorkItem[]> = {
       visual: "signal",
       maturity: "overview",
       group: "featured",
-    },
-    {
-      slug: "financial-inclusion-fintech-analysis",
-      category: "Analyse économétrique",
-      title: "Inclusion financière et analyse de la finance numérique",
-      scope:
-        "Un cadre analytique pour les questions d’inclusion financière et de segmentation de la finance numérique.",
-      role: "Analyse économétrique",
-      visual: "finance",
-      maturity: "overview",
-      group: "analytical",
     },
     ...workBatchItems.fr,
   ],
@@ -350,24 +328,6 @@ export const workContent = {
           },
         ],
       },
-      "financial-inclusion-fintech-analysis": {
-        backToWork: "Back to selected work",
-        contactCta: "Start a conversation",
-        sections: [
-          {
-            eyebrow: "Context",
-            title: "Econometric analysis frame",
-            body:
-              "This case presents a cautious analytical frame for financial inclusion and digital finance segmentation questions.",
-          },
-          {
-            eyebrow: "Scope",
-            title: "Public-safe case structure",
-            body:
-              "The public page avoids client claims, source data, provider details, performance metrics and unsupported impact statements.",
-          },
-        ],
-      },
     },
   },
   fr: {
@@ -545,24 +505,6 @@ export const workContent = {
             title: "Signaux utiles à la décision",
             body:
               "La présentation reste synthétique et n’expose aucune série institutionnelle, estimation ou donnée opérationnelle réelle.",
-          },
-        ],
-      },
-      "financial-inclusion-fintech-analysis": {
-        backToWork: "Retour aux projets",
-        contactCta: "Prendre contact",
-        sections: [
-          {
-            eyebrow: "Contexte",
-            title: "Cadre d’analyse économétrique",
-            body:
-              "Ce cas présente un cadre analytique prudent pour les questions d’inclusion financière et de segmentation de la finance numérique.",
-          },
-          {
-            eyebrow: "Périmètre",
-            title: "Structure de cas publiable",
-            body:
-              "La page publique évite les affirmations client, les données sources, les détails de fournisseurs, les métriques de performance et les impacts non étayés.",
           },
         ],
       },

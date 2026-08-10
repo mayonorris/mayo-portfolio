@@ -388,41 +388,109 @@ export default async function LocalizedRoutePage({ params }: RoutePageProps) {
     return (
       <Section className="route-page route-page--experience" labelledBy="route-page-title">
         <Container>
-          <div className="route-page__heading route-page__heading--narrative">
+          <div className="route-page__heading route-page__heading--narrative experience-hero">
             <Eyebrow>{experience.eyebrow}</Eyebrow>
             <h1 id="route-page-title">{experience.title}</h1>
             <p>{experience.intro}</p>
+            <p className="experience-hero__supporting">{experience.supportingLine}</p>
           </div>
-          <div className="experience-framing" aria-labelledby="experience-framing-title">
-            <h2 id="experience-framing-title">{experience.framing.title}</h2>
-            <p>{experience.framing.body}</p>
-            <ul className="experience-arc" role="list">
-              {experience.framing.arc.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-          <ol className="experience-timeline experience-timeline--editorial" aria-label={experience.title} role="list">
-            {experience.entries.map((entry) => (
-              <li className="experience-timeline__item" key={entry.id}>
-                <div className="experience-timeline__meta">
-                  <span>{entry.category[locale]}</span>
-                  <time>{entry.period[locale]}</time>
-                </div>
-                <span className="experience-timeline__rail" aria-hidden="true">
-                  <span className="experience-timeline__marker" />
-                </span>
-                <article className="experience-timeline__body">
-                  <h2>{entry.role[locale]}</h2>
-                  <p className="experience-timeline__organization">
-                    {entry.organization}
-                    {entry.location ? <span>{entry.location[locale]}</span> : null}
-                  </p>
-                  <p>{entry.description[locale]}</p>
+
+          <section className="experience-practice" aria-label={experience.practice.eyebrow}>
+            <Eyebrow>{experience.practice.eyebrow}</Eyebrow>
+            <div className="experience-practice__grid">
+              {experience.practice.items.map((item) => (
+                <article className="experience-practice__item" key={item.title[locale]}>
+                  <h2>{item.title[locale]}</h2>
+                  <p>{item.description[locale]}</p>
                 </article>
-              </li>
-            ))}
-          </ol>
+              ))}
+            </div>
+          </section>
+
+          <section className="experience-core" aria-label={experience.core.eyebrow}>
+            <Eyebrow>{experience.core.eyebrow}</Eyebrow>
+            <ol className="experience-timeline experience-timeline--editorial" aria-label={experience.title} role="list">
+              {experience.core.entries.map((entry) => (
+                <li className="experience-timeline__item" key={entry.id}>
+                  <div className="experience-timeline__meta">
+                    <span>{entry.category[locale]}</span>
+                    <time>{entry.period[locale]}</time>
+                  </div>
+                  <span className="experience-timeline__rail" aria-hidden="true">
+                    <span className="experience-timeline__marker" />
+                  </span>
+                  <article className="experience-timeline__body">
+                    <h2>{entry.role[locale]}</h2>
+                    <p className="experience-timeline__organization">
+                      {entry.organization[locale]}
+                      {entry.location ? <span>{entry.location[locale]}</span> : null}
+                    </p>
+                    <p className="experience-timeline__summary">{entry.summary[locale]}</p>
+                    <ul className="experience-highlights">
+                      {entry.highlights[locale].map((highlight) => (
+                        <li key={highlight}>{highlight}</li>
+                      ))}
+                    </ul>
+                    {entry.relatedWorkSlug && entry.relatedWorkLabel ? (
+                      <div className="experience-entry__action">
+                        <LinkButton
+                          href={getCaseStudyPath(locale, entry.relatedWorkSlug)}
+                          variant="secondary"
+                        >
+                          {entry.relatedWorkLabel[locale]}
+                        </LinkButton>
+                      </div>
+                    ) : null}
+                  </article>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section className="experience-assignments" aria-labelledby="experience-assignments-title">
+            <div className="experience-section-heading">
+              <h2 id="experience-assignments-title">{experience.assignments.title}</h2>
+              <p>{experience.assignments.intro}</p>
+            </div>
+            <div className="experience-assignments__list">
+              {experience.assignments.items.map((assignment) => (
+                <article className="experience-assignment" key={assignment.id}>
+                  <div className="experience-assignment__meta">
+                    <time>{assignment.period[locale]}</time>
+                    <span>{assignment.engagement[locale]}</span>
+                  </div>
+                  <div className="experience-assignment__body">
+                    <h3>{assignment.title[locale]}</h3>
+                    <p className="experience-assignment__role">{assignment.role[locale]}</p>
+                    <p>{assignment.description[locale]}</p>
+                    <LinkButton
+                      href={getCaseStudyPath(locale, assignment.relatedWorkSlug)}
+                      variant="secondary"
+                    >
+                      {assignment.relatedWorkLabel[locale]}
+                    </LinkButton>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="experience-knowledge" aria-labelledby="experience-knowledge-title">
+            <div className="experience-knowledge__meta">
+              <Eyebrow>{experience.knowledgeTransfer.eyebrow}</Eyebrow>
+              <time>{experience.knowledgeTransfer.period}</time>
+            </div>
+            <div className="experience-knowledge__body">
+              <h2 id="experience-knowledge-title">{experience.knowledgeTransfer.title}</h2>
+              <p>{experience.knowledgeTransfer.description}</p>
+              <ul className="experience-topic-list" role="list">
+                {experience.knowledgeTransfer.topics.map((topic) => (
+                  <li key={topic}>{topic}</li>
+                ))}
+              </ul>
+            </div>
+          </section>
+
           <div className="experience-timeline__actions">
             <LinkButton href={getLocalizedPath(locale, "/work")}>{experience.ctas.work}</LinkButton>
             <LinkButton href={getLocalizedPath(locale, "/contact")} variant="secondary">

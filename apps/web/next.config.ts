@@ -49,6 +49,16 @@ const nextConfig: NextConfig = {
         destination: "/fr/recherche/inclusion-financiere-pauvrete-multidimensionnelle",
         permanent: true,
       },
+      {
+        source: "/en/work/financial-inclusion-fintech-analysis",
+        destination: "/en/research/financial-inclusion-multidimensional-poverty",
+        permanent: true,
+      },
+      {
+        source: "/fr/projets/financial-inclusion-fintech-analysis",
+        destination: "/fr/recherche/inclusion-financiere-pauvrete-multidimensionnelle",
+        permanent: true,
+      },
     ];
   },
 };
